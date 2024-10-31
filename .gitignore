@@ -1,1 +1,12 @@
+/.idea*
+/app
+vendor
+composer.phar
+composer.lock
+.phpunit.result.cache
+tools/logs
+tests/ApplicationBridge/auth.json
+/var
+*.log
+.env.local
 *.local
