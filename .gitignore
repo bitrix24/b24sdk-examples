@@ -1,6 +1,7 @@
 # dependencies
 /node_modules
-/examples/*/node_modules
+/js/**/node_modules
+/php/**/node_modules
 
 # testing
 tests/ApplicationBridge/auth.json
