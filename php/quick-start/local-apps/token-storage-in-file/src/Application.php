@@ -76,7 +76,6 @@ class Application
                     null
                 )
             );
-
         }
 
         self::getLog()->debug('processInstallation.finish');
