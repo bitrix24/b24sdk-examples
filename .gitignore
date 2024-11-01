@@ -27,6 +27,14 @@ composer.lock
 Thumbs.db
 /@tmp
 
+# production
+/dist
+/js/**/dist
+/php/**/dist
+
+# TypeScript
+*.tsbuildinfo
+
 # local env files
 .env.local
 *.local

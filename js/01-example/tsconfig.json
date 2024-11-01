@@ -15,7 +15,7 @@
 		"downlevelIteration": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"jsx": "preserve"
+		"jsx": "preserve",
 	},
 	"include": ["**/*.ts", "**/*.tsx", "**/*.vue"],
 	"exclude": ["node_modules"]
