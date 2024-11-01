@@ -33,6 +33,7 @@ Thumbs.db
 /js/**/dist
 /php/**/dist
 /php/**/var
+/php/quick-start/local-apps/token-storage-in-file/public/css/app.css
 
 # TypeScript
 *.tsbuildinfo
@@ -46,3 +47,4 @@ Thumbs.db
 
 # vercel
 .vercel
+
