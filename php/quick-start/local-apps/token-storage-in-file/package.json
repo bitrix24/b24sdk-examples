@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev:tailwindcss": "npx tailwindcss -i ./assets/styles/app.css -o ./public/css/app.css --watch",
-		"dev:php": "cd public & php -S 127.0.0.1:8081",
+		"dev:php": "cd public && php -S 127.0.0.1:8090",
+        "dev:ngrok": "ngrok http 127.0.0.1:8090 --domain whale-viable-wasp.ngrok-free.app",
 		"dev": "npm-run-all -p dev:*",
 		"build:tailwindcss": "npx tailwindcss -i ./assets/styles/app.css -o ./public/css/app.css --minify",
 		"build": "npm-run-all -p build:*"
