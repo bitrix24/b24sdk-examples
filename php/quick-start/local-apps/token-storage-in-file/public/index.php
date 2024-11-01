@@ -23,16 +23,10 @@ Application::getLog()->debug('index.init', [
 	'query' => $incomingRequest->query->all()
 ]);
 
-require_once '../layouts/header.php'
+require_once '../layouts/header.php';
 ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12 text-small">
-			<h2>Request</h2>
-			<p>The application is running.</p>
-			
-			<p>Authentication tokens from Bitrix24:</p>
-			<pre><?=print_r($_REQUEST, true)?></pre>
-		</div>
-	</div>
+	<p>The application is running.</p>
+	<h3 class="text-h1 mb-sm flex whitespace-pre-wrap">Authentication tokens from Bitrix24:</h3>
+	<pre class="rounded-md px-4 py-4 bg-base-900 text-green-350 overflow-auto"><?php print_r($_REQUEST); ?></pre>
 <?php
 require_once '../layouts/footer.php';

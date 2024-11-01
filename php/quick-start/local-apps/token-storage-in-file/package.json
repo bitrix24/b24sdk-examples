@@ -6,7 +6,9 @@
 	"scripts": {
 		"dev:tailwindcss": "npx tailwindcss -i ./assets/styles/app.css -o ./public/css/app.css --watch",
 		"dev:php": "cd public & php -S 127.0.0.1:8081",
-		"dev": "npm-run-all -p dev:*"
+		"dev": "npm-run-all -p dev:*",
+		"build:tailwindcss": "npx tailwindcss -i ./assets/styles/app.css -o ./public/css/app.css --minify",
+		"build": "npm-run-all -p build:*"
 	},
 	"devDependencies": {
 		"@bitrix24/b24style": "latest",

@@ -27,15 +27,16 @@ Application::processInstallation($incomingRequest);
 
 require_once '../layouts/header.php'
 ?>
-	<div class="row">
-		<div class="col-md-12 col-lg-12 text-small">
-			<h2>Request</h2>
-			The application installation has begun. Tokens received from Bitrix24:
-			<pre><?php
-				print_r($_REQUEST); ?></pre>
-		</div>
-	</div>
-<script type="module" crossorigin>
+	<p>The application installation has begun.</p>
+	<h3 class="text-h1 mb-sm flex whitespace-pre-wrap">Tokens received from Bitrix24:</h3>
+	<pre class="rounded-md px-4 py-4 bg-base-900 text-green-350 overflow-auto"><?php print_r($_REQUEST); ?></pre>
+<script src="https://api.bitrix24.com/api/v1/"></script>
+<script>
+	BX24.init(function() {
+		BX24.installFinish();
+	});
+</script>
+<!-- script type="module" crossorigin>
 	import {
 		B24Frame
 	} from './tmp/b24jssdk/index.mjs'
@@ -78,6 +79,6 @@ require_once '../layouts/header.php'
 	{
 		console.error(error)
 	}
-</script>
+</script -->
 	<?php
 require_once '../layouts/footer.php';
