@@ -27,13 +27,17 @@ Application::processInstallation($incomingRequest);
 
 require_once '../layouts/header.php'
 ?>
-    <div class="mt-14px">
-        <div class="container my-2xl mx-6 px-4 py-4 bg-primary-on rounded-md">
-            <h3 class="text-2xl font-semibold text-base-900">The application installation has begun</h3>
-            <p class="mt-1 max-w-2xl text-sm/6 text-base-500">Tokens received from Bitrix24</p>
-	        <pre class="mt-4 rounded-md px-4 py-4 bg-base-600 text-green-350 text-sm/6 overflow-auto"><?php print_r($_REQUEST); ?></pre>
-        </div>
-    </div>
+	<div class="mt-2xl">
+		<div class="px-4 py-4 bg-white rounded-md">
+			<h3 class="text-2xl font-semibold text-base-900">The application installation has begun</h3>
+			<p class="mt-1 max-w-2xl text-sm/6 text-base-500">Tokens received from Bitrix24</p>
+			<pre
+				class="rounded-md mt-4 p-4 bg-base-900/[50] text-green-350 font-semibold text-xs leading-4 overflow-auto font-b24-system-mono"
+			><?php
+				print_r($_REQUEST);
+				?></pre>
+		</div>
+	</div>
 <script src="https://api.bitrix24.com/api/v1/"></script>
 <script>
 	BX24.init(function() {
