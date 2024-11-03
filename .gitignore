@@ -31,6 +31,8 @@ Thumbs.db
 # production
 /dist
 /js/**/dist
+/js/**/.nuxt
+/js/**/.output
 /php/**/dist
 /php/**/var
 /php/quick-start/local-apps/token-storage-in-file/public/css/app.css

@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { type Ref, ref } from 'vue'
+import { type Ref, ref } from "vue";
+
+useHead({
+	bodyAttrs: {
+		class: 'bg-tertiary font-b24-system text-base-900 antialiased',
+	}
+})
 
 interface MenuItem {
 	title: string,
@@ -26,6 +32,7 @@ const menuList: Ref<MenuItem[]> = ref([
 		href: 'https://bitrix24.github.io/b24icons/guide/icons.html'
 	}
 ])
+
 
 </script>
 
