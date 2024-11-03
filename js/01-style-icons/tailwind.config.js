@@ -2,8 +2,11 @@
 
 export default {
 	content: [
-		'./*.html',
-		'./src/**/*.{vue,js,ts,jsx,tsx}'
+		"./components/**/*.{js,vue,ts}",
+		"./layouts/**/*.vue",
+		"./pages/**/*.vue",
+		"./app.vue",
+		"./error.vue",
 	],
 	theme: {
 		extend: {},
@@ -12,6 +15,6 @@ export default {
 		require('@bitrix24/b24style')({
 			logs: false,
 			useLocalFonts: false,
-		}),
+		})
 	]
 }

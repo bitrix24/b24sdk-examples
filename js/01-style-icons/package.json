@@ -4,14 +4,16 @@
 	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
-		"dev:serve": "vite serve",
-		"dev": "npm-run-all -p dev:*",
-		"build": "vite build",
-		"clean": "rimraf --glob ./dist"
+		"dev": "nuxi dev",
+		"build": "nuxi build",
+		"generate": "nuxi generate"
+	},
+	"dependencies": {
+		"nuxt": "^3.13.2",
+		"@bitrix24/b24style": "latest",
+		"@bitrix24/b24icons-vue": "latest"
 	},
 	"devDependencies": {
-		"@bitrix24/b24style": "latest",
-		"@bitrix24/b24icons-vue": "latest",
 		"tailwindcss": "^3.4.14",
 		"autoprefixer": "^10.4.20",
 		"postcss": "^8.4.47",
