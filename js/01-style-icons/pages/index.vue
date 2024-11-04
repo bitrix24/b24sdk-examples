@@ -1,122 +1,257 @@
 <script setup lang="ts">
+import { type Ref, ref, type ComputedRef, computed } from 'vue'
 import WheelIcon from '@bitrix24/b24icons-vue/common-service/WheelIcon'
+import BtnClockIcon from '@bitrix24/b24icons-vue/button-specialized/BtnClockIcon'
+import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
 
 definePageMeta({
 	layout: "slider",
 })
 
+// region Action ////
+const processStatus: Ref<{ save: boolean, apply: boolean }> = ref({
+	save: false,
+	apply: false,
+})
+
+const isProcess: ComputedRef<boolean> = computed((): boolean =>
+{
+	return processStatus.value.save || processStatus.value.apply
+})
+
+const makeSave = async (): Promise<void> =>
+{
+	processStatus.value.save = true
+	
+	setTimeout(() =>
+		{
+			processStatus.value.save = false
+		},
+		2_000
+	)
+}
+
+const makeApply = async (): Promise<void> =>
+{
+	processStatus.value.apply = true
+	
+	setTimeout(() =>
+		{
+			processStatus.value.apply = false
+		},
+		2_000
+	)
+}
+
+const makeClosePage = async (): Promise<void> =>
+{
+	alert('[Cancel].click')
+}
+// endregion ////
+
+interface Item {
+	code: string,
+	icon: string,
+	title: string,
+	description: string,
+	isActive: boolean,
+}
+
+interface Group {
+	code: string,
+	title: string,
+	items: Item[]
+}
+
+function getElements(
+	groupIndex: number,
+	array: Item[],
+	count: number
+): Item[]
+{
+	return JSON.parse(JSON.stringify(array)).slice(0, count).map(item => {
+		item.code = `group-${groupIndex}-${item.code}`
+		return item
+	})
+}
+
+const listAllItems: Item[] = [
+	{
+		code: 'item-1',
+		icon: 'contacts',
+		title: 'Irure duis magna in sunt',
+		description: 'Nisi nostrud excepteur exercitation irure dolore enim reprehenderit commodo',
+		isActive: false,
+	},
+	{
+		code: 'item-2',
+		icon: 'contacts',
+		title: 'Cupidatat ut sit ea eu',
+		description: 'Lorem ipsum dolor sit amet sed labore fugiat ut excepteur amet incididunt',
+		isActive: false,
+	},
+	{
+		code: 'item-3',
+		icon: 'contacts',
+		title: 'Consequat aliquip velit anim non',
+		description: 'Reprehenderit fugiat ut laboris consequat mollit. Est aute dolore aliqua ut lorem eu aliqua',
+		isActive: true,
+	},
+	{
+		code: 'item-4',
+		icon: 'contacts',
+		title: 'Ut ut veniam id dolor',
+		description: 'Nostrud deserunt sed sed sed. Aliqua mollit laboris anim laborum mollit',
+		isActive: false,
+	},
+	{
+		code: 'item-5',
+		icon: 'contacts',
+		title: 'Tempor veniam elit nostrud voluptate',
+		description: 'Do culpa lorem consequat ullamco. Duis sunt ut proident eiusmod incididunt tempor enim id officia voluptate ea',
+		isActive: true,
+	},
+]
+
+let groupIndex = 0;
+const groups: Ref<Group[]> = ref([
+	{
+		code: `group-${++groupIndex}`,
+		title: 'Lorem ipsum dolor sit amet in anim dolor nulla excepteur elit eu.',
+		items: getElements(groupIndex, listAllItems, Math.min(4, listAllItems.length))
+	} as Group,
+	{
+		code: `group-${++groupIndex}`,
+		title: 'Lorem ipsum dolor sit amet labore',
+		items: getElements(groupIndex, listAllItems, Math.min(5, listAllItems.length))
+	} as Group,
+	{
+		code: `group-${++groupIndex}`,
+		title: 'Commodo aliquip reprehenderit adipiscing',
+		items: getElements(groupIndex, listAllItems, Math.min(2, listAllItems.length))
+	} as Group,
+	{
+		code: `group-${++groupIndex}`,
+		title: 'Occaecat laboris laborum ut',
+		items: getElements(groupIndex, listAllItems, Math.min(4, listAllItems.length))
+	} as Group,
+	{
+		code: `group-${++groupIndex}`,
+		title: 'Commodo aliquip laboris laborum ut',
+		items: getElements(groupIndex, listAllItems, Math.min(3, listAllItems.length))
+	} as Group,
+	{
+		code: `group-${++groupIndex}`,
+		title: 'Ipsum dolor',
+		items: getElements(groupIndex, listAllItems, Math.min(1, listAllItems.length))
+	} as Group
+])
+
 </script>
 
-
-
 <template>
-	<div class="min-h-8xl flex items-center gap-2">
-		<div class="text-4.5xl font-light">Page title1</div>
-	</div>
-	<div>
-		<div class="grid grid-cols-[repeat(auto-fill,minmax(500px,1fr))] gap-4">
-			<div class="bg-white py-sm px-lg2 cursor-pointer rounded-md">
-				<div>
-					<div>
-						<WheelIcon class="w-3 h-3" />
+	<div class="px-lg mb-xs2">
+		<div
+			class="min-h-7xl h-7xl w-full flex flex-row items-center justify-normal gap-lg2 border-b border-b-base-900/0.1"
+		>
+			<div class="pl-xs2 text-4xl font-light font-b24-secondary text-base-master">Page title1</div>
+			<div class="grow flex flex-row items-end text-lg">
+				<div class="grow font-b24-primary">
+					<div class="flex flex-row gap-2xs items-end">
+						<WheelIcon class="size-xl2 text-info-text"/>
+						<div class="flex flex-col">
+							<div class="text-3xs leading-tight opacity-70 text-base-500 items-center">use case</div>
+							<div
+								class="text-sm text-primary-link cursor-pointer transition-opacity hover:opacity-80 border-b border-dashed border-b-primary-link"
+								onclick="alert('[Some action].click')"
+							>Some action</div>
+						</div>
 					</div>
-					<div>Third-party system integration</div>
 				</div>
-				<div>Import customer data, employees or tasks from an external source, or export data from your Bitrix24.</div>
-			</div>
-			<div class="bg-white py-sm px-lg2 cursor-pointer rounded-md">
-				<div>
-					<div>
-						<WheelIcon class="w-3 h-3" />
-					</div>
-					<div>Third-party system integration</div>
+				<div class="text-md font-light text-base-900">
+					<a
+						class="hover:text-primary-link hover:underline underline-offset-2 transition-opacity hover:opacity-80"
+						href="https://bitrix24.github.io/b24style/reference/colors.html"
+						target="_blank"
+					>@bitrix24/b24style</a>
 				</div>
-				<div>Import customer data, employees or tasks from an external source, or export data from your Bitrix24.</div>
-			</div>
-			<div class="bg-white py-sm px-lg2 cursor-pointer rounded-md">
-				<div>
-					<div>
-						<WheelIcon class="w-3 h-3" />
-					</div>
-					<div>Third-party system integration</div>
-				</div>
-				<div>Import customer data, employees or tasks from an external source, or export data from your Bitrix24.</div>
 			</div>
 		</div>
 	</div>
-	
-	<div class="mt-2xl">
-		<div class="px-4 py-4 bg-white rounded-md">
-			<div class="px-4 sm:px-0">
-				<h3 class="text-2xl font-semibold text-base-900">Developer resources</h3>
-				<p class="mt-1 max-w-2xl text-sm/6 text-base-500">User Profile</p>
+	<div class="px-lg my-sm overflow-auto flex flex-col h-full-and-footer">
+		<div
+			v-for="(group) in groups"
+			:key="group.code"
+			class="mb-md"
+		>
+			<div class="mb-sm font-b24-secondary text-h4 font-light leading-8 text-base-900">{{ group.title }}</div>
+			<div class="grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-xs">
+				<div
+					v-for="(item) in group.items"
+					:key="item.code"
+					class="bg-white py-sm2 px-xs2 cursor-pointer rounded-md flex flex-row gap-sm border-2 transition-shadow shadow hover:shadow-lg relative"
+					:class="item.isActive ? 'border-success-text' : 'border-white hover:border-primary'"
+				>
+					<div
+						v-if="item.isActive"
+						class="absolute -top-2 -right-2 rounded-full bg-success-text size-5 text-success-on flex items-center justify-center"
+					>
+						<CheckIcon class="size-md" />
+					</div>
+					<div class="rounded-full bg-blue-200 size-14 min-w-14 min-h-14 flex items-center justify-center">
+						<component
+							:is="WheelIcon"
+							class="size-12 text-info-text"
+						></component>
+					</div>
+					<div class="max-w-11/12">
+						<div
+							class="font-b24-secondary text-black text-h6 leading-4 mb-xs font-semibold line-clamp-2"
+							:title="item.title"
+						>{{ item.title }}</div>
+						<div
+							class="font-b24-primary text-sm text-base-500 line-clamp-2"
+							:title="item.description"
+						>
+							<div>{{ item.description }}</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<table class="text-left table-auto">
-				<thead>
-				<tr class="border-b border-gray-300">
-					<th class="py-2 px-1 w-2">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-						     class="size-5 text-base-master dark:text-base-200">
-							<path fill="currentColor" fill-rule="evenodd"
-							      d="M20 13.443v-1.888h-1.828a5.7 5.7 0 0 0-.982-2.41l1.282-1.28-1.335-1.335-1.282 1.28a5.7 5.7 0 0 0-2.397-1.003V5h-1.886v1.802a5.7 5.7 0 0 0-2.422.99L7.875 6.52 6.54 7.855l1.275 1.271a5.7 5.7 0 0 0-1 2.429H5v1.888h1.815c.15.888.495 1.705 1.001 2.406L6.53 17.134l1.335 1.334 1.287-1.287c.708.502 1.529.84 2.42.985V20h1.885v-1.84a5.7 5.7 0 0 0 2.394-.994l1.294 1.295 1.339-1.336-1.3-1.297c.499-.695.84-1.506.988-2.387h1.828zm-7.502 2.556a3.499 3.499 0 0 1 0-6.999 3.5 3.5 0 1 1 .002 7z"
-							      clip-rule="evenodd"/>
-						</svg>
-					</th>
-					<th class="py-2 px-4 text-sm/6 font-semibold text-base-900">Parameter</th>
-					<th class="py-2 px-4 text-sm/6 font-semibold text-base-900">Value</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr>
-					<td class="py-2 px-1 border-b border-gray-300 text-sm/6 font-medium text-base-900">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-						     class="size-5 text-base-master dark:text-base-200">
-							<path fill="currentColor" fill-rule="evenodd" d="M4 5h17v2H4zm0 6h17v2H4zm17 6H4v2h17z"
-							      clip-rule="evenodd"/>
-						</svg>
-					</td>
-					<td class="py-2 px-4 border-b border-gray-300 text-sm/6 font-medium text-base-900">Name</td>
-					<td class="py-2 px-4 border-b border-gray-300 text-sm/6 font-medium text-base-900">$result?->NAME
-					</td>
-				
-				</tr>
-				<tr>
-					<td class="py-2 px-1 border-b border-gray-300 text-sm/6 font-medium text-base-900">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-						     class="size-5 text-base-master dark:text-base-200">
-							<path fill="currentColor" fill-rule="evenodd" d="M4 5h17v2H4zm0 6h17v2H4zm17 6H4v2h17z"
-							      clip-rule="evenodd"/>
-						</svg>
-					</td>
-					<td class="py-2 px-4 border-b border-gray-300 text-sm/6 font-medium text-base-900">Last Name</td>
-					<td class="py-2 px-4 border-b border-gray-300 text-sm/6 font-medium text-base-900">
-						$result?->LAST_NAME
-					</td>
-				
-				</tr>
-				<tr>
-					<td class="py-2 px-1 text-sm/6 font-medium text-base-900">
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-						     class="size-5 text-base-master dark:text-base-200">
-							<path fill="currentColor" fill-rule="evenodd" d="M4 5h17v2H4zm0 6h17v2H4zm17 6H4v2h17z"
-							      clip-rule="evenodd"/>
-						</svg>
-					</td>
-					<td class="py-2 px-4 text-sm/6 font-medium text-base-900">Is Admin</td>
-					<td class="py-2 px-4 text-sm/6 font-medium text-base-900 text-green-500">$result?->ADMIN ? 'True' :
-						'False'
-					</td>
-				</tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
-	<div class="mt-2xl">
-		<div class="px-4 py-4 bg-white rounded-md">
-			<h3 class="text-2xl font-semibold text-base-900">Request</h3>
-			<pre
-				class="rounded-md mt-4 p-4 bg-base-900/[50] text-green-350 font-semibold text-xs leading-4 overflow-auto font-b24-system-mono"
-			>{{'test'}}</pre>
+	<div class="w-full h-7xl shadow-top-sm fixed insert-x-0 bottom-0 p-3 bg-white">
+		<div class="flex flex-row flex-nowrap items-center justify-between gap-1">
+			<div class="w-1/4 flex flex-row justify-start gap-4">&nbsp;</div>
+			<div class="w-2/4 flex flex-row justify-center gap-4">
+				<button
+					@click="makeSave"
+					:disabled="isProcess"
+					class="min-w-[90px] flex flex-row items-center justify-center text-xs text-center font-semibold text-base-900 uppercase bg-green px-6 rounded hover:bg-green-400 active:bg-green-600 disabled:cursor-not-allowed disabled:bg-green-600 disabled:opacity-50"
+				>
+					<BtnClockIcon class="w-lg h-lg" v-if="processStatus.save"/>
+					<span v-else>Save</span>
+				</button>
+				
+				<button
+					@click="makeApply"
+					:disabled="isProcess"
+					class="min-w-[90px] flex flex-row items-center justify-center text-xs font-semibold text-white uppercase bg-blue px-6 rounded hover:bg-blue-400 active:bg-blue-600 disabled:cursor-not-allowed disabled:bg-blue-600 disabled:opacity-50"
+				>
+					<BtnClockIcon class="w-lg h-lg" v-if="processStatus.apply && !processStatus.save"/>
+					<span v-else>Apply</span>
+				</button>
+				
+				<button
+					@click="makeClosePage"
+					:disabled="isProcess"
+					class="text-xs text-center font-semibold text-base-900 uppercase px-2 py-3 hover:text-base-800 active:text-base-master disabled:cursor-not-allowed disabled:text-base-master disabled:opacity-50"
+				>Cancel
+				</button>
+			</div>
+			<div class="w-1/4 flex flex-row justify-end gap-1">
+				<div class="text-base-400 text-xs">Updated 8 minutes ago</div>
+			</div>
 		</div>
 	</div>
 </template>
