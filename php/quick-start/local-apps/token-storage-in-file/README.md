@@ -39,12 +39,12 @@ tailwind.config.js - Configuration file for Tailwind CSS
 ```mermaid
 graph LR
     subgraph Bitrix24 cloud
-        A[Bitrix24 Portal] 
+        A[Bitrix24 Account] 
     end
     
-    A[Bitrix24 Portal] <--> B[ngrok public host
+    A[Bitrix24 Portal] <--> B[Ngrok public host
      xxxx.ngrok-free.app]
-    B <--> C[ngrok client]
+    B <--> C[Ngrok client]
     
     subgraph Developer Machine 
     C <--> D[PHP dev «web server» 
@@ -58,10 +58,10 @@ graph LR
 ```mermaid
 graph LR
     subgraph Bitrix24 cloud
-        A[Bitrix24 Portal] 
+        A[Bitrix24 Account] 
     end
     
-    A[Bitrix24 Portal] <--> B[web-server]
+    A[Bitrix24 Account] <--> B[web-server]
     
     subgraph Production server 
     B[web-server] --> E[PHP-fpm Application]
@@ -84,7 +84,7 @@ composer install
 This command will start the PHP web server, the ngrok client, and the Tailwind CSS run-time. The PHP web server will serve your application locally, the ngrok client will expose your local server to the internet, and the Tailwind CSS run-time will process your CSS files. For more information, you can refer to the following documentation:
 
 - [PHP Built-in Web Server](https://www.php.net/manual/en/features.commandline.webserver.php)
-- [ngrok](https://ngrok.com/docs)
+- [Ngrok](https://ngrok.com/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 
 > [!WARNING]  
@@ -92,7 +92,7 @@ This command will start the PHP web server, the ngrok client, and the Tailwind C
 
 To check if the PHP web server is started, open another terminal tab or window and navigate to `http://127.0.0.1:8080` in your web browser. If the server is running, you should see your application or a directory listing.
 
-To check if the ngrok client is started, open another terminal tab or window and navigate to the URL provided by ngrok in your web browser. The URL will look something like `http://<random-subdomain>.ngrok.io`. If ngrok is running, you should see your application.
+To check if the ngrok client is started, open another terminal tab or window and navigate to the URL provided by ngrok in your web browser. The URL will look something like `http://<random-subdomain>.ngrok-free.app`. If ngrok is running, you should see your application.
 
 The ngrok client output in the terminal will look something like this:
 
@@ -131,7 +131,7 @@ cp .env .env.local
 
 Your file should look like this example:
 
-```
+```plaintext
 BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID='YOUR_DATA_HERE'
 BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET='YOUR_DATA_HERE'
 BITRIX24_PHP_SDK_APPLICATION_SCOPE='crm,user_brief'
