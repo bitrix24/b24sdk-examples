@@ -38,17 +38,14 @@ require_once '../layouts/header.php'
 				?></pre>
 		</div>
 	</div>
-<script src="https://api.bitrix24.com/api/v1/"></script>
+<!-- script src="https://api.bitrix24.com/api/v1/"></script>
 <script>
 	BX24.init(function() {
 		BX24.installFinish();
 	});
-</script>
-<!-- script type="module" crossorigin>
-	import {
-		B24Frame
-	} from './tmp/b24jssdk/index.mjs'
-	
+</script -->
+<script src="/tmp/b24jssdk/browser.index.js"></script>
+<script type="module">
 	const initializeB24Frame = async () =>
 	{
 		const queryParams = {
@@ -72,7 +69,7 @@ require_once '../layouts/header.php'
 			throw new Error('Unable to initialize Bitrix24Frame library!')
 		}
 		
-		const b24Frame = new B24Frame(queryParams)
+		const b24Frame = new B24Js.B24Frame(queryParams)
 		await b24Frame.init()
 		
 		return b24Frame
@@ -87,6 +84,7 @@ require_once '../layouts/header.php'
 	{
 		console.error(error)
 	}
-</script -->
-	<?php
+	//*/
+</script>
+<?php
 require_once '../layouts/footer.php';

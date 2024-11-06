@@ -36,4 +36,62 @@ require_once '../layouts/header.php';
 			?></pre>
 		</div>
 	</div>
+<script src="/tmp/b24jssdk/browser.index.js"></script>
+<script type="module">
+	const initializeB24Frame = async () =>
+	{
+		const queryParams = {
+			DOMAIN: null,
+			PROTOCOL: false,
+			APP_SID: null,
+			LANG: null
+		}
+		
+		if(window.name)
+		{
+			const [domain, protocol, appSid] = window.name.split('|')
+			queryParams.DOMAIN = domain
+			queryParams.PROTOCOL = parseInt(protocol) === 1
+			queryParams.APP_SID = appSid
+			queryParams.LANG = null
+		}
+		
+		if(!queryParams.DOMAIN || !queryParams.APP_SID)
+		{
+			throw new Error('Unable to initialize Bitrix24Frame library!')
+		}
+		
+		const b24Frame = new B24Js.B24Frame(queryParams)
+		await b24Frame.init()
+		
+		return b24Frame
+	}
+	
+	try
+	{
+		const $logger = B24Js.LoggerBrowser.build(
+			'local-apps: token-storage-in-file : index',
+			true
+		)
+		
+		const $b24 = await initializeB24Frame()
+		$b24.setLogger(
+			B24Js.LoggerBrowser.build('Core', true)
+		)
+		
+		$b24.callMethod('server.time')
+		.then((response) => {
+			const serverTimeResponse = response.getData().result;
+			const serverDateTime = B24Js.Text.toDateTime(serverTimeResponse)
+			$logger.info(
+				'serverTime >> ',
+				serverDateTime.toFormat('y-MM-dd HH:mm:ss')
+			)
+		})
+	}
+	catch( error )
+	{
+		console.error(error)
+	}
+</script>
 <?php require_once '../layouts/footer.php';
