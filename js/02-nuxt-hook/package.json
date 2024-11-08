@@ -12,6 +12,12 @@
 	},
 	"dependencies": {
 		"@bitrix24/b24jssdk": "file:../../../b24jssdk/packages/jssdk",
+		
+		"axios": "^1.7.7",
+		"qs": "^6.13.0",
+		"luxon": "^3.5.0",
+		"protobufjs": "^7.4.0",
+		
 		"@bitrix24/b24style": "latest",
 		"@bitrix24/b24icons-vue": "latest",
 		"@headlessui/vue": "^1.7.23",
