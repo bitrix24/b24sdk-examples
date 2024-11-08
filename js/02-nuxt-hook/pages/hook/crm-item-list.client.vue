@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import B24HookConfig from '../../config.hook'
+import B24HookConfig from '~/config.hook'
 import { DateTime } from 'luxon'
 import { ref, reactive, computed, type Ref } from 'vue'
 import Search1Icon from '@bitrix24/b24icons-vue/main/Search1Icon'
@@ -16,8 +16,8 @@ import {
 } from '@bitrix24/b24jssdk'
 import type { IResult, ISODate } from '@bitrix24/b24jssdk'
 
-import Info from '../../components/Info.vue'
-import Alert from '../../components/Alert.vue'
+import Info from '~/components/Info.vue'
+import Alert from '~/components/Alert.vue'
 
 definePageMeta({
 	layout: 'page',
