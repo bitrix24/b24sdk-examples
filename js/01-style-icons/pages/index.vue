@@ -155,7 +155,7 @@ const groups: Ref<Group[]> = ref([
 			class="min-h-7xl h-7xl w-full flex flex-row items-center justify-normal gap-lg2 border-b border-b-base-900/0.1"
 		>
 			<div class="pl-xs2 text-4xl font-light font-b24-secondary text-base-master">Page title1</div>
-			<div class="grow flex flex-row items-end text-lg">
+			<div class="grow flex flex-row items-end justify-end text-lg">
 				<div class="grow font-b24-primary">
 					<div class="flex flex-row gap-2xs items-end">
 						<WheelIcon class="size-xl2 text-info-text"/>

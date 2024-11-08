@@ -6,7 +6,9 @@
 	"scripts": {
 		"dev": "nuxi dev",
 		"build": "nuxi build",
-		"generate": "nuxi generate"
+		"generate": "nuxi generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
 		"nuxt": "^3.13.2",
