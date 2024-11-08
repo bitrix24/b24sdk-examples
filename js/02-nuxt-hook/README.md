@@ -52,10 +52,10 @@ npm run dev
 
 ### Using the Configuration
 
-The project uses a `config.ts` file to load and use environment variables. You can import and use the configuration like this:
+The project uses a `config.hook.ts` file to load and use environment variables. You can import and use the configuration like this:
 
 ```typescript
-import b24HookConfig from './config';
+import b24HookConfig from './config.hook';
 
 console.log('Bitrix24 URL:', b24HookConfig.b24Url);
 console.log('User ID:', b24HookConfig.userId);
