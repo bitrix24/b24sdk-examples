@@ -1,11 +1,16 @@
 <script setup lang="ts">
 useHead({
 	bodyAttrs: {
-		class: 'bg-tertiary font-b24-system text-base-900 antialiased'
+		class: 'bg-tertiary font-b24-system text-base-900 antialiased',
 	}
 })
+
+const route = useRoute()
+
 </script>
 
 <template>
-	<slot></slot>
+	<div class="">
+		<slot></slot>
+	</div>
 </template>

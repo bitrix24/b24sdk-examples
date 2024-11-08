@@ -24,14 +24,14 @@ In the root of the project, create a file named `.env.local`. This file will hol
 Open the `.env.local.demo` file, which has an example of environment variable settings. Copy its contents into your `.env.local` file and replace the placeholders with your own values:
 
 ```plaintext
-# Specify the domain of Bitrix24. For example: https://your_domain.bitrix24.com
-VITE_B24_HOOK_URL="insert_url"
+## For example: 35
+VITE_B24_FORM_ID="0"
 
-# Enter user ID. For example: 123
-VITE_B24_HOOK_USER_ID="insert_user_id"
+## For example: c9qk4k
+VITE_B24_FORM_SECRET="insert_secret"
 
-# Specify the secret. For example: k32t88gf3azpmwv3
-VITE_B24_HOOK_SECRET="insert_secret"
+## For example: https://cdn-ru.bitrix24.com/b80599/crm/form/loader_34.js
+VITE_B24_FORM_LOADER_SCRIPT="insert_loaderScript"
 ```
 
 4. **Make Sure `.env.local` is in `.gitignore`**:
@@ -48,15 +48,4 @@ Once the environment variables are set, you can start the project with:
 
 ```bash
 npm run dev
-```
-
-### Using the Configuration
-
-The project uses a `config.ts` file to load and use environment variables. You can import and use the configuration like this:
-
-```typescript
-import b24HookConfig from './config';
-
-console.log('Bitrix24 URL:', b24HookConfig.b24Url);
-console.log('User ID:', b24HookConfig.userId);
 ```

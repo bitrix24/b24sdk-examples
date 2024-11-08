@@ -8,7 +8,7 @@ const $logger = LoggerBrowser.build(
 	import.meta.env?.DEV === true
 )
 
-const baseDir = '/frame/'
+const baseDir = '/'
 
 function isSkipB24(fullPath: string): boolean
 {

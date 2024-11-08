@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import B24FormConfig from '../../config.b24form'
+import B24FormConfig from '~/config.b24form'
 import {
 	B24Frame,
 	useB24Helper,

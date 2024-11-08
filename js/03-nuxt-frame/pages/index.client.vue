@@ -17,8 +17,8 @@ import type {
 	StatusClose
 } from '@bitrix24/b24jssdk'
 
-import Info from '../../components/Info.vue'
-import Avatar from '../../components/Avatar.vue'
+import Info from '~/components/Info.vue'
+import Avatar from '~/components/Avatar.vue'
 import ProgressBar from '~/components/ProgressBar.vue'
 import Tabs from '~/components/Tabs.vue'
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
@@ -38,7 +38,8 @@ import PulseIcon from '@bitrix24/b24icons-vue/main/PulseIcon'
 import { useI18n } from '#imports'
 
 definePageMeta({
-	layout: "app",
+	layout: 'page',
+	title: 'Playground'
 })
 
 // region Init ////
@@ -824,7 +825,8 @@ watch(defTabIndex, async() =>
 
 <template>
 	<ClientOnly>
-		<div class="bg-white min-h-screen px-2"
+		<div class="mx-lg my-sm flex flex-col">
+		<div class=""
 		     :class="{
 				'overflow-hidden': !isInit || isReload
 			}"
@@ -838,10 +840,10 @@ watch(defTabIndex, async() =>
 				</div>
 			</div>
 			<div v-else>
-				<div class="p-4 flex items-center justify-start">
+				<div class="flex items-center justify-start gap-4">
 					<div class="flex items-center">
 						<div
-							class="mt-2 px-lg2 py-sm2 border border-base-100 rounded-lg hover:shadow-md hover:-translate-y-px col-auto md:col-span-2 lg:col-span-1 bg-white cursor-pointer"
+							class="px-lg2 py-sm2 border border-base-100 rounded-lg hover:shadow-md hover:-translate-y-px col-auto md:col-span-2 lg:col-span-1 bg-white cursor-pointer"
 							@click.stop="makeOpenSliderForUser(b24Helper?.profileInfo.data.id || 0)"
 						>
 							<div class="flex items-center gap-4">
@@ -872,14 +874,14 @@ watch(defTabIndex, async() =>
 							</div>
 						</div>
 					</div>
-					<div class="ml-4 w-0 flex-1">
+					<div class="w-0 flex-1">
 						<Info>
-							Scopes: <code>user_brief</code>, <code>crm</code>, <code>pull</code><br><br>
+							Scopes: <code>user_brief</code>, <code>crm</code>, <code>pull</code><br>
 							To view query results, open the developer console.
 						</Info>
 					</div>
 				</div>
-				<div class="mt-2">
+				<div class="my-sm px-2 rounded-lg bg-white ">
 					<Tabs
 						:items="tabsItems"
 						v-model="defTabIndex"
@@ -1432,6 +1434,7 @@ watch(defTabIndex, async() =>
 					</Tabs>
 				</div>
 			</div>
+		</div>
 		</div>
 	</ClientOnly>
 </template>

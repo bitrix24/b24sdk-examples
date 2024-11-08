@@ -15,12 +15,13 @@ import {
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 import UserGroupIcon from '@bitrix24/b24icons-vue/common-b24/UserGroupIcon'
 import BtnClockIcon from '@bitrix24/b24icons-vue/button-specialized/BtnClockIcon'
-import Toggle from '../../components/Toggle.vue'
+import Toggle from '~/components/Toggle.vue'
 import { useI18n } from '#imports'
 
 // region Init ////
 definePageMeta({
-	layout: 'slider'
+	layout: 'page',
+	title: 'User Options'
 })
 
 const $logger = LoggerBrowser.build(
@@ -382,7 +383,8 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 
 <template>
 	<ClientOnly>
-		<div class="bg-white min-h-screen overflow-hidden">
+		<div class="mx-lg my-sm flex flex-col">
+		<div class="rounded-md bg-white">
 			<div
 				v-if="!isInit"
 				class="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center"
@@ -395,11 +397,7 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 				v-else
 			>
 				<div class="p-4 mb-20">
-					<div>
-						<h1 class="text-h1 font-semibold leading-7 text-base-900">User Options</h1>
-						<p class="mt-1 max-w-2xl text-sm leading-6 text-base-500">The user settings are listed here.</p>
-					</div>
-					<div class="mt-3 text-md text-base-900">
+					<div class="text-md text-base-900">
 						<dl class="divide-y divide-base-100">
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 								<dt class="text-sm font-medium leading-6">
@@ -533,38 +531,40 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 						</dl>
 					</div>
 				</div>
-				<div class="w-full shadow-top-2xs fixed insert-x-0 bottom-0 p-3 bg-white">
-					<div class="flex flex-row items-center justify-end gap-1">
-						<div class="w-2/3 flex flex-row justify-end gap-4">
-							<button
-								@click="makeSave"
-								:disabled="isProcess"
-								class="min-w-[90px] flex flex-row items-center justify-center text-xs text-center font-semibold text-base-900 uppercase bg-green px-6 rounded hover:bg-green-400 active:bg-green-600"
-							>
-								<BtnClockIcon class="w-lg h-lg" v-if="processStatus.save"/>
-								<span v-else>Save</span>
-							</button>
-							
-							<button
-								@click="makeApply"
-								:disabled="isProcess"
-								class="min-w-[90px] flex flex-row items-center justify-center text-xs font-semibold text-white uppercase bg-blue px-6 rounded hover:bg-blue-400 active:bg-blue-600"
-							>
-								<BtnClockIcon class="w-lg h-lg" v-if="processStatus.apply && !processStatus.save"/>
-								<span v-else>Apply</span>
-							</button>
-							
-							<button
-								@click="makeClosePage"
-								:disabled="isProcess"
-								class="text-xs text-center font-semibold text-base-900 uppercase px-2 py-3 hover:text-base-800 active:text-base-master"
-							>Cancel
-							</button>
-						</div>
-						<div class="w-1/3 flex flex-row justify-end gap-1">
-							&nbsp;
-						</div>
-					</div>
+			</div>
+		</div>
+		</div>
+		<div class="w-full h-7xl shadow-top-sm fixed insert-x-0 bottom-0 p-3 bg-white">
+			<div class="flex flex-row flex-nowrap items-center justify-between gap-1">
+				<div class="w-1/4 flex flex-row justify-start gap-4">&nbsp;</div>
+				<div class="w-2/4 flex flex-row justify-center gap-4">
+					<button
+						@click="makeSave"
+						:disabled="isProcess"
+						class="min-w-[90px] flex flex-row items-center justify-center text-xs text-center font-semibold text-base-900 uppercase bg-green px-6 rounded hover:bg-green-400 active:bg-green-600"
+					>
+						<BtnClockIcon class="w-lg h-lg" v-if="processStatus.save"/>
+						<span v-else>Save</span>
+					</button>
+					
+					<button
+						@click="makeApply"
+						:disabled="isProcess"
+						class="min-w-[90px] flex flex-row items-center justify-center text-xs font-semibold text-white uppercase bg-blue px-6 rounded hover:bg-blue-400 active:bg-blue-600"
+					>
+						<BtnClockIcon class="w-lg h-lg" v-if="processStatus.apply && !processStatus.save"/>
+						<span v-else>Apply</span>
+					</button>
+					
+					<button
+						@click="makeClosePage"
+						:disabled="isProcess"
+						class="text-xs text-center font-semibold text-base-900 uppercase px-2 py-3 hover:text-base-800 active:text-base-master"
+					>Cancel
+					</button>
+				</div>
+				<div class="w-1/4 flex flex-row justify-end gap-1">
+					&nbsp;
 				</div>
 			</div>
 		</div>
