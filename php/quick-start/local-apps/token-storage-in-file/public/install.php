@@ -38,53 +38,40 @@ require_once '../layouts/header.php'
 				?></pre>
 		</div>
 	</div>
-<!-- script src="https://api.bitrix24.com/api/v1/"></script>
+<?php
+/**
+ * b24jssdk ver old
+ */
+/*/
+?>
+<script src="https://api.bitrix24.com/api/v1/"></script>
 <script>
-	BX24.init(function() {
+	BX24.init(() => {
 		BX24.installFinish();
 	});
-</script -->
-<script src="/tmp/b24jssdk/browser.index.js"></script>
+</script>
+<?php //*/?>
+<?php
+/**
+ * b24jssdk ver new
+ *
+ * @todo import from https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js
+ */
+//*/
+?>
+<!-- script src="https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js"></script -->
+<script src="/tmp/b24jssdk/umd/index.min.js"></script>
 <script type="module">
-	const initializeB24Frame = async () =>
-	{
-		const queryParams = {
-			DOMAIN: null,
-			PROTOCOL: false,
-			APP_SID: null,
-			LANG: null
-		}
-		
-		if(window.name)
-		{
-			const [domain, protocol, appSid] = window.name.split('|')
-			queryParams.DOMAIN = domain
-			queryParams.PROTOCOL = parseInt(protocol) === 1
-			queryParams.APP_SID = appSid
-			queryParams.LANG = null
-		}
-		
-		if(!queryParams.DOMAIN || !queryParams.APP_SID)
-		{
-			throw new Error('Unable to initialize Bitrix24Frame library!')
-		}
-		
-		const b24Frame = new B24Js.B24Frame(queryParams)
-		await b24Frame.init()
-		
-		return b24Frame
-	}
-	
 	try
 	{
-		const $b24 = await initializeB24Frame()
-		$b24.installFinish()
+		const $b24 = await B24Js.initializeB24Frame();
+		$b24.installFinish();
 	}
 	catch( error )
 	{
-		console.error(error)
+		console.error(error);
 	}
-	//*/
 </script>
+<?php //*/?>
 <?php
 require_once '../layouts/footer.php';
