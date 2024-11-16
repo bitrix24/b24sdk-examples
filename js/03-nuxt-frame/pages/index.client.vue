@@ -200,7 +200,7 @@ onMounted(async() =>
 				description: 'Problem in app',
 				homePageIsHide: true,
 				isShowClearError: true,
-				clearErrorHref: '/frame/'
+				clearErrorHref: '/'
 			},
 			cause: error,
 			fatal: true
@@ -445,7 +445,6 @@ const makeOpenPage = async(url: string) =>
 
 const makeOpenUfList = async(url: string) =>
 {
-	
 	const path = $b24.slider.getUrl(url)
 	path.searchParams.set('moduleId', 'crm')
 	path.searchParams.set('entityId', 'CRM_DEAL')

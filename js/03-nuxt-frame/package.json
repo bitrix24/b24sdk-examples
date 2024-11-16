@@ -11,30 +11,22 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
-		"@bitrix24/b24jssdk": "file:../../../b24jssdk/packages/jssdk",
 		"@bitrix24/b24jssdk-nuxt": "file:../../../b24jssdk-nuxt",
-		
-		"axios": "^1.7.7",
-		"qs": "^6.13.0",
-		"luxon": "^3.5.0",
-		"protobufjs": "^7.4.0",
-		
-		"@bitrix24/b24icons-vue": "latest",
+		"@bitrix24/b24jssdk": "latest",
 		"@bitrix24/b24style": "latest",
+		"@bitrix24/b24icons-vue": "latest",
 		"@headlessui/vue": "^1.7.23",
-		"@nuxtjs/i18n": "^8.5.5",
 		"@tailwindcss/forms": "^0.5.7",
 		"@tailwindcss/typography": "^0.5.2",
 		"@vueuse/core": "^11.2.0",
 		"autoprefixer": "^10.4.20",
-		"nuxt": "^3.13.2",
 		"postcss": "^8.4.47",
-		"tailwind-merge": "^2.5.3",
 		"tailwindcss": "^3.4.11",
+		"tailwind-merge": "^2.5.3",
+		"@nuxtjs/i18n": "^8.5.5",
+		"nuxt": "^3.13.2",
 		"vue": "latest",
 		"vue-router": "latest"
 	},
-	"devDependencies": {
-		"@types/luxon": "^3.4.2"
-	}
+	"devDependencies": {}
 }
