@@ -11,7 +11,7 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
-		"@bitrix24/b24jssdk-nuxt": "file:../../../b24jssdk-nuxt",
+		"@bitrix24/b24jssdk-nuxt": "latest",
 		"@bitrix24/b24jssdk": "latest",
 		"@bitrix24/b24style": "latest",
 		"@bitrix24/b24icons-vue": "latest",
