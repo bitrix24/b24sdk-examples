@@ -64,13 +64,10 @@ BX24.init(() => {
 <?php
 /**
  * b24jssdk ver new
- *
- * @todo import from https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js
  */
 //*/
 ?>
-<!-- script src="https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js"></script -->
-<script src="/tmp/b24jssdk/umd/index.min.js"></script>
+<script src="https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js"></script>
 <script type="module">
 	try
 	{
