@@ -21,7 +21,7 @@ In the root of the project, create a file named `.env.local`. This file will hol
 
 3. **Use the Template to Fill `.env.local`**:
 
-Open the `.env.local.demo` file, which has an example of environment variable settings. Copy its contents into your `.env.local` file and replace the placeholders with your own values:
+Open the `.env.local.example` file, which has an example of environment variable settings. Copy its contents into your `.env.local` file and replace the placeholders with your own values:
 
 ```plaintext
 ## For example: 35
