@@ -42,13 +42,11 @@ graph LR
         A[Bitrix24 Account] 
     end
     
-    A[Bitrix24 Portal] <--> B[Ngrok public host
-     xxxx.ngrok-free.app]
+    A[Bitrix24 Portal] <--> B[Ngrok public host xxxx.ngrok-free.app]
     B <--> C[Ngrok client]
     
     subgraph Developer Machine 
-    C <--> D[PHP dev «web server» 
-    host: 127.0.0.1:8080]
+    C <--> D[PHP dev «web server» host: 127.0.0.1:8080]
     D --> E[PHP Application]
     end
 ```
@@ -73,10 +71,15 @@ graph LR
 ### Installation of SDK
 
 1. Open shell and go to folder `/php/quick-start/local-apps/token-storagein-file/`
-2. Install dependencies via composer
+2.1 Install dependencies via composer
 
 ```shell
 composer install
+```
+2.2 Install dependencies via npm
+
+```shell
+npm install
 ```
 
 3. Open package.json and run command "dev"
