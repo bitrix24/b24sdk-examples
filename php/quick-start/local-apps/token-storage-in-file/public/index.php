@@ -98,8 +98,5 @@ BX24.init(() => {
 		console.error(error);
 	}
 </script>
-<script type="module">
-
-</script>
 <?php //*/?>
 <?php require_once '../layouts/footer.php';
