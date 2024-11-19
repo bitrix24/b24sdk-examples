@@ -69,34 +69,33 @@ BX24.init(() => {
 ?>
 <script src="https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js"></script>
 <script type="module">
-	try
-	{
-		const $logger = B24Js.LoggerBrowser.build(
-			'local-apps: token-storage-in-file : index',
-			true
-		);
-		
-		const $b24 = await B24Js.initializeB24Frame();
-		$b24.setLogger(
-			B24Js.LoggerBrowser.build('Core')
-		);
-		
-		$logger.warn('B24Frame.init')
-		
-		$b24.callMethod('server.time')
-		.then((response) => {
-			const serverTimeResponse = response.getData().result;
-			const serverDateTime = B24Js.Text.toDateTime(serverTimeResponse);
-			$logger.info(
-				`${B24Js.Text.getDateForLog()} serverTime >> `,
-				serverDateTime.toFormat('y-MM-dd HH:mm:ss')
-			)
-		})
-	}
-	catch( error )
-	{
-		console.error(error);
-	}
+try
+{
+	const $logger = B24Js.LoggerBrowser.build(
+		'local-apps: token-storage-in-file : index',
+		true
+	);
+	
+	const $b24 = await B24Js.initializeB24Frame();
+	$b24.setLogger(
+		B24Js.LoggerBrowser.build('Core')
+	);
+	
+	$logger.warn('B24Frame.init');
+	
+	const response = await $b24.callMethod('server.time');
+	const serverTimeResponse = response.getData().result;
+	const serverDateTime = B24Js.Text.toDateTime(serverTimeResponse);
+	
+	$logger.info(
+		`${B24Js.Text.getDateForLog()} serverTime >> `,
+		serverDateTime.toFormat('y-MM-dd HH:mm:ss')
+	);
+}
+catch( error )
+{
+	console.error(error);
+}
 </script>
 <?php //*/?>
 <?php require_once '../layouts/footer.php';
