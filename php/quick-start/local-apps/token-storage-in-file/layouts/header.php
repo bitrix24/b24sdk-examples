@@ -13,6 +13,10 @@ $menu = json_decode(json_encode([
 		'href' => 'https://github.com/bitrix24/b24phpsdk'
 	],
 	[
+		'title' => '@bitrix24/b24jssdk',
+		'href' => 'https://bitrix24.github.io/b24jssdk/'
+	],
+	[
 		'title' => '@bitrix24/b24style',
 		'href' => 'https://bitrix24.github.io/b24style/reference/colors.html'
 	],
