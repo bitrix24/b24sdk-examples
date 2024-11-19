@@ -18,11 +18,11 @@ $menu = json_decode(json_encode([
 	],
 	[
 		'title' => '@bitrix24/b24style',
-		'href' => 'https://bitrix24.github.io/b24style/reference/colors.html'
+		'href' => 'https://bitrix24.github.io/b24style/'
 	],
 	[
 		'title' => '@bitrix24/b24icons',
-		'href' => 'https://bitrix24.github.io/b24icons/guide/icons.html'
+		'href' => 'https://bitrix24.github.io/b24icons/'
 	]
 ]));
 
