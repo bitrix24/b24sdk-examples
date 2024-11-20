@@ -14,6 +14,7 @@
 		"@bitrix24/b24jssdk-nuxt": "latest",
 		"@bitrix24/b24style": "latest",
 		"@bitrix24/b24icons-vue": "latest",
+		"luxon": "^3.5.0",
 		"@headlessui/vue": "^1.7.23",
 		"@tailwindcss/forms": "^0.5.7",
 		"@tailwindcss/typography": "^0.5.2",
@@ -27,5 +28,7 @@
 		"vue": "latest",
 		"vue-router": "latest"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@types/luxon": "^3.4.2"
+	}
 }
