@@ -35,7 +35,7 @@ definePageMeta({
 // region Init ////
 const $logger = LoggerBrowser.build(
 	'Demo: Testing Rest-Api Calls',
-	true
+	import.meta.env?.DEV === true
 )
 const { initB24Helper, getB24Helper } = useB24Helper()
 const { formatterNumber } = useFormatter()
