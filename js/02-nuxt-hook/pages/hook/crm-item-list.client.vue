@@ -63,6 +63,7 @@ const $b24 = new B24Hook(
 	B24HookConfig
 )
 $b24.setLogger($logger)
+// $b24.offClientSideWarning() ////
 
 const b24CurrentLang: Ref<string> = ref(B24LangList.en)
 

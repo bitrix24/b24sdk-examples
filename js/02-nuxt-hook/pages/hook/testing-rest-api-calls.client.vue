@@ -85,6 +85,7 @@ const status: Ref<IStatus> = ref({
 
 const $b24 = new B24Hook(B24HookConfig)
 $b24.setLogger(LoggerBrowser.build('Core', true))
+// $b24.offClientSideWarning() ////
 
 const $isInitB24Helper = ref(false)
 initB24Helper(
