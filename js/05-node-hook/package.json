@@ -1,0 +1,24 @@
+{
+	"name": "@bitrix24/b24jssdk-node-hook",
+	"private": true,
+	"version": "0.0.0",
+	"description": "The example demonstrates how to use Node.js, TypeScript, and `@bitrix24/b24jssdk` to interact with Bitrix24 using a hook",
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"type": "module",
+	"scripts": {
+		"build": "tsc",
+		"process-company-list": "npm run build && node dist/process-company-list.js"
+	},
+	"devDependencies": {
+		"@types/luxon": "^3.4.2",
+		"@types/node": "^22.9.1",
+		"typescript": "^5.6.3"
+	},
+	"dependencies": {
+		"@bitrix24/b24jssdk": "latest",
+		"chalk": "^5.3.0",
+		"dotenv": "^16.4.5"
+	}
+}
