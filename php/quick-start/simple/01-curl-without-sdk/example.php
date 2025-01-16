@@ -38,6 +38,11 @@ $postFields = [
 ];
 
 // Initialize cURL
+if (!extension_loaded('curl')) {
+    print("fatal error: cURL is not available. Activete it or install it." . PHP_EOL);
+    exit();
+}
+
 $curl = curl_init();
 
 // Set cURL options
