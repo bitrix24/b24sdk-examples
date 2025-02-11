@@ -1,0 +1,10 @@
+/.idea*
+/var/*
+vendor
+config/auth.json
+composer.phar
+composer.lock
+package-lock.json
+.phpunit.result.cache
+*.log
+.env.local
