@@ -4,4 +4,12 @@ services:
       context: ./docker/php-cli
     volumes:
       - .:/var/www/html
+      - ./var/logs:/var/logs
+    working_dir: /var/www/html
+
+  node-cli:
+    image: node:22-alpine3.20
+    user: "1000:1000"
+    volumes:
+      - .:/var/www/html
     working_dir: /var/www/html
