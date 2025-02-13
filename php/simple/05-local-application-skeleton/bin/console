@@ -53,5 +53,5 @@ if ($_SERVER['APP_DEBUG']) {
 
 $application = new Application();
 // register cli-command
-$application->add(new TestCommand(App\LoggerFactory::getLog()));
+$application->add(new TestCommand(App\LoggerFactory::create()));
 $application->run($input);
