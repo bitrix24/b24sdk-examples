@@ -20,7 +20,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 readonly class AuthRepositoryFactory
 {
-    public static function init(LoggerInterface $logger): LocalAppAuthRepositoryInterface
+    public static function create(LoggerInterface $logger): LocalAppAuthRepositoryInterface
     {
         return new AppAuthFileStorage(
             dirname(__DIR__) . '/config/auth.json.local',

@@ -29,7 +29,7 @@ class LoggerFactory
      * @throws WrongConfigurationException
      * @throws InvalidArgumentException
      */
-    public static function getLog(): LoggerInterface
+    public static function create(): LoggerInterface
     {
         static $logger;
 

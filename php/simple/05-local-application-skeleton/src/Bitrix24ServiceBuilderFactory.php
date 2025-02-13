@@ -23,25 +23,24 @@ use Symfony\Component\HttpFoundation\Request;
 
 readonly class Bitrix24ServiceBuilderFactory
 {
-    public static function initFromRequest(Request $request): ServiceBuilder
+    public static function createFromRequest(Request $request): ServiceBuilder
     {
         return ServiceBuilderFactory::createServiceBuilderFromPlacementRequest(
             $request,
             self::getApplicationProfile(),
-            EventDispatcherFactory::init(),
-            LoggerFactory::getLog(),
+            EventDispatcherFactory::create(),
+            LoggerFactory::create(),
         );
     }
 
-    public static function initFromStoredToken(): ServiceBuilder
+    public static function createFromStoredToken(): ServiceBuilder
     {
         // init bitrix24 service builder auth data from saved auth token
-        $logger = LoggerFactory::getLog();
-        $authRepository = AuthRepositoryFactory::init($logger);
-
+        $logger = LoggerFactory::create();
+        $authRepository = AuthRepositoryFactory::create($logger);
 
         return (new ServiceBuilderFactory(
-            EventDispatcherFactory::init(),
+            EventDispatcherFactory::create(),
             $logger,
         ))->init(
             // load app profile from /config/.env.local to $_ENV and create ApplicationProfile object
@@ -56,10 +55,10 @@ readonly class Bitrix24ServiceBuilderFactory
     {
         try {
             $profile = ApplicationProfile::initFromArray($_ENV);
-            LoggerFactory::getLog()->debug('getApplicationProfile.finish');
+            LoggerFactory::create()->debug('getApplicationProfile.finish');
             return $profile;
         } catch (InvalidArgumentException $invalidArgumentException) {
-            LoggerFactory::getLog()->error(
+            LoggerFactory::create()->error(
                 'getApplicationProfile.error',
                 [
                     'message' => sprintf('cannot read config from $_ENV: %s', $invalidArgumentException->getMessage()),

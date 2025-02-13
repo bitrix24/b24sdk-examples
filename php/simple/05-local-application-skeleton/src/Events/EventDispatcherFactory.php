@@ -24,7 +24,7 @@ class EventDispatcherFactory
      *
      * @return EventDispatcherInterface The event dispatcher instance.
      */
-    public static function init(): EventDispatcherInterface
+    public static function create(): EventDispatcherInterface
     {
         $eventDispatcher = new EventDispatcher();
         $eventDispatcher->addListener(
