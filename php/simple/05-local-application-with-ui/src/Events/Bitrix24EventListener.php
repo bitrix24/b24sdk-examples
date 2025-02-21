@@ -15,10 +15,16 @@ namespace App\Events;
 
 use App\LoggerFactory;
 use App\Repository\AuthRepositoryFactory;
+use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
+use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
 use Bitrix24\SDK\Events\AuthTokenRenewedEvent;
 
 class Bitrix24EventListener
 {
+    /**
+     * @throws WrongConfigurationException
+     * @throws InvalidArgumentException
+     */
     public static function onAuthTokenRenewedEventListener(AuthTokenRenewedEvent $authTokenRenewedEvent): void
     {
         // save renewed auth token

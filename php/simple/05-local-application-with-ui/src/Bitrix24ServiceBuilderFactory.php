@@ -17,6 +17,7 @@ use App\Events\EventDispatcherFactory;
 use App\Repository\AuthRepositoryFactory;
 use Bitrix24\SDK\Core\Credentials\ApplicationProfile;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
+use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
 use Bitrix24\SDK\Services\ServiceBuilder;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,6 +34,10 @@ readonly class Bitrix24ServiceBuilderFactory
         );
     }
 
+    /**
+     * @throws WrongConfigurationException
+     * @throws InvalidArgumentException
+     */
     public static function createFromStoredToken(): ServiceBuilder
     {
         // init bitrix24 service builder auth data from saved auth token
