@@ -53,26 +53,34 @@ readonly class InstallController
             }
 
             $placementRequest = new PlacementRequest($incomingRequest);
-            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest(
-                $placementRequest->getRequest()
-            );
+            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest($placementRequest->getRequest());
 
             // your code can't trust data in request before you check is this request data valid
             $b24ServiceBuilder->getMainScope()->main()->guardValidateCurrentAuthToken();
 
             // ok, request data is valid, let's install application
-            $currentB24UserId = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile(
-            )->ID;
+            // step 1
+            // save admin auth token without application_token key
+            // they will arrive at OnApplicationInstall event
+            $this->appAuthRepository->save(
+                new LocalAppAuth(
+                    $placementRequest->getAccessToken(),
+                    $placementRequest->getDomainUrl(),
+                    null
+                )
+            );
 
+            // step 2
+            // register application lifecycle event handlers
+            $currentB24UserId = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile()->ID;
             $eventHandlerUrl = sprintf(
                 'https://%s/event-handler.php',
                 $placementRequest->getRequest()->server->get('HTTP_HOST')
             );
-            $this->logger->debug('processOnInstallPlacementRequest.startBindEventHandlers', [
+            $this->logger->debug('InstallController.startBindEventHandlers', [
                 'eventHandlerUrl' => $eventHandlerUrl
             ]);
 
-            // register application lifecycle event handlers
             $b24ServiceBuilder->getMainScope()->eventManager()->bindEventHandlers(
                 [
                     // register event handlers for implemented in SDK events
@@ -89,17 +97,7 @@ readonly class InstallController
 
                 ]
             );
-            $this->logger->debug('processOnInstallPlacementRequest.finishBindEventHandlers');
-
-            // save admin auth token without application_token key
-            // they will arrive at OnApplicationInstall event
-            $this->appAuthRepository->save(
-                new LocalAppAuth(
-                    $placementRequest->getAccessToken(),
-                    $placementRequest->getDomainUrl(),
-                    null
-                )
-            );
+            $this->logger->debug('InstallController.finishBindEventHandlers');
 
             return new Response('OK, placement request successfully processed', 200);
         } catch (Throwable $exception) {

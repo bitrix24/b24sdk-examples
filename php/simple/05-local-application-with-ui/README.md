@@ -114,6 +114,20 @@ Form params
 
 Install controller stored in file `src/Controller/InstallController.php`
 
+4. Install controller will do some tasks:
+
+- check is this request is placement request
+- check is this placement request has valid auth data
+- save auth token to file in folder `config/auth.json.local`
+- register event handler for events `ONAPPINSTALL` and `ONAPPUNINSTALL`
+
+5. If installation finished successfully, html render with js bootstrap code and load js-library for work with Bitrix24
+   api.
+6. Call js-method `BX24.installFinish()` for finish installation
+7. If installation finished portal do two things:
+
+- send event ONAPPINSTALL to event handler stored in file `event-handler.php`
+- refresh page and load main placement for application with url `index.php`
 
 ### Run local application with UI
 

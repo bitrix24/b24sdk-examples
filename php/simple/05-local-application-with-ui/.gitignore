@@ -1,7 +1,7 @@
 /.idea*
 /var/*
 vendor
-config/auth.json
+config/auth.json.local
 composer.phar
 composer.lock
 package-lock.json

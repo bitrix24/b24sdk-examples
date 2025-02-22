@@ -16,7 +16,6 @@ namespace App;
 use App\Controller\InstallController;
 use App\Repository\AuthRepositoryFactory;
 use Symfony\Component\HttpFoundation\Request;
-use Throwable;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -39,18 +38,19 @@ $log->debug(
 // - save auth tokens in file - config/auth.json.local
 // - subscribe to application lifecycle events
 $response = $installController->process($incomingRequest);
-if ($response->getStatusCode() !== 200) {
-    ?>
+
+// in production application you must use some template engine, but in this example we use php native templating features
+?>
+
+<?php if($response->getStatusCode() !== 200): ?>
     <pre>
         oh no! something went wrong
         try to find reason in log files in folder var/logs/
-<?php
-$response->send()
-?>
-    </pre>
     <?php
-}
-?>
+    $response->send()
+    ?>
+    </pre>
+<?php else: ?>
     <pre>
         Application installation finished, tokens from Bitrix24:
         <?= print_r($_REQUEST, true) ?>
@@ -61,5 +61,7 @@ $response->send()
         BX24.installFinish();
     </script>
     <?php
-//send response to stdout
-$response->send();
+    //send response to stdout
+    $response->send();
+    ?>
+<?php endif; ?>
