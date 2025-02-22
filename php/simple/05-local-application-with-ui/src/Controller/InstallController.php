@@ -21,10 +21,10 @@ use Bitrix24\SDK\Application\Requests\Events\OnApplicationUninstall\OnApplicatio
 use Bitrix24\SDK\Application\Requests\Placement\PlacementRequest;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Services\Main\Common\EventHandlerMetadata;
-use Bitrix24\SDK\Services\RemoteEventsFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 readonly class InstallController
 {
@@ -34,16 +34,6 @@ readonly class InstallController
     ) {
     }
 
-    /**
-     * it can be
-     * - incoming event request on install.php when you install local app without UI
-     *
-     * @param Request $incomingRequest
-     * @return Response
-     * @throws \Bitrix24\SDK\Core\Exceptions\InvalidArgumentException
-     * @throws \Bitrix24\SDK\Core\Exceptions\WrongSecuritySignatureException
-     * @throws \JsonException
-     */
     public function process(Request $incomingRequest): Response
     {
         $this->logger->debug('InstallController.start', [
@@ -51,92 +41,73 @@ readonly class InstallController
             'baseUrl' => $incomingRequest->getBaseUrl(),
         ]);
 
-        if (PlacementRequest::isCanProcess($incomingRequest)) {
-            $this->logger->debug('InstallController.placementRequest', [
-                'request' => $incomingRequest->request->all()
-            ]);
-            $this->processOnInstallPlacementRequest(new PlacementRequest($incomingRequest));
-            return new Response('OK', 200);
-        }
-
-        if (RemoteEventsFactory::isCanProcess($incomingRequest)) {
-            $this->logger->debug('InstallController.b24EventRequest');
-
-            // get application_token for check event security signature
-            // see https://apidocs.bitrix24.com/api-reference/events/safe-event-handlers.html
-            // on first lifecycle event OnApplicationInstall application token is null and file with auth data doesn't exists
-            // we save application_token and all next events will be validated security signature
-            $applicationToken = $this->appAuthRepository->getApplicationToken();
-
-            $event = RemoteEventsFactory::init($this->logger)->createEvent($incomingRequest, $applicationToken);
-            $this->logger->debug('InstallController.eventRequest', [
-                'eventClassName' => $event::class,
-                'eventCode' => $event->getEventCode(),
-                'eventPayload' => $event->getEventPayload(),
-            ]);
-
-            if ($event->getEventCode() !== OnApplicationInstall::CODE) {
-                throw new InvalidArgumentException(sprintf('unsupported event type %s', $event->getEventCode()));
+        try {
+            // check is this request are valid placement request?
+            if (!PlacementRequest::isCanProcess($incomingRequest)) {
+                $this->logger->error('InstallController.unknownRequest', [
+                    'request' => $incomingRequest->request->all()
+                ]);
+                throw new InvalidArgumentException(
+                    'install controller can process only placement requests from bitrix24'
+                );
             }
-            $this->logger->debug('InstallController.Event.onApplicationInstall');
-            // save auth tokens and application token
+
+            $placementRequest = new PlacementRequest($incomingRequest);
+            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest(
+                $placementRequest->getRequest()
+            );
+
+            // your code can't trust data in request before you check is this request data valid
+            $b24ServiceBuilder->getMainScope()->main()->guardValidateCurrentAuthToken();
+
+            // ok, request data is valid, let's install application
+            $currentB24UserId = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile(
+            )->ID;
+
+            $eventHandlerUrl = sprintf(
+                'https://%s/event-handler.php',
+                $placementRequest->getRequest()->server->get('HTTP_HOST')
+            );
+            $this->logger->debug('processOnInstallPlacementRequest.startBindEventHandlers', [
+                'eventHandlerUrl' => $eventHandlerUrl
+            ]);
+
+            // register application lifecycle event handlers
+            $b24ServiceBuilder->getMainScope()->eventManager()->bindEventHandlers(
+                [
+                    // register event handlers for implemented in SDK events
+                    new EventHandlerMetadata(
+                        OnApplicationInstall::CODE,
+                        $eventHandlerUrl,
+                        $currentB24UserId
+                    ),
+                    new EventHandlerMetadata(
+                        OnApplicationUninstall::CODE,
+                        $eventHandlerUrl,
+                        $currentB24UserId,
+                    ),
+
+                ]
+            );
+            $this->logger->debug('processOnInstallPlacementRequest.finishBindEventHandlers');
+
+            // save admin auth token without application_token key
+            // they will arrive at OnApplicationInstall event
             $this->appAuthRepository->save(
                 new LocalAppAuth(
-                    $event->getAuth()->authToken,
-                    $event->getAuth()->domain,
-                    $event->getAuth()->application_token
+                    $placementRequest->getAccessToken(),
+                    $placementRequest->getDomainUrl(),
+                    null
                 )
             );
-            return new Response('OK', 200);
+
+            return new Response('OK, placement request successfully processed', 200);
+        } catch (Throwable $exception) {
+            $this->logger->error('InstallController.error', [
+                'message' => $exception->getMessage(),
+                'trace' => $exception->getTraceAsString(),
+            ]);
+            return new Response(sprintf('error on placement request processing: %s', $exception->getMessage()), 500);
         }
-
-        return new Response('unknown request', 400);
-    }
-
-    protected function processOnInstallPlacementRequest(PlacementRequest $placementRequest): void
-    {
-        $this->logger->debug('processRequest.processOnInstallPlacementRequest.start');
-
-        $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromRequest($placementRequest->getRequest());
-
-        $currentB24UserId = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile()->ID;
-
-        $eventHandlerUrl = sprintf(
-            'https://%s/event-handler.php',
-            $placementRequest->getRequest()->server->get('HTTP_HOST')
-        );
-        $this->logger->debug('processRequest.processOnInstallPlacementRequest.startBindEventHandlers', [
-            'eventHandlerUrl' => $eventHandlerUrl
-        ]);
-
-        // register application lifecycle event handlers
-        $b24ServiceBuilder->getMainScope()->eventManager()->bindEventHandlers(
-            [
-                // register event handlers for implemented in SDK events
-                new EventHandlerMetadata(
-                    OnApplicationInstall::CODE,
-                    $eventHandlerUrl,
-                    $currentB24UserId
-                ),
-                new EventHandlerMetadata(
-                    OnApplicationUninstall::CODE,
-                    $eventHandlerUrl,
-                    $currentB24UserId,
-                ),
-
-            ]
-        );
-        $this->logger->debug('processRequest.processOnInstallPlacementRequest.finishBindEventHandlers');
-
-        // save admin auth token without application_token key
-        // they will arrive at OnApplicationInstall event
-        $this->appAuthRepository->save(
-            new LocalAppAuth(
-                $placementRequest->getAccessToken(),
-                $placementRequest->getDomainUrl(),
-                null
-            )
-        );
-        $this->logger->debug('processRequest.processOnInstallPlacementRequest.finish');
     }
 }

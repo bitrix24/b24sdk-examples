@@ -37,7 +37,6 @@ package.json - Configuration file for Node.js dependencies and scripts
 tailwind.config.js - Configuration file for Tailwind CSS        
 ```
 
-
 ### Architecture
 
 #### Developer configuration for local development on his machine
@@ -60,6 +59,7 @@ graph LR
 ```
 
 #### Production configuration
+
 ```mermaid
 graph LR
     subgraph Bitrix24 cloud
@@ -73,9 +73,49 @@ graph LR
     end
 ```
 
-### Installation cases
+### How it works in depth
 
-#### Run local application without UI
+#### Register local application in integration section on Bitrix24 portal
+
+Developer register application and fill paths in application cards
+
+Portal don't check is application host available
+
+#### Install local application
+
+1. Bitrix24 open application in iframe and send post request with `application/x-www-form-urlencoded` data to install
+   placement handler
+2. install handler receive data from Bitrix24
+
+Handler stored in file `public/install.php`
+
+Query string
+
+| Key      | Value                                      | Comment             |
+|----------|--------------------------------------------|---------------------|
+| APP_SID  | `b7b33763156e1478c6efe3b5358f7c2e`         | Application ID      |
+| DOMAIN   | `bitrix24-php-sdk-playground.bitrix24.com` | Bitrix24 portal url |
+| LANG     | `en`                                       | Language iso code   |
+| PROTOCOL | `1`                                        | Is https enabled    |
+
+Form params
+
+| Key               | Value                                                                    | Comment                 |
+|-------------------|--------------------------------------------------------------------------|-------------------------|
+| AUTH_EXPIRES      | `3600`                                                                   | Auth token time to live |
+| AUTH_ID           | `0eeeb96700763e400058f...`                                               | Auth token              |
+| member_id         | `010b6886ebc205e43`                                                      | Member ID               |
+| PLACEMENT         | `DEFAULT`                                                                | Placement code          |
+| PLACEMENT_OPTIONS | `{"IFRAME":"Y","IFRAME_TYPE":"SIDE_SLIDER","any":"52\/"}`                | Placement options       |
+| REFRESH_ID        | `fe6ce16700763e400058f18a00000001302a07d250d6ecf605f620846d3b45eea99242` | Refresh token           |
+| status            | `L`                                                                      | Application status code |
+
+3. Install handler start process request
+
+Install controller stored in file `src/Controller/InstallController.php`
+
+
+### Run local application with UI
 
 1. Get actual version of SDK
 2. Open shell and go to folder `/examples/local-app-with-token-storage/`
@@ -90,113 +130,8 @@ composer install
 
 > [!WARNING]  
 > This web server is designed to aid application development. It may also be useful for testing purposes or for
-> application demonstrations that are run in controlled environments. It is not intended to be a full-featured web server.
-
-```shell
-php -S 127.0.0.1:8080
-```
-
-5. In other tab check is server running and see output
-
-```shell
-curl -v 127.0.0.1:8080
-```
-
-6. Open other tab and see application log, log files created with current date.
-
-```shell
-ls var/log/ 
-tail -f var/log/application-2024-09-15.log
-```
-
-7. Expose your local PHP dev web-server to internet via [ngrok](https://ngrok.com/)
-
-```shell
-ngrok http 127.0.0.1:8080
-```
-
-You will see output from ngrok local client
-
-```
-Session Status                online
-Account                       Maksim (Plan: Free)
-Update                        update available (version 3.16.0, Ctrl-U to update)
-Version                       3.10.0
-Region                        United States (us)
-Latency                       196ms
-Web Interface                 http://127.0.0.1:4040
-Forwarding                    https://c421-94-143-197-46.ngrok-free.app -> http://127.0.0.1:8080
-```
-
-8. Check is your tunnel running and you expose application to global internet
-
-```shell
-curl -v https://c421-94-143-197-46.ngrok-free.app
-```
-
-9. Open ngrok local web interface [http://127.0.0.1:4040/](http://127.0.0.1:4040/) and see last request
-10. Go to Bitrix24 portal → left menu → «Developer resources» → «Other» → «Local application»
-11. Select «server» type of application
-12. In «handler path» enter **your** forwarding address `https://c421-94-143-197-46.ngrok-free.app/index.php` with **index.php**
-13. In «Initial installation path» enter **your** forwarding address `https://c421-94-143-197-46.ngrok-free.app/install.php` with
-    **install.php**
-14. Set checkbox «Script only (no user interface)» ← ⚠️ it`s important
-15. Assign permissions and add scopes: `crm`, `user_brief`
-16. Click on «Save» button and see button «reinstall».
-17. You can see:
-    - POST request on endpoint `https://c421-94-143-197-46.ngrok-free.app/install.php` on ngrok web
-      interface [http://127.0.0.1:4040/](http://127.0.0.1:4040/)
-    - detailed data in application log in folder `var/log/application-*.log`
-    - stored admin auth token in file `config/auth.json.local`
-18. Go to folder `config` and make a copy of file `.env`
-
-```shell
-cp .env .env.local
-```
-
-19. Open file `.env.local` and copy secret data from Bitrix24 local application settings:
-    - `Application ID (client_id)` to `BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID`
-    - `Application key (client_secret)` to `BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET`
-    - `Assign permissions` (scope) to `BITRIX24_PHP_SDK_APPLICATION_SCOPE`
-
-You get file like this example:
-
-```
-BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID='YOUR_DATA_HERE'
-BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET='YOUR_DATA_HERE'
-BITRIX24_PHP_SDK_APPLICATION_SCOPE='crm,user_brief'
-```
-
-20. Now we have stored application data and admin token. We can create requests to Bitrix24 REST-API.
-21. Open new tab in console and go to folder `bin/`
-20. Run command
-
-```shell
-php -f console.php
-```
-
-You see console output
-
-```
-Try to connect to bitrix24 with local application credentials and call method «server.time»...
-server time: 2024-09-15 22-53-26
-```
-
-#### Run local application with UI
-1. Get actual version of SDK
-2. Open shell and go to folder `/examples/local-app-with-token-storage/`
-3. Install dependencies via composer
-
-```shell
-composer install
-```
-
-4. Go to folder `public` and
-   start [built-in PHP web-server](https://www.php.net/manual/en/features.commandline.webserver.php).
-
-> [!WARNING]  
-> This web server is designed to aid application development. It may also be useful for testing purposes or for
-> application demonstrations that are run in controlled environments. It is not intended to be a full-featured web server.
+> application demonstrations that are run in controlled environments. It is not intended to be a full-featured web
+> server.
 
 ```shell
 php -S 127.0.0.1:8080
@@ -243,13 +178,16 @@ curl -v https://a3b4-94-143-197-46.ngrok-free.app
 9. Open ngrok local web interface [http://127.0.0.1:4040/](http://127.0.0.1:4040/) and see last request
 10. Go to Bitrix24 portal → left menu → «Developer resources» → «Other» → «Local application»
 11. Select «server» type of application
-12. In «handler path» enter **your** forwarding address `https://c421-94-143-197-46.ngrok-free.app/index.php` with **index.php**
-13. In «Initial installation path» enter **your** forwarding address `https://c421-94-143-197-46.ngrok-free.app/install.php` with
+12. In «handler path» enter **your** forwarding address `https://c421-94-143-197-46.ngrok-free.app/index.php` with *
+    *index.php**
+13. In «Initial installation path» enter **your** forwarding address
+    `https://c421-94-143-197-46.ngrok-free.app/install.php` with
     **install.php**
 14. Fill «Menu item text» with value «Example App»
 15. Assign permissions and add scopes: `crm`, `user_brief`,`placement`
 16. Click on «Save» button and see buttons «Open Applicatoin» and «Reinstall».
-17. Now you can see new inputs `Application ID (client_id)` and `Application key (client_secret)` with secret keys for your application. 
+17. Now you can see new inputs `Application ID (client_id)` and `Application key (client_secret)` with secret keys for
+    your application.
 18. Go to folder `config` and make a copy of file `.env`
 
 ```shell
@@ -268,6 +206,7 @@ BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID='YOUR_DATA_HERE'
 BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET='YOUR_DATA_HERE'
 BITRIX24_PHP_SDK_APPLICATION_SCOPE='crm,user_brief,placement'
 ```
+
 20. Now we have finish configure app, good job!
 21. Click on button «Reinstall» and you see installation flow in logs.
 21. Open new tab in console and go to folder `bin/`

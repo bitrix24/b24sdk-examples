@@ -90,7 +90,7 @@ up-ngrok:
 	ngrok http 127.0.0.1:10080
 
 .PHONY: down-ngrok
-stop-ngrok:
+down-ngrok:
 	@pids=$$(ps aux | grep ' ngrok http' | grep -v 'grep' | awk '{print $$2}'); \
 	if [ -n "$$pids" ]; then \
 		echo "Killing process(es): $$pids"; \
