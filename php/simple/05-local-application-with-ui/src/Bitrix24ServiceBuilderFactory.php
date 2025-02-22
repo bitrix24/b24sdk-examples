@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 readonly class Bitrix24ServiceBuilderFactory
 {
-    public static function createFromRequest(Request $request): ServiceBuilder
+    public static function createFromPlacementRequest(Request $request): ServiceBuilder
     {
         return ServiceBuilderFactory::createServiceBuilderFromPlacementRequest(
             $request,
@@ -48,7 +48,7 @@ readonly class Bitrix24ServiceBuilderFactory
             EventDispatcherFactory::create(),
             $logger,
         ))->init(
-            // load app profile from /config/.env.local to $_ENV and create ApplicationProfile object
+        // load app profile from /config/.env.local to $_ENV and create ApplicationProfile object
             self::getApplicationProfile(),
             // load oauth tokens and portal URL stored in /config/auth.json.local to LocalAppAuth object
             $authRepository->getAuth()->getAuthToken(),
