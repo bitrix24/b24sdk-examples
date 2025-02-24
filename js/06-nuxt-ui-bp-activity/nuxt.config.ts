@@ -12,11 +12,11 @@ export default defineNuxtConfig({
   devServer: {
     port: 3000,
     /*/
-	host: 'custom.mydomain.local',
-	https: {
-		key: '.../source/ssl/custom.mydomain.local-key.pem',
-		cert: '.../source/ssl/custom.mydomain.local.pem'
-	},
+    host: 'custom.mydomain.local',
+    https: {
+      key: '.../source/ssl/custom.mydomain.local-key.pem',
+      cert: '.../source/ssl/custom.mydomain.local.pem'
+    },
 	//*/
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8');
@@ -26,7 +26,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@bitrix24/b24ui-nuxt',
-    `@bitrix24/b24jssdk-nuxt`,
+    // `@bitrix24/b24jssdk-nuxt`,
     '@nuxt/eslint'
   ],
 
