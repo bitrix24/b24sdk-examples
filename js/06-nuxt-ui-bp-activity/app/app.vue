@@ -1,8 +1,8 @@
 <script setup lang="ts">
 const toaster = ref({
-	position: 'top-right' as const,
-	expand: true,
-	duration: 8000
+  position: 'top-right' as const,
+  expand: true,
+  duration: 8000
 })
 </script>
 
