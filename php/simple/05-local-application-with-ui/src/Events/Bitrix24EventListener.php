@@ -28,8 +28,6 @@ class Bitrix24EventListener
     public static function onAuthTokenRenewedEventListener(AuthTokenRenewedEvent $authTokenRenewedEvent): void
     {
         // save renewed auth token
-        AuthRepositoryFactory::create(LoggerFactory::create())->saveRenewedToken(
-            $authTokenRenewedEvent->getRenewedToken()
-        );
+        AuthRepositoryFactory::create(LoggerFactory::create())->saveRenewedToken($authTokenRenewedEvent->getRenewedToken());
     }
 }

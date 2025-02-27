@@ -15,6 +15,7 @@ namespace App;
 
 use App\Events\EventDispatcherFactory;
 use App\Repository\AuthRepositoryFactory;
+use Bitrix24\SDK\Core\Contracts\Events\EventInterface;
 use Bitrix24\SDK\Core\Credentials\ApplicationProfile;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
@@ -24,6 +25,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 readonly class Bitrix24ServiceBuilderFactory
 {
+    /**
+     * Create Bitrix24 Service builder with auth tokens received from placement request
+     *
+     * @param Request $request
+     * @return ServiceBuilder
+     * @throws InvalidArgumentException
+     * @throws WrongConfigurationException
+     */
     public static function createFromPlacementRequest(Request $request): ServiceBuilder
     {
         return ServiceBuilderFactory::createServiceBuilderFromPlacementRequest(
@@ -31,6 +40,24 @@ readonly class Bitrix24ServiceBuilderFactory
             self::getApplicationProfile(),
             EventDispatcherFactory::create(),
             LoggerFactory::create(),
+        );
+    }
+
+    /**
+     *
+     *
+     * @param EventInterface $b24Event
+     * @return ServiceBuilder
+     * @throws InvalidArgumentException
+     * @throws WrongConfigurationException
+     */
+
+    public static function createFromIncomingEvent(EventInterface $b24Event): ServiceBuilder
+    {
+        return (new ServiceBuilderFactory(EventDispatcherFactory::create(), LoggerFactory::create()))->init(
+            self::getApplicationProfile(),
+            $b24Event->getAuth()->authToken,
+            $b24Event->getAuth()->domain
         );
     }
 
