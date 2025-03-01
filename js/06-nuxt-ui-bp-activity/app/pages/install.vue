@@ -117,6 +117,15 @@ async function sleepAction(timeout: number = 1000): Promise<void> {
   return new Promise<void>(resolve => setTimeout(resolve, timeout))
 }
 
+const stepsData = computed(() => {
+  return Object.entries(steps.value).map(([index, row]) => {
+    return {
+      step: index,
+      data: row?.data
+    }
+  })
+})
+
 onMounted(async () => {
   try {
     for (const [key, step] of Object.entries(steps.value)) {
@@ -145,15 +154,6 @@ onMounted(async () => {
 
 onUnmounted(() => {
   // $b24?.destroy()
-})
-
-const stepsData = computed(() => {
-  return Object.entries(steps.value).map(([index, row]) => {
-    return {
-      step: index,
-      data: row?.data
-    }
-  })
 })
 </script>
 

@@ -8,8 +8,9 @@ export interface IStep {
 }
 // endregion ////
 
-export interface IAction {
-  caption: string
+export interface IActivity {
+  path: string
+  title: string
   description: string
   icon?: IconComponent
   isInstall?: boolean
