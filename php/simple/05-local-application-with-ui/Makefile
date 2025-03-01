@@ -18,7 +18,7 @@ help:
 	@echo "docker-up                 - run docker"
 	@echo "docker-down               - stop docker"
 	@echo "docker-down-clear         - stop docker and remove orphaned containers"
-	@echo "docker-pull               - download containers and ignore pull failures"
+	@echo "docker-pull               - download images and ignore pull failures"
 	@echo "npm-install               - install dependencies from npm"
 	@echo "npm-build                 - build frontend"
 	@echo "composer-install          - install dependencies from composer"
