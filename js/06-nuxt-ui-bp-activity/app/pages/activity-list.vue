@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import Fuse from 'fuse.js'
 // import salesMarketingData from '~/data/sales-marketing'
 // import communicationData from '~/data/communication'
 import type { IActivity } from '~/types'
@@ -34,23 +35,49 @@ const active = ref('tab-sale')
 
 const activities = ref<IActivity[]>([])
 
+const fuseOptions = {
+  keys: ['title', 'description', 'category', 'badges'],
+  includeScore: true,
+  threshold: 0.4
+}
+
+const searchQuery = ref('')
+const searchResults = ref(activities.value)
+
+const performSearch = () => {
+  const fuse = new Fuse(activities.value, fuseOptions)
+
+  if (searchQuery.value) {
+    searchResults.value = fuse.search(searchQuery.value).map(result => result.item)
+  } else {
+    searchResults.value = activities.value
+  }
+}
+
+watch(searchQuery, performSearch)
+
 async function loadData(): Promise<void> {
   modalLoader.open()
 
-  const { data } = await useAsyncData(() => {
-    return queryCollection('contentActivities')
-      // .path('/activities')
-      .select('path', 'title', 'description')
-      .all()
-  })
+  const data = await queryCollection('contentActivities')
+    .select(
+      'path',
+      'title',
+      'description',
+      'category',
+      'badges',
+      'avatar'
+    )
+    .all()
 
-  for (const row of (data?.value || {})) {
-    activities.value.push({
-      ...row,
-      icon: undefined,
+  activities.value = data.map(
+    activity => ({
+      ...activity,
       isInstall: false
-    })
-  }
+    } as IActivity)
+  )
+
+  searchResults.value = activities.value
 
   modalLoader.close()
 }
@@ -63,7 +90,10 @@ async function makeInstall(activity: IActivity): Promise<void> {
   toast.add({
     title: 'Success!',
     description: `Installed activity ${activity.title}`,
-    icon: activity?.icon || FileCheckIcon,
+    avatar: activity.avatar
+      ? { src: activity.avatar }
+      : undefined,
+    icon: activity?.avatar ? undefined : FileCheckIcon,
     color: 'success'
   })
 }
@@ -118,6 +148,12 @@ onUnmounted(() => {
 
 <template>
   <div class="pb-28 px-4">
+    <B24Input
+      v-model="searchQuery"
+      type="text"
+      placeholder="searchQuery..."
+      @input="performSearch"
+    />
     <B24Tabs
       v-model="active"
       :items="tabs"
@@ -125,8 +161,11 @@ onUnmounted(() => {
       class="mb-4"
       :content="false"
     />
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-sm">
-      <template v-for="(activity, activityIndex) in activities" :key="activityIndex">
+    <div
+      v-if="searchResults.length"
+      class="grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-sm"
+    >
+      <template v-for="(activity, activityIndex) in searchResults" :key="activityIndex">
         <div
           class="relative bg-white dark:bg-white/10 p-sm2 cursor-pointer rounded-md flex flex-row gap-sm border-2 transition-shadow shadow hover:shadow-lg hover:border-primary"
           :class="[
@@ -135,8 +174,8 @@ onUnmounted(() => {
           @click.stop="async () => { return showSlider(activity) }"
         >
           <B24Avatar
-            v-if="activity.icon"
-            :icon="activity.icon"
+            v-if="activity.avatar"
+            :src="activity.avatar"
             size="xl"
             class="border-2"
             :class="[
@@ -179,6 +218,9 @@ onUnmounted(() => {
           </div>
         </div>
       </template>
+    </div>
+    <div v-else>
+      <p>EMPTY</p>
     </div>
 
     <PreDisplay v-if="isShowDebug">

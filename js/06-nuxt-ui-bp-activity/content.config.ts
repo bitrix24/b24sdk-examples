@@ -1,11 +1,12 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
+import { EActivityCategory } from './app/types'
 
 const schema = z.object({
   title: z.string(),
   description: z.string(),
-  category: z.enum(['layout', 'form', 'element', 'navigation', 'data', 'overlay']).optional(),
-  label: z.string().optional(),
-  icon: z.string().optional()
+  category: z.array(z.nativeEnum(EActivityCategory)).optional(),
+  badges: z.array(z.string()).optional(),
+  avatar: z.string().optional()
 })
 
 export default defineContentConfig({

@@ -94,7 +94,10 @@ const filterSettings = computed(() => [
       </div>
 
       <div class="grow flex items-center justify-between gap-4">
-        <B24ButtonGroup no-split>
+        <slot name="header">
+          <div>empty-header</div>
+        </slot>
+        <!-- B24ButtonGroup no-split>
           <B24Input
             :icon="SearchIcon"
             placeholder="Search..."
@@ -114,7 +117,7 @@ const filterSettings = computed(() => [
           >
             <B24Button rounded class="self-center" :icon="Settings1Icon" color="link" depth="dark" />
           </B24DropdownMenu>
-        </B24ButtonGroup>
+        </B24ButtonGroup -->
       </div>
 
       <div class="px-4 flex items-center justify-end gap-0.5 sm:gap-4">
