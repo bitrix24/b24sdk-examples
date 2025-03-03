@@ -13,16 +13,32 @@ export enum EActivityCategory {
   Category3 = 'category_3'
 }
 
+export enum EActivityBadge {
+  Install = 'install',
+  NotInstall = 'not-install',
+  Badge1 = 'badge_1',
+  Badge2 = 'badge_2',
+  Badge3 = 'badge_3'
+}
+
 export interface IActivityContent {
   path: string
   title?: string
   description?: string
   category?: EActivityCategory[]
-  badges?: string[]
+  badges?: EActivityBadge[]
   avatar?: string
 }
 
 export interface IActivity extends IActivityContent {
   isInstall?: boolean
+}
+
+export type FilterSetting = {
+  label: string
+  type: 'checkbox'
+  checked: boolean | undefined
+  onUpdateChecked: (checked: boolean) => void
+  onSelect: (e: Event) => void
 }
 // endregion ////

@@ -19,6 +19,7 @@ const isDark = computed({
     <B24Button
       :icon="isDark ? MoonIcon : SunIcon"
       color="link"
+      size="xs"
       @click="isDark = !isDark"
     />
 

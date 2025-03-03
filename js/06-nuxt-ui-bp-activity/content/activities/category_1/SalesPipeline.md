@@ -1,6 +1,13 @@
 ---
 title: Sales Pipeline
 description: Efficiently manage your sales pipeline and close deals faster.
+category:
+  - 'category_1'
+  - 'category_3'
+badges:
+  - 'badge_2'
+  - 'badge_3'
+avatar: '/activities/category_1/SalesPipeline.jpg'
 ---
 # Instruction for Using and Configuring the "Sales Pipeline" Action
 
