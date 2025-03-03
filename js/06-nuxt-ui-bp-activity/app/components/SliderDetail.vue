@@ -24,7 +24,7 @@ const { data: content } = await useAsyncData(props.activity.path, () => {
   >
     <template #body>
       <template v-if="!content">
-        <pre>{{ load }}}</pre>
+        {{ '@todo make this' }}
       </template>
       <ContentRenderer v-else :value="content" />
     </template>

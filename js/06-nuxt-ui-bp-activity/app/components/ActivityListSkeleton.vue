@@ -2,7 +2,7 @@
 import ActivityItemSkeleton from './ActivityItemSkeleton.vue'
 
 withDefaults(defineProps<{
-  itemsCount: number
+  itemsCount?: number
 }>(), {
   itemsCount: 36
 })

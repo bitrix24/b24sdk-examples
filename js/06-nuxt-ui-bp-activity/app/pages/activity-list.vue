@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
-import Fuse from 'fuse.js'
 // import salesMarketingData from '~/data/sales-marketing'
 // import communicationData from '~/data/communication'
 import { EActivityCategory, EActivityBadge } from '~/types'
 import type { IActivity, FilterSetting } from '~/types'
-import { ModalLoader, SliderDetail, ActivityListSkeleton } from '#components'
-import PreDisplay from '~/components/PreDisplay.vue'
+import { ModalLoader, SliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay } from '#components'
+import useSearchInput from '~/composables/useSearchInput'
+import useDynamicFilter from '~/composables/useDynamicFilter'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
@@ -16,7 +16,7 @@ definePageMeta({
   title: 'Activity list'
 })
 
-const isShowDebug = ref(true)
+const isShowDebug = ref(false)
 const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()
@@ -25,8 +25,13 @@ const sliderDetail = overlay.create(SliderDetail)
 
 const activities = ref<IActivity[]>([])
 
-const searchQuery = ref('')
-const searchResults = ref<IActivity[]>(activities.value)
+const { searchInput, searchQuery, searchQueryDebounced } = useSearchInput()
+watch(searchQueryDebounced, () => {
+  /**
+   * @todo make this
+   */
+  // scrollTo(0)
+})
 
 const filterSettingsMap = ref<Map<EActivityBadge, boolean>>(new Map(
   Object.values(EActivityBadge).map(key => [key, false])
@@ -48,26 +53,6 @@ const tabs = ref(
 )
 const tabActive = ref(EActivityCategory.Category1)
 
-const fuseOptions = {
-  keys: ['title', 'description', 'category', 'badges'],
-  includeScore: true,
-  threshold: 0.4
-}
-
-searchResults.value = activities.value
-
-const performSearch = () => {
-  const fuse = new Fuse(activities.value, fuseOptions)
-
-  if (searchQuery.value) {
-    searchResults.value = fuse.search(searchQuery.value).map(result => result.item)
-  } else {
-    searchResults.value = activities.value
-  }
-}
-
-watch(searchQuery, performSearch)
-
 async function loadData(): Promise<void> {
   isLoading.value = true
 
@@ -88,8 +73,6 @@ async function loadData(): Promise<void> {
       isInstall: false
     } as IActivity)
   )
-
-  searchResults.value = activities.value
 
   /**
    * @memo see beautiful skeleton
@@ -135,6 +118,43 @@ async function sleepAction(timeout: number = 1000): Promise<void> {
 }
 
 // region Filter ////
+const activitiesList = computed(() => {
+  let list = activities.value.filter(activity =>
+    activity.category?.includes(tabActive.value)
+  )
+
+  const activeFilters = Array.from(filterSettingsMap.value.entries())
+    .filter(([_, isActive]) => isActive)
+    .map(([badge]) => badge)
+
+  if (activeFilters.length > 0) {
+    list = list.filter((activity) => {
+      return activeFilters.every((badge) => {
+        if (badge === EActivityBadge.Install) {
+          return activity.isInstall === true
+        } else if (badge === EActivityBadge.NotInstall) {
+          return activity.isInstall !== true
+        }
+
+        return activity.badges?.includes(badge)
+      })
+
+      // activity.badges?.some(badge => activeFilters.includes(badge))
+    })
+  }
+
+  return list
+})
+
+const searchResults = useDynamicFilter<IActivity>(
+  searchQuery,
+  activitiesList,
+  ['title', 'description', 'category', 'badges'],
+  {
+    includeScore: true
+  }
+)
+
 const filterSettings = computed<FilterSetting[]>(() => {
   return Object.values(EActivityBadge).map((badge) => {
     const labelMap: Record<EActivityBadge, string> = {
@@ -151,6 +171,19 @@ const filterSettings = computed<FilterSetting[]>(() => {
       checked: filterSettingsMap.value.get(badge),
       onUpdateChecked(checked: boolean) {
         filterSettingsMap.value.set(badge, checked)
+        if (
+          badge === EActivityBadge.Install
+          && checked
+          && filterSettingsMap.value.get(EActivityBadge.NotInstall)
+        ) {
+          filterSettingsMap.value.set(EActivityBadge.NotInstall, false)
+        } else if (
+          badge === EActivityBadge.NotInstall
+          && checked
+          && filterSettingsMap.value.get(EActivityBadge.Install)
+        ) {
+          filterSettingsMap.value.set(EActivityBadge.Install, false)
+        }
       },
       onSelect(e: Event) {
         e.preventDefault()
@@ -168,6 +201,14 @@ const isSomeFilter = computed<boolean>(() => {
 
   return false
 })
+
+function makeClearFilter() {
+  searchQuery.value = ''
+
+  Object.values(EActivityBadge).forEach((badge) => {
+    filterSettingsMap.value.set(badge, false)
+  })
+}
 // endregion ////
 
 onMounted(async () => {
@@ -201,16 +242,19 @@ onUnmounted(() => {
 <template>
   <NuxtLayout name="header-panel">
     <template #header-middle>
-      <div class="relative">
+      <div
+        v-show="!isLoading"
+        class="relative"
+      >
         <B24ButtonGroup no-split class="sm:pl-10">
           <B24Input
+            ref="searchInput"
             v-model="searchQuery"
             type="search"
             :icon="SearchIcon"
             placeholder="Search..."
             class="min-w-[110px] max-w-[210px]"
             rounded
-            @input="performSearch"
           />
           <B24DropdownMenu
             :items="filterSettings"
@@ -275,10 +319,19 @@ onUnmounted(() => {
               />
               <div class="flex flex-col items-start justify-between gap-2">
                 <div>
-                  <div class="font-b24-secondary text-black dark:text-base-150 text-h6 leading-4 mb-xs font-semibold line-clamp-2">
-                    {{ activity.title }}
+                  <div v-if="activity.title" class="font-b24-secondary text-black dark:text-base-150 text-h6 leading-4 mb-xs font-semibold line-clamp-2">
+                    <div>{{ activity.title }}</div>
                   </div>
-                  <div class="font-b24-primary text-sm text-base-500 line-clamp-2">
+                  <div v-if="activity.badges" class="mb-2 w-full flex flex-row flex-wrap items-start justify-start gap-2">
+                    <B24Badge
+                      v-for="(badge, badgeIndex) in activity.badges"
+                      :key="badgeIndex"
+                      size="xs"
+                      color="collab"
+                      :label="badge"
+                    />
+                  </div>
+                  <div v-if="activity.description" class="font-b24-primary text-sm text-base-500 line-clamp-2">
                     <div>{{ activity.description }}</div>
                   </div>
                 </div>
@@ -304,9 +357,11 @@ onUnmounted(() => {
             </div>
           </template>
         </div>
-        <div v-else>
-          <p>EMPTY</p>
-        </div>
+        <ActivityListEmpty
+          v-else
+          :search-query="searchQuery"
+          @clear="makeClearFilter"
+        />
         <PreDisplay v-if="isShowDebug">
           {{ activities }}
         </PreDisplay>
