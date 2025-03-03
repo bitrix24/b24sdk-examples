@@ -95,7 +95,7 @@ async function loadData(): Promise<void> {
    * @memo see beautiful skeleton
    * @todo remove
    */
-  await sleepAction(20_000)
+  await sleepAction(2_000)
   isLoading.value = false
 }
 
