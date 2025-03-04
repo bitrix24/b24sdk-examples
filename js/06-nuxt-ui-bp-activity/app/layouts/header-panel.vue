@@ -16,7 +16,7 @@ const route = useRoute()
 
 <template>
   <div class="relative flex flex-col">
-    <div class="fixed py-2 pl-4 pr-(--scrollbar-width) top-0 z-1 w-full bg-white dark:bg-base-master shadow-bottom-md flex items-center justify-between gap-4 sm:gap-8">
+    <div class="fixed py-2 pl-4 pr-(--scrollbar-width) top-0 z-1 min-h-14 w-full bg-white dark:bg-base-master shadow-bottom-md flex items-center justify-between gap-4 sm:gap-8">
       <slot name="header-start">
         <B24Link raw to="/" class="flex items-center justify-between gap-0.5">
           <Logo class="size-8 text-primary" />

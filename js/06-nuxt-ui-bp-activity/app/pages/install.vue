@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 // import { useRequestURL } from 'nuxt/app'
 // import { LoggerBrowser, B24Frame } from '@bitrix24/b24jssdk'
 import type { IStep } from '~/types'
+import { sleepAction } from '~/utils/sleep'
 import Logo from '~/components/Logo.vue'
 import PreDisplay from '~/components/PreDisplay.vue'
 
@@ -11,6 +12,7 @@ definePageMeta({
   title: 'Install'
 })
 
+// region Init ////
 const confetti = useConfetti()
 const router = useRouter()
 
@@ -28,7 +30,9 @@ const isShowDebug = ref(false)
 
 const progressColor = ref<string>('primary' as const)
 const progressValue = ref<null | number>(null)
+// endregion ////
 
+// region Steps ////
 const steps = ref<Record<string, IStep>>({
   init: {
     caption: 'You need to wait a little...',
@@ -72,7 +76,9 @@ const steps = ref<Record<string, IStep>>({
   }
 })
 const stepCode = ref<string>('init' as const)
+// endregion ////
 
+// region Actions ////
 async function makeInit(): Promise<void> {
   // const { $initializeB24Frame } = useNuxtApp()
   // $b24 = await $initializeB24Frame()
@@ -107,16 +113,6 @@ async function makeFinish(): Promise<void> {
   await router.push('/')
 }
 
-/**
- * Pause on xxx milliseconds
- *
- * @return {Promise<void>}
- * @constructor
- */
-async function sleepAction(timeout: number = 1000): Promise<void> {
-  return new Promise<void>(resolve => setTimeout(resolve, timeout))
-}
-
 const stepsData = computed(() => {
   return Object.entries(steps.value).map(([index, row]) => {
     return {
@@ -125,7 +121,9 @@ const stepsData = computed(() => {
     }
   })
 })
+// endregion ////
 
+// region Mounted / Unmounted ////
 onMounted(async () => {
   try {
     for (const [key, step] of Object.entries(steps.value)) {
@@ -155,6 +153,7 @@ onMounted(async () => {
 onUnmounted(() => {
   // $b24?.destroy()
 })
+// endregion ////
 </script>
 
 <template>

@@ -9,7 +9,7 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="my-3 flex flex-row items-start justify-start gap-2">
+  <div class="mt-2 mb-3 flex flex-row items-start justify-start gap-2">
     <B24Skeleton class="h-4 w-[150px]" />
     <B24Skeleton class="h-4 w-[150px]" />
     <B24Skeleton class="h-4 w-[150px]" />

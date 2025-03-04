@@ -8,7 +8,10 @@ import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
     description="Wait load data"
     :dismissible="false"
     fullscreen
-    :b24ui="{ content: 'bg-transparent sm:shadow-none' }"
+    :b24ui="{
+      overlay: 'backdrop-blur-sm',
+      content: 'bg-transparent dark:bg-transparent sm:shadow-none'
+    }"
   >
     <template #content>
       <div class="w-full h-full flex flex-col items-center justify-center">

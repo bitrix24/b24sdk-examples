@@ -3,7 +3,7 @@ title: Sales Pipeline
 description: Efficiently manage your sales pipeline and close deals faster.
 category:
   - 'category_1'
-  - 'category_3'
+  - 'category_2'
 badges:
   - 'badge_2'
   - 'badge_3'

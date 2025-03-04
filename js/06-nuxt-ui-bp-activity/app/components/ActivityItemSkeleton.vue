@@ -4,16 +4,21 @@
     <B24Skeleton class="h-12 w-12 rounded-full" />
     <div class="flex-1 flex flex-col items-start justify-between gap-4">
       <div class="w-full flex flex-col items-start justify-between gap-2">
-        <B24Skeleton class="h-2 w-1/3" />
+        <B24Skeleton class="mb-1 h-2 w-2/3 bg-base-400" />
+        <div class="mb-1.5 w-full flex flex-row flex-wrap items-start justify-start gap-2">
+          <B24Skeleton class="h-1 w-1/4" />
+          <B24Skeleton class="h-1 w-1/4" />
+        </div>
         <B24Skeleton class="h-2 w-full" />
-        <B24Skeleton class="h-2 w-2/4" />
         <B24Skeleton class="h-2 w-3/4" />
       </div>
       <div class="w-full flex flex-row gap-1 items-center justify-end">
-        <div class="border-2 border-gray-200 dark:border-gray-800 h-[30px] w-[100px] px-lg rounded-full flex items-center justify-center">
-          <B24Skeleton class="h-xs2 w-full rounded-3xs" />
+        <div class="border-2 border-gray-200 dark:border-gray-800 h-[30px] w-[75px] px-lg rounded-full flex items-center justify-center">
+          <B24Skeleton class="h-xs w-full rounded-3xs" />
         </div>
       </div>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+</script>

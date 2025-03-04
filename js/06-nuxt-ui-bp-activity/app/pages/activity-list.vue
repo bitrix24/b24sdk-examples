@@ -1,58 +1,48 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
-// import salesMarketingData from '~/data/sales-marketing'
-// import communicationData from '~/data/communication'
-import { EActivityCategory, EActivityBadge } from '~/types'
-import type { IActivity, FilterSetting } from '~/types'
-import { ModalLoader, SliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay } from '#components'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { type IActivity } from '~/types'
+/**
+ * @todo remove ActivityItemSkeleton
+ */
+import { ModalLoader, SliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay, ActivityItemSkeleton } from '#components'
 import useSearchInput from '~/composables/useSearchInput'
 import useDynamicFilter from '~/composables/useDynamicFilter'
+import { getBadgeProps } from '~/composables/useLabelMapBadge'
+import { sleepAction } from '~/utils/sleep'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
+import { sleep } from "@antfu/utils";
 
 definePageMeta({
   layout: false,
   title: 'Activity list'
 })
 
+// region Init ////
 const isShowDebug = ref(false)
 const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
 const sliderDetail = overlay.create(SliderDetail)
+// endregion ////
 
-const activities = ref<IActivity[]>([])
+// region Search ////
+const {
+  activities,
+  searchInput,
+  searchQuery,
+  filterBadges,
+  isSomeBadgeFilter,
+  makeClearFilter,
+  tabs,
+  tabActive,
+  activitiesList
+} = useSearchInput()
+// endregion ////
 
-const { searchInput, searchQuery, searchQueryDebounced } = useSearchInput()
-watch(searchQueryDebounced, () => {
-  /**
-   * @todo make this
-   */
-  // scrollTo(0)
-})
-
-const filterSettingsMap = ref<Map<EActivityBadge, boolean>>(new Map(
-  Object.values(EActivityBadge).map(key => [key, false])
-))
-
-const tabs = ref(
-  Object.values(EActivityCategory).map((value) => {
-    const labelMap: Record<EActivityCategory, string> = {
-      [EActivityCategory.Category1]: 'Sales and Marketing',
-      [EActivityCategory.Category2]: 'Communication',
-      [EActivityCategory.Category3]: 'Category3'
-    }
-
-    return {
-      label: labelMap[value],
-      value
-    }
-  })
-)
-const tabActive = ref(EActivityCategory.Category1)
-
+// region Data ////
 async function loadData(): Promise<void> {
   isLoading.value = true
 
@@ -75,13 +65,14 @@ async function loadData(): Promise<void> {
   )
 
   /**
-   * @memo see beautiful skeleton
-   * @todo remove
+   * @todo get from b24 info about install
    */
-  await sleepAction(2_000)
+  await sleepAction(5_000)
   isLoading.value = false
 }
+// endregion ////
 
+// region Actions ////
 async function makeInstall(activity: IActivity): Promise<void> {
   modalLoader.open()
   await sleepAction()
@@ -106,46 +97,9 @@ async function showSlider(activity: IActivity): Promise<void> {
     activity
   })
 }
-
-/**
- * Pause on xxx milliseconds
- *
- * @return {Promise<void>}
- * @constructor
- */
-async function sleepAction(timeout: number = 1000): Promise<void> {
-  return new Promise<void>(resolve => setTimeout(resolve, timeout))
-}
+// endregion ////
 
 // region Filter ////
-const activitiesList = computed(() => {
-  let list = activities.value.filter(activity =>
-    activity.category?.includes(tabActive.value)
-  )
-
-  const activeFilters = Array.from(filterSettingsMap.value.entries())
-    .filter(([_, isActive]) => isActive)
-    .map(([badge]) => badge)
-
-  if (activeFilters.length > 0) {
-    list = list.filter((activity) => {
-      return activeFilters.every((badge) => {
-        if (badge === EActivityBadge.Install) {
-          return activity.isInstall === true
-        } else if (badge === EActivityBadge.NotInstall) {
-          return activity.isInstall !== true
-        }
-
-        return activity.badges?.includes(badge)
-      })
-
-      // activity.badges?.some(badge => activeFilters.includes(badge))
-    })
-  }
-
-  return list
-})
-
 const searchResults = useDynamicFilter<IActivity>(
   searchQuery,
   activitiesList,
@@ -154,66 +108,12 @@ const searchResults = useDynamicFilter<IActivity>(
     includeScore: true
   }
 )
-
-const filterSettings = computed<FilterSetting[]>(() => {
-  return Object.values(EActivityBadge).map((badge) => {
-    const labelMap: Record<EActivityBadge, string> = {
-      [EActivityBadge.Install]: 'Installed',
-      [EActivityBadge.NotInstall]: 'Not installed',
-      [EActivityBadge.Badge1]: 'Badge 1',
-      [EActivityBadge.Badge2]: 'Badge 2',
-      [EActivityBadge.Badge3]: 'Badge 3'
-    }
-
-    return {
-      label: labelMap[badge],
-      type: 'checkbox' as const,
-      checked: filterSettingsMap.value.get(badge),
-      onUpdateChecked(checked: boolean) {
-        filterSettingsMap.value.set(badge, checked)
-        if (
-          badge === EActivityBadge.Install
-          && checked
-          && filterSettingsMap.value.get(EActivityBadge.NotInstall)
-        ) {
-          filterSettingsMap.value.set(EActivityBadge.NotInstall, false)
-        } else if (
-          badge === EActivityBadge.NotInstall
-          && checked
-          && filterSettingsMap.value.get(EActivityBadge.Install)
-        ) {
-          filterSettingsMap.value.set(EActivityBadge.Install, false)
-        }
-      },
-      onSelect(e: Event) {
-        e.preventDefault()
-      }
-    }
-  })
-})
-
-const isSomeFilter = computed<boolean>(() => {
-  for (const value of filterSettingsMap.value.values()) {
-    if (value) {
-      return true
-    }
-  }
-
-  return false
-})
-
-function makeClearFilter() {
-  searchQuery.value = ''
-
-  Object.values(EActivityBadge).forEach((badge) => {
-    filterSettingsMap.value.set(badge, false)
-  })
-}
 // endregion ////
 
+// region Mounted / Unmounted ////
 onMounted(async () => {
   try {
-    loadData()
+    await loadData()
   } catch (error: any) {
     /**
      * @todo fix error
@@ -237,6 +137,7 @@ onMounted(async () => {
 onUnmounted(() => {
   // $b24?.destroy()
 })
+// endregion ////
 </script>
 
 <template>
@@ -257,7 +158,7 @@ onUnmounted(() => {
             rounded
           />
           <B24DropdownMenu
-            :items="filterSettings"
+            :items="filterBadges"
             :content="{
               align: 'start',
               side: 'left',
@@ -271,7 +172,7 @@ onUnmounted(() => {
           </B24DropdownMenu>
         </B24ButtonGroup>
         <B24Chip
-          v-if="isSomeFilter"
+          v-if="isSomeBadgeFilter"
           inset
           standalone
           class="absolute top-0 right-2"
@@ -287,7 +188,7 @@ onUnmounted(() => {
           v-model="tabActive"
           :items="tabs"
           orientation="horizontal"
-          class="mb-4"
+          class="hidden lg:block mb-4 "
           :content="false"
         />
         <div
@@ -317,9 +218,9 @@ onUnmounted(() => {
                   icon: activity?.isInstall ? 'text-green-400 dark:text-green-900' : 'text-blue-400 dark:text-blue-900'
                 }"
               />
-              <div class="flex flex-col items-start justify-between gap-2">
+              <div class="w-full flex flex-col items-start justify-between gap-2">
                 <div>
-                  <div v-if="activity.title" class="font-b24-secondary text-black dark:text-base-150 text-h6 leading-4 mb-xs font-semibold line-clamp-2">
+                  <div v-if="activity.title" class="font-b24-secondary text-black dark:text-base-150 text-h6 leading-4 mb-xs font-semibold line-clamp-1">
                     <div>{{ activity.title }}</div>
                   </div>
                   <div v-if="activity.badges" class="mb-2 w-full flex flex-row flex-wrap items-start justify-start gap-2">
@@ -329,6 +230,7 @@ onUnmounted(() => {
                       size="xs"
                       color="collab"
                       :label="badge"
+                      v-bind="getBadgeProps(badge)"
                     />
                   </div>
                   <div v-if="activity.description" class="font-b24-primary text-sm text-base-500 line-clamp-2">
@@ -356,6 +258,10 @@ onUnmounted(() => {
               </div>
             </div>
           </template>
+          <ActivityItemSkeleton
+            v-for="i in 5"
+            :key="i"
+          />
         </div>
         <ActivityListEmpty
           v-else
