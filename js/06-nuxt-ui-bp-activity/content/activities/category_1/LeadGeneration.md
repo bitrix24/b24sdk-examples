@@ -1,7 +1,7 @@
 ---
 title: Lead Generation
 description: Organize and manage legal documents securely.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

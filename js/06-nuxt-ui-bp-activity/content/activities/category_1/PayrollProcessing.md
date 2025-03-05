@@ -1,7 +1,7 @@
 ---
 title: Payroll Processing
 description: Automate payroll calculations and ensure compliance.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

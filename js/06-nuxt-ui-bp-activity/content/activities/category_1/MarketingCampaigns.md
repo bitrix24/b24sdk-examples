@@ -1,7 +1,7 @@
 ---
 title: Marketing Campaigns
 description: Create, execute, and analyze marketing campaigns for better ROI.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

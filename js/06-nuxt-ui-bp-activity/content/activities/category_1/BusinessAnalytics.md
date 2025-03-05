@@ -1,7 +1,7 @@
 ---
 title: Business Analytics
 description: Leverage data-driven insights to make informed decisions.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

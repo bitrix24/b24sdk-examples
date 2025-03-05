@@ -1,7 +1,7 @@
 ---
 title: Inventory Management
 description: Track and optimize your inventory levels in real-time.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

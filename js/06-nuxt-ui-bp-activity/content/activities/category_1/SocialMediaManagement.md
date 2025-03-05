@@ -1,7 +1,7 @@
 ---
 title: Social Media Management
 description: Schedule posts and track performance across social platforms.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

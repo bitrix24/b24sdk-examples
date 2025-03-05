@@ -1,7 +1,7 @@
 ---
 title: Product Development
 description: Manage the lifecycle of products from ideation to launch.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

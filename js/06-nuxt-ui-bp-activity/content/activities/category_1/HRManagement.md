@@ -1,7 +1,7 @@
 ---
 title: HR Management
 description: Streamline HR processes and manage employee data effectively.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

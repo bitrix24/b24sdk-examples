@@ -1,7 +1,7 @@
 ---
 title: Performance Reviews
 description: Conduct regular performance evaluations and set goals.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

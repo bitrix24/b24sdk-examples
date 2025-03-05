@@ -4,7 +4,7 @@ import { EActivityCategory } from './app/types'
 const schema = z.object({
   title: z.string(),
   description: z.string(),
-  category: z.array(z.nativeEnum(EActivityCategory)).optional(),
+  categories: z.array(z.nativeEnum(EActivityCategory)).optional(),
   badges: z.array(z.string()).optional(),
   avatar: z.string().optional()
 })

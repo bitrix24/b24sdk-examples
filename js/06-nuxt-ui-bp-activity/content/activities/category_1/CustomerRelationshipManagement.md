@@ -1,7 +1,7 @@
 ---
 title: Customer Relationship Management
 description: Centralize customer data and improve retention strategies.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

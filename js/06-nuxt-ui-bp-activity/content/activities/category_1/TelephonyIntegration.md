@@ -1,7 +1,7 @@
 ---
 title: Telephony Integration
 description: Enhance communication with integrated telephony solutions.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges:

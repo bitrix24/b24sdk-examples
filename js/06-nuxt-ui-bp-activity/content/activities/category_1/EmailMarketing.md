@@ -1,7 +1,7 @@
 ---
 title: Email Marketing
 description: Design and send personalized email campaigns to engage your audience.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 
