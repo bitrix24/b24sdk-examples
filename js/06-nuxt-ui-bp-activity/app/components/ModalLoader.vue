@@ -9,13 +9,12 @@ import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
     :dismissible="false"
     fullscreen
     :b24ui="{
-      overlay: 'backdrop-blur-sm',
       content: 'bg-transparent dark:bg-transparent sm:shadow-none'
     }"
   >
     <template #content>
       <div class="w-full h-full flex flex-col items-center justify-center">
-        <SpinnerIcon class="animate-spin text-base-500 stroke-2 size-52" />
+        <SpinnerIcon class="animate-spin text-base-100 dark:text-base-500 stroke-2 size-52" />
       </div>
     </template>
   </B24Modal>

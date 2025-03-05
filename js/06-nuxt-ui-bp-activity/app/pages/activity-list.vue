@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
-import { type IActivity } from '~/types'
+import type { IActivity } from '~/types'
 /**
  * @todo remove ActivityItemSkeleton
  */
-import { ModalLoader, SliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay, ActivityItemSkeleton } from '#components'
+import { ModalLoader, ModalConfirm, SliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay, ActivityItemSkeleton } from '#components'
 import useSearchInput from '~/composables/useSearchInput'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
@@ -24,6 +24,7 @@ const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
+const modalConfirm = overlay.create(ModalConfirm)
 const sliderDetail = overlay.create(SliderDetail)
 // endregion ////
 
@@ -73,7 +74,7 @@ async function loadData(): Promise<void> {
 // region Actions ////
 async function makeInstall(activity: IActivity): Promise<void> {
   modalLoader.open()
-  await sleepAction()
+  await sleepAction(1000)
 
   activity.isInstall = true
 
@@ -81,13 +82,41 @@ async function makeInstall(activity: IActivity): Promise<void> {
 
   toast.add({
     title: 'Success!',
-    description: `Installed activity ${activity.title}`,
+    description: `Installed activity ${activity.title}. Now you can use it in your business processes.`,
     avatar: activity.avatar
       ? { src: activity.avatar }
       : undefined,
     icon: activity?.avatar ? undefined : FileCheckIcon,
     color: 'success'
   })
+}
+
+async function makeUnInstall(activity: IActivity): Promise<void> {
+  const isConfirm = await modalConfirm.open({
+    activity
+  })
+
+  if (!isConfirm) {
+    return
+  }
+
+  modalLoader.open()
+
+  await sleepAction()
+
+  activity.isInstall = false
+
+  toast.add({
+    title: 'Success!',
+    description: `Uninstalled activity ${activity.title}. You must ensure that business processes are working properly.`,
+    avatar: activity.avatar
+      ? { src: activity.avatar }
+      : undefined,
+    icon: activity?.avatar ? undefined : FileCheckIcon,
+    color: 'success'
+  })
+
+  modalLoader.close()
 }
 
 async function showSlider(activity: IActivity): Promise<void> {
@@ -197,7 +226,7 @@ onUnmounted(() => {
             <div
               class="relative bg-white dark:bg-white/10 p-sm2 cursor-pointer rounded-md flex flex-row gap-sm border-2 transition-shadow shadow hover:shadow-lg hover:border-primary"
               :class="[
-                activity?.isInstall ? 'border-green-400 dark:border-green-600' : 'border-base-master/10 dark:border-base-100/20'
+                activity?.isInstall ? 'border-green-300 dark:border-green-800' : 'border-base-master/10 dark:border-base-100/20'
               ]"
               @click.stop="async () => { return showSlider(activity) }"
             >
@@ -207,13 +236,11 @@ onUnmounted(() => {
                 size="xl"
                 class="border-2"
                 :class="[
-                  activity?.isInstall ? 'border-green-400' : 'border-blue-400'
-                // item.value === 'tab-sale' ? 'pb-1' : '',
-                // item.value === 'tab-communication' ? 'pr-1' : ''
+                  activity?.isInstall ? 'border-green-300 dark:border-green-800' : 'border-blue-400'
                 ]"
                 :b24ui="{
-                  root: activity?.isInstall ? 'bg-green-150 dark:bg-green-400' : 'bg-blue-150 dark:bg-blue-400',
-                  icon: activity?.isInstall ? 'text-green-400 dark:text-green-900' : 'text-blue-400 dark:text-blue-900'
+                  root: activity?.isInstall ? 'bg-green-300 dark:bg-green-800' : 'bg-blue-150 dark:bg-blue-400',
+                  icon: activity?.isInstall ? 'text-green-300 dark:text-green-800' : 'text-blue-400 dark:text-blue-900'
                 }"
               />
               <div class="w-full flex flex-col items-start justify-between gap-2">
@@ -245,21 +272,20 @@ onUnmounted(() => {
                     loading-auto
                     @click.stop="async () => { return makeInstall(activity) }"
                   />
-                  <B24Badge
+                  <B24Button
                     v-else
-                    size="lg"
-                    color="collab"
-                    use-fill
-                    label="Installed"
+                    size="xs"
+                    rounded
+                    label="Uninstall"
+                    color="default"
+                    depth="light"
+                    loading-auto
+                    @click.stop="async () => { return makeUnInstall(activity) }"
                   />
                 </div>
               </div>
             </div>
           </template>
-          <ActivityItemSkeleton
-            v-for="i in 5"
-            :key="i"
-          />
         </div>
         <ActivityListEmpty
           v-else

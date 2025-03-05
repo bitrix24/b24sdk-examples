@@ -18,8 +18,7 @@ const { data: content } = await useAsyncData(props.activity.path, () => {
     :description="activity.description"
     :close="{ onClick: () => emit('close', false) }"
     :b24ui="{
-      overlay: 'backdrop-blur-xs',
-      content: 'sm:max-w-1/3',
+      content: 'sm:max-w-2/4 md:max-w-2/3 lg:max-w-1/3',
       body: 'm-5 p-5 bg-white dark:bg-white/10 rounded'
     }"
   >

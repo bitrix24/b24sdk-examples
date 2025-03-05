@@ -11,7 +11,7 @@ const emit = defineEmits<{ clear: [] }>()
 <template>
   <div class="flex flex-col items-center justify-center">
     <div class="text-base-350">
-      <AttentionIIcon class="size-32 text-base-600" />
+      <AttentionIIcon class="size-64 text-base-400" />
     </div>
     <h2 class="text-h1 my-6">
       No activity found
@@ -19,6 +19,7 @@ const emit = defineEmits<{ clear: [] }>()
     <B24Button
       label="Clear your search and try again"
       rounded
+      depth="dark"
       @click="emit('clear')"
     />
   </div>
