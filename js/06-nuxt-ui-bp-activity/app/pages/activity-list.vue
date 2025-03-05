@@ -12,7 +12,6 @@ import { sleepAction } from '~/utils/sleep'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
-import { sleep } from "@antfu/utils";
 
 definePageMeta({
   layout: false,
@@ -51,7 +50,7 @@ async function loadData(): Promise<void> {
       'path',
       'title',
       'description',
-      'category',
+      'categories',
       'badges',
       'avatar'
     )
@@ -67,7 +66,6 @@ async function loadData(): Promise<void> {
   /**
    * @todo get from b24 info about install
    */
-  await sleepAction(5_000)
   isLoading.value = false
 }
 // endregion ////
@@ -103,7 +101,7 @@ async function showSlider(activity: IActivity): Promise<void> {
 const searchResults = useDynamicFilter<IActivity>(
   searchQuery,
   activitiesList,
-  ['title', 'description', 'category', 'badges'],
+  ['title', 'description', 'categories', 'badges'],
   {
     includeScore: true
   }

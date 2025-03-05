@@ -25,7 +25,7 @@ export interface IActivityContent {
   path: string
   title?: string
   description?: string
-  category?: EActivityCategory[]
+  categories?: EActivityCategory[]
   badges?: EActivityBadge[]
   avatar?: string
 }
