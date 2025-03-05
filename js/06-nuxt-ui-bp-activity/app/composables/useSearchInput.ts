@@ -101,7 +101,7 @@ const useSearchInput = () => {
         return true
       }
 
-      return activity.category?.includes(tabActive.value)
+      return activity.categories?.includes(tabActive.value)
     })
 
     const activeFilters = Array.from(filterBadgeMap.value.entries())
