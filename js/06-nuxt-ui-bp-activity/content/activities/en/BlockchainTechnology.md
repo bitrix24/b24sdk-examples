@@ -1,7 +1,7 @@
 ---
 title: Blockchain Technology
 description: Explore blockchain for secure and transparent transactions.
-category: 
+categories: 
   - 'category_1'
 badges: 
   - 'badge_2'

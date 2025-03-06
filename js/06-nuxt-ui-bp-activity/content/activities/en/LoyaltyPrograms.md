@@ -1,7 +1,7 @@
 ---
 title: Loyalty Programs
 description: Build customer loyalty with rewards and incentives.
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_2'

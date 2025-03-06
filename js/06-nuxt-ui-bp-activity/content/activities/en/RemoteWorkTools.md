@@ -1,7 +1,7 @@
 ---
 title: Remote Work Tools
 description: Enable your team to work efficiently from anywhere in the world.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

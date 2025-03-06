@@ -1,7 +1,7 @@
 ---
 title: Маркетплейс приложений
 description: Обнаруживайте и интегрируйте сторонние приложения для улучшения вашего бизнеса.
-category:
+categories:
 - 'category_1'
 - 'category_2'
 - 'category_3'

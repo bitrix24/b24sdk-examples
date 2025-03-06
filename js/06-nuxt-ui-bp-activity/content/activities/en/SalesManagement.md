@@ -1,7 +1,7 @@
 ---
 title: Sales Management
 description: Tools and insights to manage your sales pipeline effectively.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

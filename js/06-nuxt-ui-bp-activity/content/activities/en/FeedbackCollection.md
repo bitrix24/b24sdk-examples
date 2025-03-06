@@ -1,7 +1,7 @@
 ---
 title: Feedback Collection
 description: Gather and analyze customer feedback to improve services
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_1'

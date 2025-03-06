@@ -1,7 +1,7 @@
 ---
 title: Team Collaboration
 description: Facilitate seamless communication and collaboration within your team.
-category: 
+categories: 
   - 'category_1'
   - 'category_3'
 badges: 

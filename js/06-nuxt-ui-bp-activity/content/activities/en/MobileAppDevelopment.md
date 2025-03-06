@@ -1,7 +1,7 @@
 ---
 title: Mobile App Development
 description: Build and manage mobile applications to reach your audience.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

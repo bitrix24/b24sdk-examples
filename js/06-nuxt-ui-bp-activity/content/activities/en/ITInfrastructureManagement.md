@@ -1,7 +1,7 @@
 ---
 title: IT Infrastructure Management
 description: Monitor and maintain your IT systems for optimal performance.
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_1'

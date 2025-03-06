@@ -1,7 +1,7 @@
 ---
 title: Innovation Management
 description: Foster a culture of innovation and creativity in your organization.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges:

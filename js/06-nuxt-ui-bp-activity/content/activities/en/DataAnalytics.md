@@ -1,7 +1,7 @@
 ---
 title: Data Analytics
 description: Analyze your business data to make informed decisions.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

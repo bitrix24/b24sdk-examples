@@ -1,7 +1,7 @@
 ---
 title: Quality Assurance
 description: Ensure product and service quality through rigorous testing.
-category:
+categories:
   - 'category_1'
 
 badges:

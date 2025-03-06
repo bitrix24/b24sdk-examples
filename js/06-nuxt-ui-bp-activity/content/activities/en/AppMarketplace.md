@@ -1,7 +1,7 @@
 ---
 title: App Marketplace
 description: Discover and integrate third-party apps to enhance your business.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
   - 'category_3'
@@ -25,6 +25,8 @@ avatar: '/activities/AppMarketplace.webp'
 - Open the **App Marketplace** through the Bitrix24 interface.
 - Use filters and categories to find apps that match your business needs (e.g., marketing, analytics, project management).
 - Review app descriptions, ratings, and user feedback.
+
+![App Marketplace](/activities/AppMarketplace.webp)
 
 ### 3. Installing and Configuring Apps
 - Click **"Install"** for the selected app.

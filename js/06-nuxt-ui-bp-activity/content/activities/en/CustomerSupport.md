@@ -1,7 +1,7 @@
 ---
 title: Customer Support
 description: Discover and integrate third-party apps to enhance your business.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

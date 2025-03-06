@@ -1,7 +1,7 @@
 ---
 title: Recruitment Tools
 description: Streamline hiring with advanced recruitment and applicant tracking.
-category: 
+categories: 
   - 'category_3'
 badges: 
   - 'badge_2'

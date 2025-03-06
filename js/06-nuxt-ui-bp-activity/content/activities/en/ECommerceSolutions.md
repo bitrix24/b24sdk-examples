@@ -1,7 +1,7 @@
 ---
 title: E-commerce Solutions
 description: Manage your online store and optimize customer experience.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

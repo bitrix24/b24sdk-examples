@@ -1,7 +1,7 @@
 ---
 title: Knowledge Sharing
 description: Create a centralized knowledge base for your organization.
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_3'

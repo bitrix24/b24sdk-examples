@@ -1,7 +1,7 @@
 ---
 title: Marketing Campaigns
 description: Efficiently manage your sales pipeline and close deals faster.
-category: 
+categories: 
   - 'category_1'
 badges: 
   - 'badge_1'

@@ -1,7 +1,7 @@
 ---
 title: Cloud Solutions
 description: Leverage cloud technology for scalable and flexible operations.
-category: 
+categories: 
   - 'category_3'
 badges: 
   - 'badge_3'

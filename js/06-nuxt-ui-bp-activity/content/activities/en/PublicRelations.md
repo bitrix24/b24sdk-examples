@@ -1,7 +1,7 @@
 ---
 title: Public Relations
 description: Manage your public image and media interactions effectively.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

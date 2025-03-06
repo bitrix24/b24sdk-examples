@@ -1,7 +1,7 @@
 ---
 title: Marketing Automation
 description: Automate your marketing campaigns and track their performance.
-category: 
+categories: 
   - 'category_1'
 badges: 
   - 'badge_3'

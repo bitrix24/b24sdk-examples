@@ -1,7 +1,7 @@
 ---
 title: Sustainability Initiatives
 description: Implement eco-friendly practices and track their impact.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

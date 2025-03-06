@@ -1,7 +1,7 @@
 ---
 title: CRM Integration
 description: Seamlessly integrate your CRM with other business tools.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

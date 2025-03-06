@@ -1,7 +1,7 @@
 ---
 title: Contract Lifecycle Management
 description: Track contracts from creation to renewal or termination.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

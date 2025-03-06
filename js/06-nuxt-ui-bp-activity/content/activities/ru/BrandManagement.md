@@ -1,7 +1,7 @@
 ---
 title: Управление брендом
 description: Защищайте и улучшайте идентичность вашего бренда на всех каналах.
-category:
+categories:
 - 'category_2'
 badges:
 - 'badge_2'

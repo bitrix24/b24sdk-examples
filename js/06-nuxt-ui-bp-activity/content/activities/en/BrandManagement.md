@@ -1,7 +1,7 @@
 ---
 title: Brand Management
 description: Protect and enhance your brand identity across all channels.
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_2'

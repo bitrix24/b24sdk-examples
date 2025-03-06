@@ -1,7 +1,7 @@
 ---
 title: Employee Onboarding
 description: Simplify the onboarding process for new hires.
-category: 
+categories: 
   - 'category_1'
 badges: 
   - 'badge_2'

@@ -1,7 +1,7 @@
 ---
 title: Tax Management
 description: Stay compliant with tax regulations and simplify filings.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

@@ -1,7 +1,7 @@
 ---
 title: Cybersecurity
 description: Protect your business from cyber threats and data breaches.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
   - 'category_3'

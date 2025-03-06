@@ -1,7 +1,7 @@
 ---
 title: Vendor Management
 description: Manage relationships with vendors and optimize procurement.
-category: 
+categories: 
   - 'category_1'
   - 'category_3'
 badges: 

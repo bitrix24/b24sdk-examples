@@ -1,7 +1,7 @@
 ---
 title: IoT Integration
 description: Integrate IoT devices to enhance operational efficiency.
-category: 
+categories: 
   - 'category_1'
   - 'category_2'
 badges: 

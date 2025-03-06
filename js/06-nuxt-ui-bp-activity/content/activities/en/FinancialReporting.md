@@ -1,7 +1,7 @@
 ---
 title: Financial Reporting
 description: Generate detailed financial reports for better decision-making.
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_1'

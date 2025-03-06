@@ -1,7 +1,7 @@
 ---
 title: Crisis Management
 description: Discover and integrate third-party apps to enhance your business.
-category: 
+categories: 
   - 'category_2'
   - 'category_3'
 badges: 

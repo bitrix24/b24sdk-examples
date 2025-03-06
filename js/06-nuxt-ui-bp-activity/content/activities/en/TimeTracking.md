@@ -1,7 +1,7 @@
 ---
 title: Time Tracking
 description: Plan and execute events with ease using dedicated tools.
-category: 
+categories: 
   - 'category_2'
 badges: 
   - 'badge_2'
