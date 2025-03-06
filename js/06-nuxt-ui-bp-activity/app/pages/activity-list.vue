@@ -72,6 +72,12 @@ async function loadData(): Promise<void> {
 // endregion ////
 
 // region Actions ////
+async function showSlider(activity: IActivity): Promise<void> {
+  return sliderDetail.open({
+    activity
+  })
+}
+
 async function makeInstall(activity: IActivity): Promise<void> {
   modalLoader.open()
   await sleepAction(1000)
@@ -117,12 +123,6 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
   })
 
   modalLoader.close()
-}
-
-async function showSlider(activity: IActivity): Promise<void> {
-  return sliderDetail.open({
-    activity
-  })
 }
 // endregion ////
 
