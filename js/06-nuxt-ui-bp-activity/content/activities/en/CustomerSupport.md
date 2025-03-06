@@ -1,13 +1,13 @@
 ---
 title: Customer Support
 description: Discover and integrate third-party apps to enhance your business.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_1'
   - 'badge_2'
-avatar: '/activities/CustomerSupport.jpg'
+avatar: '/activities/CustomerSupport.webp'
 ---
 # Instruction for Using and Configuring the "Customer Support" Action
 

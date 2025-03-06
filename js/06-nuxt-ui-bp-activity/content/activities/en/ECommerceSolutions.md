@@ -1,12 +1,12 @@
 ---
 title: E-commerce Solutions
 description: Manage your online store and optimize customer experience.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_3'
-avatar: '/activities/ECommerceSolutions.jpg'
+avatar: '/activities/ECommerceSolutions.webp'
 ---
 # Instruction for Using and Configuring the " E-commerce Solutions" Action
 

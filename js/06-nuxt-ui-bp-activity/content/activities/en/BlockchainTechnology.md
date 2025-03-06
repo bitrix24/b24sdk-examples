@@ -1,11 +1,11 @@
 ---
 title: Blockchain Technology
 description: Explore blockchain for secure and transparent transactions.
-categories: 
+category: 
   - 'category_1'
 badges: 
   - 'badge_2'
-avatar: '/activities/BlockchainTechnology.jpg'
+avatar: '/activities/BlockchainTechnology.webp'
 ---
 # Instruction for Using and Configuring the "Blockchain Technology" Action
 

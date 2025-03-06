@@ -1,12 +1,12 @@
 ---
 title: Innovation Management
 description: Foster a culture of innovation and creativity in your organization.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges:
   - 'badge_2'
-avatar: '/activities/InnovationManagement.jpg'
+avatar: '/activities/InnovationManagement.webp'
 ---
 # Instruction for Using and Configuring the " Innovation Management" Action
 

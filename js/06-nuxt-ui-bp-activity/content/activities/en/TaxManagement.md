@@ -1,13 +1,13 @@
 ---
 title: Tax Management
 description: Stay compliant with tax regulations and simplify filings.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/TaxManagement.jpg'
+avatar: '/activities/TaxManagement.webp'
 
 ---
 # Instruction for Using and Configuring the "Tax Management" Action

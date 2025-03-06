@@ -1,11 +1,11 @@
 ---
 title: Loyalty Programs
 description: Build customer loyalty with rewards and incentives.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_2'
-avatar: '/activities/LoyaltyPrograms.jpg'
+avatar: '/activities/LoyaltyPrograms.webp'
 ---
 # Instruction for Using and Configuring the "Loyalty Programs" Action
 

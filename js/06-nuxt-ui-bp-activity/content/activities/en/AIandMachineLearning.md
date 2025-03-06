@@ -1,24 +1,16 @@
 ---
 title: AI and Machine Learning
 description: Discover and integrate third-party apps to enhance your business.
-categories: 
+category: 
   - 'category_1'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/AIandMachineLearning.jpg'
+avatar: '/activities/AIandMachineLearning.webp'
 ---
-### Video Tutorial
+# Instruction for Using and Configuring the "AI and Machine Learning" Action
 
-For a visual guide on setting up and using the `AI and Machine Learning` action, watch the video:
-
-<iframe
-  class="aspect-video w-full my-6 rounded shadow-md"
-  src="//www.youtube.com/embed/OyzJd8BcTfY?feature=oembed&rel=0"
-  frameborder="0"
-  allow="accelerometer; autoplay; encrypted-media; gyroscope"
-  allowfullscreen>
-</iframe>
+## Action Description
 
 ## **Configuring the "AI and Machine Learning" Action**
 

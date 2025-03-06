@@ -1,12 +1,12 @@
 ---
 title: Project Tracking
 description: Discover and integrate third-party apps to enhance your business.
-categories: 
+category: 
   - 'category_1'
   - 'category_3'
 badges: 
   - 'badge_2'
-avatar: '/activities/ProjectTracking.jpg'
+avatar: '/activities/ProjectTracking.webp'
 ---
 # Instruction for Using and Configuring the "Project Tracking" Action
 

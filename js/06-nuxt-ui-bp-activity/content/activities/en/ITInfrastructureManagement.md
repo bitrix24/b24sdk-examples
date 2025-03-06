@@ -1,12 +1,12 @@
 ---
 title: IT Infrastructure Management
 description: Monitor and maintain your IT systems for optimal performance.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/ITInfrastructureManagement.jpg'
+avatar: '/activities/ITInfrastructureManagement.webp'
 ---
 # Instruction for Using and Configuring the " IT Infrastructure Management" Action
 

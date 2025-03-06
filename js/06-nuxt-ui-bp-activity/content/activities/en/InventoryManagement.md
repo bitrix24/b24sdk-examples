@@ -1,12 +1,12 @@
 ---
 title: Inventory Management
 description: Track and optimize your inventory levels in real-time.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_1'
   - 'badge_2'
-avatar: '/activities/InventoryManagement.jpg'
+avatar: '/activities/InventoryManagement.webp'
 ---
 # Instruction for Using and Configuring the "Inventory Management" Action
 

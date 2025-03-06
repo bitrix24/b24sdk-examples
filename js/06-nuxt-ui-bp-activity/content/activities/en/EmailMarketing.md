@@ -1,11 +1,11 @@
 ---
 title: Email Marketing
 description: Design and send personalized email campaigns to engage your audience.
-categories: 
+category: 
   - 'category_3'
 badges: 
   - 'badge_2'
-avatar: '/activities/EmailMarketing.jpg'
+avatar: '/activities/EmailMarketing.webp'
 ---
 # Instruction for Using and Configuring the "Email Marketing" Action
 

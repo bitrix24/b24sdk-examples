@@ -1,13 +1,13 @@
 ---
 title: Sales Management
 description: Tools and insights to manage your sales pipeline effectively.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/SalesManagement.jpg'
+avatar: '/activities/SalesManagement.webp'
 ---
 
 # Instruction for Using and Configuring the "Sales Management" Action

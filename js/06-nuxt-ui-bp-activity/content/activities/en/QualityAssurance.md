@@ -1,13 +1,13 @@
 ---
 title: Quality Assurance
 description: Ensure product and service quality through rigorous testing.
-categories:
+category:
   - 'category_1'
 
 badges:
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/QualityAssurance.jpg'
+avatar: '/activities/QualityAssurance.webp'
 ---
 # Instruction for Using and Configuring the "Quality Assurance" Action
 

@@ -1,11 +1,11 @@
 ---
 title: Knowledge Sharing
 description: Create a centralized knowledge base for your organization.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_3'
-avatar: '/activities/KnowledgeSharing.jpg'
+avatar: '/activities/KnowledgeSharing.webp'
 ---
 # Instruction for Using and Configuring the "Knowledge Sharing" Action
 

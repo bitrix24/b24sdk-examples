@@ -1,32 +1,20 @@
 ---
 title: Sales Pipeline
 description: Efficiently manage your sales pipeline and close deals faster.
-categories:
+category:
   - 'category_1'
-  - 'category_2'
 badges:
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/SalesPipeline.jpg'
+avatar: '/activities/SalesPipeline.webp'
 ---
+# Instruction for Using and Configuring the "Sales Pipeline" Action
 
-### Video Tutorial
+## Action Description
 
-For a visual guide on setting up and using the "Sales Pipeline" action, watch the video:
+The "Sales Pipeline" action is designed to efficiently manage your sales pipeline and accelerate deal closure in Bitrix24. It helps automate sales management processes and improves interaction between pipeline stages.
 
-<iframe
-  class="aspect-video w-full mb-2 "
-  src="//www.youtube.com/embed/OyzJd8BcTfY?feature=oembed&rel=0"
-  frameborder="0"
-  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-
-### Action Description
-
-The `Sales Pipeline` action is designed to efficiently manage your sales pipeline and accelerate deal closure in Bitrix24. It helps automate sales management processes and improves interaction between pipeline stages.
-
-### How to Use the "Sales Pipeline" Action
+## How to Use the "Sales Pipeline" Action
 
 1. **Adding the Action to a Business Process:**
 	- Go to the "Business Processes" section in your Bitrix24.
@@ -42,8 +30,24 @@ The `Sales Pipeline` action is designed to efficiently manage your sales pipelin
 	- Save the settings and launch the business process.
 	- Test how the action works with sample data and make adjustments if necessary.
 
-### Tips for Effective Use
+## Video Tutorial
+
+For a visual guide on setting up and using the "Sales Pipeline" action, watch the video:
+
+<iframe
+  class="aspect-video"
+  src="//www.youtube.com/embed/OyzJd8BcTfY?feature=oembed&rel=0"
+  frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+
+## Tips for Effective Use
 
 - Regularly analyze the effectiveness of your sales pipeline and adjust the action settings as needed.
 - Use notifications to keep team members informed about deal stage changes.
 - Integrate the action with other Bitrix24 tools, such as CRM, tasks, and calendar.
+
+---
+
+If you have any questions, contact Bitrix24 support or refer to the documentation.

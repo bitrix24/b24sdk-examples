@@ -1,12 +1,12 @@
 ---
 title: Mobile App Development
 description: Build and manage mobile applications to reach your audience.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_2' 
-avatar: '/activities/MobileAppDevelopment.jpg'
+avatar: '/activities/MobileAppDevelopment.webp'
 ---
 # Instruction for Using and Configuring the "Mobile App Development" Action
 

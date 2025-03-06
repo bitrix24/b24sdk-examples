@@ -1,11 +1,11 @@
 ---
 title: Employee Onboarding
 description: Simplify the onboarding process for new hires.
-categories: 
+category: 
   - 'category_1'
 badges: 
   - 'badge_2'
-avatar: '/activities/EmployeeOnboarding.jpg'
+avatar: '/activities/EmployeeOnboarding.webp'
 ---
 # Instruction for Using and Configuring the "Employee Onboarding" Action
 

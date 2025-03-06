@@ -1,12 +1,12 @@
 ---
 title: Contract Lifecycle Management
 description: Track contracts from creation to renewal or termination.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_3'
-avatar: '/activities/ContractLifecycleManagement.jpg'
+avatar: '/activities/ContractLifecycleManagement.webp'
 ---
 
 # Instruction for Using and Configuring the "Contract Lifecycle Management" Action

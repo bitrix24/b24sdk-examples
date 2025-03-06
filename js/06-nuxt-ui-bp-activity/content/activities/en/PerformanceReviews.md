@@ -1,12 +1,12 @@
 ---
 title: Performance Reviews
 description: Conduct regular performance evaluations and set goals.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_3'
-avatar: '/activities/PerformanceReviews.jpg'
+avatar: '/activities/PerformanceReviews.webp'
 ---
 
 # Instruction for Using and Configuring the "Performance Reviews" Action

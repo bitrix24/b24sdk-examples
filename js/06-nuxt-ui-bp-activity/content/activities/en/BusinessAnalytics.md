@@ -1,11 +1,11 @@
 ---
 title: Business Analytics
 description: Leverage data-driven insights to make informed decisions.
-categories: 
+category: 
   - 'category_1'
 badges: 
   - 'badge_1'
-avatar: '/activities/BusinessAnalytics.jpg'
+avatar: '/activities/BusinessAnalytics.webp'
 ---
 # Instruction for Using and Configuring the "Business Analytics" Action
 

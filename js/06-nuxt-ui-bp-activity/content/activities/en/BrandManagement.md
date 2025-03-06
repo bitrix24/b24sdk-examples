@@ -1,12 +1,12 @@
 ---
 title: Brand Management
 description: Protect and enhance your brand identity across all channels.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/BrandManagement.jpg'
+avatar: '/activities/BrandManagement.webp'
 ---
 # Instruction for Using and Configuring the "Brand Management" Action
 

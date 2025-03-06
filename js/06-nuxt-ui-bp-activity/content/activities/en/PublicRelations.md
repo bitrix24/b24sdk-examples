@@ -1,19 +1,19 @@
 ---
 title: Public Relations
 description: Manage your public image and media interactions effectively.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/PublicRelations.jpg'
+avatar: '/activities/PublicRelations.webp'
 ---
 # Instruction for Using and Configuring the "Public Relations" Action
 
 ## Action Description
 
-## Configuring the "Public Relations" Action"
+## **Configuring the "Public Relations" Action"
 
 ### 1: Access the Workflow Designer
 - Log in to your Bitrix24 account.

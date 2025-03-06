@@ -1,12 +1,12 @@
 ---
 title: Telephony Integration
 description: Enhance communication with integrated telephony solutions.
-categories: 
+category: 
   - 'category_1'
 badges:
   - 'badge_1'
   - 'badge_2'
-avatar: '/activities/TelephonyIntegration.jpg'
+avatar: '/activities/TelephonyIntegration.webp'
 ---
 
 # Instruction for Using and Configuring the "Telephony Integration" Action

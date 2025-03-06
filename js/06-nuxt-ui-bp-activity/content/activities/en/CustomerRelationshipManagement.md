@@ -1,12 +1,12 @@
 ---
 title: Customer Relationship Management
 description: Centralize customer data and improve retention strategies.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/CustomerRelationshipManagement.jpg'
+avatar: '/activities/CustomerRelationshipManagement.webp'
 ---
 
 # Instruction for Using and Configuring the "Customer Relationship Management" Action

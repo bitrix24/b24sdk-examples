@@ -1,13 +1,13 @@
 ---
 title: Data Analytics
 description: Analyze your business data to make informed decisions.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/DataAnalytics.jpg'
+avatar: '/activities/DataAnalytics.webp'
 ---
 # Instruction for Using and Configuring the "Data Analytics" Action
 

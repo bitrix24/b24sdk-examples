@@ -1,13 +1,13 @@
 ---
 title: CRM Integration
 description: Seamlessly integrate your CRM with other business tools.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/CRMIntegration.jpg'
+avatar: '/activities/CRMIntegration.webp'
 ---
 # Instruction for Using and Configuring the " CRM Integration" Action
 

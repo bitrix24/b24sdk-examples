@@ -1,12 +1,12 @@
 ---
 title: Feedback Collection
 description: Gather and analyze customer feedback to improve services
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/FeedbackCollection.jpg'
+avatar: '/activities/FeedbackCollection.webp'
 ---
 
 # Instruction for Using and Configuring the "Feedback Collection" Action

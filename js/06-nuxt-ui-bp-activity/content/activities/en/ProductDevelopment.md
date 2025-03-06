@@ -1,11 +1,11 @@
 ---
 title: Product Development
 description: Manage the lifecycle of products from ideation to launch.
-categories: 
+category: 
   - 'category_1'
 badges: 
   - 'badge_2'
-avatar: '/activities/ProductDevelopment.jpg'
+avatar: '/activities/ProductDevelopment.webp'
 ---
 # Instruction for Using and Configuring the "Product Development" Action
 

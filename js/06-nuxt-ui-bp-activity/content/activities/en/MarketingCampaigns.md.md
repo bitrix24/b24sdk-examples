@@ -1,12 +1,12 @@
 ---
 title: Marketing Campaigns
 description: Efficiently manage your sales pipeline and close deals faster.
-categories: 
+category: 
   - 'category_1'
 badges: 
   - 'badge_1'
   - 'badge_2'
-avatar: '/activities/MarketingCampaigns.jpg'
+avatar: '/activities/MarketingCampaigns.webp'
 ---
 # Instruction for Using and Configuring the "Marketing Campaigns" Action
 

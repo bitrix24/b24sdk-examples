@@ -1,12 +1,12 @@
 ---
 title: IoT Integration
 description: Integrate IoT devices to enhance operational efficiency.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_2'
-avatar: '/activities/IoTIntegration.jpg'
+avatar: '/activities/IoTIntegration.webp'
 ---
 # Instruction for Using and Configuring the "IoT Integration" Action
 

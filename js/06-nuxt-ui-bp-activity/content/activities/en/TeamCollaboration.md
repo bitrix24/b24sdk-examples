@@ -1,13 +1,13 @@
 ---
 title: Team Collaboration
 description: Facilitate seamless communication and collaboration within your team.
-categories: 
+category: 
   - 'category_1'
   - 'category_3'
 badges: 
   - 'badge_1'
 
-avatar: '/activities/TeamCollaboration.jpg'
+avatar: '/activities/TeamCollaboration.webp'
 
 ---
 # Instruction for Using and Configuring the "Team Collaboration" Action

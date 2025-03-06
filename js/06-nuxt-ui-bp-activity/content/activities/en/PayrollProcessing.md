@@ -1,11 +1,11 @@
 ---
 title: Payroll Processing
 description: Automate payroll calculations and ensure compliance.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_3'
-avatar: '/activities/PayrollProcessing.jpg'
+avatar: '/activities/PayrollProcessing.webp'
 
 ---
 # Instruction for Using and Configuring the "Payroll Processing" Action

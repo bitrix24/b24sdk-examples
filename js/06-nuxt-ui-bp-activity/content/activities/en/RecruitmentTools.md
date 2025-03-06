@@ -1,11 +1,11 @@
 ---
 title: Recruitment Tools
 description: Streamline hiring with advanced recruitment and applicant tracking.
-categories: 
+category: 
   - 'category_3'
 badges: 
   - 'badge_2'
-avatar: '/activities/RecruitmentTools.jpg'
+avatar: '/activities/RecruitmentTools.webp'
 ---
 # Instruction for Using and Configuring the "Recruitment Tools" Action
 

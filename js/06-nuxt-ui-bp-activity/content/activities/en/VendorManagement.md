@@ -1,13 +1,13 @@
 ---
 title: Vendor Management
 description: Manage relationships with vendors and optimize procurement.
-categories: 
+category: 
   - 'category_1'
   - 'category_3'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/VendorManagement.jpg'
+avatar: '/activities/VendorManagement.webp'
 ---
 
 # Instruction for Using and Configuring the "Vendor Management" Action

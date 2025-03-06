@@ -1,11 +1,11 @@
 ---
 title: HR Management
 description: Streamline HR processes and manage employee data effectively.
-categories: 
+category: 
   - 'category_3'
 badges: 
   - 'badge_2'
-avatar: '/activities/HRManagement.jpg'
+avatar: '/activities/HRManagement.webp'
 ---
 # Instruction for Using and Configuring the "HR Management" Action
 

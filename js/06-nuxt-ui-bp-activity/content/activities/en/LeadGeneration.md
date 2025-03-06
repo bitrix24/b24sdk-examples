@@ -1,13 +1,13 @@
 ---
 title: Lead Generation
 description: Organize and manage legal documents securely.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/LeadGeneration.jpg'
+avatar: '/activities/LeadGeneration.webp'
 ---
 
 # Instruction for Using and Configuring the "Lead Generation" Action

@@ -1,12 +1,12 @@
 ---
 title: Remote Work Tools
 description: Enable your team to work efficiently from anywhere in the world.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
 badges: 
   - 'badge_3'
-avatar: '/activities/RemoteWorkTools.jpg'
+avatar: '/activities/RemoteWorkTools.webp'
 ---
 # Instruction for Using and Configuring the "Remote Work Tools" Action
 

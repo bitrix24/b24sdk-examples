@@ -1,12 +1,12 @@
 ---
 title: Legal Document Management
 description: Discover and integrate third-party apps to enhance your business.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/LegalDocumentManagement.jpg'
+avatar: '/activities/LegalDocumentManagement.webp'
 
 ---
 # Instruction for Using and Configuring the "Legal Document Management" Action

@@ -1,12 +1,12 @@
 ---
 title: Event Management
 description: Plan and execute events with ease using dedicated tools.
-categories: 
+category: 
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_1'
-avatar: '/activities/EventManagement.jpg'
+avatar: '/activities/EventManagement.webp'
 ---
 # Instruction for Using and Configuring the "Event Management" Action
 

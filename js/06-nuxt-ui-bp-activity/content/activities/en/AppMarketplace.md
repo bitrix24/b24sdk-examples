@@ -1,18 +1,18 @@
 ---
 title: App Marketplace
 description: Discover and integrate third-party apps to enhance your business.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_2'
   - 'badge_3'
-avatar: '/activities/AppMarketplace.jpg'
+avatar: '/activities/AppMarketplace.webp'
 ---
-# Instruction for Using and Configuring the "App Marketplace" Action 
+# Instruction for Using and Configuring the "App Marketplace" Action
 
-<img class="aspect-video object-cover my-6 rounded shadow-md" src="/activities/AppMarketplace.jpg" />
+## Action Description
 
 ## **Configuring the "App Marketplace" Action**
 

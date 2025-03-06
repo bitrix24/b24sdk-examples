@@ -1,11 +1,11 @@
 ---
 title: Time Tracking
 description: Plan and execute events with ease using dedicated tools.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_2'
-avatar: '/activities/AppMarketplace.jpg'
+avatar: '/activities/AppMarketplace.webp'
 ---
 # Instruction for Using and Configuring the "App Marketplace" Action
 

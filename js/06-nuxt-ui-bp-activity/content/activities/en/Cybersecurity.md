@@ -1,13 +1,13 @@
 ---
 title: Cybersecurity
 description: Protect your business from cyber threats and data breaches.
-categories: 
+category: 
   - 'category_1'
   - 'category_2'
   - 'category_3'
 badges: 
   - 'badge_3'
-avatar: '/activities/Cybersecurity.jpg'
+avatar: '/activities/Cybersecurity.webp'
 ---
 # Instruction for Using and Configuring the "Cybersecurity" Action
 

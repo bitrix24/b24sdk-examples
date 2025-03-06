@@ -1,12 +1,12 @@
 ---
 title: Financial Reporting
 description: Generate detailed financial reports for better decision-making.
-categories: 
+category: 
   - 'category_2'
 badges: 
   - 'badge_1'
   - 'badge_3'
-avatar: '/activities/AppMarketplace.jpg'
+avatar: '/activities/AppMarketplace.webp'
 ---
 # Instruction for Using and Configuring the "Financial Reporting" Action
 
