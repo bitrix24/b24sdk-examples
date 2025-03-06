@@ -23,9 +23,17 @@ const { data: content } = await useAsyncData(props.activity.path, () => {
     }"
   >
     <template #body>
-      <template v-if="!content">
-        {{ '@todo make this' }}
-      </template>
+      <B24Advice
+        v-if="!content"
+        class="min-w-full"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <p>An error has been identified in generating activity data.</p>
+        <p>Please contact the app’s technical support team — our specialists will resolve the issue promptly.</p>
+        <div class="mt-2 flex flex-row flex-wrap items-start justify-between gap-2">
+          <B24Button size="xs" color="primary" label="@todo" />
+        </div>
+      </B24Advice>
       <ContentRenderer v-else :value="content" />
     </template>
 
@@ -40,8 +48,8 @@ const { data: content } = await useAsyncData(props.activity.path, () => {
         />
       </div>
       <B24Badge
-        class="absolute left-5"
         v-if="activity.isInstall"
+        class="absolute left-5"
         size="lg"
         color="collab"
         use-fill
