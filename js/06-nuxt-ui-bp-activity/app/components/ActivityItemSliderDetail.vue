@@ -8,7 +8,7 @@ const props = defineProps<{
 const emit = defineEmits<{ close: [boolean] }>()
 
 const { data: content } = await useAsyncData(props.activity.path, () => {
-  return queryCollection('contentActivities').path(props.activity.path).first()
+  return queryCollection('contentActivitiesEn').path(props.activity.path).first()
 })
 </script>
 
@@ -49,9 +49,10 @@ const { data: content } = await useAsyncData(props.activity.path, () => {
       </div>
       <B24Badge
         v-if="activity.isInstall"
-        class="absolute left-5"
+        class="absolute right-5"
         size="lg"
         color="collab"
+        depth="light"
         use-fill
         label="Installed"
       />
