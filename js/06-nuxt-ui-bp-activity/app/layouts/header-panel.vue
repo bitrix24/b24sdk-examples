@@ -1,9 +1,6 @@
 <script setup lang="ts">
-
-import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
-
 import Logo from '~/components/Logo.vue'
-import ColorMode from '~/components/ColorMode.vue'
+import NavSettings from '~/components/NavSettings.vue'
 
 useHead({
   bodyAttrs: {
@@ -46,8 +43,7 @@ const route = useRoute()
 
       <div class="pr-4 flex items-center justify-end gap-0.5 sm:gap-4">
         <slot name="header-end">
-          <B24Button :icon="SettingsIcon" color="link" to="/" size="xs" />
-          <ColorMode />
+          <NavSettings />
         </slot>
       </div>
     </div>
