@@ -4,7 +4,7 @@ import type { IActivity } from '~/types'
 /**
  * @todo remove ActivityItemSkeleton
  */
-import { ModalLoader, ModalConfirm, SliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay, ActivityItemSkeleton } from '#components'
+import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay } from '#components'
 import useSearchInput from '~/composables/useSearchInput'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
@@ -25,7 +25,7 @@ const toast = useToast()
 const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
 const modalConfirm = overlay.create(ModalConfirm)
-const sliderDetail = overlay.create(SliderDetail)
+const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
 // endregion ////
 
 // region Search ////
@@ -46,7 +46,7 @@ const {
 async function loadData(): Promise<void> {
   isLoading.value = true
 
-  const data = await queryCollection('contentActivities')
+  const data = await queryCollection('contentActivitiesEn')
     .select(
       'path',
       'title',
@@ -73,7 +73,7 @@ async function loadData(): Promise<void> {
 
 // region Actions ////
 async function showSlider(activity: IActivity): Promise<void> {
-  return sliderDetail.open({
+  return activitySliderDetail.open({
     activity
   })
 }
@@ -192,7 +192,7 @@ onUnmounted(() => {
               sideOffset: 2
             }"
             :b24ui="{
-              content: 'w-[140px]'
+              content: 'w-[240px]'
             }"
           >
             <B24Button rounded :icon="Settings1Icon" color="link" depth="dark" />
