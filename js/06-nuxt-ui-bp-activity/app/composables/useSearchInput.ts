@@ -37,7 +37,21 @@ const useSearchInput = () => {
   ))
 
   const filterBadges = computed<FilterSetting[]>(() => {
-    return Object.values(EActivityBadge).map((badge) => {
+    const badges = Object.values(EActivityBadge)
+    const notInstallIndex = badges.indexOf(EActivityBadge.NotInstall)
+
+    const badgesWithSeparator: ('separator' | EActivityBadge)[] = [...badges]
+    if (notInstallIndex !== -1) {
+      badgesWithSeparator.splice(notInstallIndex + 1, 0, 'separator')
+    }
+
+    return badgesWithSeparator.map((item: 'separator' | EActivityBadge) => {
+      if (item === 'separator') {
+        return { type: 'separator' as const }
+      }
+
+      const badge = item as EActivityBadge
+
       return {
         label: labelMapBadge[badge],
         type: 'checkbox' as const,
