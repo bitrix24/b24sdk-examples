@@ -11,8 +11,13 @@ const schema = z.object({
 
 export default defineContentConfig({
   collections: {
-    contentActivities: defineCollection({
-      source: 'activities/**/*.md',
+    contentActivitiesEn: defineCollection({
+      source: 'activities/en/**/*.md',
+      type: 'page',
+      schema
+    }),
+    contentActivitiesRu: defineCollection({
+      source: 'activities/ru/**/*.md',
       type: 'page',
       schema
     })
