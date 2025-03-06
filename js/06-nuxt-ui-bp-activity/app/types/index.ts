@@ -40,5 +40,7 @@ export type FilterSetting = {
   checked: boolean | undefined
   onUpdateChecked: (checked: boolean) => void
   onSelect: (e: Event) => void
+} | {
+  type: 'separator'
 }
 // endregion ////
