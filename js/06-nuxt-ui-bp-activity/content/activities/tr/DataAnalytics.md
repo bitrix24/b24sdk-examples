@@ -1,0 +1,43 @@
+---
+title: Veri Analizi
+description: İş verilerinizi analiz ederek bilinçli kararlar alın.
+categories: 
+  - 'category_2'
+  - 'category_3'
+badges: 
+  - 'badge_2'
+  - 'badge_3'
+avatar: '/activities/DataAnalytics.webp'
+---
+# "Veri Analizi" Eylemini Kullanma ve Yapılandırma Talimatı
+
+## Eylem Açıklaması
+
+## **"Veri Analizi" Eylemini Yapılandırma**
+
+### 1: İş Akışı Tasarımcısına Erişin
+- Bitrix24 hesabınıza giriş yapın.
+- **CRM** > **Otomasyon** > **İş Süreçleri** bölümüne gidin.
+- **İş Süreci Oluştur**'a tıklayın veya düzenlemek için mevcut bir süreci seçin.
+
+### 2: Satış Yönetimi Eylemini Ekleyin
+- İş Akışı Tasarımcısında, mevcut eylemler listesinden **Satış Yönetimi** eylemini sürükleyip bırakın.
+- Eylemi, iş akışınızda gerçekleşmesini istediğiniz yere konumlandırın.
+
+### 3: Eylemi Yapılandırın
+- Potansiyel Müşteri Takibi:
+  - Satış boru hattınızın aşamalarını tanımlayın.
+  - Potansiyel müşteri durum değişiklikleri için bildirimler ayarlayın.
+- Performans Analizi:
+  - İzlemek istediğiniz metrikleri seçin (örneğin, dönüşüm oranları, anlaşma değerleri).
+  - Düzenli performans incelemeleri için otomatik raporlar oluşturun.
+- Görev Otomasyonu:
+  - Tekrarlayan görevleri belirleyin (örneğin, takip e-postaları gönderme).
+  - Bu görevleri otomatik olarak yönetmek için otomasyon kuralları oluşturun.
+- Anlaşma Yönetimi:
+  - Anlaşma aşamalarını ve ilerleme kriterlerini ayarlayın.
+  - Her anlaşma için ekip üyelerine görevler ve son tarihler atayın.
+
+### 4: Kaydedin ve Etkinleştirin
+- Her şeyin doğru yapılandırıldığından emin olmak için ayarlarınızı gözden geçirin.
+- **Kaydet** ve ardından **Etkinleştir**'e tıklayarak Satış Yönetimi eylemini iş akışınızda aktif hale getirin.

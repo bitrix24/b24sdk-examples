@@ -16,6 +16,11 @@ export default defineContentConfig({
       type: 'page',
       schema
     }),
+    contentActivitiesDe: defineCollection({
+      source: 'activities/de/**/*.md',
+      type: 'page',
+      schema
+    }),
     contentActivitiesRu: defineCollection({
       source: 'activities/ru/**/*.md',
       type: 'page',
