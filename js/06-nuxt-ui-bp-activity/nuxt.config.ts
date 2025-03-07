@@ -87,7 +87,7 @@ export default defineNuxtConfig({
       // },
       {
         code: 'ru',
-        name: 'Polski',
+        name: 'Русский',
         file: 'ru.json'
       },
       // {
@@ -137,11 +137,11 @@ export default defineNuxtConfig({
       //   name: 'ภาษาไทย',
       //   file: 'th.json'
       // },
-      // {
-      //   code: 'ar',
-      //   name: 'عربي',
-      //   file: 'ar.json'
-      // },
+      {
+        code: 'ar',
+        name: 'عربي',
+        file: 'ar.json'
+      }
       // {
       //   code: 'kz',
       //   name: 'Қазақша',

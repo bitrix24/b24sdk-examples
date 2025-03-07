@@ -7,8 +7,10 @@ const props = defineProps<{
 
 const emit = defineEmits<{ close: [boolean] }>()
 
+const { locale } = useI18n()
+
 const { data: content } = await useAsyncData(props.activity.path, () => {
-  return queryCollection('contentActivitiesEn').path(props.activity.path).first()
+  return queryCollection(`contentActivities_${locale.value}`).path(props.activity.path).first()
 })
 </script>
 

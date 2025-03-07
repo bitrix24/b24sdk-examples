@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import type { IActivity } from '~/types'
 /**
  * @todo remove ActivityItemSkeleton
@@ -26,6 +26,8 @@ const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
 const modalConfirm = overlay.create(ModalConfirm)
 const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
+
+const { locale } = useI18n()
 // endregion ////
 
 // region Search ////
@@ -46,7 +48,7 @@ const {
 async function loadData(): Promise<void> {
   isLoading.value = true
 
-  const data = await queryCollection('contentActivitiesEn')
+  const data = await queryCollection(`contentActivities_${locale.value}`)
     .select(
       'path',
       'title',
@@ -69,6 +71,10 @@ async function loadData(): Promise<void> {
    */
   isLoading.value = false
 }
+
+watch(locale, () => {
+  loadData()
+})
 // endregion ////
 
 // region Actions ////
@@ -218,6 +224,7 @@ onUnmounted(() => {
           class="hidden lg:block mb-4 "
           :content="false"
         />
+        <ProseH1>H1</ProseH1>
         <div
           v-if="searchResults.length"
           class="grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-sm"
