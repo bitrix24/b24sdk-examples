@@ -5,7 +5,6 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import type { IStep } from '~/types'
 import { sleepAction } from '~/utils/sleep'
 import Logo from '~/components/Logo.vue'
-import PreDisplay from '~/components/PreDisplay.vue'
 
 definePageMeta({
   layout: 'clear',
@@ -180,8 +179,8 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <PreDisplay v-if="isShowDebug">
+    <ProsePre v-if="isShowDebug">
       {{ stepsData }}
-    </PreDisplay>
+    </ProsePre>
   </div>
 </template>

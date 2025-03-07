@@ -4,7 +4,7 @@ import type { IActivity } from '~/types'
 /**
  * @todo remove ActivityItemSkeleton
  */
-import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty, PreDisplay } from '#components'
+import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import useSearchInput from '~/composables/useSearchInput'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
@@ -19,7 +19,7 @@ definePageMeta({
 })
 
 // region Init ////
-const isShowDebug = ref(false)
+const isShowDebug = ref(true)
 const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()
@@ -292,9 +292,9 @@ onUnmounted(() => {
           :search-query="searchQuery"
           @clear="makeClearFilter"
         />
-        <PreDisplay v-if="isShowDebug">
+        <ProsePre v-if="isShowDebug">
           {{ activities }}
-        </PreDisplay>
+        </ProsePre>
       </template>
     </div>
   </NuxtLayout>
