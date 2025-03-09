@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { nextTick, ref } from 'vue'
 import { scrollToTop } from '~/utils/scrollToTop'
+import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import PulseCircleIcon from '@bitrix24/b24icons-vue/main/PulseCircleIcon'
 import ItemIcon from '@bitrix24/b24icons-vue/crm/ItemIcon'
 import InterconnectionIcon from '@bitrix24/b24icons-vue/crm/InterconnectionIcon'
@@ -9,7 +10,7 @@ import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import EarthLanguageIcon from '@bitrix24/b24icons-vue/main/EarthLanguageIcon'
 
-const { locale, locales, setLocale } = useI18n()
+const { locale, locales: localesI18n, setLocale } = useI18n()
 
 const toast = useToast()
 const colorMode = useColorMode()
@@ -23,8 +24,10 @@ const isDark = computed({
   }
 })
 
+const dir = computed(() => locales[locale.value].dir)
+
 const langMap = ref<Map<string, boolean>>(new Map(
-  Object.values(locales.value).map(lang => [lang.code, false])
+  Object.values(localesI18n.value).map(lang => [lang.code, false])
 ))
 langMap.value.set(locale.value, true)
 
@@ -76,7 +79,7 @@ const helpItems = computed(() => {
     {
       label: 'Lang',
       icon: EarthLanguageIcon,
-      children: locales.value.map((localeRow) => {
+      children: localesI18n.value.map((localeRow) => {
         return {
           label: localeRow.name,
           type: 'checkbox' as const,
@@ -107,11 +110,11 @@ defineShortcuts(extractShortcuts(helpItems.value))
     :items="helpItems"
     :content="{
       align: 'start',
-      side: 'left',
+      side: dir === 'ltr' ? 'left' : 'right',
       sideOffset: 2
     }"
     :b24ui="{
-      content: 'w-[240px]'
+      content: 'w-[240px] max-h-[245px]'
     }"
   >
     <B24Button

@@ -1,17 +1,16 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import type { IActivity } from '~/types'
-/**
- * @todo remove ActivityItemSkeleton
- */
 import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import useSearchInput from '~/composables/useSearchInput'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import { sleepAction } from '~/utils/sleep'
+import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
+import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
 
 definePageMeta({
   layout: false,
@@ -19,15 +18,19 @@ definePageMeta({
 })
 
 // region Init ////
-const isShowDebug = ref(true)
+const isShowDebug = ref(false)
 const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
 const modalConfirm = overlay.create(ModalConfirm)
 const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
+// endregion ////
 
+// region Locale ////
 const { locale } = useI18n()
+const dir = computed(() => locales[locale.value].dir)
+const contentCollection = computed(() => `contentActivities_${locale.value}`)
 // endregion ////
 
 // region Search ////
@@ -48,7 +51,7 @@ const {
 async function loadData(): Promise<void> {
   isLoading.value = true
 
-  const data = await queryCollection(`contentActivities_${locale.value}`)
+  const data = await queryCollection(contentCollection.value)
     .select(
       'path',
       'title',
@@ -194,11 +197,11 @@ onUnmounted(() => {
             :items="filterBadges"
             :content="{
               align: 'start',
-              side: 'left',
+              side: dir === 'ltr' ? 'left' : 'right',
               sideOffset: 2
             }"
             :b24ui="{
-              content: 'w-[240px]'
+              content: 'w-[240px] max-h-[245px]'
             }"
           >
             <B24Button rounded :icon="Settings1Icon" color="link" depth="dark" />
@@ -224,10 +227,10 @@ onUnmounted(() => {
           class="hidden lg:block mb-4 "
           :content="false"
         />
-        <ProseH1>H1</ProseH1>
+
         <div
           v-if="searchResults.length"
-          class="grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-sm"
+          class="mb-sm grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-sm"
         >
           <template v-for="(activity, activityIndex) in searchResults" :key="activityIndex">
             <div
@@ -237,6 +240,15 @@ onUnmounted(() => {
               ]"
               @click.stop="async () => { return showSlider(activity) }"
             >
+              <div
+                v-if="activity?.isInstall"
+                class="absolute -top-2  rounded-full bg-green-400 dark:bg-green-800 size-5 text-white flex items-center justify-center"
+                :class="[
+                  dir === 'ltr' ? 'right-3' : 'left-3'
+                ]"
+              >
+                <CheckIcon class="size-md" />
+              </div>
               <B24Avatar
                 v-if="activity.avatar"
                 :src="activity.avatar"
@@ -260,7 +272,6 @@ onUnmounted(() => {
                       v-for="(badge, badgeIndex) in activity.badges"
                       :key="badgeIndex"
                       size="xs"
-                      color="collab"
                       :label="badge"
                       v-bind="getBadgeProps(badge)"
                     />
@@ -294,11 +305,13 @@ onUnmounted(() => {
             </div>
           </template>
         </div>
+
         <ActivityListEmpty
           v-else
           :search-query="searchQuery"
           @clear="makeClearFilter"
         />
+
         <ProsePre v-if="isShowDebug">
           {{ activities }}
         </ProsePre>

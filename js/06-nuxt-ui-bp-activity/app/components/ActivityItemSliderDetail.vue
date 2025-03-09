@@ -7,10 +7,13 @@ const props = defineProps<{
 
 const emit = defineEmits<{ close: [boolean] }>()
 
+// region Locale ////
 const { locale } = useI18n()
+const contentCollection = computed(() => `contentActivities_${locale.value}`)
+// endregion ////
 
 const { data: content } = await useAsyncData(props.activity.path, () => {
-  return queryCollection(`contentActivities_${locale.value}`).path(props.activity.path).first()
+  return queryCollection(contentCollection.value).path(props.activity.path).first()
 })
 </script>
 

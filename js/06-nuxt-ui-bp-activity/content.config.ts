@@ -1,7 +1,35 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
+import type { DefinedCollection } from '@nuxt/content'
 import { EActivityCategory } from './app/types'
 
-const schema = z.object({
+interface LocaleConfig {
+  code: string
+  name: string
+  file: string
+}
+
+const getLocales = (): LocaleConfig[] => {
+  try {
+    const rawLocales = process.env.NUXT_PUBLIC_CONTENT_LOCALES || '[]'
+    const locales: unknown = JSON.parse(rawLocales)
+
+    if (!Array.isArray(locales)) throw new Error('Invalid locales format')
+    return locales.filter((l): l is LocaleConfig =>
+      typeof l === 'object'
+      && l !== null
+      && 'code' in l
+      && 'name' in l
+      && 'file' in l
+    )
+  } catch (error) {
+    console.error('Error parsing locales:', error)
+    return []
+  }
+}
+
+const locales = getLocales()
+
+const activitySchema = z.object({
   title: z.string(),
   description: z.string(),
   categories: z.array(z.nativeEnum(EActivityCategory)).optional(),
@@ -9,27 +37,25 @@ const schema = z.object({
   avatar: z.string().optional()
 })
 
-export default defineContentConfig({
-  collections: {
-    contentActivities_en: defineCollection({
-      source: 'activities/en/**/*.md',
+const isValidLocaleCode = (code: string): boolean => /^[a-z]{2}(?:-[A-Z]{2})?$/.test(code)
+
+const createContentCollections = (locales: LocaleConfig[]): Record<string, DefinedCollection> => {
+  return locales.reduce((acc, locale) => {
+    if (!isValidLocaleCode(locale.code)) {
+      console.warn(`Invalid locale code: ${locale.code}`)
+      return acc
+    }
+
+    acc[`contentActivities_${locale.code}`] = defineCollection({
+      source: `activities/${locale.code}/**/*.md`,
       type: 'page',
-      schema
-    }),
-    contentActivities_de: defineCollection({
-      source: 'activities/de/**/*.md',
-      type: 'page',
-      schema
-    }),
-    contentActivities_ru: defineCollection({
-      source: 'activities/ru/**/*.md',
-      type: 'page',
-      schema
-    }),
-    contentActivities_ar: defineCollection({
-      source: 'activities/ar/**/*.md',
-      type: 'page',
-      schema
+      schema: activitySchema
     })
-  }
+
+    return acc
+  }, {} as Record<string, DefinedCollection>)
+}
+
+export default defineContentConfig({
+  collections: createContentCollections(locales)
 })
