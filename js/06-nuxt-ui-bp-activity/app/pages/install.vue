@@ -7,7 +7,9 @@ import { sleepAction } from '~/utils/sleep'
 import Logo from '~/components/Logo.vue'
 
 definePageMeta({
-  layout: 'clear',
+  layout: 'clear'
+})
+useHead({
   title: 'Install'
 })
 

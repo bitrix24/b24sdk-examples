@@ -1,4 +1,3 @@
-
 ---
 title: Gerenciamento de Vendas
 description: Ferramentas e insights para gerenciar seu pipeline de vendas de forma eficaz.

@@ -1,4 +1,3 @@
-
 ---
 title: Pipeline de Vendas
 description: Gerencie seu pipeline de vendas de forma eficiente e feche negócios mais rapidamente.

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * @todo: area for close
+ */
 import type { IActivity } from '~/types'
 
 defineProps<{
@@ -10,22 +13,22 @@ const emit = defineEmits<{ close: [boolean] }>()
 
 <template>
   <B24Modal
-    :title="`Confirm uninstallation ${activity.title}?`"
-    description="The activity will become unavailable in all business processes."
+    :title="$t('component.modal.confirm.title', { title: activity.title })"
+    :description="$t('component.modal.confirm.description')"
     :close="{ onClick: () => emit('close', false) }"
   >
     <template #footer>
       <div class="flex gap-2">
         <B24Button
           rounded
-          label="I confirm"
+          :label="$t('component.modal.confirm.confirm')"
           color="danger"
           size="sm"
           @click="emit('close', true)"
         />
         <B24Button
           rounded
-          label="Cancel"
+          :label="$t('component.modal.confirm.cancel')"
           color="link"
           depth="light"
           size="sm"

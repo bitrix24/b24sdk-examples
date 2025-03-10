@@ -1,4 +1,3 @@
-
 ---
 title: Acompanhamento de Tempo
 description: Planeje e execute eventos com facilidade usando ferramentas dedicadas.

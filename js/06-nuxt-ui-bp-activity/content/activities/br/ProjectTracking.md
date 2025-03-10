@@ -1,4 +1,3 @@
-
 ---
 title: Acompanhamento de Projetos
 description: Descubra e integre aplicativos de terceiros para aprimorar seus negócios.

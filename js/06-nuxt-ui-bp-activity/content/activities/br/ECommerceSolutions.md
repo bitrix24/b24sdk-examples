@@ -1,4 +1,3 @@
-
 ---
 title: Soluções de E-commerce
 description: Gerencie sua loja online e otimize a experiência do cliente.

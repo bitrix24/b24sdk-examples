@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, watch } from 'vue'
 import type { IActivity } from '~/types'
 import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
+import type { Collections } from '@nuxt/content'
 import useSearchInput from '~/composables/useSearchInput'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
@@ -12,9 +13,13 @@ import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
 import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
 
+const { locale, t } = useI18n()
+
 definePageMeta({
-  layout: false,
-  title: 'Activity list'
+  layout: false
+})
+useHead({
+  title: t('page.list.seo.title')
 })
 
 // region Init ////
@@ -28,9 +33,8 @@ const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
 // endregion ////
 
 // region Locale ////
-const { locale } = useI18n()
 const dir = computed(() => locales[locale.value].dir)
-const contentCollection = computed(() => `contentActivities_${locale.value}`)
+const contentCollection = computed<keyof Collections>(() => `contentActivities_${locale.value}`)
 // endregion ////
 
 // region Search ////
@@ -96,8 +100,12 @@ async function makeInstall(activity: IActivity): Promise<void> {
   modalLoader.close()
 
   toast.add({
-    title: 'Success!',
-    description: `Installed activity ${activity.title}. Now you can use it in your business processes.`,
+    title: t('page.list.make.install.success.title'),
+    description: t(
+      'page.list.make.install.success.description', {
+        title: activity.title
+      }
+    ),
     avatar: activity.avatar
       ? { src: activity.avatar }
       : undefined,
@@ -122,8 +130,12 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
   activity.isInstall = false
 
   toast.add({
-    title: 'Success!',
-    description: `Uninstalled activity ${activity.title}. You must ensure that business processes are working properly.`,
+    title: t('page.list.make.uninstall.success.title'),
+    description: t(
+      'page.list.make.install.uninstall.description', {
+        title: activity.title
+      }
+    ),
     avatar: activity.avatar
       ? { src: activity.avatar }
       : undefined,
@@ -159,7 +171,7 @@ onMounted(async () => {
       statusCode: 404,
       statusMessage: error?.message || error,
       data: {
-        description: 'Problem in app',
+        description: t('error.onMounted.description'),
         homePageIsHide: true,
         isShowClearError: true,
         clearErrorHref: '/'
@@ -183,13 +195,13 @@ onUnmounted(() => {
         v-show="!isLoading"
         class="relative"
       >
-        <B24ButtonGroup no-split class="sm:pl-10">
+        <B24ButtonGroup no-split class="sm:ps-10">
           <B24Input
             ref="searchInput"
             v-model="searchQuery"
             type="search"
             :icon="SearchIcon"
-            placeholder="Search..."
+            :placeholder="$t('page.list.ui.searchInput.placeholder')"
             class="min-w-[110px] max-w-[210px]"
             rounded
           />
@@ -211,7 +223,7 @@ onUnmounted(() => {
           v-if="isSomeBadgeFilter"
           inset
           standalone
-          class="absolute top-0 right-2"
+          class="absolute top-0 ltr:right-2 rtl:left-2"
           size="2xs"
           color="primary"
         />
@@ -242,10 +254,7 @@ onUnmounted(() => {
             >
               <div
                 v-if="activity?.isInstall"
-                class="absolute -top-2  rounded-full bg-green-400 dark:bg-green-800 size-5 text-white flex items-center justify-center"
-                :class="[
-                  dir === 'ltr' ? 'right-3' : 'left-3'
-                ]"
+                class="absolute -top-2 ltr:right-3 rtl:left-3 rounded-full bg-green-400 dark:bg-green-800 size-5 text-white flex items-center justify-center"
               >
                 <CheckIcon class="size-md" />
               </div>
@@ -285,7 +294,7 @@ onUnmounted(() => {
                     v-if="!activity.isInstall"
                     size="xs"
                     rounded
-                    label="Install"
+                    :label="$t('page.list.ui.make.install')"
                     color="primary"
                     loading-auto
                     @click.stop="async () => { return makeInstall(activity) }"
@@ -294,7 +303,7 @@ onUnmounted(() => {
                     v-else
                     size="xs"
                     rounded
-                    label="Uninstall"
+                    :label="$t('page.list.ui.make.uninstall')"
                     color="default"
                     depth="light"
                     loading-auto
@@ -308,7 +317,6 @@ onUnmounted(() => {
 
         <ActivityListEmpty
           v-else
-          :search-query="searchQuery"
           @clear="makeClearFilter"
         />
 

@@ -4,8 +4,8 @@ import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 
 <template>
   <B24Modal
-    title="Load..."
-    description="Wait load data"
+    :title="$t('component.modal.loader.title')"
+    :description="$t('component.modal.loader.description')"
     :dismissible="false"
     fullscreen
     :b24ui="{

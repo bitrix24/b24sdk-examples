@@ -1,4 +1,68 @@
 {
-	"message1": "The early bird catches the worm",
-	"message2": "A picture is worth a thousand words"
+	"page": {
+    "list": {
+      "seo": {
+        "title": "**Activity list"
+      },
+      "make": {
+        "install": {
+          "success": {
+            "title": "**Success!",
+            "description": "**Installed activity {title}. Now you can use it in your business processes."
+          }
+        },
+        "uninstall": {
+          "success": {
+            "title": "**Success!",
+            "description": "**Uninstalled activity {title}. You must ensure that business processes are working properly."
+          }
+        }
+      },
+      "ui": {
+        "searchInput": {
+          "placeholder": "**Search..."
+        },
+        "make": {
+          "install": "**Install",
+          "uninstall": "**Uninstall"
+        }
+      }
+    }
+  },
+  "component": {
+    "modal": {
+      "loader": {
+        "title": "**Load...",
+        "description": "**Wait load data"
+      },
+      "confirm": {
+        "title": "**Confirm uninstallation {title}?",
+        "description": "**The activity will become unavailable in all business processes.",
+        "confirm": "**I confirm",
+        "cancel": "**Cancel"
+      }
+    },
+    "activity": {
+      "list": {
+        "empty": {
+          "title": "**No activity found",
+          "action": "**Clear your search and try again"
+        }
+      },
+      "item": {
+        "slider": {
+          "advice": {
+            "p1": "**An error has been identified in generating activity data.",
+            "p2": "**Please contact the app’s technical support team — our specialists will resolve the issue promptly.",
+            "action": "**Submit a question to support"
+          },
+          "close": "**Close",
+          "installed": "**Installed"
+        }
+      }
+    }
+  },
+  "error": {
+    "onMounted": "**Problem in app"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@bitrix24/b24ui-playground-nuxt-starter-bp-activity",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "build": "nuxt build",
@@ -14,15 +14,15 @@
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.3",
-    "@bitrix24/b24ui-nuxt": "^0.4.4",
-    "@nuxt/content": "^3.2.2",
-    "@nuxtjs/i18n": "^9.2.1",
+    "@bitrix24/b24ui-nuxt": "^0.4.5",
+    "@nuxt/content": "^3.3.0",
+    "@nuxtjs/i18n": "^9.3.1",
     "fuse.js": "^7.1.0",
-    "nuxt": "^3.15.4"
+    "nuxt": "^3.16.0"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^1.0.1",
-    "eslint": "^9.21.0",
+    "@nuxt/eslint": "^1.2.0",
+    "eslint": "^9.22.0",
     "typescript": "^5.8.2",
     "sharp": "^0.33.5",
     "openai": "^4.86.2"

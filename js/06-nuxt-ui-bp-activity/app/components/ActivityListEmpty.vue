@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import AttentionIIcon from '@bitrix24/b24icons-vue/main/AttentionIIcon'
 
-defineProps<{
-  searchQuery?: string
-}>()
+defineProps<{}>()
 
 const emit = defineEmits<{ clear: [] }>()
 </script>
@@ -14,10 +12,10 @@ const emit = defineEmits<{ clear: [] }>()
       <AttentionIIcon class="size-64 text-base-400" />
     </div>
     <h2 class="text-h1 my-6">
-      No activity found
+      {{ $t('component.activity.list.empty.title') }}
     </h2>
     <B24Button
-      label="Clear your search and try again"
+      :label="$t('component.activity.list.empty.action')"
       rounded
       depth="dark"
       @click="emit('clear')"

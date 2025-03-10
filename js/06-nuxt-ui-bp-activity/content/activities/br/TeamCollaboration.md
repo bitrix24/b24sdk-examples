@@ -1,4 +1,3 @@
-
 ---
 title: Colaboração em Equipe
 description: Facilite a comunicação e colaboração perfeita dentro da sua equipe.
@@ -9,7 +8,6 @@ badges:
   - 'badge_1'
 
 avatar: '/activities/TeamCollaboration.webp'
-
 ---
 # Instruções para Usar e Configurar a Ação "Colaboração em Equipe"
 
