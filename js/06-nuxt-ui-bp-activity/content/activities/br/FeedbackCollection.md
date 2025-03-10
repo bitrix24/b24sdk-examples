@@ -1,6 +1,6 @@
 ---
-title: Coleta de Feedback
-description: Colete e analise feedback dos clientes para melhorar os serviços
+title: Collecte de Retours
+description: Recueillir et analyser les retours clients pour améliorer les services
 categories: 
   - 'category_2'
 badges: 
@@ -9,37 +9,37 @@ badges:
 avatar: '/activities/FeedbackCollection.webp'
 ---
 
-# Instruções para Uso e Configuração da Ação "Coleta de Feedback"
+# Instructions pour l'Utilisation et la Configuration de l'Action "Collecte de Retours"
 
-## Descrição da Ação
+## Description de l'Action
 
-## **Configurando a Ação "Coleta de Feedback"**
+## **Configuration de l'Action "Collecte de Retours"**
 
-### Passo 1: Acesse o Designer de Processos de Negócios
-- Faça login na sua conta do Bitrix24.
-- Navegue até a seção **CRM**.
-- Selecione **Processos de Negócios** no menu à esquerda.
-- Clique em **Criar um Processo de Negócios** ou escolha um existente para editar.
+### Étape 1 : Accéder au Concepteur de Processus Métier
+- Connectez-vous à votre compte Bitrix24.
+- Accédez à la section **CRM**.
+- Sélectionnez **Processus Métier** dans le menu de gauche.
+- Cliquez sur **Créer un Processus Métier** ou choisissez un processus existant à modifier.
 
-### Passo 2: Adicione a Ação de Coleta de Feedback
-- No Designer de Processos de Negócios, arraste e solte a ação **Coleta de Feedback** da lista de ações disponíveis.
-- Posicione a ação no local desejado dentro do seu fluxo de trabalho.
+### Étape 2 : Ajouter l'Action de Collecte de Retours
+- Dans le Concepteur de Processus Métier, glissez-déposez l'action **Collecte de Retours** depuis la liste des actions disponibles.
+- Placez l'action à l'endroit souhaité dans votre workflow.
 
-### Passo 3: Configure a Ação de Coleta de Feedback
-- **Nome da Ação**: Certifique-se de que a ação esteja rotulada adequadamente (por exemplo, "Coletar Feedback do Cliente").
-- **Canais de Feedback**: Especifique os canais pelos quais o feedback será coletado (por exemplo, e-mail, formulários web, pesquisas).
-- **Perguntas de Feedback**: Defina as perguntas ou prompts que serão usados para coletar feedback. Você pode usar modelos pré-definidos ou criar perguntas personalizadas.
-- **Tratamento de Respostas**: Configure como as respostas serão tratadas:
-- **Configurações de Notificação**: Configure notificações para alertar os membros relevantes da equipe quando novos feedbacks forem recebidos.
+### Étape 3 : Configurer l'Action de Collecte de Retours
+- **Nom de l'Action** : Assurez-vous que l'action est correctement nommée (par exemple, "Collecter les Retours Clients").
+- **Canaux de Retours** : Spécifiez les canaux par lesquels les retours seront collectés (par exemple, e-mail, formulaires web, enquêtes).
+- **Questions de Retours** : Définissez les questions ou invites qui seront utilisées pour recueillir les retours. Vous pouvez utiliser des modèles prédéfinis ou créer des questions personnalisées.
+- **Gestion des Réponses** : Configurez la manière dont les réponses seront traitées :
+- **Paramètres de Notification** : Configurez les notifications pour alerter les membres concernés de l'équipe lorsqu'un nouveau retour est reçu.
 
-### Passo 4: Integre com o CRM
-- **Vincule a Entidades do CRM**: Certifique-se de que o feedback esteja vinculado a entidades relevantes do CRM (por exemplo, negócios, contatos ou empresas) para fácil referência.
-- **Ações Automatizadas**: Configure ações automatizadas com base na análise do feedback (por exemplo, e-mails de acompanhamento para feedback negativo, ofertas de recompensa para feedback positivo).
+### Étape 4 : Intégrer avec le CRM
+- **Lier aux Entités CRM** : Assurez-vous que les retours sont liés aux entités CRM pertinentes (par exemple, deals, contacts ou entreprises) pour une référence facile.
+- **Actions Automatisées** : Configurez des actions automatisées basées sur l'analyse des retours (par exemple, e-mails de suivi pour les retours négatifs, offres de récompense pour les retours positifs).
 
-### Passo 5: Teste o Fluxo de Trabalho
-- **Simule a Coleta de Feedback**: Execute um teste para garantir que o feedback seja coletado e processado corretamente.
-- **Revise a Análise**: Verifique se a análise do feedback está precisa e se as notificações são enviadas conforme configurado.
+### Étape 5 : Tester le Workflow
+- **Simuler la Collecte de Retours** : Exécutez un test pour vous assurer que les retours sont collectés et traités correctement.
+- **Revue de l'Analyse** : Vérifiez que l'analyse des retours est précise et que les notifications sont envoyées comme configuré.
 
-### Passo 6: Inicie e Monitore
-- **Ative o Processo de Negócios**: Após a conclusão dos testes, ative o processo de negócios.
-- **Monitore o Feedback**: Revise regularmente o feedback coletado e os insights gerados para tomar decisões informadas.
+### Étape 6 : Lancer et Surveiller
+- **Activer le Processus Métier** : Une fois les tests terminés, activez le processus métier.
+- **Surveiller les Retours** : Revoyez régulièrement les retours collectés et les insights générés pour prendre des décisions éclairées.

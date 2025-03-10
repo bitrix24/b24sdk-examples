@@ -1,12 +1,12 @@
 import { useDebounce } from '@vueuse/core'
 import { nextTick, onMounted, ref, watch } from 'vue'
-import { labelMapBadge } from '~/composables/useLabelMapBadge'
-import { labelMapTab } from '~/composables/useLabelMapTab'
 import { scrollToTop } from '~/utils/scrollToTop'
 import type { FilterSetting, IActivity } from '~/types'
 import { EActivityBadge, EActivityCategory } from '~/types'
 
 const useSearchInput = () => {
+  const { t } = useI18n()
+
   // region Init ////
   const activities = ref<IActivity[]>([])
 
@@ -18,12 +18,12 @@ const useSearchInput = () => {
   // region Tabs ////
   const tabs = ref([
     {
-      label: 'All',
+      label: t('composables.useSearchInput.tab.all'),
       value: 'all'
     },
     ...Object.values(EActivityCategory).map((value) => {
       return {
-        label: labelMapTab[value],
+        label: t(`composables.useSearchInput.tab.${value}`),
         value
       }
     })
@@ -53,7 +53,7 @@ const useSearchInput = () => {
       const badge = item as EActivityBadge
 
       return {
-        label: labelMapBadge[badge],
+        label: t(`composables.useSearchInput.badge.${badge}`),
         type: 'checkbox' as const,
         checked: filterBadgeMap.value.get(badge),
         onUpdateChecked(checked: boolean) {

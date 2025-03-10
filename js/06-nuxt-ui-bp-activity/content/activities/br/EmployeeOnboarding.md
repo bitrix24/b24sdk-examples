@@ -19,21 +19,21 @@ avatar: '/activities/EmployeeOnboarding.webp'
 - Encontre a ação **"Integração de Funcionários"** na lista de ações disponíveis e adicione-a ao processo.
 
 ### 2. Configurando as Etapas de Integração
-- Crie um **modelo de processo de integração** com todas as etapas necessárias (por exemplo, processamento de documentos, treinamento, apresentação à equipe).
-- Designe pessoas responsáveis por cada etapa.
+- Crie um **modelo de processo de integração** com todas as etapas necessárias (por exemplo, processamento de documentos, treinamento, introdução à equipe).
+- Atribua responsáveis para cada etapa.
 - Defina prazos para cada etapa.
 
 ### 3. Automatizando Tarefas
 - Use **robôs** para enviar automaticamente notificações e lembretes.
-- Configure a criação automática de tarefas para as pessoas responsáveis.
-- Habilite a **integração com CRM** para registrar os dados dos novos funcionários.
+- Configure a criação automática de tarefas para os responsáveis.
+- Ative a **integração com CRM** para incluir os dados dos novos funcionários.
 
 ### 4. Acompanhando o Progresso
 - Use **quadros Kanban** ou **gráficos de Gantt** para visualizar o progresso.
-- Configure notificações para a conclusão de etapas para as pessoas responsáveis.
+- Configure notificações para a conclusão de etapas para os responsáveis.
 - Atualize regularmente os status das tarefas para manter os dados atualizados.
 
 ### 5. Análise e Otimização
 - Use relatórios internos para analisar a eficácia do processo de integração (por exemplo, tempo de conclusão, nível de satisfação).
 - Configure notificações para gerentes com métricas-chave.
-- Otimize o processo com base nos dados analíticos.
+- Otimize o processo com base nos dados de análise.

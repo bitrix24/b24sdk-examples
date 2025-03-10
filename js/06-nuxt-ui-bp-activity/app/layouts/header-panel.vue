@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Logo from '~/components/Logo.vue'
+import DeveloperInfo from '~/components/DeveloperInfo.vue'
 import NavSettings from '~/components/NavSettings.vue'
 
 useHead({
@@ -7,8 +8,6 @@ useHead({
     class: 'text-base-master dark:text-base-150 bg-base-50 dark:bg-base-dark font-b24-system antialiased'
   }
 })
-
-const route = useRoute()
 </script>
 
 <template>
@@ -18,21 +17,14 @@ const route = useRoute()
         <B24Link raw to="/" class="flex items-center justify-between gap-0.5">
           <Logo class="size-8 text-primary" />
           <div class="hidden sm:block text-primary leading-none">
-            {{ route.meta.title }}
+            <slot name="header-title">
+              <!-- / header-title / -->
+            </slot>
           </div>
         </B24Link>
-        <div class="hidden sm:block">
-          <div class="flex flex-row gap-2xs items-end">
-            <div class="flex flex-col items-start justify-center gap-0.5">
-              <div class="text-3xs leading-tight opacity-70 text-base-500">
-                developer
-              </div>
-              <div class="text-3xs leading-tight text-base-700">
-                Company Name
-              </div>
-            </div>
-          </div>
-        </div>
+        <DeveloperInfo
+          class="hidden sm:block"
+        />
       </slot>
 
       <div class="grow flex items-center justify-between gap-4">

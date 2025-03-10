@@ -1,68 +1,137 @@
 {
-	"page": {
+  "page": {
+    "index": {
+      "seo": {
+        "title": "Bitrix24 UI - bpActivity"
+      },
+      "page": {
+        "install": "1. Install",
+        "main": "2. Main page"
+      },
+      "settings": {
+        "currentLang": "{title}",
+        "dark": "Dark",
+        "light": "Light"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Install the application"
+      },
+      "ui": {
+        "title": "Application Installation"
+      },
+      "step": {
+        "init": {
+          "caption": "You need to wait a bit..."
+        },
+        "placement": {
+          "caption": "Placement..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Completion"
+        }
+      }
+    },
     "list": {
       "seo": {
-        "title": "**Activity list"
+        "title": "List of activities"
       },
       "make": {
         "install": {
           "success": {
-            "title": "**Success!",
-            "description": "**Installed activity {title}. Now you can use it in your business processes."
+            "title": "Success!",
+            "description": "Activity {title} has been installed. Now you can use it in your business processes."
           }
         },
         "uninstall": {
           "success": {
-            "title": "**Success!",
-            "description": "**Uninstalled activity {title}. You must ensure that business processes are working properly."
+            "title": "Success!",
+            "description": "Activity {title} has been removed. Make sure your business processes are working correctly."
           }
         }
       },
       "ui": {
         "searchInput": {
-          "placeholder": "**Search..."
+          "placeholder": "Search..."
         },
         "make": {
-          "install": "**Install",
-          "uninstall": "**Uninstall"
+          "install": "Install",
+          "uninstall": "Uninstall"
         }
+      }
+    }
+  },
+  "composables": {
+    "useSearchInput": {
+      "tab": {
+        "all": "All",
+        "category_1": "Sales and Marketing",
+        "category_2": "Communications",
+        "category_3": "Category3"
+      },
+      "badge": {
+        "install": "Installed",
+        "not-install": "Not installed",
+        "badge_1": "Badge 1",
+        "badge_2": "Badge 2",
+        "badge_3": "Badge 3"
       }
     }
   },
   "component": {
     "modal": {
       "loader": {
-        "title": "**Load...",
-        "description": "**Wait load data"
+        "title": "Loading...",
+        "description": "Please wait while data is loading"
       },
       "confirm": {
-        "title": "**Confirm uninstallation {title}?",
-        "description": "**The activity will become unavailable in all business processes.",
-        "confirm": "**I confirm",
-        "cancel": "**Cancel"
+        "title": "Confirm deletion of {title}?",
+        "description": "The activity will become unavailable in all business processes.",
+        "confirm": "I confirm",
+        "cancel": "Cancel"
       }
     },
     "activity": {
       "list": {
         "empty": {
-          "title": "**No activity found",
-          "action": "**Clear your search and try again"
+          "title": "No activities found",
+          "action": "Clear the search and try again"
         }
       },
       "item": {
         "slider": {
           "advice": {
-            "p1": "**An error has been identified in generating activity data.",
-            "p2": "**Please contact the app’s technical support team — our specialists will resolve the issue promptly.",
-            "action": "**Submit a question to support"
+            "p1": "An error was detected in the activity data generation.",
+            "p2": "Please contact the application support team — our specialists will promptly resolve the issue.",
+            "action": "Send a question to support"
           },
-          "close": "**Close",
-          "installed": "**Installed"
+          "close": "Close",
+          "installed": "Installed"
         }
+      }
+    },
+    "developer": {
+      "info": {
+        "title": "Company name",
+        "caption": "developer"
+      }
+    },
+    "nav": {
+      "settings": {
+        "settings": "Settings",
+        "integrators": "For integrators",
+        "help": "Help",
+        "support": "Support",
+        "dark": "Dark",
+        "light": "Light"
       }
     }
   },
   "error": {
-    "onMounted": "**Problem in app"
+    "onMounted": "Application issue"
   }
 }

@@ -1,6 +1,6 @@
 ---
-title: Gestão do Ciclo de Vida de Contratos
-description: Acompanhe contratos desde a criação até a renovação ou rescisão.
+title: Gestion du Cycle de Vie des Contrats
+description: Suivez les contrats depuis leur création jusqu'à leur renouvellement ou résiliation.
 categories: 
   - 'category_1'
   - 'category_2'
@@ -9,32 +9,32 @@ badges:
 avatar: '/activities/ContractLifecycleManagement.webp'
 ---
 
-# Instruções para Uso e Configuração da Ação "Gestão do Ciclo de Vida de Contratos"
+# Instruction pour l'Utilisation et la Configuration de l'Action "Gestion du Cycle de Vie des Contrats"
 
-## Descrição da Ação
+## Description de l'Action
 
-## **Configurando a Ação "Gestão do Ciclo de Vida de Contratos"**
+## Configuration de l'Action "Gestion du Cycle de Vie des Contrats"
 
-### 1. Adicionando a Ação a um Processo de Negócios
-- Acesse a seção **"Processos de Negócios"** no seu Bitrix24.
-- Crie um novo processo ou abra um existente.
-- Encontre a ação **"Gestão do Ciclo de Vida de Contratos"** na lista de ações disponíveis e adicione-a ao processo.
+### 1. Ajout de l'Action à un Processus Métier
+- Accédez à la section **"Processus Métier"** dans votre Bitrix24.
+- Créez un nouveau processus ou ouvrez un processus existant.
+- Trouvez l'action **"Gestion du Cycle de Vie des Contrats"** dans la liste des actions disponibles et ajoutez-la au processus.
 
-### 2. Configurando Parâmetros do Contrato
-- Crie um **modelo de contrato** com todas as seções necessárias (por exemplo, partes, termos, condições).
-- Atribua pessoas responsáveis para cada etapa (por exemplo, advogado, gerente).
-- Defina prazos para cada etapa.
+### 2. Configuration des Paramètres du Contrat
+- Créez un **modèle de contrat** avec toutes les sections nécessaires (par exemple, parties, termes, conditions).
+- Attribuez des personnes responsables pour chaque étape (par exemple, avocat, manager).
+- Définissez des délais pour chaque étape.
 
-### 3. Acompanhando o Ciclo de Vida do Contrato
-- Use **notificações automáticas** para lembrar sobre eventos futuros (por exemplo, renovação, rescisão).
-- Configure **pesquisas** e **questionários** para coletar feedback das partes.
-- Ative a **integração com CRM** para contabilizar dados do contrato.
+### 3. Suivi du Cycle de Vie du Contrat
+- Utilisez **des notifications automatiques** pour rappeler les événements à venir (par exemple, renouvellement, résiliation).
+- Configurez des **enquêtes** et des **questionnaires** pour recueillir les commentaires des parties.
+- Activez **l'intégration CRM** pour prendre en compte les données du contrat.
 
-### 4. Análise e Relatórios
-- Use relatórios integrados para analisar dados de contratos (por exemplo, número de contratos ativos, datas de conclusão).
-- Configure notificações para pessoas responsáveis com métricas-chave.
-- Otimize o processo de gestão de contratos com base em dados analíticos.
+### 4. Analyse et Reporting
+- Utilisez les rapports intégrés pour analyser les données des contrats (par exemple, nombre de contrats actifs, dates d'échéance).
+- Configurez des notifications pour les personnes responsables avec des indicateurs clés.
+- Optimisez le processus de gestion des contrats en fonction des données analytiques.
 
-### 5. Integração com Processos de Negócios
-- Configure gatilhos para atualizações automáticas de dados (por exemplo, ao alterar termos ou condições).
-- Use dados do CRM para contabilizar negócios e clientes relacionados.
+### 5. Intégration avec les Processus Métier
+- Configurez des déclencheurs pour des mises à jour automatiques des données (par exemple, lors de la modification des termes ou conditions).
+- Utilisez les données CRM pour prendre en compte les affaires et clients associés.

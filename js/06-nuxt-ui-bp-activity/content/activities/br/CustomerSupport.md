@@ -1,6 +1,6 @@
 ---
-title: Suporte ao Cliente
-description: Descubra e integre aplicativos de terceiros para aprimorar seus negócios.
+title: Support client
+description: Découvrez et intégrez des applications tierces pour améliorer votre entreprise.
 categories: 
   - 'category_1'
   - 'category_2'
@@ -9,25 +9,24 @@ badges:
   - 'badge_2'
 avatar: '/activities/CustomerSupport.webp'
 ---
+# Instructions pour l'utilisation et la configuration de l'action "Support client"
 
-# Instruções para Usar e Configurar a Ação "Suporte ao Cliente"
+## Description de l'action
 
-## Descrição da Ação
+## **Configuration de l'action "Support client"**
 
-## **Configurando a Ação "Suporte ao Cliente"**
+### 1. Ajout de l'action à un processus métier
+- Ouvrez le processus métier où vous souhaitez ajouter l'action "Support client".
+- Dans la palette d'actions, localisez la section "Support client" et faites glisser l'action sur le canevas du processus métier.
 
-### 1. Adicionar a Ação a um Processo de Negócios
-- Abra o processo de negócios onde deseja adicionar a ação "Suporte ao Cliente".
-- Na paleta de ações, localize a seção "Suporte ao Cliente" e arraste a ação para o **canvas do processo de negócios**.
+### 2. Configuration de l'intégration
+- Une fois l'application installée, accédez à ses paramètres.
+- Configurez l'intégration avec Bitrix24 selon les instructions de l'application.
 
-### 2. Configurar Integração
-- Após instalar o aplicativo, acesse suas **configurações**.
-- Configure a integração com o Bitrix24 de acordo com as instruções do aplicativo.
+### 3. Mapping des champs
+- Lors de la configuration de l'action "Support client", mappez les champs de Bitrix24 aux champs de l'application sélectionnée.
+- Cela permet le transfert de données entre Bitrix24 et l'application tierce.
 
-### 3. Mapeamento de Campos
-- Ao configurar a ação "Suporte ao Cliente", **mapeie os campos do Bitrix24** para os campos do aplicativo selecionado.
-- Isso permite a transferência de dados entre o Bitrix24 e o aplicativo de terceiros.
-
-### 4. Definir Condições
-- Estabeleça as **condições** sob as quais a ação "Suporte ao Cliente" deve ser executada.
-- Isso possibilita a automação da ação com base em **eventos específicos** ou critérios definidos.
+### 4. Définition des conditions
+- Établissez les conditions sous lesquelles l'action "Support client" doit être exécutée.
+- Cela permet l'automatisation de l'action en fonction d'événements ou de critères spécifiques.

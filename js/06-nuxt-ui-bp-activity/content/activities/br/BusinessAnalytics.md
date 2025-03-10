@@ -1,38 +1,38 @@
 ---
-title: Análise de Negócios
-description: Aproveite insights baseados em dados para tomar decisões informadas.
+title: Analyse Commerciale
+description: Exploitez des informations basées sur les données pour prendre des décisions éclairées.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_1'
 avatar: '/activities/BusinessAnalytics.webp'
 ---
-# Instruções para Usar e Configurar a Ação "Análise de Negócios"
+# Instructions pour l'Utilisation et la Configuration de l'Action "Analyse Commerciale"
 
-## Descrição da Ação
+## Description de l'Action
 
-## **Configurando a Ação "Análise de Negócios"**
+## **Configuration de l'Action "Analyse Commerciale"**
 
-### 1. Adicionando a Ação a um Processo de Negócios
-- Acesse a seção **"Processos de Negócios"** no seu Bitrix24.
-- Crie um novo processo ou abra um existente.
-- Encontre a ação **"Análise de Negócios"** na lista de ações disponíveis e adicione-a ao processo.
+### 1. Ajout de l'Action à un Processus Commercial
+- Accédez à la section **"Processus Commerciaux"** dans votre Bitrix24.
+- Créez un nouveau processus ou ouvrez un processus existant.
+- Trouvez l'action **"Analyse Commerciale"** dans la liste des actions disponibles et ajoutez-la au processus.
 
-### 2. Configurando Fontes de Dados
-- Conecte as fontes de dados necessárias (por exemplo, CRM, plataformas de marketing, sistemas de contabilidade).
-- Configure a sincronização de dados para atualizações automáticas de análises.
-- Certifique-se de que os dados estejam corretamente integrados e disponíveis para análise.
+### 2. Configuration des Sources de Données
+- Connectez les sources de données nécessaires (par exemple, CRM, plateformes marketing, systèmes de comptabilité).
+- Configurez la synchronisation des données pour des mises à jour automatiques des analyses.
+- Assurez-vous que les données sont correctement intégrées et disponibles pour l'analyse.
 
-### 3. Criando Relatórios e Painéis
-- Use ferramentas integradas para criar relatórios (por exemplo, gráficos, tabelas, diagramas).
-- Configure painéis para visualizar métricas-chave (por exemplo, vendas, conversão, retenção de clientes).
-- Configure a geração automática de relatórios em um cronograma.
+### 3. Création de Rapports et Tableaux de Bord
+- Utilisez les outils intégrés pour créer des rapports (par exemple, graphiques, tableaux, diagrammes).
+- Configurez des tableaux de bord pour visualiser les indicateurs clés (par exemple, ventes, conversion, rétention des clients).
+- Configurez la génération automatique de rapports selon un calendrier.
 
-### 4. Analisando Dados e Tomando Decisões
-- Explore os dados usando filtros e segmentação para identificar tendências e padrões.
-- Use ferramentas analíticas para previsões e modelagem de cenários.
-- Tome decisões baseadas em dados para otimizar processos de negócios.
+### 4. Analyse des Données et Prise de Décisions
+- Explorez les données en utilisant des filtres et des segmentations pour identifier des tendances et des modèles.
+- Utilisez des outils analytiques pour la prévision et la modélisation de scénarios.
+- Prenez des décisions basées sur les données pour optimiser les processus commerciaux.
 
-### 5. Integrando com Processos de Negócios
-- Configure gatilhos para iniciar automaticamente tarefas analíticas (por exemplo, quando os dados mudam ou uma etapa do processo é concluída).
-- Use análises para automatizar decisões (por exemplo, enviar notificações, alterar statuses).
+### 5. Intégration avec les Processus Commerciaux
+- Configurez des déclencheurs pour lancer automatiquement des tâches analytiques (par exemple, lorsque les données changent ou qu'une étape du processus est terminée).
+- Utilisez l'analyse pour automatiser les décisions (par exemple, envoi de notifications, changement de statuts).

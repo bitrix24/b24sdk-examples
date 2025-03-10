@@ -16,7 +16,7 @@ avatar: '/activities/Cybersecurity.webp'
 ## **Configurando a Ação "Segurança Cibernética"**
 
 ### 1: Acesse o Designer de Fluxo de Trabalho
-- Faça login na sua conta Bitrix24.
+- Faça login na sua conta do Bitrix24.
 - Navegue até **CRM** > **Automação** > **Processos de Negócios**.
 - Clique em **Criar Processo de Negócios** ou selecione um existente para editar.
 
@@ -26,13 +26,13 @@ avatar: '/activities/Cybersecurity.webp'
 
 ### 3: Configure a Ação
 - Monitoramento de Ameaças:
-  - Configure parâmetros para detectar atividades incomuns (por exemplo, várias tentativas de login falhas).
+  - Defina parâmetros para detectar atividades incomuns (por exemplo, várias tentativas de login falhas).
   - Escolha os sistemas ou dados a serem monitorados para possíveis ameaças.
 - Criptografia de Dados:
   - Selecione os tipos de dados a serem criptografados (por exemplo, informações de clientes, registros financeiros).
   - Especifique os protocolos de criptografia a serem usados.
 - Controle de Acesso:
-  - Defina funções e permissões dos usuários.
+  - Defina funções e permissões de usuário.
   - Restrinja o acesso a dados sensíveis com base nas funções dos usuários.
 - Resposta a Incidentes:
   - Crie respostas automatizadas para incidentes específicos (por exemplo, bloquear endereços IP, notificar a equipe de segurança).
@@ -40,4 +40,4 @@ avatar: '/activities/Cybersecurity.webp'
 
 ### 4: Salve e Ative
 - Revise suas configurações para garantir que tudo esteja configurado corretamente.
-- Clique em **Salvar** e depois em **Ativar** para colocar a ação de Segurança Cibernética em funcionamento no seu fluxo de trabalho.
+- Clique em **Salvar** e depois em **Ativar** para tornar a ação de Segurança Cibernética ativa no seu fluxo de trabalho.

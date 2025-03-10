@@ -1,6 +1,6 @@
 ---
-title: Gestão de Eventos
-description: Planeje e execute eventos com facilidade usando ferramentas dedicadas.
+title: Gestion d'événements
+description: Planifiez et exécutez des événements facilement grâce à des outils dédiés.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -8,35 +8,35 @@ badges:
   - 'badge_1'
 avatar: '/activities/EventManagement.webp'
 ---
-# Instruções para Usar e Configurar a Ação "Gestão de Eventos"
+# Instructions pour utiliser et configurer l'action "Gestion d'événements"
 
-## Descrição da Ação
+## Description de l'action
 
-## **Configurando a Ação "Gestão de Eventos"**
+## **Configuration de l'action "Gestion d'événements"**
 
-### 1: Acesse o Designer de Fluxo de Trabalho
-- Faça login na sua conta Bitrix24.
-- Navegue até **CRM** > **Automação** > **Processos de Negócios**.
-- Clique em **Criar Processo de Negócio** ou selecione um existente para editar.
+### 1 : Accéder au Concepteur de workflows
+- Connectez-vous à votre compte Bitrix24.
+- Accédez à **CRM** > **Automatisation** > **Processus métier**.
+- Cliquez sur **Créer un processus métier** ou sélectionnez-en un existant à modifier.
 
-### 2: Adicione a Ação de Gestão de Eventos
-- No Designer de Fluxo de Trabalho, arraste e solte a ação **Gestão de Eventos** da lista de ações disponíveis.
-- Posicione a ação onde deseja que ela ocorra no seu fluxo de trabalho.
+### 2 : Ajouter l'action Gestion d'événements
+- Dans le Concepteur de workflows, faites glisser et déposez l'action **Gestion d'événements** depuis la liste des actions disponibles.
+- Positionnez l'action à l'endroit où vous souhaitez qu'elle se produise dans votre workflow.
 
-### 3: Configure a Ação
-- Agendamento do Evento:
-  - Defina a data, hora e local do evento.
-  - Adicione detalhes do evento, como agenda, palestrantes ou instruções especiais.
-- Gestão de Participantes:
-  - Crie uma lista de participantes ou importe contatos.
-  - Configure o rastreamento de RSVP e lembretes.
-- Automação de Tarefas:
-  - Atribua tarefas aos membros da equipe para a preparação do evento.
-  - Automatize lembretes para prazos e entregas.
-- Acompanhamento Pós-Evento:
-  - Crie modelos de e-mail para notas de agradecimento ou solicitações de feedback.
-  - Agende e-mails de acompanhamento para serem enviados após o evento.
+### 3 : Configurer l'action
+- Planification de l'événement :
+  - Définissez la date, l'heure et le lieu de l'événement.
+  - Ajoutez des détails tels que l'ordre du jour, les intervenants ou des instructions spéciales.
+- Gestion des participants :
+  - Créez une liste de participants ou importez des contacts.
+  - Configurez le suivi des RSVP et les rappels.
+- Automatisation des tâches :
+  - Attribuez des tâches aux membres de l'équipe pour la préparation de l'événement.
+  - Automatisez les rappels pour les délais et les livrables.
+- Suivi post-événement :
+  - Créez des modèles d'e-mails pour les remerciements ou les demandes de feedback.
+  - Planifiez l'envoi d'e-mails de suivi après l'événement.
 
-### 4: Salve e Ative
-- Revise suas configurações para garantir que tudo esteja configurado corretamente.
-- Clique em **Salvar** e depois em **Ativar** para tornar a ação de Gestão de Eventos ativa no seu fluxo de trabalho.
+### 4 : Enregistrer et activer
+- Vérifiez vos paramètres pour vous assurer que tout est configuré correctement.
+- Cliquez sur **Enregistrer** puis sur **Activer** pour rendre l'action Gestion d'événements active dans votre workflow.

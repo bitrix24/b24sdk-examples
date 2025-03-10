@@ -28,12 +28,12 @@ avatar: '/activities/ECommerceSolutions.webp'
   - Configure workflows automatizados para confirmação de pedidos, processamento de pagamentos e notificações de envio.
   - Integre com sua plataforma de e-commerce para sincronizar pedidos em tempo real.
 - Engajamento do Cliente:
-  - Crie modelos de e-mail personalizados para confirmações de pedidos, promoções e acompanhamentos.
+  - Crie modelos de e-mail personalizados para confirmações de pedidos, promoções e follow-ups.
   - Configure respostas automatizadas para consultas e feedbacks dos clientes.
 - Gerenciamento de Estoque:
   - Defina limites de nível de estoque e automatize alertas para estoque baixo.
   - Sincronize dados de estoque com sua plataforma de e-commerce para garantir precisão.
-- Análises e Relatórios:
+- Análise e Relatórios:
   - Configure painéis para acompanhar métricas-chave como vendas, retenção de clientes e desempenho de produtos.
   - Agende relatórios automatizados para serem enviados à sua equipe.
 

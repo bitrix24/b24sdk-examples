@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
-import { scrollToTop } from '~/utils/scrollToTop'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import PulseCircleIcon from '@bitrix24/b24icons-vue/main/PulseCircleIcon'
-import ItemIcon from '@bitrix24/b24icons-vue/crm/ItemIcon'
 import InterconnectionIcon from '@bitrix24/b24icons-vue/crm/InterconnectionIcon'
 import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
-import EarthLanguageIcon from '@bitrix24/b24icons-vue/main/EarthLanguageIcon'
+import HelpIcon from '@bitrix24/b24icons-vue/main/HelpIcon'
 
-const { locale, locales: localesI18n, setLocale } = useI18n()
+const { locale, t } = useI18n()
 
 const toast = useToast()
 const colorMode = useColorMode()
@@ -26,22 +23,17 @@ const isDark = computed({
 
 const dir = computed(() => locales[locale.value].dir)
 
-const langMap = ref<Map<string, boolean>>(new Map(
-  Object.values(localesI18n.value).map(lang => [lang.code, false])
-))
-langMap.value.set(locale.value, true)
-
 const helpItems = computed(() => {
   return [
     {
-      label: 'Settings',
+      label: t('component.nav.settings.settings'),
       icon: SettingsIcon,
       onSelect() {
         toast.add({ title: 'Action', description: 'Settings clicked' })
       }
     },
     {
-      label: 'For integrators',
+      label: t('component.nav.settings.integrators'),
       icon: InterconnectionIcon,
       onSelect() {
         toast.add({ title: 'Action', description: 'For integrators clicked' })
@@ -51,14 +43,14 @@ const helpItems = computed(() => {
       type: 'separator' as const
     },
     {
-      label: 'Help',
-      icon: ItemIcon,
+      label: t('component.nav.settings.help'),
+      icon: HelpIcon,
       onSelect() {
         toast.add({ title: 'Action', description: 'Help clicked' })
       }
     },
     {
-      label: 'Support',
+      label: t('component.nav.settings.support'),
       icon: PulseCircleIcon,
       onSelect() {
         toast.add({ title: 'Action', description: 'Support clicked' })
@@ -68,36 +60,13 @@ const helpItems = computed(() => {
       type: 'separator' as const
     },
     {
-      label: isDark.value ? 'Dark' : 'Light',
+      label: isDark.value ? t('component.nav.settings.dark') : t('component.nav.settings.light'),
       icon: isDark.value ? MoonIcon : SunIcon,
       kbds: ['shift', 'd'],
       onSelect(e: Event) {
         e?.preventDefault()
         isDark.value = !isDark.value
       }
-    },
-    {
-      label: 'Lang',
-      icon: EarthLanguageIcon,
-      children: localesI18n.value.map((localeRow) => {
-        return {
-          label: localeRow.name,
-          type: 'checkbox' as const,
-          checked: langMap.value.get(localeRow.code),
-          onUpdateChecked() {
-            [...langMap.value.keys()].forEach((lang) => {
-              langMap.value.set(lang, false)
-            })
-            langMap.value.set(localeRow.code, true)
-
-            setLocale(localeRow.code)
-
-            nextTick(() => {
-              scrollToTop()
-            })
-          }
-        }
-      })
     }
   ]
 })

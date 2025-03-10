@@ -1,6 +1,6 @@
 ---
-title: Mercado de Aplicativos
-description: Descubra e integre aplicativos de terceiros para aprimorar seu negócio.
+title: Marché des Applications
+description: Découvrez et intégrez des applications tierces pour améliorer votre entreprise.
 categories: 
   - 'category_1'
   - 'category_2'
@@ -10,33 +10,33 @@ badges:
   - 'badge_3'
 avatar: '/activities/AppMarketplace.webp'
 ---
-# Instruções para Usar e Configurar a Ação "Mercado de Aplicativos"
+# Instructions pour l'Utilisation et la Configuration de l'Action "Marché des Applications"
 
-## Descrição da Ação
+## Description de l'Action
 
-## **Configurando a Ação "Mercado de Aplicativos"**
+## **Configuration de l'Action "Marché des Applications"**
 
-### 1. Adicionando a Ação a um Processo de Negócios
-- Acesse a seção **"Processos de Negócios"** no seu Bitrix24.
-- Crie um novo processo ou abra um existente.
-- Encontre a ação **"Mercado de Aplicativos"** na lista de ações disponíveis e adicione-a ao processo.
+### 1. Ajouter l'Action à un Processus Métier
+- Accédez à la section **"Processus Métier"** dans votre Bitrix24.
+- Créez un nouveau processus ou ouvrez un processus existant.
+- Trouvez l'action **"Marché des Applications"** dans la liste des actions disponibles et ajoutez-la au processus.
 
-### 2. Pesquisando e Selecionando Aplicativos
-- Abra o **Mercado de Aplicativos** através da interface do Bitrix24.
-- Use filtros e categorias para encontrar aplicativos que atendam às necessidades do seu negócio (por exemplo, marketing, análise, gerenciamento de projetos).
-- Revise as descrições dos aplicativos, avaliações e feedback dos usuários.
+### 2. Recherche et Sélection d'Applications
+- Ouvrez le **Marché des Applications** via l'interface Bitrix24.
+- Utilisez les filtres et catégories pour trouver des applications correspondant à vos besoins métier (par exemple, marketing, analyse, gestion de projet).
+- Consultez les descriptions des applications, les évaluations et les retours des utilisateurs.
 
-![Mercado de Aplicativos](/activities/AppMarketplace.webp)
+![Marché des Applications](/activities/AppMarketplace.webp)
 
-### 3. Instalando e Configurando Aplicativos
-- Clique em **"Instalar"** para o aplicativo selecionado.
-- Siga as instruções na tela para concluir a instalação.
-- Configure a integração do aplicativo com seus dados e processos no Bitrix24 (por exemplo, conexão com CRM, configuração de API).
+### 3. Installation et Configuration des Applications
+- Cliquez sur **"Installer"** pour l'application sélectionnée.
+- Suivez les instructions à l'écran pour terminer l'installation.
+- Configurez l'intégration de l'application avec vos données et processus dans Bitrix24 (par exemple, connexion CRM, configuration API).
 
-### 4. Integração com Processos de Negócios
-- Use os aplicativos instalados para automatizar tarefas (por exemplo, sincronização automática de dados, envio de notificações).
-- Configure gatilhos e ações nos processos de negócios para aproveitar a funcionalidade do aplicativo.
+### 4. Intégration avec les Processus Métier
+- Utilisez les applications installées pour automatiser des tâches (par exemple, synchronisation automatique des données, envoi de notifications).
+- Configurez des déclencheurs et des actions dans les processus métier pour tirer parti des fonctionnalités de l'application.
 
-### 5. Gerenciamento e Atualizações
-- Verifique regularmente se há atualizações para os aplicativos instalados para garantir compatibilidade e segurança.
-- Remova aplicativos não utilizados para otimizar o desempenho do sistema.
+### 5. Gestion et Mises à Jour
+- Vérifiez régulièrement les mises à jour des applications installées pour assurer la compatibilité et la sécurité.
+- Supprimez les applications inutilisées pour optimiser les performances du système.

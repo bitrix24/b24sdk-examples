@@ -6,11 +6,13 @@ import type { IStep } from '~/types'
 import { sleepAction } from '~/utils/sleep'
 import Logo from '~/components/Logo.vue'
 
+const { t } = useI18n()
+
 definePageMeta({
   layout: 'clear'
 })
 useHead({
-  title: 'Install'
+  title: t('page.install.seo.title')
 })
 
 // region Init ////
@@ -36,11 +38,11 @@ const progressValue = ref<null | number>(null)
 // region Steps ////
 const steps = ref<Record<string, IStep>>({
   init: {
-    caption: 'You need to wait a little...',
+    caption: t('page.install.step.init.caption'),
     action: makeInit
   },
   placement: {
-    caption: 'Placement...',
+    caption: t('page.install.step.init.caption'),
     action: async () => {
       /**
        * Registering placement
@@ -56,12 +58,11 @@ const steps = ref<Record<string, IStep>>({
     }
   },
   crm: {
-    caption: 'Crm...',
+    caption: t('page.install.step.crm.caption'),
     action: async () => {
       /**
        * Some actions for crm
        */
-
       if (steps.value.crm) {
         steps.value.crm.data = {
           par31: 'val31',
@@ -72,7 +73,7 @@ const steps = ref<Record<string, IStep>>({
     }
   },
   finish: {
-    caption: 'Finish',
+    caption: t('page.install.step.finish.caption'),
     action: makeFinish
   }
 })
@@ -140,7 +141,7 @@ onMounted(async () => {
       statusCode: 404,
       statusMessage: error?.message || error,
       data: {
-        description: 'Problem in app',
+        description: t('error.onMounted.description'),
         homePageIsHide: true,
         isShowClearError: true,
         clearErrorHref: '/'
@@ -174,7 +175,7 @@ onUnmounted(() => {
     />
     <div class="mt-6 flex flex-col items-center justify-center gap-2">
       <div class="text-h1 text-nowrap">
-        Installing the application
+        {{ $t('page.install.ui.title') }}
       </div>
       <div class="text-base-500">
         {{ steps[stepCode]?.caption || '...' }}

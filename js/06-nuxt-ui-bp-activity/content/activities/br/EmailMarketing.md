@@ -1,39 +1,39 @@
 ---
 title: Email Marketing
-description: Concepção e envio de campanhas de e-mail personalizadas para envolver o seu público.
+description: Concevez et envoyez des campagnes d'emailing personnalisées pour engager votre audience.
 categories: 
   - 'category_3'
 badges: 
   - 'badge_2'
 avatar: '/activities/EmailMarketing.webp'
 ---
-# Instruções para Utilizar e Configurar a Ação "Email Marketing"
+# Instruction pour l'Utilisation et la Configuration de l'Action "Email Marketing"
 
-## Descrição da Ação
+## Description de l'Action
 
-## **Configuração da Ação "Email Marketing"**
+## **Configuration de l'Action "Email Marketing"**
 
-### 1. Adicionar a Ação a um Processo de Negócio
-- Aceda à secção **"Processos de Negócio"** no seu Bitrix24.
-- Crie um novo processo ou abra um existente.
-- Encontre a ação **"Email Marketing"** na lista de ações disponíveis e adicione-a ao processo.
+### 1. Ajouter l'Action à un Processus Métier
+- Accédez à la section **"Processus Métier"** dans votre Bitrix24.
+- Créez un nouveau processus ou ouvrez un processus existant.
+- Trouvez l'action **"Email Marketing"** dans la liste des actions disponibles et ajoutez-la au processus.
 
-### 2. Criar uma Campanha de E-mail
-- Clique em **"Criar Campanha"** e selecione o tipo (por exemplo, newsletter, resposta automática).
-- Utilize modelos ou crie um e-mail do zero no editor visual.
-- Adicione elementos personalizados (por exemplo, nome, empresa) para aumentar o envolvimento.
+### 2. Création d'une Campagne d'Emailing
+- Cliquez sur **"Créer une Campagne"** et sélectionnez le type (par exemple, newsletter, répondeur automatique).
+- Utilisez des modèles ou créez un email à partir de zéro dans l'éditeur visuel.
+- Ajoutez des éléments personnalisés (par exemple, nom, entreprise) pour augmenter l'engagement.
 
-### 3. Configurar o Público-Alvo
-- Selecione um segmento de público do CRM ou crie um novo (por exemplo, por geografia, interesses, histórico de compras).
-- Configure filtros para um direcionamento preciso.
-- Certifique-se de que a base de dados de contactos está atualizada e livre de endereços inválidos.
+### 3. Configuration de l'Audience Cible
+- Sélectionnez un segment d'audience dans le CRM ou créez-en un nouveau (par exemple, par géographie, intérêts, historique d'achat).
+- Configurez des filtres pour un ciblage précis.
+- Assurez-vous que la base de données de contacts est à jour et exempte d'adresses invalides.
 
-### 4. Agendamento e Envio
-- Defina a data e hora para o envio da campanha.
-- Configure gatilhos para envio automático (por exemplo, após registo no site ou alteração do estado do negócio).
-- Verifique o e-mail em busca de erros e envie uma mensagem de teste antes de lançar.
+### 4. Planification et Envoi
+- Définissez la date et l'heure d'envoi de la campagne.
+- Configurez des déclencheurs pour un envoi automatique (par exemple, lors de l'inscription sur le site ou du changement de statut d'une affaire).
+- Vérifiez l'email pour les erreurs et envoyez un message test avant le lancement.
 
-### 5. Análise de Resultados
-- Utilize relatórios integrados para analisar a eficácia da campanha (por exemplo, aberturas, cliques, conversões).
-- Configure notificações para os responsáveis com as métricas-chave.
-- Otimize campanhas futuras com base nos dados obtidos.
+### 5. Analyse des Résultats
+- Utilisez les rapports intégrés pour analyser l'efficacité de la campagne (par exemple, ouvertures, clics, conversions).
+- Configurez des notifications pour les personnes responsables avec les métriques clés.
+- Optimisez les campagnes futures en fonction des données obtenues.

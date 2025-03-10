@@ -7,7 +7,7 @@ badges:
   - 'badge_2'
 avatar: '/activities/BlockchainTechnology.webp'
 ---
-# Instrução para Usar e Configurar a Ação "Tecnologia Blockchain"
+# Instruções para Usar e Configurar a Ação "Tecnologia Blockchain"
 
 ## Descrição da Ação
 
@@ -34,7 +34,7 @@ avatar: '/activities/BlockchainTechnology.webp'
   - Configure permissões de acesso para usuários autorizados.
 - Armazenamento Descentralizado:
   - Identifique arquivos ou documentos sensíveis a serem armazenados na blockchain.
-  - Configure criptografia e controles de acesso para segurança adicional.
+  - Configure criptografia e controles de acesso para maior segurança.
 
 ### 4: Salve e Ative
 - Revise suas configurações para garantir que tudo esteja configurado corretamente.

@@ -24,7 +24,7 @@
     "@nuxt/eslint": "^1.2.0",
     "eslint": "^9.22.0",
     "typescript": "^5.8.2",
-    "sharp": "^0.33.5",
-    "openai": "^4.86.2"
+    "openai": "^4.86.2",
+    "dotenv": "^16.4.7"
   }
 }

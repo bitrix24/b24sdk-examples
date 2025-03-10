@@ -1,6 +1,6 @@
 ---
-title: AI e Machine Learning
-description: Descubra e integre aplicativos de terceiros para aprimorar seu negócio.
+title: AI ha Meziantoù Deskiñ
+description: Dizoloit hag integrit arloadoù trede evit gwellaat ho kenwerzh.
 categories: 
   - 'category_1'
 badges: 
@@ -8,9 +8,9 @@ badges:
   - 'badge_3'
 avatar: '/activities/AIandMachineLearning.webp'
 ---
-### Tutorial em Vídeo
+### Video Tutorial
 
-Para um guia visual sobre como configurar e usar a ação `AI e Machine Learning`, assista ao vídeo:
+Evit ur skouerenn wel war penaos kefluniañ hag implijout an obererezh `AI ha Meziantoù Deskiñ`, gwelit ar video:
 
 <iframe
   class="aspect-video w-full my-6 rounded shadow-md"
@@ -20,35 +20,35 @@ Para um guia visual sobre como configurar e usar a ação `AI e Machine Learning
   allowfullscreen>
 </iframe>
 
-# Instruções para Usar e Configurar a Ação "AI e Machine Learning"
+# Displegadenn evit implijout ha kefluniañ an obererezh "AI ha Meziantoù Deskiñ"
 
-## Descrição da Ação
+## Displegadenn an Obererezh
 
-## **Configurando a Ação "AI e Machine Learning"**
+## **Kefluniañ an Obererezh "AI ha Meziantoù Deskiñ"**
 
-### 1: Acesse o Designer de Fluxo de Trabalho
-- Faça login na sua conta do Bitrix24.
-- Navegue até **CRM** > **Automação** > **Processos de Negócios**.
-- Clique em **Criar Processo de Negócios** ou selecione um existente para editar.
+### 1: Kae d'an Dizagner Labour
+- Kennaskit d'ho kont Bitrix24.
+- Kit da **CRM** > **Emgefreekadur** > **Prosesoù Kenwerzhel**.
+- Klikit war **Krouiñ Proses Kenwerzhel** pe dibabit unan a zo anezhañ evit e gemmañ.
 
-### 2: Adicione a Ação AI e Machine Learning
-- No Designer de Fluxo de Trabalho, arraste e solte a ação **AI e Machine Learning** da lista de ações disponíveis.
-- Posicione a ação onde deseja que ela ocorra no seu fluxo de trabalho.
+### 2: Ouzhpennañ an Obererezh AI ha Meziantoù Deskiñ
+- En Dizagner Labour, skuilhit hag arsavit an obererezh **AI ha Meziantoù Deskiñ** eus roll an obererezhioù hegerz.
+- Lakaat an obererezh el lec'h ma fell deoc'h e c'hoarvezfe en ho proses labour.
 
-### 3: Configure a Ação
-- Automação de Processos:
-  - Selecione as tarefas ou processos que deseja automatizar.
-  - Defina as condições e gatilhos para a automação.
-- Análise Preditiva:
-  - Escolha as fontes de dados para análise (por exemplo, CRM, dados de vendas).
-  - Configure os parâmetros para gerar previsões e insights.
-- Análise de Dados:
-  - Especifique os conjuntos de dados a serem analisados.
-  - Configure as métricas e KPIs a serem rastreados.
-- Recomendações Inteligentes:
-  - Ative sugestões baseadas em AI para otimização de processos.
-  - Personalize os tipos de recomendações que deseja receber.
+### 3: Kefluniañ an Obererezh
+- Emgefreekadur Prosesoù:
+  - Dibabit an trevelloù pe prosesoù a fell deoc'h emgefreekadur anezho.
+  - Termenit an argerzhoù hag an difregoù evit an emgefreekadur.
+- Elfennoù Rakwelet:
+  - Dibabit ar mammennoù roadennoù evit an analiz (da skouer, CRM, roadennoù gwerzhañ).
+  - Keflunit ar paramedroù evit krouiñ rakweledadoù ha gouiziegezhioù.
+- Analiz Roadennoù:
+  - Spisait ar strolladoù roadennoù da analizañ.
+  - Keflunit ar metrikoù hag ar KPIoù da heuliañ.
+- Alioù Speredek:
+  - Gweredekait alioù renet gant AI evit gwellaat ar prosesoù.
+  - Personelait ar seurt alioù a fell deoc'h resev.
 
-### 4: Salve e Ative
-- Revise suas configurações para garantir que tudo esteja configurado corretamente.
-- Clique em **Salvar** e depois em **Ativar** para tornar a ação AI e Machine Learning ativa no seu fluxo de trabalho.
+### 4: Enrollañ hag Oberiañ
+- Adlennit ho arventennoù evit asuriñ eo pep tra kefluniet mat.
+- Klikit war **Enrollañ** ha goude **Oberiañ** evit lakaat an obererezh AI ha Meziantoù Deskiñ da vevañ en ho proses labour.

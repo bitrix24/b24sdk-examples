@@ -18,6 +18,7 @@ const { locale, t } = useI18n()
 definePageMeta({
   layout: false
 })
+
 useHead({
   title: t('page.list.seo.title')
 })
@@ -190,6 +191,9 @@ onUnmounted(() => {
 
 <template>
   <NuxtLayout name="header-panel">
+    <template #header-title>
+      {{ $t('page.list.seo.title') }}
+    </template>
     <template #header-middle>
       <div
         v-show="!isLoading"
@@ -281,7 +285,7 @@ onUnmounted(() => {
                       v-for="(badge, badgeIndex) in activity.badges"
                       :key="badgeIndex"
                       size="xs"
-                      :label="badge"
+                      :label="$t(`composables.useSearchInput.badge.${badge}`)"
                       v-bind="getBadgeProps(badge)"
                     />
                   </div>
