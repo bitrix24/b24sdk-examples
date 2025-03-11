@@ -6,6 +6,7 @@ import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import HelpIcon from '@bitrix24/b24icons-vue/main/HelpIcon'
+import { computed } from "vue";
 
 const { locale, t } = useI18n()
 
@@ -21,7 +22,7 @@ const isDark = computed({
   }
 })
 
-const dir = computed(() => locales[locale.value].dir)
+const dir = computed(() => locales[locale.value]?.dir || 'ltr')
 
 const helpItems = computed(() => {
   return [

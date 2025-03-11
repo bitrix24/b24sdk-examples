@@ -3,10 +3,11 @@
  * @todo: open support
  * @todo: area for close
  */
+import { computed } from 'vue'
 import type { IActivity } from '~/types'
 import type { Collections } from '@nuxt/content'
 
-const { locale } = useI18n()
+const { locale, defaultLocale } = useI18n()
 
 const props = defineProps<{
   activity: IActivity
@@ -15,7 +16,7 @@ const props = defineProps<{
 const emit = defineEmits<{ close: [boolean] }>()
 
 // region Locale ////
-const contentCollection = computed<keyof Collections>(() => `contentActivities_${locale.value}`)
+const contentCollection = computed<keyof Collections>(() => `contentActivities_${locale.value.length > 0 ? locale.value : defaultLocale}`)
 // endregion ////
 
 // region Data ////

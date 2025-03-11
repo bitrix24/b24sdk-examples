@@ -6,7 +6,7 @@ import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import EarthLanguageIcon from '@bitrix24/b24icons-vue/main/EarthLanguageIcon'
 
-const { locale, locales: localesI18n, setLocale, t } = useI18n()
+const { locale, locales: localesI18n, setLocale, t, defaultLocale } = useI18n()
 
 definePageMeta({
   layout: 'clear'
@@ -27,7 +27,7 @@ const isDark = computed({
   }
 })
 
-const dir = computed(() => locales[locale.value].dir)
+const dir = computed(() => locales[locale.value]?.dir || 'ltr')
 
 const langMap = ref<Map<string, boolean>>(new Map(
   Object.values(localesI18n.value).map(lang => [lang.code, false])
@@ -46,7 +46,10 @@ const helpItems = computed(() => {
       }
     },
     {
-      label: t('page.index.settings.currentLang', { code: locales[locale.value].code, title: locales[locale.value].name }),
+      label: t('page.index.settings.currentLang', {
+        code: locales[locale.value]?.code || defaultLocale,
+        title: locales[locale.value]?.name || defaultLocale
+      }),
       icon: EarthLanguageIcon,
       children: localesI18n.value.map((localeRow) => {
         return {

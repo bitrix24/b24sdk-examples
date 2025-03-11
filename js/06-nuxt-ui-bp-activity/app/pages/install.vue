@@ -141,7 +141,7 @@ onMounted(async () => {
       statusCode: 404,
       statusMessage: error?.message || error,
       data: {
-        description: t('error.onMounted.description'),
+        description: t('error.onMounted'),
         homePageIsHide: true,
         isShowClearError: true,
         clearErrorHref: '/'

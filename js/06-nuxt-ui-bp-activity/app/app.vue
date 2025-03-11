@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 
-const { locale } = useI18n()
-const lang = computed(() => locales[locale.value].code)
-const dir = computed(() => locales[locale.value].dir)
+const { locale, defaultLocale } = useI18n()
+const lang = computed(() => locales[locale.value]?.code || defaultLocale)
+const dir = computed(() => locales[locale.value]?.dir || 'ltr')
 
 useHead({
   htmlAttrs: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import type { IActivity } from '~/types'
 import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import type { Collections } from '@nuxt/content'
@@ -13,7 +13,7 @@ import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
 import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
 
-const { locale, t } = useI18n()
+const { locale, t, defaultLocale } = useI18n()
 
 definePageMeta({
   layout: false
@@ -34,8 +34,8 @@ const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
 // endregion ////
 
 // region Locale ////
-const dir = computed(() => locales[locale.value].dir)
-const contentCollection = computed<keyof Collections>(() => `contentActivities_${locale.value}`)
+const dir = computed(() => locales[locale.value]?.dir || 'ltr')
+const contentCollection = computed<keyof Collections>(() => `contentActivities_${locale.value.length > 0 ? locale.value : defaultLocale}`)
 // endregion ////
 
 // region Search ////
@@ -133,7 +133,7 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
   toast.add({
     title: t('page.list.make.uninstall.success.title'),
     description: t(
-      'page.list.make.install.uninstall.description', {
+      'page.list.make.uninstall.success.description', {
         title: activity.title
       }
     ),
@@ -172,7 +172,7 @@ onMounted(async () => {
       statusCode: 404,
       statusMessage: error?.message || error,
       data: {
-        description: t('error.onMounted.description'),
+        description: t('error.onMounted'),
         homePageIsHide: true,
         isShowClearError: true,
         clearErrorHref: '/'
