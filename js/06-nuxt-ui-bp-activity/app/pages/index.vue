@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import * as locales from '#b24ui/locale'
 import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
@@ -72,6 +72,13 @@ const helpItems = computed(() => {
       })
     }
   ]
+})
+
+onMounted(async () => {
+  if(locale.value?.length < 1)
+  {
+    setLocale(defaultLocale)
+  }
 })
 </script>
 
