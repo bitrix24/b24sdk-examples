@@ -13,7 +13,7 @@ avatar: '/activities/CRMIntegration.webp'
 
 ## Action Description
 
-## **Configuring the " CRM Integration" Action"
+## **Configuring the " CRM Integration" Action"**
 
 ### 1: Access the Workflow Designer
 - Log in to your Bitrix24 account.

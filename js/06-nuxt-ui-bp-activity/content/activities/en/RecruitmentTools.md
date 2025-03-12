@@ -11,7 +11,7 @@ avatar: '/activities/RecruitmentTools.webp'
 
 ## Action Description
 
-## **Configuring the "Recruitment Tools" Action"
+## **Configuring the "Recruitment Tools" Action"**
 
 ### 1. Adding the Action to a Business Process
 - Go to the **"Business Processes"** section in your Bitrix24.

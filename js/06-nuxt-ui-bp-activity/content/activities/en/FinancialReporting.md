@@ -12,7 +12,7 @@ avatar: '/activities/AppMarketplace.webp'
 
 ## Action Description
 
-## **Configuring the "Financial Reporting" Action"
+## **Configuring the "Financial Reporting" Action"**
 
 ### 1. Adding the Action to a Business Process
 - Go to the **"Business Processes"** section in your Bitrix24.

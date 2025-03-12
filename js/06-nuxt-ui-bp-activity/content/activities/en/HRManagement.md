@@ -11,7 +11,7 @@ avatar: '/activities/HRManagement.webp'
 
 ## Action Description
 
-## **Configuring the "HR Management" Action"
+## **Configuring the "HR Management" Action"**
 
 ### 1. Adding the Action to a Business Process
 - Go to the **"Business Processes"** section in your Bitrix24.

@@ -13,7 +13,7 @@ avatar: '/activities/DataAnalytics.webp'
 
 ## Action Description
 
-## **Configuring the "Data Analytics" Action"
+## **Configuring the "Data Analytics" Action"**
 
 ### 1: Access the Workflow Designer
 - Log in to your Bitrix24 account.

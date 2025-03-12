@@ -1,6 +1,6 @@
 ---
-title: العلاقات العامة
-description: إدارة صورتك العامة وتفاعلاتك مع وسائل الإعلام بشكل فعال.
+title: Public Relations
+description: Manage your public image and media interactions effectively.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -9,35 +9,37 @@ badges:
   - 'badge_3'
 avatar: '/activities/PublicRelations.webp'
 ---
-# تعليمات لاستخدام وتكوين إجراء "العلاقات العامة"
+# Instruction for Using and Configuring the "Public Relations" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "العلاقات العامة"**
+## **Configuring the "Public Relations" Action"**
 
-### 1: الوصول إلى مصمم سير العمل
-- سجل الدخول إلى حساب Bitrix24 الخاص بك.
-- انتقل إلى **CRM** > **الأتمتة** > **عمليات الأعمال**.
-- انقر على **إنشاء عملية أعمال** أو حدد عملية موجودة لتعديلها.
+### 1: Access the Workflow Designer
+- Log in to your Bitrix24 account.
+- Navigate to **CRM** > **Automation** > **Business Processes**.
+- Click on **Create Business Process** or select an existing one to edit.
 
-### 2: إضافة إجراء العلاقات العامة
-- في مصمم سير العمل، اسحب وأسقط إجراء **العلاقات العامة** من قائمة الإجراءات المتاحة.
-- ضع الإجراء في المكان الذي تريد أن يحدث فيه في سير العمل الخاص بك.
+### 2: Add the Public Relations Action
+- In the Workflow Designer, drag and drop the **Public Relations** action from the list of available actions.
+- Position the action where you want it to occur in your workflow.
 
-### 3: تكوين الإجراء
-- مراقبة الوسائط:
-  - حدد الكلمات الرئيسية أو العبارات التي تريد مراقبتها.
-  - اختر قنوات الوسائط (مثل وسائل التواصل الاجتماعي، وسائل الإعلام) لتتبعها.
-- توزيع البيانات الصحفية:
-  - قم بتحميل قالب البيانات الصحفية الخاص بك.
-  - اختر وسائل الإعلام أو قوائم الاتصال للتوزيع.
-- إدارة الأزمات:
-  - حدد المحفزات لوضع الأزمة (مثل عتبة المشاعر السلبية).
-  - قم بإعداد ردود تلقائية أو تنبيهات لفريق العلاقات العامة الخاص بك.
-- التواصل مع أصحاب المصلحة:
-  - أنشئ قوالب للتحديثات أو التقارير الدورية.
-  - قم بجدولة التحديثات التلقائية لإرسالها إلى أصحاب المصلحة.
+### 3: Configure the Action
+- Media Monitoring:
+  - Specify the keywords or phrases to monitor.
+  - Choose the media channels (e.g., social media, news outlets) to track.
+- Press Release Distribution:
+  - Upload your press release template.
+  - Select the media outlets or contact lists for distribution.
+- Crisis Management:
+  - Define the triggers for crisis mode (e.g., negative sentiment threshold).
+  - Set up automated responses or alerts for your PR team.
+- Stakeholder Communication:
+  - Create templates for regular updates or reports.
+  - Schedule automatic updates to be sent to stakeholders.
 
-### 4: حفظ وتفعيل
-- راجع إعداداتك للتأكد من تكوين كل شيء بشكل صحيح.
-- انقر على **حفظ** ثم **تفعيل** لجعل إجراء العلاقات العامة نشطًا في سير العمل الخاص بك.
+###  4: Save and Activate
+- Review your settings to ensure everything is configured correctly.
+- Click **Save** and then **Activate** to make the Public Relations action live in your workflow.
+
+

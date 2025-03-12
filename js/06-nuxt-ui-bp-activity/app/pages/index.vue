@@ -119,6 +119,12 @@ onMounted(async () => {
         color="primary"
         to="/activity-list"
       />
+      <B24Button
+        rounded
+        :label="$t('page.index.page.integrators')"
+        color="primary"
+        to="/for-integrators"
+      />
     </div>
   </div>
 </template>

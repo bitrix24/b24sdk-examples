@@ -1,6 +1,6 @@
 ---
-title: إدارة الضرائب
-description: ابق متوافقًا مع اللوائح الضريبية وتبسيط عمليات التقديم.
+title: Tax Management
+description: Stay compliant with tax regulations and simplify filings.
 categories: 
   - 'category_1'
   - 'category_2'
@@ -10,33 +10,33 @@ badges:
 avatar: '/activities/TaxManagement.webp'
 
 ---
-# تعليمات استخدام وتكوين إجراء "إدارة الضرائب"
+# Instruction for Using and Configuring the "Tax Management" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "إدارة الضرائب"**
+## **Configuring the "Tax Management" Action**
 
-### 1. إضافة الإجراء إلى عملية أعمال
-- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24.
-- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
-- ابحث عن إجراء **"إدارة الضرائب"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
+### 1. Adding the Action to a Business Process
+- Go to the **"Business Processes"** section in your Bitrix24.
+- Create a new process or open an existing one.
+- Find the **"Tax Management"** action in the list of available actions and add it to the process.
 
-### 2. إعداد بيانات الضرائب
-- قم باستيراد البيانات الضريبية من ملف CSV أو أضفها يدويًا.
-- حدد معدلات الضرائب والفئات واللوائح المعمول بها في منطقتك.
-- قم بإعداد **الأدوار** و**صلاحيات الوصول** للمستخدمين الذين يديرون بيانات الضرائب.
+### 2. Setting Up Tax Data
+- Import tax-related data from a CSV file or add it manually.
+- Specify tax rates, categories, and applicable regulations for your region.
+- Set up **roles** and **access rights** for users managing tax data.
 
-### 3. أتمتة حسابات الضرائب
-- استخدم **التحديثات التلقائية** لحساب الضرائب بناءً على المعاملات أو المبيعات أو بيانات الرواتب.
-- قم بتكوين الإشعارات لمواعيد الضرائب المهمة (مثل مواعيد التقديم أو مواعيد استحقاق الدفع).
-- قم بتمكين **التكامل مع أنظمة المحاسبة** لإعداد التقارير الضريبية بسلاسة.
+### 3. Automating Tax Calculations
+- Use **automatic updates** to calculate taxes based on transactions, sales, or payroll data.
+- Configure notifications for important tax deadlines (e.g., filing dates, payment due dates).
+- Enable **integration with accounting systems** for seamless tax reporting.
 
-### 4. التتبع وإعداد التقارير
-- استخدم التقارير المدمجة لتحليل بيانات الضرائب (مثل إجمالي الالتزامات الضريبية، الخصومات، المبالغ المستردة).
-- قم بإعداد إشعارات للأشخاص المسؤولين مع المقاييس الرئيسية.
-- قم بتحسين عمليات إدارة الضرائب بناءً على بيانات التحليلات.
+### 4. Tracking and Reporting
+- Use built-in reports to analyze tax data (e.g., total tax liabilities, deductions, refunds).
+- Set up notifications for responsible persons with key metrics.
+- Optimize tax management processes based on analytics data.
 
-### 5. ضمان الامتثال
-- قم بتحديث إعدادات الضرائب بانتظام لتعكس التغييرات في اللوائح.
-- استخدم **سجلات التدقيق** لتتبع التغييرات وضمان الشفافية.
-- قم بالتكامل مع **أنظمة التقديم الإلكتروني** لتبسيط عمليات تقديم الضرائب.
+### 5. Ensuring Compliance
+- Regularly update tax settings to reflect changes in regulations.
+- Use **audit logs** to track changes and ensure transparency.
+- Integrate with **e-filing systems** for simplified tax submissions.

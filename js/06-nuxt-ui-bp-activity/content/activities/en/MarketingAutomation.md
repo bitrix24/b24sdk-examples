@@ -11,7 +11,7 @@ avatar: '/activities/MarketingAutomation.webp'
 
 ## Action Description
 
-## **Configuring the "Marketing Automation" Action"
+## **Configuring the "Marketing Automation" Action"**
 
 ### 1: Access the Workflow Designer
 - Log in to your Bitrix24 account.

@@ -1,38 +1,41 @@
 ---
-title: إدارة وسائل التواصل الاجتماعي
-description: جدولة المنشورات وتتبع الأداء عبر منصات التواصل الاجتماعي.
+title: Social Media Management
+description: Schedule posts and track performance across social platforms.
 categories: 
   - 'category_2'
+  - 'category_3'
+badges: 
+  - 'badge_1'
   - 'badge_2'
 avatar: '/activities/SocialMediaManagement.webp'
 ---
 
-# تعليمات استخدام وتكوين إجراء "إدارة وسائل التواصل الاجتماعي"
+# Instruction for Using and Configuring the ""Social Media Management" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "إدارة وسائل التواصل الاجتماعي"**
+## **Configuring the "Social Media Management" Action**
 
-### 1. إضافة الإجراء إلى عملية أعمال
-- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24.
-- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
-- ابحث عن إجراء **"إدارة وسائل التواصل الاجتماعي"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
+### 1. Adding the Action to a Business Process
+- Go to the **"Business Processes"** section in your Bitrix24.
+- Create a new process or open an existing one.
+- Find the **"Social Media Management"** action in the list of available actions and add it to the process.
 
-### 2. ربط حسابات وسائل التواصل الاجتماعي
-- انتقل إلى قسم **"الشبكات الاجتماعية"** في إعدادات Bitrix24.
-- قم بربط حسابات وسائل التواصل الاجتماعي الخاصة بك (مثل Facebook، Instagram، LinkedIn).
-- قم بالتفويض ومنح الأذونات اللازمة للوصول.
+### 2. Connecting Social Media Accounts
+- Go to the **"Social Networks"** section in Bitrix24 settings.
+- Connect your social media accounts (e.g., Facebook, Instagram, LinkedIn).
+- Authorize and grant the necessary permissions for access.
 
-### 3. جدولة المنشورات
-- قم بإنشاء منشور جديد باستخدام المحرر المرئي.
-- أضف نصًا، صورًا، مقاطع فيديو، أو روابط.
-- حدد التاريخ والوقت للنشر أو استخدم ميزة **"النشر التلقائي"**.
+### 3. Scheduling Posts
+- Create a new post using the visual editor.
+- Add text, images, videos, or links.
+- Set the date and time for publication or use the **"Autoposting"** feature.
 
-### 4. تتبع الأداء
-- استخدم التقارير المدمجة لتحليل أداء المنشورات (مثل الوصول، التفاعل، النقرات).
-- قم بإعداد إشعارات للأشخاص المسؤولين مع المقاييس الرئيسية.
-- قم بتحسين المحتوى بناءً على بيانات التحليلات.
+### 4. Tracking Performance
+- Use built-in reports to analyze post performance (e.g., reach, engagement, clicks).
+- Set up notifications for responsible persons with key metrics.
+- Optimize content based on analytics data.
 
-### 5. التكامل مع عمليات الأعمال
-- قم بإعداد محفزات للنشر التلقائي (مثل عند إطلاق حملة جديدة أو تغيير حالة المشروع).
-- استخدم بيانات CRM لتخصيص المحتوى.
+### 5. Integrating with Business Processes
+- Set up triggers for automatic posting (e.g., when a new campaign is launched or a project status changes).
+- Use CRM data to personalize content.  

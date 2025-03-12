@@ -11,7 +11,7 @@ avatar: '/activities/EmployeeOnboarding.webp'
 
 ## Action Description
 
-## **Configuring the "Employee Onboarding" Action"
+## **Configuring the "Employee Onboarding" Action"**
 
 ### 1. Adding the Action to a Business Process
 - Go to the **"Business Processes"** section in your Bitrix24.

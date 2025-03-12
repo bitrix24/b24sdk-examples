@@ -1,6 +1,6 @@
 ---
-title: الحملات التسويقية
-description: إدارة خطوط المبيعات الخاصة بك بكفاءة وإغلاق الصفقات بشكل أسرع.
+title: Marketing Campaigns
+description: Efficiently manage your sales pipeline and close deals faster.
 categories: 
   - 'category_1'
 badges: 
@@ -8,32 +8,32 @@ badges:
   - 'badge_2'
 avatar: '/activities/MarketingCampaigns.webp'
 ---
-# تعليمات لاستخدام وتكوين إجراء "الحملات التسويقية"
+# Instruction for Using and Configuring the "Marketing Campaigns" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "الحملات التسويقية"**
+## **Configuring the "Marketing Campaigns" Action**
 
-## 1. إضافة الإجراء إلى عملية الأعمال
-- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
-- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
-- ابحث عن إجراء **"الحملات التسويقية"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
+## 1. Adding the Action to a Business Process
+- Go to the **"Business Processes"** section in your Bitrix24.
+- Create a new process or open an existing one.
+- Find the **"Marketing Campaigns"** action in the list of available actions and add it to the process.
 
-## 2. تعيين معلمات الحملة
-- حدد **اسم الحملة** لتسهيل التعرف عليها.
-- اختر **نوع الحملة** (مثل حملة بريد إلكتروني، عرض ترويجي، حملة رسائل نصية).
-- حدد **الجمهور المستهدف** باستخدام شرائح العملاء أو الفلاتر.
+## 2. Setting Campaign Parameters
+- Specify the **campaign name** for easy identification.
+- Select the **campaign type** (e.g., email campaign, promotional offer, SMS campaign).
+- Define the **target audience** using customer segments or filters.
 
-## 3. جدولة وإطلاق الحملة
-- حدد **تاريخ ووقت البدء** للحملة.
-- قم بتكوين **المحفزات** للإطلاق التلقائي (مثل عند إضافة عميل محتمل جديد أو تغيير حالة الصفقة).
-- تحقق من جميع المعلمات وقم بإطلاق الحملة.
+## 3. Scheduling and Launching
+- Set the **start date and time** for the campaign.
+- Configure **triggers** for automatic launch (e.g., when a new lead is added or a deal status changes).
+- Verify all parameters and launch the campaign.
 
-## 4. تحليل النتائج
-- بعد انتهاء الحملة، قم بجمع البيانات تلقائيًا حول النتائج (مثل عدد العملاء المشاركين، معدل التحويل، العائد على الاستثمار).
-- استخدم **التقارير** المدمجة لتحليل فعالية الحملة.
-- قم بإعداد **إشعارات** للأشخاص المسؤولين بنتائج الحملة.
+## 4. Analyzing Results
+- After the campaign ends, automatically collect data on the results (e.g., number of engaged customers, conversion rate, ROI).
+- Use built-in **reports** to analyze campaign effectiveness.
+- Set up **notifications** for responsible persons with campaign results.
 
-## 5. تحسين العمليات
-- بناءً على البيانات التي تم الحصول عليها، قم بإجراء تعديلات على استراتيجية الحملة التسويقية الخاصة بك.
-- أتمتة المهام المتكررة لتحسين الكفاءة.
+## 5. Optimizing Processes
+- Based on the data obtained, make adjustments to your marketing campaign strategy.
+- Automate repetitive tasks to improve efficiency.  

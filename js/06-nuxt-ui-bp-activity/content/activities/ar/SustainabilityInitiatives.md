@@ -1,6 +1,6 @@
 ---
-title: مبادرات الاستدامة
-description: تنفيذ ممارسات صديقة للبيئة وتتبع تأثيرها.
+title: Sustainability Initiatives
+description: Implement eco-friendly practices and track their impact.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -10,35 +10,35 @@ badges:
 avatar: '/activities/SocialMediaManagement.webp'
 ---
 
-# تعليمات لاستخدام وتكوين إجراء "مبادرات الاستدامة"
+# Instruction for Using and Configuring the ""Sustainability Initiatives" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "مبادرات الاستدامة"**
+## **Configuring the "Sustainability Initiatives" Action**
 
-### 1: الوصول إلى مصمم سير العمل
-- سجل الدخول إلى حساب Bitrix24 الخاص بك.
-- انتقل إلى **CRM** > **الأتمتة** > **عمليات الأعمال**.
-- انقر على **إنشاء عملية أعمال** أو حدد عملية موجودة لتعديلها.
+### 1: Access the Workflow Designer
+- Log in to your Bitrix24 account.
+- Navigate to **CRM** > **Automation** > **Business Processes**.
+- Click on **Create Business Process** or select an existing one to edit.
 
-### 2: إضافة إجراء مبادرات الاستدامة
-- في مصمم سير العمل، اسحب وأسقط إجراء **مبادرات الاستدامة** من قائمة الإجراءات المتاحة.
-- ضع الإجراء في المكان الذي تريد أن يحدث فيه ضمن سير العمل الخاص بك.
+### 2: Add the Sustainability Initiatives Action
+- In the Workflow Designer, drag and drop the **Sustainability Initiatives** action from the list of available actions.
+- Position the action where you want it to occur in your workflow.
 
-### 3: تكوين الإجراء
-- تنفيذ الممارسات الصديقة للبيئة:
-  - حدد الممارسات التي سيتم تنفيذها (مثل تقليل النفايات، كفاءة الطاقة).
-  - قم بتعيين أعضاء الفريق المسؤولين عن كل ممارسة.
-- تتبع التأثير:
-  - قم بإعداد المقاييس لقياس التأثير البيئي (مثل البصمة الكربونية، توفير الطاقة).
-  - قم بدمج مصادر البيانات للتتبع التلقائي.
-- مراقبة الأهداف:
-  - حدد أهدافًا واضحة للاستدامة وجداول زمنية.
-  - قم بتكوين تتبع التقدم وإنشاء تنبيهات لمعالم محددة.
-- التقارير:
-  - قم بتخصيص قوالب التقارير لتشمل المقاييس الرئيسية للاستدامة.
-  - قم بجدولة إنشاء التقارير التلقائي وتوزيعها.
+### 3: Configure the Action
+- Eco-Friendly Practice Implementation:
+  - Define the practices to be implemented (e.g., waste reduction, energy efficiency).
+  - Assign responsible team members for each practice.
+- Impact Tracking:
+  - Set up metrics to measure environmental impact (e.g., carbon footprint, energy savings).
+  - Integrate data sources for automatic tracking.
+- Goal Monitoring:
+  - Establish clear sustainability goals and timelines.
+  - Configure progress tracking and alerts for milestones.
+- Reporting:
+  - Customize report templates to include key sustainability metrics.
+  - Schedule automated report generation and distribution.
 
-### 4: الحفظ والتفعيل
-- راجع إعداداتك للتأكد من تكوين كل شيء بشكل صحيح.
-- انقر على **حفظ** ثم **تفعيل** لجعل إجراء مبادرات الاستدامة نشطًا في سير العمل الخاص بك.
+### 4: Save and Activate
+- Review your settings to ensure everything is configured correctly.
+- Click **Save** and then **Activate** to make the Sustainability Initiatives action live in your workflow.

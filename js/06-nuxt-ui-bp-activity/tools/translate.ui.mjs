@@ -14,8 +14,6 @@ import { config } from 'dotenv'
 config({ path: '.env.development' })
 config({ path: '.env' })
 
-
-
 const rl = createInterface({
   input: process.stdin,
   output: process.stdout

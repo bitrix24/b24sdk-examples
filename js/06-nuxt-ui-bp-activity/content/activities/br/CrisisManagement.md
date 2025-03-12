@@ -1,6 +1,6 @@
 ---
 title: Gerenciamento de Crise
-description: Descubra e integre aplicativos de terceiros para melhorar seu negócio.
+description: Descubra e integre aplicativos de terceiros para aprimorar seu negócio.
 categories: 
   - 'category_2'
   - 'badge_2'
@@ -12,14 +12,14 @@ avatar: '/activities/CrisisManagement.webp'
 
 ## **Configurando a Ação "Gerenciamento de Crise"**
 
-### 1: Acesse o Designer de Fluxo de Trabalho
+### 1: Acesse o Designer de Workflow
 - Faça login na sua conta do Bitrix24.
 - Navegue até **CRM** > **Automação** > **Processos de Negócios**.
 - Clique em **Criar Processo de Negócios** ou selecione um existente para editar.
 
 ### 2: Adicione a Ação de Gerenciamento de Crise
-- No Designer de Fluxo de Trabalho, arraste e solte a ação **Gerenciamento de Crise** da lista de ações disponíveis.
-- Posicione a ação onde deseja que ela ocorra no seu fluxo de trabalho.
+- No Designer de Workflow, arraste e solte a ação **Gerenciamento de Crise** da lista de ações disponíveis.
+- Posicione a ação onde deseja que ela ocorra no seu workflow.
 
 ### 3: Configure a Ação
 - Criação do Plano de Crise:
@@ -37,4 +37,4 @@ avatar: '/activities/CrisisManagement.webp'
 
 ### 4: Salve e Ative
 - Revise suas configurações para garantir que tudo esteja configurado corretamente.
-- Clique em **Salvar** e depois em **Ativar** para tornar a ação de Gerenciamento de Crise ativa no seu fluxo de trabalho.
+- Clique em **Salvar** e depois em **Ativar** para tornar a ação de Gerenciamento de Crise ativa no seu workflow.

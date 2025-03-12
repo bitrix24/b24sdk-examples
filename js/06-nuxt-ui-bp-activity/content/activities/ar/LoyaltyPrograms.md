@@ -1,37 +1,37 @@
 ---
-title: برامج الولاء
-description: بناء ولاء العملاء من خلال المكافآت والحوافز.
+title: Loyalty Programs
+description: Build customer loyalty with rewards and incentives.
 categories: 
   - 'category_2'
 badges: 
   - 'badge_2'
 avatar: '/activities/LoyaltyPrograms.webp'
 ---
-# تعليمات استخدام وتكوين إجراء "برامج الولاء"
+# Instruction for Using and Configuring the "Loyalty Programs" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "برامج الولاء"**
+## **Configuring the "Loyalty Programs" Action**
 
-### 1. الوصول إلى الإجراء
-- انتقل إلى بوابة Bitrix24 الخاصة بك.
-- انتقل إلى **CRM** > **عمليات الأعمال**.
-- حدد أو أنشئ عملية أعمال جديدة حيث تريد إضافة إجراء برامج الولاء.
+### 1. Accessing the Action
+- Navigate to your Bitrix24 portal.
+- Go to **CRM** > **Business Processes**.
+- Select or create a new business process where you want to add the Loyalty Programs action.
 
-### 2. إضافة إجراء برامج الولاء
-- في محرر عمليات الأعمال، اسحب وأسقط إجراء **برامج الولاء** من قائمة الإجراءات المتاحة.
-- ضع الإجراء في الموقع المطلوب داخل سير العمل الخاص بك.
+### 2. Adding the Loyalty Programs Action
+- In the business process editor, drag and drop the **Loyalty Programs** action from the list of available actions.
+- Place the action in the desired location within your workflow.
 
-### 3. تكوين الإجراء
-- **اسم الإجراء**: تأكد من تسمية الإجراء بشكل مناسب للوضوح (على سبيل المثال، "برامج الولاء - مكافأة العميل").
-- **شروط التشغيل**: حدد الشروط التي يجب أن يتم تشغيل هذا الإجراء بناءً عليها (على سبيل المثال، بعد الشراء، في ذكرى العميل).
+### 3. Configuring the Action
+- **Action Name**: Ensure the action is named appropriately for clarity (e.g., "Loyalty Programs - Reward Customer").
+- **Trigger Conditions**: Set the conditions under which this action should be triggered (e.g., after a purchase, on customer anniversary).
 
-### 4. اختبار الإجراء
-1. احفظ عملية الأعمال الخاصة بك.
-2. قم بتشغيل سيناريو اختبار للتأكد من أن الإجراء يتم تشغيله بشكل صحيح وأن المكافآت يتم توزيعها كما هو متوقع.
-3. تحقق من كل من إشعارات العملاء والإشعارات الداخلية للتأكد من استلامها وتنسيقها بشكل صحيح.
+### 4. Testing the Action
+1. Save your business process.
+2. Run a test scenario to ensure the action triggers correctly and the rewards are distributed as expected.
+3. Check both customer and internal notifications to confirm they are received and formatted correctly.
 
-### 5. المراقبة والتحسين
-- **التقارير**: استخدم تقارير Bitrix24 لمراقبة فعالية برامج الولاء الخاصة بك.
-- **التغذية الراجعة**: جمع تعليقات العملاء لفهم تأثير المكافآت والحوافز الخاصة بك.
-- **التعديلات**: قم بإجراء التعديلات اللازمة على معايير المكافآت وأهلية العملاء بناءً على بيانات الأداء والتعليقات.
+### 5. Monitoring and Optimization
+- **Reports**: Use Bitrix24 reports to monitor the effectiveness of your loyalty programs.
+- **Feedback**: Collect customer feedback to understand the impact of your rewards and incentives.
+- **Adjustments**: Make necessary adjustments to the reward parameters and eligibility criteria based on performance data and feedback.

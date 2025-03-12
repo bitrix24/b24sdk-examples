@@ -12,7 +12,7 @@ avatar: '/activities/PayrollProcessing.webp'
 
 ## Action Description
 
-## **Configuring the "Payroll Processing" Action"
+## **Configuring the "Payroll Processing" Action"**
 
 ### 1. Adding the Action to a Business Process
 - Go to the **"Business Processes"** section in your Bitrix24.

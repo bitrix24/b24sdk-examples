@@ -24,7 +24,7 @@ useHead({
 })
 
 // region Init ////
-const isShowDebug = ref(false)
+const isShowDebug = ref(true)
 const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()

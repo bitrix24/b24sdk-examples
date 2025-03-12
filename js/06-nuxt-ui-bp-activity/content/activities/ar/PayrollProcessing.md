@@ -1,6 +1,6 @@
 ---
-title: معالجة الرواتب
-description: أتمتة حسابات الرواتب وضمان الامتثال.
+title: Payroll Processing
+description: Automate payroll calculations and ensure compliance.
 categories: 
   - 'category_2'
 badges: 
@@ -8,32 +8,32 @@ badges:
 avatar: '/activities/PayrollProcessing.webp'
 
 ---
-# تعليمات استخدام وتكوين إجراء "معالجة الرواتب"
+# Instruction for Using and Configuring the "Payroll Processing" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "معالجة الرواتب"**
+## **Configuring the "Payroll Processing" Action"**
 
-### 1. إضافة الإجراء إلى عملية أعمال
-- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
-- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
-- ابحث عن إجراء **"معالجة الرواتب"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
+### 1. Adding the Action to a Business Process
+- Go to the **"Business Processes"** section in your Bitrix24.
+- Create a new process or open an existing one.
+- Find the **"Payroll Processing"** action in the list of available actions and add it to the process.
 
-### 2. إعداد بيانات الموظفين
-- قم باستيراد بيانات الموظفين من ملف CSV أو أضفها يدويًا.
-- حدد خصائص الموظفين (مثل الاسم، المنصب، المعدل، معلومات الضرائب).
-- قم بإعداد **الأدوار** و**صلاحيات الوصول** لكل موظف.
+### 2. Setting Up Employee Data
+- Import employee data from a CSV file or add it manually.
+- Specify employee characteristics (e.g., name, position, rate, tax information).
+- Set up **roles** and **access rights** for each employee.
 
-### 3. أتمتة الحسابات
-- استخدم **التحديثات التلقائية** للبيانات عند تغيير حالة الموظف (مثل التوظيف، الفصل).
-- قم بإعداد إشعارات للأحداث المهمة (مثل تغيير المعدل، تغيير الضرائب).
-- قم بتمكين **التكامل مع أنظمة المحاسبة** لحساب الرواتب تلقائيًا.
+### 3. Automating Calculations
+- Use **automatic updates** of data when an employee's status changes (e.g., hiring, dismissal).
+- Set up notifications for important events (e.g., rate changes, tax changes).
+- Enable **integration with accounting systems** for automatic payroll calculations.
 
-### 4. التتبع وإعداد التقارير
-- استخدم التقارير المدمجة لتحليل بيانات الرواتب (مثل المبلغ الإجمالي، الضرائب، المكافآت).
-- قم بإعداد إشعارات للأشخاص المسؤولين مع المقاييس الرئيسية.
-- قم بتحسين عملية الرواتب بناءً على بيانات التحليلات.
+### 4. Tracking and Reporting
+- Use built-in reports to analyze payroll data (e.g., total amount, taxes, bonuses).
+- Set up notifications for responsible persons with key metrics.
+- Optimize the payroll process based on analytics data.
 
-### 5. التكامل مع عمليات الأعمال
-- قم بإعداد محفزات للتحديث التلقائي للبيانات (مثل تغيير المعدلات أو معلومات الضرائب).
-- استخدم بيانات CRM لحساب الصفقات والعملاء المرتبطين.
+### 5. Integrating with Business Processes
+- Set up triggers for automatic data updates (e.g., when changing rates or tax information).
+- Use CRM data to account for related deals and clients. 

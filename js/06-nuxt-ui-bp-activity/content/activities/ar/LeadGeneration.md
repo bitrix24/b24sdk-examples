@@ -1,6 +1,6 @@
 ---
-title: توليد العملاء المحتملين
-description: تنظيم وإدارة المستندات القانونية بأمان.
+title: Lead Generation
+description: Organize and manage legal documents securely.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -10,33 +10,34 @@ badges:
 avatar: '/activities/LeadGeneration.webp'
 ---
 
-# تعليمات استخدام وتكوين إجراء "توليد العملاء المحتملين"
+# Instruction for Using and Configuring the "Lead Generation" Action
 
-## وصف الإجراء
+## Action Description
 
-## **تكوين إجراء "توليد العملاء المحتملين"**
+## **Configuring the "Lead Generation" Action**
 
-### 1. إضافة الإجراء إلى عملية الأعمال
-- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
-- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
-- ابحث عن إجراء **"توليد العملاء المحتملين"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
+### 1. Adding the Action to a Business Process
+- Go to the **"Business Processes"** section in your Bitrix24.
+- Create a new process or open an existing one.
+- Find the **"Lead Generation"** action in the list of available actions and add it to the process.
 
-### 2. إعداد مصادر العملاء المحتملين
-- قم بتوصيل مصادر العملاء المحتملين (مثل نماذج الموقع، حملات الإعلانات، وسائل التواصل الاجتماعي).
-- قم بتكوين إنشاء العملاء المحتملين تلقائيًا في CRM عند استلام البيانات.
-- استخدم **نماذج الويب** في Bitrix24 لجمع معلومات الاتصال.
+### 2. Setting Up Lead Sources
+- Connect lead sources (e.g., website forms, ad campaigns, social media).
+- Configure automatic lead creation in CRM when data is received.
+- Use Bitrix24 **web forms** to collect contact information.
 
-### 3. أتمتة معالجة العملاء المحتملين
-- قم بإعداد تصنيف العملاء المحتملين تلقائيًا حسب الفئات (مثل المصدر، المنطقة، الاهتمامات).
-- استخدم **الروبوتات** لإرسال رسائل البريد الإلكتروني أو الرسائل النصية تلقائيًا إلى العملاء المحتملين الجدد.
-- قم بتكوين إشعارات للمديرين حول العملاء المحتملين الجدد.
+### 3. Automating Lead Processing
+- Set up automatic lead classification by categories (e.g., source, region, interests).
+- Use **robots** to automatically send emails or SMS to new leads.
+- Configure notifications for managers about new leads.
 
-### 4. رعاية العملاء المحتملين
-- قم بإنشاء سيناريوهات **قمع المبيعات** لإشراك العملاء المحتملين خطوة بخطوة.
-- استخدم **حملات البريد الإلكتروني** و**التذكيرات التلقائية** للحفاظ على الاتصال.
-- قم بإعداد محفزات لتحويل العملاء المحتملين إلى صفقات عند استيفاء شروط معينة.
+### 4. Nurturing Leads
+- Create **sales funnel** scenarios for step-by-step lead engagement.
+- Use **email campaigns** and **automatic reminders** to maintain contact.
+- Set up triggers to convert leads into deals when certain conditions are met.
 
-### 5. التحليل والتحسين
-- استخدم التقارير المدمجة لتحليل فعالية توليد العملاء المحتملين (مثل عدد العملاء المحتملين، التحويل إلى صفقات).
-- قم بإعداد إشعارات للأشخاص المسؤولين مع المقاييس الرئيسية.
-- قم بتحسين العمليات بناءً على بيانات التحليلات.
+### 5. Analysis and Optimization
+- Use built-in reports to analyze lead generation effectiveness (e.g., number of leads, conversion to deals).
+- Set up notifications for responsible persons with key metrics.
+- Optimize processes based on analytics data.  
+

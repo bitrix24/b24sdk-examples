@@ -14,7 +14,7 @@ avatar: '/activities/TeamCollaboration.webp'
 
 ## Action Description
 
-## **Configuring the "Team Collaboration" Action"
+## **Configuring the "Team Collaboration" Action"**
 
 ### 1. Adding the Action to a Business Process
 - Go to the **"Business Processes"** section in your Bitrix24.

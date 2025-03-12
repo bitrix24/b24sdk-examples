@@ -13,7 +13,7 @@ avatar: '/activities/PublicRelations.webp'
 
 ## Action Description
 
-## **Configuring the "Public Relations" Action"
+## **Configuring the "Public Relations" Action"**
 
 ### 1: Access the Workflow Designer
 - Log in to your Bitrix24 account.
