@@ -1,41 +1,41 @@
 ---
-title: Knowledge Sharing
-description: Create a centralized knowledge base for your organization.
+title: مشاركة المعرفة
+description: أنشئ قاعدة معرفية مركزية لمنظمتك.
 categories: 
   - 'category_2'
 badges: 
   - 'badge_3'
 avatar: '/activities/KnowledgeSharing.webp'
 ---
-# Instruction for Using and Configuring the "Knowledge Sharing" Action
+# تعليمات لاستخدام وتكوين إجراء "مشاركة المعرفة"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Knowledge Sharing" Action**
+## **تكوين إجراء "مشاركة المعرفة"**
 
-### 1: Access the Workflow Designer
-- Log in to your Bitrix24 account.
-- Navigate to **CRM** > **Automation** > **Business Processes**.
-- Click on **Create Business Process** or select an existing one to edit.
+### 1: الوصول إلى مصمم سير العمل
+- سجّل الدخول إلى حساب Bitrix24 الخاص بك.
+- انتقل إلى **CRM** > **الأتمتة** > **عمليات الأعمال**.
+- انقر على **إنشاء عملية أعمال** أو حدد عملية موجودة لتعديلها.
 
-### 2: Add the Knowledge Sharing Action
-- In the Workflow Designer, drag and drop the **Knowledge Sharing** action from the list of available actions.
-- Position the action where you want it to occur in your workflow.
+### 2: إضافة إجراء مشاركة المعرفة
+- في مصمم سير العمل، اسحب وأسقط إجراء **مشاركة المعرفة** من قائمة الإجراءات المتاحة.
+- ضع الإجراء في المكان الذي تريد أن يحدث فيه في سير العمل الخاص بك.
 
-### 3: Configure the Action
-- Centralized Knowledge Base:
-  - Define the categories and subcategories for organizing knowledge.
-  - Upload existing documents and resources to the knowledge base.
-- Easy Access:
-  - Set permissions to control who can view and edit knowledge resources.
-  - Create shortcuts or links to frequently accessed information.
-- Collaboration:
-  - Enable comments and feedback on knowledge articles.
-  - Set up notifications for updates and changes to the knowledge base.
-- Search Functionality:
-  - Configure search settings to include relevant tags and keywords.
-  - Ensure that all documents are indexed for quick retrieval.
+### 3: تكوين الإجراء
+- قاعدة المعرفة المركزية:
+  - حدد الفئات والفئات الفرعية لتنظيم المعرفة.
+  - قم بتحميل المستندات والموارد الموجودة إلى قاعدة المعرفة.
+- الوصول السهل:
+  - قم بتعيين الأذونات للتحكم في من يمكنه عرض وتعديل موارد المعرفة.
+  - أنشئ اختصارات أو روابط للمعلومات التي يتم الوصول إليها بشكل متكرر.
+- التعاون:
+  - قم بتمكين التعليقات والملاحظات على مقالات المعرفة.
+  - قم بإعداد إشعارات للتحديثات والتغييرات في قاعدة المعرفة.
+- وظيفة البحث:
+  - قم بتكوين إعدادات البحث لتشمل العلامات والكلمات الرئيسية ذات الصلة.
+  - تأكد من فهرسة جميع المستندات لاسترجاعها بسرعة.
 
-### 4: Save and Activate
-- Review your settings to ensure everything is configured correctly.
-- Click **Save** and then **Activate** to make the Knowledge Sharing action live in your workflow.
+### 4: الحفظ والتشغيل
+- راجع إعداداتك للتأكد من تكوين كل شيء بشكل صحيح.
+- انقر على **حفظ** ثم **تشغيل** لجعل إجراء مشاركة المعرفة نشطًا في سير العمل الخاص بك.

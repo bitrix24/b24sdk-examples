@@ -1,6 +1,6 @@
 ---
-title: IT Infrastructure Management
-description: Monitor and maintain your IT systems for optimal performance.
+title: إدارة البنية التحتية لتكنولوجيا المعلومات
+description: راقب وحافظ على أنظمة تكنولوجيا المعلومات الخاصة بك لأداء مثالي.
 categories: 
   - 'category_2'
 badges: 
@@ -8,35 +8,35 @@ badges:
   - 'badge_3'
 avatar: '/activities/ITInfrastructureManagement.webp'
 ---
-# Instruction for Using and Configuring the " IT Infrastructure Management" Action
+# تعليمات استخدام وتكوين إجراء "إدارة البنية التحتية لتكنولوجيا المعلومات"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "IT Infrastructure Management" Action**
+## **تكوين إجراء "إدارة البنية التحتية لتكنولوجيا المعلومات"**
 
-### 1: Access the Workflow Designer
-- Log in to your Bitrix24 account.
-- Navigate to **CRM** > **Automation** > **Business Processes**.
-- Click on **Create Business Process** or select an existing one to edit.
+### 1: الوصول إلى مصمم سير العمل
+- سجل الدخول إلى حساب Bitrix24 الخاص بك.
+- انتقل إلى **CRM** > **الأتمتة** > **عمليات الأعمال**.
+- انقر على **إنشاء عملية أعمال** أو حدد عملية موجودة لتعديلها.
 
-### 2: Add the IT Infrastructure Management Action
-- In the Workflow Designer, drag and drop the **IT Infrastructure Management** action from the list of available actions.
-- Position the action where you want it to occur in your workflow.
+### 2: إضافة إجراء إدارة البنية التحتية لتكنولوجيا المعلومات
+- في مصمم سير العمل، اسحب وأسقط إجراء **إدارة البنية التحتية لتكنولوجيا المعلومات** من قائمة الإجراءات المتاحة.
+- ضع الإجراء في المكان الذي تريد أن يحدث فيه في سير العمل الخاص بك.
 
-### 3: Configure the Action
-- System Monitoring:
-  - Define the metrics to monitor (e.g., server uptime, network latency).
-  - Set thresholds for performance alerts.
-- Automated Alerts:
-  - Specify the conditions for triggering alerts (e.g., CPU usage above 90%).
-  - Choose the notification channels (e.g., email, SMS, Bitrix24 chat).
-- Maintenance Scheduling:
-  - Create a schedule for routine maintenance tasks (e.g., backups, updates).
-  - Assign responsible team members for each task.
-- Incident Management:
-  - Set up workflows for incident reporting and resolution.
-  - Define escalation paths for unresolved issues.
+### 3: تكوين الإجراء
+- مراقبة النظام:
+  - حدد المقاييس التي تريد مراقبتها (مثل وقت تشغيل الخادم، تأخر الشبكة).
+  - عيّن عتبات لتنبيهات الأداء.
+- التنبيهات التلقائية:
+  - حدد الشروط لتفعيل التنبيهات (مثل استخدام وحدة المعالجة المركزية فوق 90%).
+  - اختر قنوات الإعلام (مثل البريد الإلكتروني، الرسائل النصية، محادثة Bitrix24).
+- جدولة الصيانة:
+  - أنشئ جدولاً لمهام الصيانة الروتينية (مثل النسخ الاحتياطي، التحديثات).
+  - عيّن أعضاء الفريق المسؤولين عن كل مهمة.
+- إدارة الحوادث:
+  - أنشئ سير عمل للإبلاغ عن الحوادث وحلها.
+  - حدد مسارات التصعيد للحالات التي لم يتم حلها.
 
-### 4: Save and Activate
-- Review your settings to ensure everything is configured correctly.
-- Click **Save** and then **Activate** to make the IT Infrastructure Management action live in your workflow.
+### 4: حفظ وتفعيل
+- راجع إعداداتك للتأكد من أن كل شيء تم تكوينه بشكل صحيح.
+- انقر على **حفظ** ثم **تفعيل** لجعل إجراء إدارة البنية التحتية لتكنولوجيا المعلومات يعمل في سير العمل الخاص بك.

@@ -21,7 +21,7 @@ avatar: '/activities/AppMarketplace.webp'
 - Crie um novo processo ou abra um existente.
 - Encontre a ação **"Mercado de Aplicativos"** na lista de ações disponíveis e adicione-a ao processo.
 
-### 2. Pesquisando e Selecionando Aplicativos
+### 2. Buscando e Selecionando Aplicativos
 - Abra o **Mercado de Aplicativos** através da interface do Bitrix24.
 - Use filtros e categorias para encontrar aplicativos que atendam às necessidades do seu negócio (por exemplo, marketing, análise, gerenciamento de projetos).
 - Revise as descrições dos aplicativos, avaliações e feedback dos usuários.
@@ -35,7 +35,7 @@ avatar: '/activities/AppMarketplace.webp'
 
 ### 4. Integrando com Processos de Negócios
 - Use os aplicativos instalados para automatizar tarefas (por exemplo, sincronização automática de dados, envio de notificações).
-- Configure gatilhos e ações em processos de negócios para aproveitar a funcionalidade do aplicativo.
+- Configure gatilhos e ações nos processos de negócios para aproveitar a funcionalidade do aplicativo.
 
 ### 5. Gerenciamento e Atualizações
 - Verifique regularmente se há atualizações para os aplicativos instalados para garantir compatibilidade e segurança.

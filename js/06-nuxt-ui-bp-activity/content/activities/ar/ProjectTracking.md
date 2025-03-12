@@ -1,6 +1,6 @@
 ---
-title: Project Tracking
-description: Discover and integrate third-party apps to enhance your business.
+title: تتبع المشاريع
+description: اكتشف ودمج تطبيقات الطرف الثالث لتعزيز عملك.
 categories: 
   - 'category_1'
   - 'category_3'
@@ -8,33 +8,32 @@ badges:
   - 'badge_2'
 avatar: '/activities/ProjectTracking.webp'
 ---
-# Instruction for Using and Configuring the "Project Tracking" Action
+# تعليمات استخدام وتكوين إجراء "تتبع المشاريع"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Project Tracking" Action**
+## **تكوين إجراء "تتبع المشاريع"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Project Tracking"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية أعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"تتبع المشاريع"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Setting Up Project Parameters
-- Specify the project name and its key stages.
-- Assign responsible persons for each stage.
-- Set deadlines for each task.
+### 2. إعداد معلمات المشروع
+- حدد اسم المشروع ومراحله الرئيسية.
+- قم بتعيين الأشخاص المسؤولين عن كل مرحلة.
+- حدد مواعيد نهائية لكل مهمة.
 
-### 3. Tracking Progress
-- Use **Kanban boards** or **Gantt charts** to visualize progress.
-- Set up automatic notifications for approaching deadlines.
-- Regularly update task statuses to keep data current.
+### 3. تتبع التقدم
+- استخدم **لوحات Kanban** أو **مخططات Gantt** لتصور التقدم.
+- قم بإعداد إشعارات تلقائية لاقتراب المواعيد النهائية.
+- قم بتحديث حالات المهام بانتظام للحفاظ على البيانات محدثة.
 
-### 4. Analysis and Reporting
-- Use built-in reports to analyze task completion (e.g., percentage of completed tasks, delays).
-- Set up notifications for managers with key metrics.
-- Optimize processes based on analytics data.
+### 4. التحليل وإعداد التقارير
+- استخدم التقارير المدمجة لتحليل إنجاز المهام (مثل نسبة المهام المكتملة، التأخيرات).
+- قم بإعداد إشعارات للمديرين مع المقاييس الرئيسية.
+- قم بتحسين العمليات بناءً على بيانات التحليلات.
 
-### 5. Integrating with Business Processes
-- Set up triggers for automatic status updates (e.g., when a task is completed or deadlines change).
-- Use CRM data to account for related deals and clients.  
-
+### 5. التكامل مع عمليات الأعمال
+- قم بإعداد محفزات لتحديث الحالة تلقائيًا (مثل عند اكتمال مهمة أو تغيير المواعيد النهائية).
+- استخدم بيانات CRM لأخذ الصفقات والعملاء المرتبطين في الاعتبار.

@@ -1,6 +1,6 @@
 ---
-title: Telephony Integration
-description: Enhance communication with integrated telephony solutions.
+title: تكامل الاتصالات الهاتفية
+description: عزز التواصل مع حلول الاتصالات المتكاملة.
 categories: 
   - 'category_1'
 badges:
@@ -9,33 +9,33 @@ badges:
 avatar: '/activities/TelephonyIntegration.webp'
 ---
 
-# Instruction for Using and Configuring the "Telephony Integration" Action
+# تعليمات استخدام وتهيئة إجراء "تكامل الاتصالات الهاتفية"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Telephony Integration" Action**
+## **تهيئة إجراء "تكامل الاتصالات الهاتفية"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Telephony Integration"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية أعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"تكامل الاتصالات الهاتفية"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Connecting Telephony
-- Go to the **"Telephony"** section in Bitrix24 settings.
-- Choose a suitable telephony provider from the available list (e.g., Bitrix24.Telephony, SIP telephony).
-- Follow the on-screen instructions to connect and configure telephony.
+### 2. توصيل الاتصالات الهاتفية
+- انتقل إلى قسم **"الاتصالات الهاتفية"** في إعدادات Bitrix24.
+- اختر مزود اتصالات مناسب من القائمة المتاحة (مثل Bitrix24.Telephony، SIP telephony).
+- اتبع التعليمات الظاهرة على الشاشة لتوصيل وتهيئة الاتصالات الهاتفية.
 
-### 3. Configuring CRM Integration
-- Set up automatic creation of client cards and call records in CRM.
-- Enable the **"Caller ID"** feature to automatically match incoming calls with clients.
-- Configure missed call notifications and their redirection to responsible employees.
+### 3. تهيئة تكامل CRM
+- قم بإعداد إنشاء تلقائي لبطاقات العملاء وسجلات المكالمات في CRM.
+- قم بتمكين ميزة **"معرف المتصل"** لمطابقة المكالمات الواردة تلقائيًا مع العملاء.
+- قم بتهيئة إشعارات المكالمات الفائتة وإعادة توجيهها إلى الموظفين المسؤولين.
 
-### 4. Automating Calls
-- Set up automatic calls via a robot in business processes (e.g., meeting reminders, order confirmations).
-- Use **IVR (Interactive Voice Response)** for automatic call routing.
-- Configure scenarios for handling incoming and outgoing calls.
+### 4. أتمتة المكالمات
+- قم بإعداد مكالمات تلقائية عبر روبوت في عمليات الأعمال (مثل تذكيرات الاجتماعات، تأكيدات الطلبات).
+- استخدم **IVR (الاستجابة الصوتية التفاعلية)** لتوجيه المكالمات تلقائيًا.
+- قم بتهيئة سيناريوهات للتعامل مع المكالمات الواردة والصادرة.
 
-### 5. Analysis and Reporting
-- Use built-in reports to analyze calls (e.g., number of incoming/outgoing calls, call duration).
-- Set up notifications for managers with key call metrics.
-- Optimize processes based on analytics data.
+### 5. التحليل وإعداد التقارير
+- استخدم التقارير المدمجة لتحليل المكالمات (مثل عدد المكالمات الواردة/الصادرة، مدة المكالمة).
+- قم بإعداد إشعارات للمديرين تحتوي على مقاييس المكالمات الرئيسية.
+- قم بتحسين العمليات بناءً على بيانات التحليلات.

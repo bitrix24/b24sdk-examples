@@ -1,6 +1,6 @@
 ---
-title: Quality Assurance
-description: Ensure product and service quality through rigorous testing.
+title: ضمان الجودة
+description: ضمان جودة المنتج والخدمة من خلال الاختبارات الدقيقة.
 categories:
   - 'category_1'
 
@@ -9,33 +9,33 @@ badges:
   - 'badge_3'
 avatar: '/activities/QualityAssurance.webp'
 ---
-# Instruction for Using and Configuring the "Quality Assurance" Action
+# تعليمات استخدام وتكوين إجراء "ضمان الجودة"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Quality Assurance" Action**
+## **تكوين إجراء "ضمان الجودة"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Quality Assurance"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية الأعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"ضمان الجودة"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Setting Up Testing Parameters
-- Define the **testing criteria** (e.g., functionality, performance, usability).
-- Assign **responsible persons** for each testing phase (e.g., QA engineers, product managers).
-- Set **deadlines** for each testing stage to ensure timely delivery.
+### 2. إعداد معايير الاختبار
+- حدد **معايير الاختبار** (مثل الوظائف، الأداء، قابلية الاستخدام).
+- قم بتعيين **الأشخاص المسؤولين** عن كل مرحلة من مراحل الاختبار (مثل مهندسي ضمان الجودة، مديري المنتجات).
+- حدد **المواعيد النهائية** لكل مرحلة من مراحل الاختبار لضمان التسليم في الوقت المحدد.
 
-### 3. Automating Testing Processes
-- Use **automated testing tools** to streamline repetitive tasks.
-- Set up **triggers** to initiate testing when a product reaches a specific stage (e.g., after development or before release).
-- Configure **notifications** for test results and issues detected.
+### 3. أتمتة عمليات الاختبار
+- استخدم **أدوات الاختبار الآلي** لتبسيط المهام المتكررة.
+- قم بإعداد **المحفزات** لبدء الاختبار عندما يصل المنتج إلى مرحلة معينة (مثل بعد التطوير أو قبل الإصدار).
+- قم بتكوين **الإشعارات** لنتائج الاختبار والمشكلات المكتشفة.
 
-### 4. Tracking and Reporting
-- Use **dashboards** to visualize testing progress and results.
-- Generate **reports** to analyze key metrics (e.g., defect rate, test coverage, pass/fail rates).
-- Set up **alerts** for critical issues that require immediate attention.
+### 4. التتبع وإعداد التقارير
+- استخدم **لوحات المعلومات** لتصور تقدم الاختبار والنتائج.
+- قم بإنشاء **تقارير** لتحليل المقاييس الرئيسية (مثل معدل العيوب، تغطية الاختبار، معدلات النجاح/الفشل).
+- قم بإعداد **تنبيهات** للمشكلات الحرجة التي تتطلب اهتمامًا فوريًا.
 
-### 5. Integrating with Business Processes
-- Link QA processes with **project management tools** to track progress.
-- Use **CRM data** to ensure customer requirements are met during testing.
-- Integrate with **task management** to assign and monitor QA tasks. 
+### 5. التكامل مع عمليات الأعمال
+- قم بربط عمليات ضمان الجودة مع **أدوات إدارة المشاريع** لتتبع التقدم.
+- استخدم **بيانات CRM** لضمان تلبية متطلبات العملاء خلال الاختبار.
+- قم بالتكامل مع **إدارة المهام** لتعيين ومتابعة مهام ضمان الجودة.

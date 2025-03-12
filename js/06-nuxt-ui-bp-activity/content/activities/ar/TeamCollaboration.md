@@ -1,6 +1,6 @@
 ---
-title: Team Collaboration
-description: Facilitate seamless communication and collaboration within your team.
+title: التعاون بين الفريق
+description: تسهيل التواصل والتعاون السلس داخل فريقك.
 categories: 
   - 'category_1'
   - 'category_3'
@@ -10,33 +10,33 @@ badges:
 avatar: '/activities/TeamCollaboration.webp'
 
 ---
-# Instruction for Using and Configuring the "Team Collaboration" Action
+# تعليمات لاستخدام وتكوين إجراء "التعاون بين الفريق"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Team Collaboration" Action"**
+## **تكوين إجراء "التعاون بين الفريق"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Team Collaboration"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية أعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"التعاون بين الفريق"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Setting Up Communication Tools
-- Enable **chat** and **video calls** for instant communication.
-- Use **group tasks** to distribute responsibilities.
-- Set up **shared documents** and **file storage** for collaborative work.
+### 2. إعداد أدوات التواصل
+- قم بتمكين **الدردشة** و**المكالمات المرئية** للتواصل الفوري.
+- استخدم **المهام الجماعية** لتوزيع المسؤوليات.
+- قم بإعداد **المستندات المشتركة** و**تخزين الملفات** للعمل التعاوني.
 
-### 3. Organizing Workflows
-- Create **projects** and **tasks** for each team member.
-- Configure **automatic notifications** for new tasks and status changes.
-- Use **Kanban boards** to visualize progress.
+### 3. تنظيم سير العمل
+- قم بإنشاء **مشاريع** و**مهام** لكل عضو في الفريق.
+- قم بتكوين **إشعارات تلقائية** للمهام الجديدة وتغييرات الحالة.
+- استخدم **لوحات Kanban** لتصور التقدم.
 
-### 4. Integrating with Other Tools
-- Connect **CRM** to account for clients and deals.
-- Use the **calendar** to schedule meetings and deadlines.
-- Set up **analytics** to track team performance.
+### 4. التكامل مع الأدوات الأخرى
+- قم بتوصيل **CRM** لحساب العملاء والصفقات.
+- استخدم **التقويم** لجدولة الاجتماعات والمواعيد النهائية.
+- قم بإعداد **التحليلات** لتتبع أداء الفريق.
 
-### 5. Analysis and Optimization
-- Use built-in reports to analyze task completion and collaboration.
-- Set up notifications for managers with key metrics.
-- Optimize processes based on analytics data.   
+### 5. التحليل والتحسين
+- استخدم التقارير المدمجة لتحليل إكمال المهام والتعاون.
+- قم بإعداد إشعارات للمديرين مع المقاييس الرئيسية.
+- قم بتحسين العمليات بناءً على بيانات التحليلات.

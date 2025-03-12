@@ -1,6 +1,6 @@
 ---
-title: Performance Reviews
-description: Conduct regular performance evaluations and set goals.
+title: تقييم الأداء
+description: قم بإجراء تقييمات أداء منتظمة وحدد الأهداف.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -9,33 +9,33 @@ badges:
 avatar: '/activities/PerformanceReviews.webp'
 ---
 
-# Instruction for Using and Configuring the "Performance Reviews" Action
+# تعليمات استخدام وتكوين إجراء "تقييم الأداء"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Performance Reviews" Action"
+## **تكوين إجراء "تقييم الأداء"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Performance Reviews"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية أعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"تقييم الأداء"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Setting Up Evaluation Parameters
-- Create an **evaluation template** with specified criteria (e.g., work quality, goal achievement, skills).
-- Assign responsible persons for conducting evaluations (e.g., manager, HR).
-- Set the frequency of evaluations (e.g., quarterly, annually).
+### 2. إعداد معايير التقييم
+- قم بإنشاء **قالب تقييم** مع تحديد المعايير (مثل جودة العمل، تحقيق الأهداف، المهارات).
+- عيّن الأشخاص المسؤولين عن إجراء التقييمات (مثل المدير، الموارد البشرية).
+- حدد تكرار التقييمات (مثل ربع سنوي، سنوي).
 
-### 3. Conducting Evaluations
-- Use **automatic notifications** to remind about upcoming evaluations.
-- Set up **surveys** and **questionnaires** to collect feedback from employees and managers.
-- Enable **CRM integration** to account for employee data.
+### 3. إجراء التقييمات
+- استخدم **إشعارات تلقائية** لتذكير بالمواعيد المقبلة للتقييمات.
+- قم بإعداد **استبيانات** و**استطلاعات رأي** لجمع التعليقات من الموظفين والمديرين.
+- فعّل **تكامل CRM** لأخذ بيانات الموظفين في الاعتبار.
 
-### 4. Setting Goals
-- Based on evaluation results, set **individual goals** for each employee.
-- Configure **automatic reminders** for goal deadlines.
-- Use **Kanban boards** or **Gantt charts** to visualize progress.
+### 4. تحديد الأهداف
+- بناءً على نتائج التقييم، حدد **أهداف فردية** لكل موظف.
+- قم بتكوين **تذكيرات تلقائية** لمواعيد تحقيق الأهداف.
+- استخدم **لوحات Kanban** أو **مخططات Gantt** لتصور التقدم.
 
-### 5. Analysis and Optimization
-- Use built-in reports to analyze evaluation results (e.g., performance level, goal achievement).
-- Set up notifications for managers with key metrics.
-- Optimize the evaluation process based on analytics data.  
+### 5. التحليل والتحسين
+- استخدم التقارير المدمجة لتحليل نتائج التقييمات (مثل مستوى الأداء، تحقيق الأهداف).
+- قم بإعداد إشعارات للمديرين مع المقاييس الرئيسية.
+- قم بتحسين عملية التقييم بناءً على بيانات التحليلات.

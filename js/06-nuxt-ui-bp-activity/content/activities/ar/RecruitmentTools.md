@@ -1,39 +1,39 @@
 ---
-title: Recruitment Tools
-description: Streamline hiring with advanced recruitment and applicant tracking.
+title: أدوات التوظيف
+description: تبسيط عملية التوظيف مع أدوات متقدمة لتتبع المتقدمين وإدارة التوظيف.
 categories: 
   - 'category_3'
 badges: 
   - 'badge_2'
 avatar: '/activities/RecruitmentTools.webp'
 ---
-# Instruction for Using and Configuring the "Recruitment Tools" Action
+# تعليمات استخدام وتكوين إجراء "أدوات التوظيف"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Recruitment Tools" Action"**
+## **تكوين إجراء "أدوات التوظيف"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Recruitment Tools"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية أعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"أدوات التوظيف"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Setting Up Job Postings
-- Create **job postings** with position titles, descriptions, and requirements.
-- Configure **automatic posting** of vacancies on job boards and platforms.
-- Use **email templates** to send responses to candidates.
+### 2. إعداد إعلانات الوظائف
+- قم بإنشاء **إعلانات وظائف** مع عناوين الوظائف، والأوصاف، والمتطلبات.
+- قم بتكوين **النشر التلقائي** للوظائف على لوائح الوظائف والمنصات.
+- استخدم **قوالب البريد الإلكتروني** لإرسال الردود إلى المرشحين.
 
-### 3. Tracking Candidates
-- Use the **Applicant Tracking System (ATS)** to manage all hiring stages.
-- Set up **automatic notifications** for new applications and candidate status changes.
-- Enable **CRM integration** to account for candidate data.
+### 3. تتبع المرشحين
+- استخدم **نظام تتبع المتقدمين (ATS)** لإدارة جميع مراحل التوظيف.
+- قم بإعداد **إشعارات تلقائية** للتطبيقات الجديدة وتغييرات حالة المرشحين.
+- قم بتمكين **تكامل CRM** لحساب بيانات المرشحين.
 
-### 4. Conducting Interviews
-- Set up a **calendar** for scheduling interviews.
-- Use **video calls** for conducting remote interviews.
-- Configure **surveys** and **tests** to assess candidate skills.
+### 4. إجراء المقابلات
+- قم بإعداد **تقويم** لجدولة المقابلات.
+- استخدم **مكالمات الفيديو** لإجراء المقابلات عن بُعد.
+- قم بتكوين **استطلاعات الرأي** و**الاختبارات** لتقييم مهارات المرشحين.
 
-### 5. Analysis and Optimization
-- Use built-in reports to analyze hiring process effectiveness (e.g., time to fill a vacancy, number of applications).
-- Set up notifications for managers with key metrics.
-- Optimize the hiring process based on analytics data.  
+### 5. التحليل والتحسين
+- استخدم التقارير المدمجة لتحليل فعالية عملية التوظيف (مثل الوقت اللازم لشغل الوظيفة، عدد التطبيقات).
+- قم بإعداد إشعارات للمديرين مع المقاييس الرئيسية.
+- قم بتحسين عملية التوظيف بناءً على بيانات التحليلات.

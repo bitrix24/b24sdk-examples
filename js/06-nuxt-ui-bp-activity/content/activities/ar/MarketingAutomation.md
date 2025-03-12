@@ -1,41 +1,41 @@
 ---
-title: Marketing Automation
-description: Automate your marketing campaigns and track their performance.
+title: أتمتة التسويق
+description: أتمتة حملاتك التسويقية وتتبع أدائها.
 categories: 
   - 'category_1'
 badges: 
   - 'badge_3'
 avatar: '/activities/MarketingAutomation.webp'
 ---
-# Instruction for Using and Configuring the "Marketing Automation" Action
+# تعليمات استخدام وتكوين إجراء "أتمتة التسويق"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Marketing Automation" Action"**
+## **تكوين إجراء "أتمتة التسويق"**
 
-### 1: Access the Workflow Designer
-- Log in to your Bitrix24 account.
-- Navigate to **CRM** > **Automation** > **Business Processes**.
-- Click on **Create Business Process** or select an existing one to edit.
+### 1: الوصول إلى مصمم سير العمل
+- سجل الدخول إلى حساب Bitrix24 الخاص بك.
+- انتقل إلى **CRM** > **الأتمتة** > **عمليات الأعمال**.
+- انقر على **إنشاء عملية أعمال** أو حدد عملية موجودة لتعديلها.
 
-### 2: Add the Marketing Automation Action
-- In the Workflow Designer, drag and drop the **Marketing Automation** action from the list of available actions.
-- Position the action where you want it to occur in your workflow.
+### 2: إضافة إجراء أتمتة التسويق
+- في مصمم سير العمل، اسحب وأسقط إجراء **أتمتة التسويق** من قائمة الإجراءات المتاحة.
+- ضع الإجراء في المكان الذي تريد أن يحدث فيه في سير العمل الخاص بك.
 
-### 3: Configure the Action
-- Campaign Automation:
-  - Define the triggers for starting a campaign (e.g., new lead, specific date).
-  - Set up automated tasks such as email sending, social media posting, or ad management.
-- Performance Tracking:
-  - Select the key performance indicators (KPIs) to track (e.g., open rates, click-through rates).
-  - Configure dashboards to visualize campaign performance.
-- Lead Nurturing:
-  - Create automated follow-up sequences based on lead behavior.
-  - Set up reminders and notifications for your sales team.
-- Personalization:
-  - Define audience segments based on CRM data.
-  - Customize content and messaging for each segment.
+### 3: تكوين الإجراء
+- أتمتة الحملة:
+  - حدد المحفزات لبدء الحملة (مثل عميل محتمل جديد، تاريخ محدد).
+  - قم بإعداد مهام مؤتمتة مثل إرسال البريد الإلكتروني، نشر على وسائل التواصل الاجتماعي، أو إدارة الإعلانات.
+- تتبع الأداء:
+  - اختر مؤشرات الأداء الرئيسية (KPIs) لتتبعها (مثل معدلات الفتح، معدلات النقر).
+  - قم بتكوين لوحات التحكم لتصور أداء الحملة.
+- رعاية العملاء المحتملين:
+  - أنشئ تسلسلات متابعة مؤتمتة بناءً على سلوك العميل المحتمل.
+  - قم بإعداد تذكيرات وإشعارات لفريق المبيعات الخاص بك.
+- التخصيص:
+  - حدد شرائح الجمهور بناءً على بيانات CRM.
+  - قم بتخصيص المحتوى والرسائل لكل شريحة.
 
-### 4: Save and Activate
-- Review your settings to ensure everything is configured correctly.
-- Click **Save** and then **Activate** to make the Marketing Automation action live in your workflow.
+### 4: حفظ وتفعيل
+- راجع إعداداتك للتأكد من تكوين كل شيء بشكل صحيح.
+- انقر على **حفظ** ثم **تفعيل** لجعل إجراء أتمتة التسويق يعمل في سير العمل الخاص بك.

@@ -1,6 +1,6 @@
 ---
-title: Mobile App Development
-description: Build and manage mobile applications to reach your audience.
+title: تطوير تطبيقات الجوال
+description: بناء وإدارة تطبيقات الجوال للوصول إلى جمهورك.
 categories: 
   - 'category_2'
   - 'category_3'
@@ -8,35 +8,35 @@ badges:
   - 'badge_2' 
 avatar: '/activities/MobileAppDevelopment.webp'
 ---
-# Instruction for Using and Configuring the "Mobile App Development" Action
+# تعليمات استخدام وتكوين إجراء "تطوير تطبيقات الجوال"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Mobile App Development" Action**
+## **تكوين إجراء "تطوير تطبيقات الجوال"**
 
-### 1: Access the Workflow Designer
-- Log in to your Bitrix24 account.
-- Navigate to **CRM** > **Automation** > **Business Processes**.
-- Click on **Create Business Process** or select an existing one to edit.
+### 1: الوصول إلى مصمم سير العمل
+- سجل الدخول إلى حساب Bitrix24 الخاص بك.
+- انتقل إلى **CRM** > **الأتمتة** > **عمليات الأعمال**.
+- انقر على **إنشاء عملية أعمال** أو حدد عملية موجودة لتعديلها.
 
-### 2: Add the Mobile App Development Action
-- In the Workflow Designer, drag and drop the **Mobile App Development** action from the list of available actions.
-- Position the action where you want it to occur in your workflow.
+### 2: إضافة إجراء تطوير تطبيقات الجوال
+- في مصمم سير العمل، اسحب وأسقط إجراء **تطوير تطبيقات الجوال** من قائمة الإجراءات المتاحة.
+- ضع الإجراء في المكان الذي تريد أن يحدث فيه في سير العمل الخاص بك.
 
-### 3: Configure the Action
-- Project Management:
-  - Define tasks and milestones for your mobile app development project.
-  - Assign tasks to team members and set deadlines.
-- Team Collaboration:
-  - Set up communication channels for team discussions.
-  - Integrate with Bitrix24 Chat and Video Calls for real-time collaboration.
-- Version Control:
-  - Specify version naming conventions and release schedules.
-  - Track changes and updates to your app.
-- User Feedback Integration:
-  - Connect your app to Bitrix24 to collect user feedback.
-  - Set up automated workflows to analyze and act on feedback.
+### 3: تكوين الإجراء
+- إدارة المشروع:
+  - حدد المهام والمعالم لمشروع تطوير تطبيق الجوال الخاص بك.
+  - قم بتعيين المهام لأعضاء الفريق وحدد المواعيد النهائية.
+- تعاون الفريق:
+  - قم بإعداد قنوات الاتصال لمناقشات الفريق.
+  - قم بالتكامل مع Bitrix24 Chat والمكالمات المرئية للتعاون في الوقت الفعلي.
+- التحكم في الإصدارات:
+  - حدد تسميات الإصدارات وجداول الإصدار.
+  - تتبع التغييرات والتحديثات على تطبيقك.
+- تكامل ملاحظات المستخدم:
+  - قم بتوصيل تطبيقك بـ Bitrix24 لجمع ملاحظات المستخدمين.
+  - قم بإعداد سير عمل آلي لتحليل ملاحظات المستخدمين والتصرف بناءً عليها.
 
-### 4: Save and Activate
-- Review your settings to ensure everything is configured correctly.
-- Click **Save** and then **Activate** to make the Mobile App Development action live in your workflow.
+### 4: الحفظ والتفعيل
+- راجع إعداداتك للتأكد من تكوين كل شيء بشكل صحيح.
+- انقر على **حفظ** ثم **تفعيل** لجعل إجراء تطوير تطبيقات الجوال يعمل في سير العمل الخاص بك.

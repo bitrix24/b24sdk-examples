@@ -1,6 +1,6 @@
 ---
-title: Legal Document Management
-description: Discover and integrate third-party apps to enhance your business.
+title: إدارة المستندات القانونية
+description: اكتشف ودمج تطبيقات الطرف الثالث لتعزيز عملك.
 categories: 
   - 'category_2'
 badges: 
@@ -9,38 +9,38 @@ badges:
 avatar: '/activities/LegalDocumentManagement.webp'
 
 ---
-# Instruction for Using and Configuring the "Legal Document Management" Action
+# تعليمات استخدام وتهيئة إجراء "إدارة المستندات القانونية"
 
-## Action Description
+## وصف الإجراء
 
-## **Configuring the "Legal Document Management" Action**
+## **تهيئة إجراء "إدارة المستندات القانونية"**
 
-### 1. Adding the Action to a Business Process
-- Go to the **"Business Processes"** section in your Bitrix24.
-- Create a new process or open an existing one.
-- Find the **"Legal Document Management"** action in the list of available actions and add it to the process.
+### 1. إضافة الإجراء إلى عملية الأعمال
+- انتقل إلى قسم **"عمليات الأعمال"** في Bitrix24 الخاص بك.
+- قم بإنشاء عملية جديدة أو افتح عملية موجودة.
+- ابحث عن إجراء **"إدارة المستندات القانونية"** في قائمة الإجراءات المتاحة وأضفه إلى العملية.
 
-### 2. Setting Up Document Templates
-- Create **document templates** for frequently used legal documents (e.g., contracts, agreements, NDAs).
-- Use the built-in editor to customize templates with placeholders for dynamic data.
-- Save templates in a centralized repository for easy access.
+### 2. إعداد قوالب المستندات
+- قم بإنشاء **قوالب مستندات** للمستندات القانونية المستخدمة بشكل متكرر (مثل العقود، الاتفاقيات، اتفاقيات عدم الإفصاح).
+- استخدم المحرر المدمج لتخصيص القوالب مع العناصر النائبة للبيانات الديناميكية.
+- احفظ القوالب في مستودع مركزي للوصول السهل.
 
-### 3. Automating Document Generation
-- Set up **triggers** to automatically generate documents based on specific events (e.g., new client onboarding, contract renewal).
-- Use **CRM data** to populate documents with relevant information (e.g., client names, dates, terms).
-- Configure **approval workflows** to ensure documents are reviewed and signed by authorized personnel.
+### 3. أتمتة إنشاء المستندات
+- قم بإعداد **المحفزات** لإنشاء المستندات تلقائيًا بناءً على أحداث محددة (مثل إضافة عميل جديد، تجديد العقد).
+- استخدم **بيانات CRM** لملء المستندات بالمعلومات ذات الصلة (مثل أسماء العملاء، التواريخ، الشروط).
+- قم بتهيئة **سير عمل الموافقة** للتأكد من مراجعة المستندات وتوقيعها من قبل الأشخاص المصرح لهم.
 
-### 4. Managing Document Storage and Access
-- Organize documents into **folders** and **categories** for easy retrieval.
-- Set **access permissions** to ensure only authorized users can view or edit sensitive documents.
-- Enable **version control** to track changes and maintain a history of document revisions.
+### 4. إدارة تخزين المستندات والوصول إليها
+- قم بتنظيم المستندات في **مجلدات** و**فئات** لسهولة الاسترجاع.
+- قم بتعيين **أذونات الوصول** للتأكد من أن المستخدمين المصرح لهم فقط يمكنهم عرض أو تعديل المستندات الحساسة.
+- قم بتمكين **التحكم في الإصدارات** لتتبع التغييرات والحفاظ على تاريخ مراجعات المستندات.
 
-### 5. Integrating with Third-Party Apps
-- Explore the **Bitrix24 Marketplace** for third-party apps that enhance legal document management (e.g., e-signature tools, compliance checkers).
-- Integrate these apps to streamline workflows and improve efficiency.
-- Ensure data synchronization between Bitrix24 and third-party apps for seamless operations.
+### 5. التكامل مع تطبيقات الطرف الثالث
+- استكشف **Bitrix24 Marketplace** لتطبيقات الطرف الثالث التي تعزز إدارة المستندات القانونية (مثل أدوات التوقيع الإلكتروني، أدوات التحقق من الامتثال).
+- قم بدمج هذه التطبيقات لتبسيط سير العمل وتحسين الكفاءة.
+- تأكد من مزامنة البيانات بين Bitrix24 وتطبيقات الطرف الثالث لعمليات سلسة.
 
-### 6. Analyzing and Optimizing
-- Use built-in **reports** to track document usage, approval times, and compliance rates.
-- Set up **notifications** for key stakeholders with important updates.
-- Optimize processes based on analytics data to improve efficiency and reduce errors. 
+### 6. التحليل والتحسين
+- استخدم **التقارير** المدمجة لتتبع استخدام المستندات، أوقات الموافقة، ومعدلات الامتثال.
+- قم بإعداد **الإشعارات** لأصحاب المصلحة الرئيسيين بالتحديثات المهمة.
+- قم بتحسين العمليات بناءً على بيانات التحليلات لتحسين الكفاءة وتقليل الأخطاء.

@@ -1,5 +1,5 @@
 ---
-title: Análise de Negócios
+title: Business Analytics
 description: Aproveite insights baseados em dados para tomar decisões informadas.
 categories: 
   - 'category_1'
@@ -7,16 +7,16 @@ badges:
   - 'badge_1'
 avatar: '/activities/BusinessAnalytics.webp'
 ---
-# Instruções para Usar e Configurar a Ação "Análise de Negócios"
+# Instrução para Uso e Configuração da Ação "Business Analytics"
 
 ## Descrição da Ação
 
-## **Configurando a Ação "Análise de Negócios"**
+## **Configurando a Ação "Business Analytics"**
 
 ### 1. Adicionando a Ação a um Processo de Negócios
-- Vá para a seção **"Processos de Negócios"** no seu Bitrix24.
+- Acesse a seção **"Processos de Negócios"** no seu Bitrix24.
 - Crie um novo processo ou abra um existente.
-- Encontre a ação **"Análise de Negócios"** na lista de ações disponíveis e adicione-a ao processo.
+- Encontre a ação **"Business Analytics"** na lista de ações disponíveis e adicione-a ao processo.
 
 ### 2. Configurando Fontes de Dados
 - Conecte as fontes de dados necessárias (por exemplo, CRM, plataformas de marketing, sistemas de contabilidade).
