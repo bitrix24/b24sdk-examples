@@ -159,6 +159,10 @@ const searchResults = useDynamicFilter<IActivity>(
 )
 // endregion ////
 
+// region forIntegrators ////
+
+// endregion ////
+
 // region Mounted / Unmounted ////
 onMounted(async () => {
   try {

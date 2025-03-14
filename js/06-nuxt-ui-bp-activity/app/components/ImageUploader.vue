@@ -1,42 +1,71 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onBeforeUnmount } from 'vue'
+import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
 
 const props = withDefaults(defineProps<{
   maxSize?: number
   quality?: number
 }>(), {
-  maxSize: 800,
-  quality: 0.8
+  maxSize: 40,
+  quality: 1.0
 })
 
-const emit = defineEmits<{
-  imageUpload: [string]
-  imageError: [string]
-}>()
+interface ImageUploaderEmits {
+  (e: 'imageUpload' | 'imageError', payload: string): void
+}
 
-const previewImage = ref<string | null>(null)
+const emits = defineEmits<ImageUploaderEmits>()
 
-const handleImageUpload = async (event: Event) => {
-  const input = event.target as HTMLInputElement
-  const file = input.files?.[0]
+const modelValue = defineModel<string>({ required: true })
+const fileInput = ref<HTMLInputElement | null>(null)
+const isDragging = ref(false)
 
-  if (!file) return
+const handleDragOver = (e: DragEvent) => {
+  e.preventDefault()
+  isDragging.value = true
+}
+
+const handleDragLeave = (e: DragEvent) => {
+  e.preventDefault()
+  isDragging.value = false
+}
+
+const handleDrop = (e: DragEvent) => {
+  e.preventDefault()
+  isDragging.value = false
+
+  const files = e.dataTransfer?.files
+  if (files && files[0]) {
+    handleFile(files[0])
+  }
+}
+
+const handleFile = async (file: File) => {
+  if (!file.type.startsWith('image/')) {
+    emits('imageError', 'Invalid file type')
+    return
+  }
 
   try {
     const processedImage = await processImage(file)
-
     if (processedImage) {
-      emit('imageUpload', processedImage)
-      // localStorage.setItem('webpImage', processedImage)
-      previewImage.value = processedImage
+      emits('imageUpload', processedImage)
+      modelValue.value = processedImage
     }
   } catch (error) {
-    emit('imageError', 'Error processing image')
+    emits('imageError', 'Error processing image')
     console.error('Error processing image:', error)
   }
 }
 
-const processImage = (file: File): Promise<string | null> => {
+const handleFileInput = (e: Event) => {
+  const input = e.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (file) handleFile(file)
+  input.value = ''
+}
+
+const processImage = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
 
@@ -49,55 +78,91 @@ const processImage = (file: File): Promise<string | null> => {
         const ctx = canvas.getContext('2d')
         if (!ctx) return reject('Canvas context not found')
 
-        // Calculate new dimensions
+        // Рассчет новых размеров
         let width = img.width
         let height = img.height
 
-        if (width > height && width > props.maxSize) {
-          height = height * (props.maxSize / width)
-          width = props.maxSize
-        } else if (height > props.maxSize) {
-          width = width * (props.maxSize / height)
-          height = props.maxSize
+        if (width > props.maxSize || height > props.maxSize) {
+          const ratio = Math.min(props.maxSize / width, props.maxSize / height)
+          width = Math.floor(width * ratio)
+          height = Math.floor(height * ratio)
         }
 
-        // Set canvas dimensions
         canvas.width = width
         canvas.height = height
 
-        // Draw and compress image
         ctx.drawImage(img, 0, 0, width, height)
 
-        // Convert to WebP with quality
         canvas.toBlob(
-          (blob) => {
+          async (blob) => {
             if (!blob) return reject('Conversion failed')
-            const reader = new FileReader()
-            reader.onloadend = () => resolve(reader.result as string)
-            reader.readAsDataURL(blob)
+
+            const dataUrlReader = new FileReader()
+            dataUrlReader.onloadend = () => {
+              if (dataUrlReader.result) {
+                resolve(dataUrlReader.result as string)
+              } else {
+                reject('Failed to read blob')
+              }
+            }
+            dataUrlReader.readAsDataURL(blob)
           },
           'image/webp',
           props.quality
         )
       }
 
-      img.onerror = reject
+      img.onerror = () => reject('Image loading error')
     }
+
+    reader.onerror = () => reject('File reading error')
     reader.readAsDataURL(file)
   })
 }
+
+const triggerFileInput = () => {
+  fileInput.value?.click()
+}
+
+onBeforeUnmount(() => {
+  if (modelValue.value) {
+    URL.revokeObjectURL(modelValue.value)
+  }
+})
 </script>
 
 <template>
   <div>
-    <B24Input
+    <div
+      :class="[
+        'border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors',
+        isDragging ? 'border-blue-500 bg-blue-50' : 'border-base-300 hover:border-blue-400'
+      ]"
+      @click="triggerFileInput"
+      @dragover="handleDragOver"
+      @dragleave="handleDragLeave"
+      @drop="handleDrop"
+    >
+      <div class="flex flex-col items-center gap-4">
+        <IncertImageIcon class="w-12 h-12 text-base-400" />
+
+        <div class="text-base-600">
+          <ProseH3>
+            Drag and drop an image here or click to select
+          </ProseH3>
+          <ProseP class="text-sm text-base-400 text-nowrap">
+            JPG, PNG, WEBP | 40 x 40
+          </ProseP>
+        </div>
+      </div>
+    </div>
+
+    <input
+      ref="fileInput"
       type="file"
       accept="image/*"
-      @change="handleImageUpload"
-    />
-    <div v-if="previewImage">
-      <h3>Preview:</h3>
-      <img :src="previewImage" alt="Resized image" />
-    </div>
+      class="hidden"
+      @change="handleFileInput"
+    >
   </div>
 </template>

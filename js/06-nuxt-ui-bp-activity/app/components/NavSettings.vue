@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { ModalForIntegrators } from '#components'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import PulseCircleIcon from '@bitrix24/b24icons-vue/main/PulseCircleIcon'
 import InterconnectionIcon from '@bitrix24/b24icons-vue/crm/InterconnectionIcon'
@@ -6,7 +8,6 @@ import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import HelpIcon from '@bitrix24/b24icons-vue/main/HelpIcon'
-import { computed } from "vue";
 
 const { locale, t } = useI18n()
 
@@ -24,6 +25,9 @@ const isDark = computed({
 
 const dir = computed(() => locales[locale.value]?.dir || 'ltr')
 
+const overlay = useOverlay()
+const modalForIntegrators = overlay.create(ModalForIntegrators)
+
 const helpItems = computed(() => {
   return [
     {
@@ -36,8 +40,11 @@ const helpItems = computed(() => {
     {
       label: t('component.nav.settings.integrators'),
       icon: InterconnectionIcon,
-      onSelect() {
-        toast.add({ title: 'Action', description: 'For integrators clicked' })
+      async onSelect() {
+        const isSave = await modalForIntegrators.open()
+        if (!isSave) {
+          return
+        }
       }
     },
     {

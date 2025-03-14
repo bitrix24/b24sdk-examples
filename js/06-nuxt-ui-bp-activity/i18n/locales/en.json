@@ -120,6 +120,12 @@
         "caption": "developer"
       }
     },
+    "integrator": {
+      "info": {
+        "empty": "YourCompanyName",
+        "caption": "integrator"
+      }
+    },
     "nav": {
       "settings": {
         "settings": "Settings",

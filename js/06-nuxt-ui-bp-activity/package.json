@@ -13,8 +13,8 @@
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
-    "@bitrix24/b24icons-vue": "^1.0.3",
-    "@bitrix24/b24ui-nuxt": "^0.4.7",
+    "@bitrix24/b24icons-vue": "^1.0.5",
+    "@bitrix24/b24ui-nuxt": "^0.4.9",
     "@nuxt/content": "^3.3.0",
     "@nuxtjs/i18n": "^9.3.1",
     "fuse.js": "^7.1.0",
