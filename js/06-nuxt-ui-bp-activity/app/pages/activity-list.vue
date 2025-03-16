@@ -12,6 +12,7 @@ import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
 import SearchIcon from '@bitrix24/b24icons-vue/button/SearchIcon'
 import CheckIcon from '@bitrix24/b24icons-vue/main/CheckIcon'
+import NavSettings from "~/components/NavSettings.vue";
 
 const { locale, t, defaultLocale } = useI18n()
 
@@ -194,49 +195,51 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <NuxtLayout name="header-panel">
+  <NuxtLayout name="dashboard">
     <template #header-title>
       {{ $t('page.list.seo.title') }}
     </template>
-    <template #header-middle>
-      <div
-        v-show="!isLoading"
-        class="relative"
-      >
-        <B24ButtonGroup no-split class="sm:ps-10">
-          <B24Input
-            ref="searchInput"
-            v-model="searchQuery"
-            type="search"
-            :icon="SearchIcon"
-            :placeholder="$t('page.list.ui.searchInput.placeholder')"
-            class="min-w-[110px] max-w-[210px]"
-            rounded
-          />
-          <B24DropdownMenu
-            :items="filterBadges"
-            :content="{
-              align: 'start',
-              side: dir === 'ltr' ? 'left' : 'right',
-              sideOffset: 2
-            }"
-            :b24ui="{
-              content: 'w-[240px] max-h-[245px]'
-            }"
-          >
-            <B24Button rounded :icon="Settings1Icon" color="link" depth="dark" />
-          </B24DropdownMenu>
-        </B24ButtonGroup>
-        <B24Chip
-          v-if="isSomeBadgeFilter"
-          inset
-          standalone
-          class="absolute top-0 ltr:right-2 rtl:left-2"
-          size="2xs"
-          color="primary"
+    <!-- template #header-middle -->
+    <div
+      v-show="!isLoading"
+      class="relative w-full"
+    >
+      <B24ButtonGroup no-split class="sm:ps-10 w-full">
+        <B24Input
+          ref="searchInput"
+          v-model="searchQuery"
+          type="search"
+          :icon="SearchIcon"
+          :placeholder="$t('page.list.ui.searchInput.placeholder')"
+          class="min-w-[110px] max-w-[210px]"
+          rounded
         />
-      </div>
-    </template>
+        <B24DropdownMenu
+          :items="filterBadges"
+          :content="{
+            align: 'start',
+            side: dir === 'ltr' ? 'left' : 'right',
+            sideOffset: 2
+          }"
+          :b24ui="{
+            content: 'w-[240px] max-h-[245px]'
+          }"
+        >
+          <B24Button rounded :icon="Settings1Icon" color="link" depth="dark" />
+        </B24DropdownMenu>
+      </B24ButtonGroup>
+      <B24Chip
+        v-if="isSomeBadgeFilter"
+        inset
+        standalone
+        class="absolute top-0 ltr:right-2 rtl:left-2"
+        size="2xs"
+        color="primary"
+      />
+
+      <NavSettings />
+    </div>
+    <!-- /template -->
     <div class="px-4">
       <ActivityListSkeleton v-if="isLoading" />
       <template v-else>

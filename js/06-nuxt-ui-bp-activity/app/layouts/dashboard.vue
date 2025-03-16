@@ -2,6 +2,7 @@
 import { watch, onMounted } from 'vue'
 import { UserNav } from '#components'
 import MenuIcon from '@bitrix24/b24icons-vue/main/MenuIcon'
+import Cross50Icon from '@bitrix24/b24icons-vue/actions/Cross50Icon'
 
 defineProps({
   title: {
@@ -57,20 +58,71 @@ watch(isMobileSidebarOpen, (newSlidebarState) => {
 </script>
 
 <template>
-  <div
-    data-tt="@todo"
-    class="relative min-h-screen bg-background"
-    data-new-class="relative isolate flex min-h-svh w-full bg-white max-lg:flex-col lg:bg-base-100 dark:bg-base-900 dark:lg:bg-base-950"
-  >
-    <!-- Mobile Sidebar Overlay -->
-    <div
-      v-if="isMobileSidebarOpen"
-      class="fixed inset-0 z-4 bg-black/50 lg:hidden"
-      @click="isMobileSidebarOpen = false"
-    />
-
+  <div class="relative isolate min-h-svh bg-white w-full flex max-lg:flex-col w-full dark:bg-base-900 lg:bg-base-50 dark:lg:bg-dark">
     <!-- Sidebar -->
-    <aside
+    <div class="fixed inset-y-0 left-0 w-64 max-lg:hidden">
+      <nav class="flex h-full min-h-0 flex-col">
+        <!-- Sidebar/Header -->
+        <div class="p-4 flex flex-col border-b border-base-950/5 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5">
+          <h2 class="text-xl font-semibold">
+            Dashboard
+          </h2>
+        </div>
+        <!-- Sidebar/Content -->
+        <div class="p-4 flex flex-1 flex-col overflow-y-auto [&>[data-slot=section]+[data-slot=section]]:mt-8">
+          <!-- Sidebar/Nav Main -->
+          <div data-slot="section" class="flex flex-col gap-0.5">
+            <template v-for="item in navItems" :key="item.path">
+              <B24Link
+                :to="item.path"
+                class="flex items-center rounded-lg px-4 py-2.5 text-sm hover:bg-base-200 hover:text-white"
+              >
+                {{ item.title }}
+              </B24Link>
+            </template>
+          </div>
+
+          <!-- Sidebar/Nav Second -->
+          <!-- @todo max-lg:hidden -->
+          <div data-slot="section" class="max-lg:hidden flex flex-col gap-0.5">
+            <!-- @todo text/xs -->
+            <ProseH6 class="mb-1 px-2 text-xs/6 font-medium text-base-500 dark:text-base-400">
+              Upcoming Events
+            </ProseH6>
+            <template v-for="item in navItems" :key="item.path">
+              <B24Link
+                :to="item.path"
+                class="flex items-center rounded-lg px-4 py-2.5 text-sm hover:bg-base-200 hover:text-white"
+              >
+                {{ item.title }}
+              </B24Link>
+            </template>
+          </div>
+
+          <!-- Sidebar/Nav Delim -->
+          <div aria-hidden="true" class="mt-8 flex-1"></div>
+
+          <!-- Sidebar/Nav Last -->
+          <div data-slot="section" class="flex flex-col gap-0.5">
+            <template v-for="item in navItems" :key="item.path">
+              <B24Link
+                :to="item.path"
+                class="flex items-center rounded-lg px-4 py-2.5 text-sm hover:bg-base-200 hover:text-white"
+              >
+                {{ item.title }}
+              </B24Link>
+            </template>
+          </div>
+        </div>
+        <!-- Sidebar/Footer -->
+        <!-- @todo max-lg:hidden -->
+        <div class="p-4 flex flex-col border-t border-base-950/5 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5 max-lg:hidden">
+          <UserNav />
+        </div>
+      </nav>
+    </div>
+    <!-- Sidebar -->
+    <!-- aside
       ref="sidebarRef"
       data-clas1="@todo max-lg:hidden"
       data-clas2="left-0 top-0      h-screen border-r shadow-xl transform transition-transform lg:translate-x-0"
@@ -107,7 +159,6 @@ watch(isMobileSidebarOpen, (newSlidebarState) => {
           <div class="flex flex-1 flex-col overflow-y-auto p-4 [&>[data-slot=section]+[data-slot=section]]:mt-8">
             <nav class="flex flex-col gap-0.5">
               <slot name="sidebar-content">
-                <!-- Default sidebar content -->
                 <ul class="space-y-2">
                   <li v-for="item in navItems" :key="item.path">
                     <B24Link
@@ -130,40 +181,119 @@ watch(isMobileSidebarOpen, (newSlidebarState) => {
           </div>
         </div>
       </div>
-    </aside>
-    <!-- Main Content -->
-    <div class="lg:pl-64">
-      <!-- Header -->
-      <header class="sticky top-0 z-2 border-b border-red-950/5 p-4 dark:border-white/5 bg-white/80 backdrop-blur">
-        <div class="flex items-center justify-between px-6">
-          <div class="flex items-center gap-4">
-            <button
-              class="lg:hidden"
-              @click="isMobileSidebarOpen = !isMobileSidebarOpen"
-            >
-              <MenuIcon class="h-6 w-6" />
-            </button>
-            <slot name="header-left">
-              <h1 class="text-xl font-semibold">
-                {{ title }}
-              </h1>
-            </slot>
-          </div>
+    </aside -->
+    <!-- Header -->
+    <header class="flex items-center px-4 lg:hidden">
+      <div class="py-2.5">
+        <B24Slideover
+          side="left"
+          title="Slideover with side"
+          description="Some"
+          :b24ui="{ content: 'max-w-64 p-2 bg-transparent dark:bg-transparent' }"
+        >
+          <B24Button
+            color="link"
+            :icon="MenuIcon"
+            size="sm"
+            @click="isMobileSidebarOpen = !isMobileSidebarOpen"
+          />
 
-          <div class="flex items-center gap-4">
-            <slot name="header-right">
-              <div class="lg:hidden">
-                <UserNav />
+          <template #content>
+            <!-- Sidebar -->
+            <div class="flex h-full flex-col rounded-lg bg-white dark:bg-base-900 ring-1 shadow-xs ring-base-950/5 dark:ring-white/10">
+              <div class="-mb-3 px-4 pt-3">
+                <B24ModalDialogClose>
+                  <B24Button
+                    :icon="Cross50Icon"
+                  />
+                </B24ModalDialogClose>
               </div>
+              <nav class="flex h-full min-h-0 flex-col">
+                <!-- Sidebar/Header -->
+                <div class="p-4 flex flex-col border-b border-base-950/5 dark:border-white/5 [&>[data-slot=section]+[data-slot=section]]:mt-2.5">
+                  <h2 class="text-xl font-semibold">
+                    Dashboard
+                  </h2>
+                </div>
+                <!-- Sidebar/Content -->
+                <div class="p-4 flex flex-1 flex-col overflow-y-auto [&>[data-slot=section]+[data-slot=section]]:mt-8">
+                  <!-- Sidebar/Nav Main -->
+                  <div data-slot="section" class="flex flex-col gap-0.5">
+                    <template v-for="item in navItems" :key="item.path">
+                      <B24Link
+                        :to="item.path"
+                        class="flex items-center rounded-lg px-4 py-2.5 text-sm hover:bg-base-200 hover:text-white"
+                      >
+                        {{ item.title }}
+                      </B24Link>
+                    </template>
+                  </div>
+
+                  <!-- Sidebar/Nav Second -->
+                  <!-- @todo max-lg:hidden -->
+                  <div data-slot="section" class="max-lg:hidden flex flex-col gap-0.5">
+                    <!-- @todo text/xs -->
+                    <ProseH6 class="mb-1 px-2 text-xs/6 font-medium text-base-500 dark:text-base-400">
+                      Upcoming Events
+                    </ProseH6>
+                    <template v-for="item in navItems" :key="item.path">
+                      <B24Link
+                        :to="item.path"
+                        class="flex items-center rounded-lg px-4 py-2.5 text-sm hover:bg-base-200 hover:text-white"
+                      >
+                        {{ item.title }}
+                      </B24Link>
+                    </template>
+                  </div>
+                  <!-- Sidebar/Nav Delim -->
+                  <div aria-hidden="true" class="mt-8 flex-1"></div>
+
+                  <!-- Sidebar/Nav Last -->
+                  <div data-slot="section" class="flex flex-col gap-0.5">
+                    <template v-for="item in navItems" :key="item.path">
+                      <B24Link
+                        :to="item.path"
+                        class="flex items-center rounded-lg px-4 py-2.5 text-sm hover:bg-base-200 hover:text-white"
+                      >
+                        {{ item.title }}
+                      </B24Link>
+                    </template>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </template>
+        </B24Slideover>
+      </div>
+      <div class="min-w-0 flex-1">
+        <nav class="flex flex-1 items-center gap-4 py-2.5">
+          <!-- @todo use normal html -->
+          <div class="flex items-center gap-4">
+            <slot name="header-left">
+              <span class="text-xl font-semibold">
+                {{ title }}
+              </span>
             </slot>
           </div>
-        </div>
-      </header>
+          <div aria-hidden="true" class="-ml-4 flex-1"></div>
+          <div class="flex items-center gap-3">
+            <slot name="header-right">
+              <UserNav />
+            </slot>
+          </div>
+        </nav>
+      </div>
+    </header>
 
-      <!-- Page Content -->
-      <main class="min-h-[calc(100vh-4rem)] p-6">
-        <slot />
-      </main>
-    </div>
+    <!-- Page Content -->
+    <main class="flex flex-1 flex-col pb-2 lg:min-w-0 lg:pt-2 lg:pr-2 lg:pl-64">
+      <!-- @todo fix color -->
+      <div class="grow p-6 lg:rounded-lg lg:bg-white dark:lg:bg-zinc-900 lg:p-10 lg:ring-1 lg:shadow-xs lg:ring-base-950/5 dark:lg:ring-white/10">
+        <!-- @todo use container -->
+        <div class="mx-auto max-w-[72rem]">
+          <slot />
+        </div>
+      </div>
+    </main>
   </div>
 </template>
