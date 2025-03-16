@@ -10,6 +10,7 @@ MAKEFLAGS += --no-print-directory
 ROOT_DIR := $(shell pwd)
 
 help:
+	@echo "-------------------------"
 	@echo "Bitrix24 PHP SDK examples"
 	@echo "Local application with UI"
 	@echo "-------------------------"

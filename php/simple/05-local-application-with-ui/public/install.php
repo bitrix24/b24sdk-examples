@@ -35,7 +35,7 @@ $log->debug(
 );
 
 // process request:
-// - save auth tokens in file - config/auth.json.local
+// - save auth tokens in file - /config/auth.json.local
 // - subscribe to application lifecycle events
 $response = $installController->process($incomingRequest);
 

@@ -23,7 +23,7 @@ readonly class AuthRepositoryFactory
     public static function create(LoggerInterface $logger): LocalAppAuthRepositoryInterface
     {
         return new AppAuthFileStorage(
-            dirname(__DIR__) . '/config/auth.json.local',
+            dirname(__DIR__,2) . '/config/auth.json.local',
             new Filesystem(),
             $logger
         );
