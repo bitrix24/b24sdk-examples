@@ -19,6 +19,7 @@ use Bitrix24\SDK\Core\Credentials\Credentials;
 use Bitrix24\SDK\Core\Credentials\WebhookUrl;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
 use Bitrix24\SDK\Core\Response\Response;
+use Bitrix24\SDK\Services\ServiceBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -39,14 +40,8 @@ use Throwable;
 )]
 class TestCommand extends Command
 {
-    protected CoreInterface $core;
-
-    /**
-     * ListCommand constructor.
-     *
-     * @param LoggerInterface $logger
-     */
     public function __construct(
+        private readonly ServiceBuilder $b24ServiceBuilder,
         private readonly LoggerInterface $logger
     ) {
         // best practices recommend to call the parent constructor first and
@@ -67,7 +62,23 @@ class TestCommand extends Command
 
         $io = new SymfonyStyle($input, $output);
         try {
-            $io->writeln('Hello world!');
+            $io->writeln(['Hello world!', '', 'start request to bitrix24 with saved token']);
+            $user = $this->b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
+
+            $io->writeln(
+                sprintf(
+                    'user info: %s',
+                    sprintf(
+                        'user id – %s' . PHP_EOL .
+                        'user name - %s %s' . PHP_EOL .
+                        'is admin - %s',
+                        $user->ID,
+                        $user->NAME,
+                        $user->LAST_NAME,
+                        $user->ADMIN ? 'yes' : 'no'
+                    )
+                )
+            );
         } catch (BaseException $exception) {
             $io->caution('Bitrix24 error');
             $io->text(

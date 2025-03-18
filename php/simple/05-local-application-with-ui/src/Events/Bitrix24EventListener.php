@@ -19,7 +19,7 @@ use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
 use Bitrix24\SDK\Events\AuthTokenRenewedEvent;
 
-class Bitrix24EventListener
+readonly class Bitrix24EventListener
 {
     /**
      * @throws WrongConfigurationException

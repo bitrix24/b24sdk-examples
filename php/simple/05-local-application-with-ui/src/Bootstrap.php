@@ -17,9 +17,9 @@ use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Dotenv\Dotenv;
 
-class Bootstrap
+readonly class Bootstrap
 {
-    private const CONFIG_FILE_NAME = '/config/.env';
+    private const string CONFIG_FILE_NAME = '/config/.env';
 
     /**
      * Loads configuration from the environment file.

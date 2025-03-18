@@ -10,6 +10,7 @@
  * file that was distributed with this source code.
  */
 
+use App\Bitrix24ServiceBuilderFactory;
 use App\Bootstrap;
 use App\Infrastructure\Console\TestCommand;
 use Symfony\Component\Console\Application;
@@ -53,5 +54,10 @@ if ($_SERVER['APP_DEBUG']) {
 
 $application = new Application();
 // register cli-command
-$application->add(new TestCommand(App\LoggerFactory::create()));
+$application->add(
+    new TestCommand(
+        Bitrix24ServiceBuilderFactory::createFromStoredToken(),
+        App\LoggerFactory::create()
+    )
+);
 $application->run($input);

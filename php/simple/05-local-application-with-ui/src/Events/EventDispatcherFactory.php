@@ -17,7 +17,7 @@ use Bitrix24\SDK\Events\AuthTokenRenewedEvent;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class EventDispatcherFactory
+readonly class EventDispatcherFactory
 {
     /**
      * Retrieves an instance of the event dispatcher.
