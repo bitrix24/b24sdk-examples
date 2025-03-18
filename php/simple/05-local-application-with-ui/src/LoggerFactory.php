@@ -23,13 +23,14 @@ use Psr\Log\LoggerInterface;
 
 class LoggerFactory
 {
-    private const LOG_FILE_NAME = '/var/logs/application.log';
+    private const string LOG_FILE_NAME = '/var/logs/application.log';
+    private const string LOGGER_NAME = 'app';
 
     /**
      * @throws WrongConfigurationException
      * @throws InvalidArgumentException
      */
-    public static function create(): LoggerInterface
+    public static function create(?string $loggerName = null): LoggerInterface
     {
         static $logger;
 
@@ -47,10 +48,12 @@ class LoggerFactory
             );
             $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
 
-            $logger = new Logger('App');
+            $logger = new Logger($loggerName ?? self::LOGGER_NAME);
             $logger->pushHandler($rotatingFileHandler);
             $logger->pushProcessor(new MemoryUsageProcessor(true, true));
             $logger->pushProcessor(new UidProcessor());
+        } elseif ($loggerName !== null) {
+            $logger = $logger->withName($loggerName);
         }
 
         return $logger;

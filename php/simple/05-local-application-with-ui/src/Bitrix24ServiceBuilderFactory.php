@@ -18,6 +18,7 @@ use App\Repository\AuthRepositoryFactory;
 use Bitrix24\SDK\Core\Contracts\Events\EventInterface;
 use Bitrix24\SDK\Core\Credentials\ApplicationProfile;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
+use Bitrix24\SDK\Core\Exceptions\UnknownScopeCodeException;
 use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
 use Bitrix24\SDK\Services\ServiceBuilder;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
@@ -25,6 +26,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 readonly class Bitrix24ServiceBuilderFactory
 {
+    private const string LOGGER_NAME ='b24-php-sdk';
+
     /**
      * Create Bitrix24 Service builder with auth tokens received from placement request
      *
@@ -39,13 +42,11 @@ readonly class Bitrix24ServiceBuilderFactory
             $request,
             self::getApplicationProfile(),
             EventDispatcherFactory::create(),
-            LoggerFactory::create(),
+            LoggerFactory::create(self::LOGGER_NAME),
         );
     }
 
     /**
-     *
-     *
      * @param EventInterface $b24Event
      * @return ServiceBuilder
      * @throws InvalidArgumentException
@@ -68,14 +69,14 @@ readonly class Bitrix24ServiceBuilderFactory
     public static function createFromStoredToken(): ServiceBuilder
     {
         // init bitrix24 service builder auth data from saved auth token
-        $logger = LoggerFactory::create();
+        $logger = LoggerFactory::create(self::LOGGER_NAME);
         $authRepository = AuthRepositoryFactory::create($logger);
 
         return (new ServiceBuilderFactory(
             EventDispatcherFactory::create(),
             $logger,
         ))->init(
-        // load app profile from /config/.env.local to $_ENV and create ApplicationProfile object
+            // load app profile from /config/.env.local to $_ENV and create ApplicationProfile object
             self::getApplicationProfile(),
             // load oauth tokens and portal URL stored in /config/auth.json.local to LocalAppAuth object
             $authRepository->getAuth()->getAuthToken(),
@@ -83,6 +84,11 @@ readonly class Bitrix24ServiceBuilderFactory
         );
     }
 
+    /**
+     * @throws WrongConfigurationException
+     * @throws InvalidArgumentException
+     * @throws UnknownScopeCodeException
+     */
     private static function getApplicationProfile(): ApplicationProfile
     {
         try {
