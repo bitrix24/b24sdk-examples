@@ -15,20 +15,32 @@ const useSearchInput = () => {
   const searchQueryDebounced = useDebounce<string>(searchQuery, 200)
   // endregion ////
 
-  // region Tabs ////
-  const tabs = ref([
+  // region Categories ////
+  const categoryActive = ref<'all' | EActivityCategory>('all')
+
+  const categories = computed(() => [
     {
-      label: t('composables.useSearchInput.tab.all'),
-      value: 'all'
+      label: t('composables.useSearchInput.categories.all'),
+      value: 'all',
+      active: categoryActive.value === 'all',
+      onSelect(e: Event) {
+        e.preventDefault()
+        categoryActive.value = 'all'
+      }
     },
     ...Object.values(EActivityCategory).map((value) => {
       return {
-        label: t(`composables.useSearchInput.tab.${value}`),
-        value
+        label: t(`composables.useSearchInput.categories.${value}`),
+        value,
+        active: categoryActive.value === value,
+        onSelect(e: Event) {
+          e.preventDefault()
+          categoryActive.value = value
+        }
       }
     })
   ])
-  const tabActive = ref<'all' | EActivityCategory>('all')
+
   // endregion ////
 
   // region Badge ////
@@ -111,11 +123,11 @@ const useSearchInput = () => {
   // region Data ////
   const activitiesList = computed(() => {
     let list = activities.value.filter((activity) => {
-      if (tabActive.value === 'all') {
+      if (categoryActive.value === 'all') {
         return true
       }
 
-      return activity.categories?.includes(tabActive.value)
+      return activity.categories?.includes(categoryActive.value)
     })
 
     const activeFilters = Array.from(filterBadgeMap.value.entries())
@@ -180,8 +192,8 @@ const useSearchInput = () => {
     filterBadges,
     isSomeBadgeFilter,
     makeClearFilter,
-    tabs,
-    tabActive,
+    categories,
+    categoryActive,
     activitiesList
   }
 }

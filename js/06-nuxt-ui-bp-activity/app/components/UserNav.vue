@@ -3,9 +3,10 @@
     :items="userMenuItems"
   >
     <B24Button
-      color="success"
-      depth="dark"
+      color="link"
+      depth="light"
       class="gap-2"
+      use-dropdown
     >
       <B24Avatar
         size="xs"
@@ -20,13 +21,7 @@
 const userMenuItems = [
   [{
     label: 'Profile',
-    // icon: 'i-heroicons-user-circle',
     click: () => console.log('Profile clicked')
-  }],
-  [{
-    label: 'Sign Out',
-    // icon: 'i-heroicons-arrow-left-on-rectangle',
-    click: () => console.log('Sign out clicked')
   }]
 ]
 </script>

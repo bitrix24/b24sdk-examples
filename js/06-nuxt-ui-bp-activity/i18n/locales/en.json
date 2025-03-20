@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title": "bpActivity"
+  },
   "page": {
     "index": {
       "seo": {
@@ -67,7 +70,7 @@
   },
   "composables": {
     "useSearchInput": {
-      "tab": {
+      "categories": {
         "all": "All",
         "category_1": "Sales and Marketing",
         "category_2": "Communications",

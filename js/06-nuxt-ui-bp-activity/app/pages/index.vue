@@ -75,8 +75,7 @@ const helpItems = computed(() => {
 })
 
 onMounted(async () => {
-  if(locale.value?.length < 1)
-  {
+  if (locale.value?.length < 1) {
     setLocale(defaultLocale)
   }
 })
@@ -118,12 +117,6 @@ onMounted(async () => {
         :label="$t('page.index.page.main')"
         color="primary"
         to="/activity-list"
-      />
-      <B24Button
-        rounded
-        :label="$t('page.index.page.integrators')"
-        color="primary"
-        to="/for-integrators"
       />
     </div>
   </div>

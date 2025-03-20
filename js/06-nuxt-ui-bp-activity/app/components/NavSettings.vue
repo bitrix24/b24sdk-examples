@@ -9,7 +9,7 @@ import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import HelpIcon from '@bitrix24/b24icons-vue/main/HelpIcon'
 
-const { locale, t } = useI18n()
+const { t } = useI18n()
 
 const toast = useToast()
 const colorMode = useColorMode()
@@ -22,8 +22,6 @@ const isDark = computed({
     colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
   }
 })
-
-const dir = computed(() => locales[locale.value]?.dir || 'ltr')
 
 const overlay = useOverlay()
 const modalForIntegrators = overlay.create(ModalForIntegrators)
@@ -48,7 +46,7 @@ const helpItems = computed(() => {
       }
     },
     {
-      type: 'separator' as const
+      type: 'label' as const
     },
     {
       label: t('component.nav.settings.help'),
@@ -65,7 +63,7 @@ const helpItems = computed(() => {
       }
     },
     {
-      type: 'separator' as const
+      type: 'label' as const
     },
     {
       label: isDark.value ? t('component.nav.settings.dark') : t('component.nav.settings.light'),
@@ -83,21 +81,9 @@ defineShortcuts(extractShortcuts(helpItems.value))
 </script>
 
 <template>
-  <B24DropdownMenu
+  <B24NavigationMenu
     :items="helpItems"
-    :content="{
-      align: 'start',
-      side: dir === 'ltr' ? 'left' : 'right',
-      sideOffset: 2
-    }"
-    :b24ui="{
-      content: 'w-[240px] max-h-[245px]'
-    }"
-  >
-    <B24Button
-      :icon="SettingsIcon"
-      color="link"
-      size="xs"
-    />
-  </B24DropdownMenu>
+    variant="pill"
+    orientation="vertical"
+  />
 </template>
