@@ -9,7 +9,7 @@ useHead({
   }
 })
 
-defineProps({
+const props = defineProps({
   navItems: {
     type: Array as PropType<Array<{
       label: string
@@ -21,14 +21,27 @@ defineProps({
   }
 })
 
-
+const navList = computed(() => (handleClick: () => void) => {
+  return props.navItems.map((item) => {
+    return {
+      ...item,
+      onSelect(e: Event) {
+        e.preventDefault()
+        handleClick()
+        if (typeof item?.onSelect === 'function') {
+          item.onSelect(e)
+        }
+      }
+    }
+  })
+})
 </script>
 
 <template>
   <B24SidebarLayout
     :use-light-content="route.path !== '/activity-list'"
   >
-    <template #sidebar>
+    <template #sidebar="{ handleClick }">
       <B24SidebarHeader>
         <B24SidebarSection class="ps-[18px] flex-row  items-center justify-start gap-0.5 text-primary">
           <Logo class="size-8" />
@@ -39,7 +52,7 @@ defineProps({
       </B24SidebarHeader>
       <B24SidebarBody>
         <B24NavigationMenu
-          :items="navItems"
+          :items="navList(handleClick)"
           variant="pill"
           orientation="vertical"
         />

@@ -46,9 +46,6 @@ const helpItems = computed(() => {
       }
     },
     {
-      type: 'label' as const
-    },
-    {
       label: t('component.nav.settings.help'),
       icon: HelpIcon,
       onSelect() {
@@ -61,9 +58,6 @@ const helpItems = computed(() => {
       onSelect() {
         toast.add({ title: 'Action', description: 'Support clicked' })
       }
-    },
-    {
-      type: 'label' as const
     },
     {
       label: isDark.value ? t('component.nav.settings.dark') : t('component.nav.settings.light'),
