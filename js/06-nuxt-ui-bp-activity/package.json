@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.5",
-    "@bitrix24/b24ui-nuxt": "^0.5.4",
+    "@bitrix24/b24ui-nuxt": "^0.5.6",
     "@nuxt/content": "^3.3.0",
     "@nuxtjs/i18n": "^9.3.1",
     "fuse.js": "^7.1.0",

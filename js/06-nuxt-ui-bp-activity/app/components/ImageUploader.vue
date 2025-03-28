@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * @todo fix lang
+ */
 import { ref, onBeforeUnmount } from 'vue'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
 

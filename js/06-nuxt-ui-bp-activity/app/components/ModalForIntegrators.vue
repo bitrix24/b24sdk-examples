@@ -1,62 +1,127 @@
 <script setup lang="ts">
+/**
+ * @todo fix lang
+ */
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
 import * as z from 'zod'
+import { stepSchemas, fullSchema, type Schema } from '~/types/validationSchemasForIntegrators'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
 import ChevronToTheLeftIcon from '@bitrix24/b24icons-vue/actions/ChevronToTheLeftIcon'
 
-const { t } = useI18n()
-
+// region Init ////
+// const { t } = useI18n()
 const emit = defineEmits<{ close: [boolean] }>()
-
-definePageMeta({
-  layout: 'slider'
-})
-useHead({
-  title: t('page.forIntegrators.seo.title')
-})
 const toast = useToast()
 
-// region Init ////
-const isLoading = ref(true)
-
-const schema = z.object({
-  logo: z.string().optional(),
-  company: z.string()
-    .min(2, 'Company name must be at least 2 characters')
-    .max(100, 'Company name too long (max 100 characters)'),
-
-  phone: z.string()
-    .max(20, 'Phone number too long')
-    .optional()
-    .transform(val => val?.replace(/[\s.-]/g, '')),
-
-  email: z.string()
-    // .email('Invalid e-mail address')
-    .max(60, 'E-mail too long')
-    .optional(),
-
-  whatsapp: z.string()
-    .max(60, 'Whatsapp too long')
-    .optional(),
-
-  telegram: z.string()
-    .max(60, 'Telegram too long')
-    .optional(),
-
-  site: z.string()
-    .max(60, 'URL too long')
-    .optional(),
-
-  comments: z.string()
-    .max(2000, 'Comments too long (max 2000 characters)')
-    .optional()
-})
-
-type Schema = z.input<typeof schema>
+async function loadData(): Promise<void> {
+  try {
+    isLoading.value = true
+    // @todo get real info
+    Object.assign(state)
+  } finally {
+    isLoading.value = false
+  }
+}
 // endregion ////
 
-// region Data ////
-const state = reactive<Partial<Schema>>(initializeState())
+// region Component State ////
+const step = ref(1)
+const stepsMax = ref(4)
+const isLoading = ref(true)
+const validationErrors = ref<z.ZodFormattedError<Schema> | null>(null)
+const messageErrors = ref<string | null>(null)
+
+const state = reactive<Schema>({
+  logo: '',
+  company: '',
+  phone: '',
+  email: '',
+  whatsapp: '',
+  telegram: '',
+  site: '',
+  comments: ''
+})
+
+const stepTitle = computed(() => {
+  switch (step.value) {
+    case 1:
+      return 'Let\'s upload your company logo and specify its name.'
+    case 2:
+      return 'Shall we indicate the phone number and e-mail?'
+    case 3:
+      return 'Will we show messengers? And the website?'
+    case 4:
+      return 'Anything to add?'
+    default:
+      return '?'
+  }
+})
+// endregion ////
+
+// region Form Actions ////
+async function validateStep() {
+  try {
+    const currentSchema = stepSchemas[step.value as keyof typeof stepSchemas]
+    currentSchema.parse(state)
+    validationErrors.value = null
+    return true
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      validationErrors.value = error.format()
+      toast.add({
+        title: 'Validation Error',
+        description: 'Please check the form fields',
+        color: 'danger'
+      })
+    }
+    return false
+  }
+}
+
+async function nextStep() {
+  if (!await validateStep()) return
+  if (step.value < stepsMax.value) {
+    step.value += 1
+  }
+}
+
+async function prevStep() {
+  if (step.value > 1) {
+    step.value -= 1
+  }
+}
+
+const progress = computed(() =>
+  step.value === stepsMax.value ? 100 : (100 / stepsMax.value) * step.value
+)
+
+const isStepValid = computed(() => {
+  return true
+})
+
+async function onSubmit() {
+  try {
+    fullSchema.parse(state)
+    // Submit logic here
+    console.log('Form submitted:', state)
+    toast.add({
+      title: 'Success',
+      description: 'The form has been submitted.',
+      color: 'success'
+    })
+
+    emit('close', true)
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      validationErrors.value = error.format()
+      toast.add({
+        title: 'Validation Error',
+        description: 'Please check all form fields',
+        color: 'danger'
+      })
+    }
+  }
+}
 
 const itemsPreview = computed(() => [
   {
@@ -87,51 +152,23 @@ const itemsPreview = computed(() => [
   {
     label: 'Comments',
     code: 'comments',
-    description: state.comments
+    description: state.comments?.slice(0, 200)
   }
 ])
-
-function initializeState(): Partial<Schema> {
-  return {
-    logo: '',
-    company: '',
-    phone: '',
-    email: '',
-    whatsapp: '',
-    telegram: '',
-    site: '',
-    comments: ''
-  }
-}
-
-async function loadData(): Promise<void> {
-  try {
-    // @todo get real info
-    Object.assign(state)
-  } finally {
-    isLoading.value = false
-  }
-}
-
-async function clearData(): Promise<void> {
-  Object.assign(state, initializeState())
-}
 // endregion ////
 
-// region Form Actions ////
-async function onSubmit(): Promise<void> {
-  try {
-    // todo make real call api
-    console.log('Form submitted:', state)
+// region Error Helpers ////
+const getFieldError = (fieldName: string) =>
+  validationErrors.value?.[fieldName as keyof typeof validationErrors.value]?._errors?.join(', ') || ''
+// endregion ////
 
-    toast.add({
-      title: 'Success',
-      description: 'The form has been submitted.',
-      color: 'success'
-    })
-  } catch (error) {
-    handleError(error, 'Failed to submit')
-  }
+// region FileUpload ////
+const handleFileUpload = () => {
+  messageErrors.value = ''
+}
+
+const handleErrorFileUploader = (payload: string) => {
+  messageErrors.value = payload
 }
 // endregion ////
 
@@ -160,44 +197,20 @@ function handleError(error: unknown, context: string): void {
   })
 }
 // endregion ////
-
-const stepsMax = ref(4)
-const step = ref(1)
-const progress = computed(() => {
-  return step.value === stepsMax.value
-    ? 100
-    : (100 / stepsMax.value) * step.value
-})
-
-async function nextStep() {
-  if (step.value + 1 > stepsMax.value) {
-    step.value = stepsMax.value
-  } else {
-    step.value += 1
-  }
-}
-
-async function prevStep() {
-  if (step.value - 1 < 1) {
-    step.value = 1
-  } else {
-    step.value -= 1
-  }
-}
 </script>
 
 <template>
   <B24Modal
-    title="Integrator Settings"
-    description="Manage your company integration settings."
+    :title="stepTitle"
+    :description="`Step ${step} from ${stepsMax}`"
     :dismissible="false"
-    :b24ui="{ content: 'max-w-[64rem]' }"
+    :b24ui="{ content: 'max-w-[64rem] h-full' }"
     :close="{ onClick: () => emit('close', false) }"
   >
     <template #body>
       <B24Progress
         v-model="progress"
-        size="sm"
+        size="xs"
       />
       <div class="p-4 bg-white dark:bg-white/10 ">
         <!-- Content Section -->
@@ -205,22 +218,32 @@ async function prevStep() {
           <!-- Form Section -->
           <B24Form
             ref="form"
+            :validate-on="['input', 'change', 'blur']"
             :state="state"
-            :schema="schema"
-            class="space-y-6 min-w-[320px]"
-            @submit="onSubmit"
+            :schema="fullSchema"
+            class="space-y-6"
+            @submit.prevent="onSubmit"
           >
             <template v-if="step === 1">
-              <ImageUploader
-                v-model="state.logo"
-                placeholder="Upload logo"
-                class="w-full"
-              />
+              <B24FormField
+                label="Logo"
+                name="logo"
+                :error="getFieldError('logo')"
+              >
+                <ImageUploader
+                  v-model="state.logo"
+                  placeholder="Upload logo"
+                  class="w-full"
+                  @image-upload="handleFileUpload"
+                  @image-error="handleErrorFileUploader"
+                />
+              </B24FormField>
               <B24FormField
                 label="Company Name"
                 name="company"
                 required
                 :hint="`${state.company.length}/100`"
+                :error="getFieldError('company')"
               >
                 <B24Input
                   v-model="state.company"
@@ -277,20 +300,20 @@ async function prevStep() {
               <B24FormField
                 label="Comments"
                 name="comments"
-                :hint="`${state.comments.length}/2000`"
+                :hint="`${state.comments.length}/200`"
               >
                 <B24Textarea
                   v-model="state.comments"
-                  placeholder="Additional information..."
+                  placeholder="Please provide important information..."
                   class="w-full"
-                  :rows="4"
+                  :rows="7"
                 />
               </B24FormField>
             </template>
           </B24Form>
 
           <!-- Preview Section -->
-          <div class="w-[320px] hidden md:block ">
+          <div class="">
             <div class="w-full bg-base-50 dark:bg-base-dark py-3 px-3 rounded-md flex items-center justify-center">
               <B24Button
                 class="w-full ps-0 pe-0"
@@ -335,17 +358,26 @@ async function prevStep() {
                 :b24ui="{ container: 'mt-0' }"
               >
                 <template #description="{ item }">
-                  <template v-if="item.code !== 'comments'">
-                    <ProseA :href="item.code === 'phone' ? item.description.replace(/[^\d+]/g, '') : item.description">
+                  <span class="w-3/4 block break-words">
+                    <template v-if="item.code !== 'comments'">
+                      <ProseA :href="item.code === 'phone' ? item.description.replace(/[^\d+]/g, '') : item.description">
+                        {{ item.description }}
+                      </ProseA>
+                    </template>
+                    <template v-else>
                       {{ item.description }}
-                    </ProseA>
-                  </template>
-                  <template v-else>
-                    {{ item.description }}
-                  </template>
+                    </template>
+                  </span>
                 </template>
               </B24DescriptionList>
             </div>
+
+            <B24Advice
+              v-if="messageErrors"
+              class="mt-4 w-full"
+              :description="messageErrors"
+              :avatar="{ src: '/avatar/assistant.png' }"
+            />
           </div>
         </section>
       </div>
@@ -369,6 +401,7 @@ async function prevStep() {
           size="sm"
           label="Next"
           color="primary"
+          :disabled="!isStepValid"
           @click="nextStep"
         />
         <B24Button
@@ -376,7 +409,7 @@ async function prevStep() {
           rounded
           size="sm"
           label="Save"
-          color="primary"
+          color="success"
           @click="onSubmit"
         />
       </div>

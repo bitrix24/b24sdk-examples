@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import type { IActivity } from '~/types'
 import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import type { Collections } from '@nuxt/content'
-import useSearchInput from '~/composables/useSearchInput'
+import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
 import { sleepAction } from '~/utils/sleep'
@@ -46,9 +46,8 @@ const {
   filterBadges,
   isSomeBadgeFilter,
   makeClearFilter,
-  categories,
   activitiesList
-} = useSearchInput()
+} = useSearch()
 // endregion ////
 
 // region Data ////
@@ -195,7 +194,6 @@ onUnmounted(() => {
 <template>
   <NuxtLayout
     name="dashboard"
-    :nav-items="categories"
   >
     <template #header-title>
       <ProseH1 class="mt-1 mb-0 max-lg:ps-3">

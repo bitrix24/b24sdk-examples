@@ -1,47 +1,23 @@
 import { useDebounce } from '@vueuse/core'
 import { nextTick, onMounted, ref, watch } from 'vue'
 import { scrollToTop } from '~/utils/scrollToTop'
-import type { FilterSetting, IActivity } from '~/types'
-import { EActivityBadge, EActivityCategory } from '~/types'
+import type { FilterSetting, IActivity, EActivityCategory } from '~/types'
+import { EActivityBadge } from '~/types'
 
-const useSearchInput = () => {
+// region Init ////
+const activities = ref<IActivity[]>([])
+
+const searchInput = ref<HTMLElement | null>(null)
+const searchQuery = ref<string>('')
+const searchQueryDebounced = useDebounce<string>(searchQuery, 200)
+// endregion ////
+
+// region Categories ////
+const categoryActive = ref<'all' | EActivityCategory>('all')
+// endregion ////
+
+const useSearch = () => {
   const { t } = useI18n()
-
-  // region Init ////
-  const activities = ref<IActivity[]>([])
-
-  const searchInput = ref<HTMLElement | null>(null)
-  const searchQuery = ref<string>('')
-  const searchQueryDebounced = useDebounce<string>(searchQuery, 200)
-  // endregion ////
-
-  // region Categories ////
-  const categoryActive = ref<'all' | EActivityCategory>('all')
-
-  const categories = computed(() => [
-    {
-      label: t('composables.useSearchInput.categories.all'),
-      value: 'all',
-      active: categoryActive.value === 'all',
-      onSelect(e: Event) {
-        e.preventDefault()
-        categoryActive.value = 'all'
-      }
-    },
-    ...Object.values(EActivityCategory).map((value) => {
-      return {
-        label: t(`composables.useSearchInput.categories.${value}`),
-        value,
-        active: categoryActive.value === value,
-        onSelect(e: Event) {
-          e.preventDefault()
-          categoryActive.value = value
-        }
-      }
-    })
-  ])
-
-  // endregion ////
 
   // region Badge ////
   const filterBadgeMap = ref<Map<EActivityBadge, boolean>>(new Map(
@@ -192,10 +168,9 @@ const useSearchInput = () => {
     filterBadges,
     isSomeBadgeFilter,
     makeClearFilter,
-    categories,
     categoryActive,
     activitiesList
   }
 }
 
-export default useSearchInput
+export default useSearch
