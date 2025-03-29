@@ -3,8 +3,9 @@
  * @todo fix lang
  */
 import { ref, reactive, onMounted, onUnmounted } from 'vue'
-import * as z from 'zod'
-import { stepSchemas, fullSchema, type Schema } from '~/types/validationSchemasForIntegrators'
+import { z } from 'zod'
+import type { FormError } from '@bitrix24/b24ui-nuxt'
+import { stepSchemas, type Schema } from '~/types/validationSchemasForIntegrators'
 import IncertImageIcon from '@bitrix24/b24icons-vue/editor/IncertImageIcon'
 import ChevronToTheLeftIcon from '@bitrix24/b24icons-vue/actions/ChevronToTheLeftIcon'
 
@@ -12,25 +13,15 @@ import ChevronToTheLeftIcon from '@bitrix24/b24icons-vue/actions/ChevronToTheLef
 // const { t } = useI18n()
 const emit = defineEmits<{ close: [boolean] }>()
 const toast = useToast()
-
-async function loadData(): Promise<void> {
-  try {
-    isLoading.value = true
-    // @todo get real info
-    Object.assign(state)
-  } finally {
-    isLoading.value = false
-  }
-}
 // endregion ////
 
 // region Component State ////
 const step = ref(1)
 const stepsMax = ref(4)
 const isLoading = ref(true)
+const isStepValid = ref(false)
 const validationErrors = ref<z.ZodFormattedError<Schema> | null>(null)
-const messageErrors = ref<string | null>(null)
-
+const fileUploadError = ref<string | undefined>(undefined)
 const state = reactive<Schema>({
   logo: '',
   company: '',
@@ -41,6 +32,17 @@ const state = reactive<Schema>({
   site: '',
   comments: ''
 })
+const progress = computed(() => step.value === stepsMax.value ? 100 : (100 / stepsMax.value) * step.value)
+
+async function loadData(): Promise<void> {
+  try {
+    isLoading.value = true
+    // @todo get real info
+    Object.assign(state, {})
+  } finally {
+    isLoading.value = false
+  }
+}
 
 const stepTitle = computed(() => {
   switch (step.value) {
@@ -59,49 +61,45 @@ const stepTitle = computed(() => {
 // endregion ////
 
 // region Form Actions ////
-async function validateStep() {
-  try {
-    const currentSchema = stepSchemas[step.value as keyof typeof stepSchemas]
-    currentSchema.parse(state)
-    validationErrors.value = null
-    return true
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      validationErrors.value = error.format()
-      toast.add({
-        title: 'Validation Error',
-        description: 'Please check the form fields',
-        color: 'danger'
-      })
-    }
-    return false
-  }
-}
+function nextStep() {
+  validate()
+  if (!isStepValid.value) {
+    toast.add({
+      title: 'Validation Error',
+      description: 'Please check form fields',
+      color: 'danger'
+    })
 
-async function nextStep() {
-  if (!await validateStep()) return
+    return
+  }
+
   if (step.value < stepsMax.value) {
     step.value += 1
+
+    validate()
   }
 }
 
-async function prevStep() {
+function prevStep() {
   if (step.value > 1) {
     step.value -= 1
+    validate()
   }
 }
-
-const progress = computed(() =>
-  step.value === stepsMax.value ? 100 : (100 / stepsMax.value) * step.value
-)
-
-const isStepValid = computed(() => {
-  return true
-})
 
 async function onSubmit() {
   try {
-    fullSchema.parse(state)
+    validate()
+    if (!isStepValid.value) {
+      toast.add({
+        title: 'Validation Error',
+        description: 'Please check form fields',
+        color: 'danger'
+      })
+
+      return
+    }
+
     // Submit logic here
     console.log('Form submitted:', state)
     toast.add({
@@ -112,14 +110,13 @@ async function onSubmit() {
 
     emit('close', true)
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      validationErrors.value = error.format()
-      toast.add({
-        title: 'Validation Error',
-        description: 'Please check all form fields',
-        color: 'danger'
-      })
-    }
+    console.error(error)
+
+    toast.add({
+      title: 'onSubmit Error',
+      description: 'Please check log',
+      color: 'danger'
+    })
   }
 }
 
@@ -127,27 +124,27 @@ const itemsPreview = computed(() => [
   {
     label: 'Phone',
     code: 'phone',
-    description: state.phone
+    description: state.phone?.slice(0, 60)
   },
   {
     label: 'E-mail',
     code: 'email',
-    description: state.email
-  },
-  {
-    label: 'WhatsApp',
-    code: 'whatsapp',
-    description: state.whatsapp
+    description: state.email?.slice(0, 60)
   },
   {
     label: 'Telegram',
     code: 'telegram',
-    description: state.telegram
+    description: state.telegram?.slice(0, 60)
+  },
+  {
+    label: 'WhatsApp',
+    code: 'whatsapp',
+    description: state.whatsapp?.slice(0, 60)
   },
   {
     label: 'Website',
     code: 'site',
-    description: state.site
+    description: state.site?.slice(0, 60)
   },
   {
     label: 'Comments',
@@ -158,17 +155,39 @@ const itemsPreview = computed(() => [
 // endregion ////
 
 // region Error Helpers ////
-const getFieldError = (fieldName: string) =>
-  validationErrors.value?.[fieldName as keyof typeof validationErrors.value]?._errors?.join(', ') || ''
-// endregion ////
+function validate(): FormError[] {
+  try {
+    const currentSchema = stepSchemas[step.value as keyof typeof stepSchemas]
+    currentSchema.parse(state)
+    isStepValid.value = true
+    validationErrors.value = null
+  } catch (error) {
+    isStepValid.value = false
+    if (
+      error instanceof z.ZodError
+    ) {
+      validationErrors.value = error.format()
+    }
+  }
 
-// region FileUpload ////
+  if (!validationErrors.value) return []
+
+  const errors = Object.entries(validationErrors.value).flatMap(([fieldName, fieldErrors]) => {
+    const messages = (fieldErrors as { _errors?: string[] })._errors || []
+    return messages.map(message => ({
+      name: fieldName as keyof Schema,
+      message
+    }))
+  })
+  return errors
+}
+
 const handleFileUpload = () => {
-  messageErrors.value = ''
+  fileUploadError.value = undefined
 }
 
 const handleErrorFileUploader = (payload: string) => {
-  messageErrors.value = payload
+  fileUploadError.value = payload
 }
 // endregion ////
 
@@ -218,17 +237,29 @@ function handleError(error: unknown, context: string): void {
           <!-- Form Section -->
           <B24Form
             ref="form"
-            :validate-on="['input', 'change', 'blur']"
+            dd-validate-on="['blur', 'change', 'input']"
+            :validate="validate"
             :state="state"
-            :schema="fullSchema"
             class="space-y-6"
             @submit.prevent="onSubmit"
           >
             <template v-if="step === 1">
               <B24FormField
-                label="Logo"
+                label="Company Name"
+                name="company"
+                required
+                :hint="`${state.company.length}/100`"
+              >
+                <B24Input
+                  v-model="state.company"
+                  autofocus
+                  placeholder="Enter company name"
+                  class="w-full"
+                />
+              </B24FormField>
+              <B24FormField
                 name="logo"
-                :error="getFieldError('logo')"
+                :error="fileUploadError"
               >
                 <ImageUploader
                   v-model="state.logo"
@@ -238,31 +269,25 @@ function handleError(error: unknown, context: string): void {
                   @image-error="handleErrorFileUploader"
                 />
               </B24FormField>
-              <B24FormField
-                label="Company Name"
-                name="company"
-                required
-                :hint="`${state.company.length}/100`"
-                :error="getFieldError('company')"
-              >
-                <B24Input
-                  v-model="state.company"
-                  placeholder="Enter company name"
-                  class="w-full"
-                />
-              </B24FormField>
             </template>
             <template v-else-if="step === 2">
-              <B24FormField label="Phone" name="phone">
+              <B24FormField
+                label="Phone"
+                name="phone"
+              >
                 <B24Input
                   v-model="state.phone"
                   type="tel"
+                  autofocus
                   placeholder="+1234567890"
                   class="w-full"
                 />
               </B24FormField>
 
-              <B24FormField label="Email" name="email">
+              <B24FormField
+                label="Email"
+                name="email"
+              >
                 <B24Input
                   v-model="state.email"
                   type="email"
@@ -272,15 +297,12 @@ function handleError(error: unknown, context: string): void {
               </B24FormField>
             </template>
             <template v-else-if="step === 3">
-              <B24FormField label="WhatsApp" name="whatsapp">
-                <B24Input
-                  v-model="state.whatsapp"
-                  placeholder="https://wa.me/..."
-                  class="w-full"
-                />
-              </B24FormField>
-
-              <B24FormField label="Telegram" name="telegram">
+              <B24FormField
+                label="Telegram"
+                name="telegram"
+                autofocus
+                :hint="`${(state?.telegram || '').length}/60`"
+              >
                 <B24Input
                   v-model="state.telegram"
                   placeholder="https://t.me/..."
@@ -288,7 +310,23 @@ function handleError(error: unknown, context: string): void {
                 />
               </B24FormField>
 
-              <B24FormField label="Website" name="site">
+              <B24FormField
+                label="WhatsApp"
+                name="whatsapp"
+                :hint="`${(state?.whatsapp || '').length}/60`"
+              >
+                <B24Input
+                  v-model="state.whatsapp"
+                  placeholder="https://wa.me/..."
+                  class="w-full"
+                />
+              </B24FormField>
+
+              <B24FormField
+                label="Website"
+                name="site"
+                :hint="`${(state?.site || '').length}/60`"
+              >
                 <B24Input
                   v-model="state.site"
                   placeholder="https://example.com"
@@ -300,7 +338,7 @@ function handleError(error: unknown, context: string): void {
               <B24FormField
                 label="Comments"
                 name="comments"
-                :hint="`${state.comments.length}/200`"
+                :hint="`${(state?.comments || '').length}/200`"
               >
                 <B24Textarea
                   v-model="state.comments"
@@ -355,12 +393,22 @@ function handleError(error: unknown, context: string): void {
                 size="sm"
                 class="px-3 rounded-lg overflow-hidden"
                 :items="itemsPreview"
-                :b24ui="{ container: 'mt-0' }"
+                :b24ui="{ container: 'mt-0  sm:grid-cols-[min(20%,10rem)_auto]' }"
               >
                 <template #description="{ item }">
-                  <span class="w-3/4 block break-words">
-                    <template v-if="item.code !== 'comments'">
-                      <ProseA :href="item.code === 'phone' ? item.description.replace(/[^\d+]/g, '') : item.description">
+                  <span class="block break-words">
+                    <template v-if="item.code === 'phone'">
+                      <ProseA :href="`tel:${(item?.description || '').replace(/[^\d+]/g, '')}`">
+                        {{ item.description }}
+                      </ProseA>
+                    </template>
+                    <template v-else-if="item.code === 'email'">
+                      <ProseA :href="`mailto:${item.description}`">
+                        {{ item.description }}
+                      </ProseA>
+                    </template>
+                    <template v-else-if="item.code !== 'comments'">
+                      <ProseA :href="item.description">
                         {{ item.description }}
                       </ProseA>
                     </template>
@@ -371,13 +419,6 @@ function handleError(error: unknown, context: string): void {
                 </template>
               </B24DescriptionList>
             </div>
-
-            <B24Advice
-              v-if="messageErrors"
-              class="mt-4 w-full"
-              :description="messageErrors"
-              :avatar="{ src: '/avatar/assistant.png' }"
-            />
           </div>
         </section>
       </div>
@@ -410,6 +451,7 @@ function handleError(error: unknown, context: string): void {
           size="sm"
           label="Save"
           color="success"
+          :disabled="!isStepValid"
           @click="onSubmit"
         />
       </div>

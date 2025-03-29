@@ -19,7 +19,7 @@ interface ImageUploaderEmits {
 
 const emits = defineEmits<ImageUploaderEmits>()
 
-const modelValue = defineModel<string>({ required: true })
+const modelValue = defineModel<string | undefined>({ required: true })
 const fileInput = ref<HTMLInputElement | null>(null)
 const isDragging = ref(false)
 
