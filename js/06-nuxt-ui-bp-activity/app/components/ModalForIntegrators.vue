@@ -2,7 +2,7 @@
 /**
  * @todo fix lang
  */
-import { ref, reactive, onMounted } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { z } from 'zod'
 import type { FormError } from '@bitrix24/b24ui-nuxt'
 import { stepSchemas, type Schema } from '~/types/validationSchemasForIntegrators'
@@ -214,9 +214,9 @@ function handleError(error: unknown, context: string): void {
         v-model="progress"
         size="xs"
       />
-      <div class="p-4 bg-white dark:bg-white/10 ">
+      <div class="px-10 py-8 bg-white dark:bg-white/10 ">
         <!-- Content Section -->
-        <section class="mb-8 p-6 grid grid-cols-1 md:grid-cols-2 gap-6 overflow-hidden w-full">
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           <!-- Form Section -->
           <B24Form
             ref="form"
@@ -335,8 +335,8 @@ function handleError(error: unknown, context: string): void {
           </B24Form>
 
           <!-- Preview Section -->
-          <div class="">
-            <div class="w-full bg-base-50 dark:bg-base-dark py-3 px-3 rounded-md flex items-center justify-center">
+          <div class="w-[237px]">
+            <div class="mx-xs py-3 px-3 bg-base-200 dark:bg-base-dark rounded-md flex items-center justify-center">
               <B24Button
                 class="w-full ps-0 pe-0"
                 label="Open"
@@ -345,7 +345,7 @@ function handleError(error: unknown, context: string): void {
                 normal-case
                 :b24ui="{ baseLine: 'w-full shrink-0' }"
               >
-                <div class="flex flex-row items-center justify-start gap-4 w-full shrink-1">
+                <div class="flex flex-row items-center justify-start gap-2 w-full shrink-1">
                   <div class="shrink-0">
                     <img
                       v-if="state.logo"
@@ -372,12 +372,12 @@ function handleError(error: unknown, context: string): void {
               </B24Button>
             </div>
 
-            <div class="w-full mt-2 bg-white dark:bg-base-dark shadow-lg rounded-2xs ring ring-base-300 dark:ring-base-800">
+            <div class="ml-xs w-72 max-h-96 overflow-y-auto mt-2 bg-white dark:bg-base-dark shadow-lg rounded-2xs ring ring-base-300 dark:ring-base-800">
               <B24DescriptionList
                 size="sm"
                 class="px-3 rounded-lg overflow-hidden"
                 :items="itemsPreview"
-                :b24ui="{ container: 'mt-0  sm:grid-cols-[min(20%,10rem)_auto]' }"
+                :b24ui="{ container: 'mt-0  sm:grid-cols-[min(35%,5rem)_auto]' }"
               >
                 <template #description="{ item }">
                   <span class="block break-words">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { UserNav, Logo, ModalForIntegrators } from '#components'
+import { IntegratorNav, Logo, ModalForIntegrators } from '#components'
 import { EActivityCategory } from '~/types'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
 import useSearch from '~/composables/useSearch'
@@ -144,8 +144,14 @@ defineShortcuts(extractShortcuts(helpItems.value(() => {})))
         />
       </B24SidebarBody>
       <B24SidebarFooter>
-        <UserNav />
+        <IntegratorNav />
       </B24SidebarFooter>
+    </template>
+    <template #navbar>
+      <B24NavbarSpacer />
+      <B24NavbarSection>
+        <IntegratorNav />
+      </B24NavbarSection>
     </template>
 
     <!-- Header -->
