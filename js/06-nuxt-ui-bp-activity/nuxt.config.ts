@@ -10,7 +10,10 @@ export default defineNuxtConfig({
     // `@bitrix24/b24jssdk-nuxt`,
     '@nuxt/eslint',
     '@nuxt/content',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@pinia/nuxt',
+    // @todo remove this - need use b24 app settings ////
+    '@pinia-plugin-persistedstate/nuxt'
   ],
   ssr: false,
   /**
@@ -55,5 +58,12 @@ export default defineNuxtConfig({
     lazy: true,
     defaultLocale: 'en',
     locales: locales
+  },
+  // @todo remove this - need use b24 app settings ////
+  piniaPersistedstate: {
+    cookieOptions: {
+      sameSite: 'strict'
+    },
+    storage: 'localStorage'
   }
 })
