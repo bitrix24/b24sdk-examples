@@ -2,7 +2,7 @@
 /**
  * @todo fix lang
  */
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { z } from 'zod'
 import type { FormError } from '@bitrix24/b24ui-nuxt'
 import { stepSchemas, type Schema } from '~/types/validationSchemasForIntegrators'
@@ -11,6 +11,7 @@ import ChevronToTheLeftIcon from '@bitrix24/b24icons-vue/actions/ChevronToTheLef
 
 // region Init ////
 // const { t } = useI18n()
+const appSettings = useAppSettingsStore()
 const emit = defineEmits<{ close: [boolean] }>()
 const toast = useToast()
 // endregion ////
@@ -18,8 +19,7 @@ const toast = useToast()
 // region Component State ////
 const step = ref(1)
 const stepsMax = ref(4)
-const isLoading = ref(true)
-const isStepValid = ref(false)
+const isStepValid = ref(true)
 const validationErrors = ref<z.ZodFormattedError<Schema> | null>(null)
 const fileUploadError = ref<string | undefined>(undefined)
 const state = reactive<Schema>({
@@ -33,16 +33,6 @@ const state = reactive<Schema>({
   comments: ''
 })
 const progress = computed(() => step.value === stepsMax.value ? 100 : (100 / stepsMax.value) * step.value)
-
-async function loadData(): Promise<void> {
-  try {
-    isLoading.value = true
-    // @todo get real info and add skeleton
-    Object.assign(state, {})
-  } finally {
-    isLoading.value = false
-  }
-}
 
 const stepTitle = computed(() => {
   switch (step.value) {
@@ -101,12 +91,7 @@ async function onSubmit() {
     }
 
     // Submit logic here
-    console.log('Form submitted:', state)
-    toast.add({
-      title: 'Success',
-      description: 'The form has been submitted.',
-      color: 'success'
-    })
+    appSettings.updateIntegrator(state)
 
     emit('close', true)
   } catch (error) {
@@ -194,15 +179,13 @@ const handleErrorFileUploader = (payload: string) => {
 // region Lifecycle Hooks ////
 onMounted(async () => {
   try {
-    await loadData()
+    Object.assign(
+      state,
+      appSettings.integrator
+    )
   } catch (error) {
     handleError(error, 'Failed to load data')
-    // showError({ ... }) // @todo unComment
   }
-})
-
-onUnmounted(() => {
-  // $b24?.destroy()
 })
 // endregion ////
 
