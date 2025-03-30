@@ -157,11 +157,7 @@ const searchResults = useDynamicFilter<IActivity>(
 )
 // endregion ////
 
-// region forIntegrators ////
-
-// endregion ////
-
-// region Mounted / Unmounted ////
+// region Lifecycle Hooks ////
 onMounted(async () => {
   try {
     await loadData()
@@ -192,59 +188,57 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <NuxtLayout
-    name="dashboard"
-  >
+  <NuxtLayout name="dashboard">
     <template #header-title>
-      <ProseH1 class="mt-1 mb-0 max-lg:ps-3">
-        {{ $t('page.list.seo.title') }}
+      <ProseH1 class="mt-1 mb-0 max-lg:ps-3" @click.stop="isLoading = !isLoading">
+        {{ $t('page.list.seo.title') }} @click
       </ProseH1>
     </template>
 
-    <div v-show="!isLoading" class="my-8 relative">
-      <B24ButtonGroup no-split class="max-lg:ps-3 min-w-[110px] max-w-[400px]">
-        <B24Input
-          ref="searchInput"
-          v-model="searchQuery"
-          type="search"
-          :icon="SearchIcon"
-          :placeholder="$t('page.list.ui.searchInput.placeholder')"
-          class="min-w-[110px] max-w-[400px]"
-          rounded
-        />
-        <B24DropdownMenu
-          :items="filterBadges"
-          :content="{
-            align: 'start',
-            side: dir === 'ltr' ? 'left' : 'right',
-            sideOffset: 2
-          }"
-          :b24ui="{
-            content: 'w-[240px] max-h-[245px]'
-          }"
-        >
-          <B24Button
-            rounded
-            color="link"
-            depth="dark"
-          >
-            <template #leading>
-              <Settings1Icon class="size-8" />
-              <B24Chip
-                v-if="isSomeBadgeFilter"
-                standalone
-                class="absolute top-0 ltr:right-2 rtl:left-2"
-                size="2xs"
-                color="primary"
-              />
-            </template>
-          </B24Button>
-        </B24DropdownMenu>
-      </B24ButtonGroup>
-    </div>
-
     <ActivityListSkeleton v-if="isLoading" />
     <template v-else>
+      <div class="my-8 relative">
+        <B24ButtonGroup no-split class="max-lg:ps-3 min-w-[110px] max-w-[400px]">
+          <B24Input
+            ref="searchInput"
+            v-model="searchQuery"
+            type="search"
+            :icon="SearchIcon"
+            :placeholder="$t('page.list.ui.searchInput.placeholder')"
+            class="min-w-[110px] max-w-[400px]"
+            rounded
+          />
+          <B24DropdownMenu
+            :items="filterBadges"
+            :content="{
+              align: 'start',
+              side: dir === 'ltr' ? 'left' : 'right',
+              sideOffset: 2
+            }"
+            :b24ui="{
+              content: 'w-[240px] max-h-[245px]'
+            }"
+          >
+            <B24Button
+              rounded
+              color="link"
+              depth="dark"
+            >
+              <template #leading>
+                <Settings1Icon class="size-8" />
+                <B24Chip
+                  v-if="isSomeBadgeFilter"
+                  standalone
+                  class="absolute top-0 ltr:right-2 rtl:left-2"
+                  size="2xs"
+                  color="primary"
+                />
+              </template>
+            </B24Button>
+          </B24DropdownMenu>
+        </B24ButtonGroup>
+      </div>
+
       <div
         v-if="searchResults.length"
         class="grid grid-cols-[repeat(auto-fill,minmax(310px,1fr))] gap-sm"

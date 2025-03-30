@@ -9,13 +9,10 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="mt-2 mb-3 flex flex-row items-start justify-start gap-2">
-    <B24Skeleton class="h-4 w-[150px]" />
-    <B24Skeleton class="h-4 w-[150px]" />
-    <B24Skeleton class="h-4 w-[150px]" />
+  <div class="my-8 max-lg:ps-3">
+    <B24Skeleton class="h-5xl min-w-[110px] max-w-[400px] rounded-full" />
   </div>
-  <B24Separator />
-  <div class="mt-4  grid grid-cols-[repeat(auto-fill,minmax(266px,1fr))] gap-y-sm gap-x-sm">
+  <div class="mt-4 grid grid-cols-[repeat(auto-fill,minmax(310px,1fr))] gap-sm">
     <ActivityItemSkeleton
       v-for="i in itemsCount"
       :key="i"
