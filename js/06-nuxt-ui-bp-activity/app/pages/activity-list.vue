@@ -191,7 +191,7 @@ onUnmounted(() => {
   <NuxtLayout name="dashboard">
     <template #header-title>
       <ProseH1 class="mt-1 mb-0 max-lg:ps-3">
-        {{ $t('page.list.seo.title') }} @click
+        {{ $t('page.list.seo.title') }}
       </ProseH1>
     </template>
 
