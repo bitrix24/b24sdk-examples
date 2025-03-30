@@ -300,11 +300,11 @@ function handleError(error: unknown, context: string): void {
               <B24FormField
                 label="Telegram"
                 name="telegram"
-                autofocus
                 :hint="`${(state?.telegram || '').length}/60`"
               >
                 <B24Input
                   v-model="state.telegram"
+                  autofocus
                   placeholder="https://t.me/..."
                   class="w-full"
                 />
@@ -342,6 +342,7 @@ function handleError(error: unknown, context: string): void {
               >
                 <B24Textarea
                   v-model="state.comments"
+                  autofocus
                   placeholder="Please provide important information..."
                   class="w-full"
                   :rows="7"
