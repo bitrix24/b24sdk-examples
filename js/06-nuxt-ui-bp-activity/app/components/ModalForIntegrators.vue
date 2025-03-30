@@ -37,7 +37,7 @@ const progress = computed(() => step.value === stepsMax.value ? 100 : (100 / ste
 async function loadData(): Promise<void> {
   try {
     isLoading.value = true
-    // @todo get real info
+    // @todo get real info and add skeleton
     Object.assign(state, {})
   } finally {
     isLoading.value = false
@@ -47,7 +47,7 @@ async function loadData(): Promise<void> {
 const stepTitle = computed(() => {
   switch (step.value) {
     case 1:
-      return 'Let\'s upload your company logo and specify its name.'
+      return 'Let\'s enter your company name and upload its logo.'
     case 2:
       return 'Shall we indicate the phone number and e-mail?'
     case 3:
@@ -221,7 +221,7 @@ function handleError(error: unknown, context: string): void {
 <template>
   <B24Modal
     :title="stepTitle"
-    :description="`Step ${step} from ${stepsMax}`"
+    :description="`step ${step} from ${stepsMax}`"
     :dismissible="false"
     :b24ui="{ content: 'max-w-[64rem] h-full' }"
     :close="{ onClick: () => emit('close', false) }"
