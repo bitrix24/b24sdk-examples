@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import type { IActivity } from '~/types'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import type { Collections } from '@nuxt/content'
@@ -54,8 +54,6 @@ const {
 
 // region Data ////
 async function loadData(): Promise<void> {
-  isLoading.value = true
-
   const data = await queryCollection(contentCollection.value)
     .select(
       'path',
@@ -73,16 +71,7 @@ async function loadData(): Promise<void> {
       isInstall: false
     } as IActivity)
   )
-
-  /**
-   * @todo get from b24 info about install
-   */
-  isLoading.value = false
 }
-
-watch(locale, () => {
-  loadData()
-})
 // endregion ////
 
 // region Actions ////
@@ -162,8 +151,15 @@ const searchResults = useDynamicFilter<IActivity>(
 // region Lifecycle Hooks ////
 onMounted(async () => {
   try {
+    isLoading.value = true
+
     await initApp()
     await loadData()
+
+    /**
+     * @todo get from b24 info about install
+     */
+    isLoading.value = false
   } catch (error: any) {
     /**
      * @todo fix error
