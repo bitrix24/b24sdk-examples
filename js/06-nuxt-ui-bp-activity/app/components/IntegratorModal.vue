@@ -328,7 +328,7 @@ function handleError(error: unknown, context: string): void {
                   autofocus
                   placeholder="Please provide important information..."
                   class="w-full"
-                  :rows="7"
+                  :rows="10"
                 />
               </B24FormField>
             </template>
@@ -343,7 +343,7 @@ function handleError(error: unknown, context: string): void {
                 color="link"
                 use-dropdown
                 normal-case
-                :b24ui="{ baseLine: 'w-full shrink-0' }"
+                :b24ui="{ baseLine: 'w-full shrink-0', trailingIcon: 'text-base-500' }"
               >
                 <div class="flex flex-row items-center justify-start gap-2 w-full shrink-1">
                   <div class="shrink-0">
@@ -351,11 +351,11 @@ function handleError(error: unknown, context: string): void {
                       v-if="state.logo"
                       :src="state.logo"
                       alt="Company Logo"
-                      class="rounded-md border border-base-200 dark:border-base-700 w-[40px] min-h-[40px] object-cover"
+                      class="rounded-md border border-base-500 w-[40px] min-h-[40px] object-cover"
                     >
                     <IncertImageIcon
                       v-else
-                      class="rounded-md border text-base-200 dark:text-base-800 border-base-200 dark:border-base-700 size-10 object-cover"
+                      class="rounded-md border text-base-500 border-base-500 size-10 object-cover"
                     />
                   </div>
                   <div class="min-w-0">
@@ -372,7 +372,7 @@ function handleError(error: unknown, context: string): void {
               </B24Button>
             </div>
 
-            <div class="ml-xs w-72 max-h-96 overflow-y-auto mt-2 bg-white dark:bg-base-dark shadow-lg rounded-2xs ring ring-base-300 dark:ring-base-800">
+            <div class="ml-xs w-72 mt-2 bg-white dark:bg-base-dark shadow-lg rounded-2xs ring ring-base-300 dark:ring-base-800">
               <B24DescriptionList
                 size="sm"
                 class="px-3 rounded-lg overflow-hidden"
@@ -380,7 +380,7 @@ function handleError(error: unknown, context: string): void {
                 :b24ui="{ container: 'mt-0  sm:grid-cols-[min(35%,5rem)_auto]' }"
               >
                 <template #description="{ item }">
-                  <span class="block break-words">
+                  <div class="break-words">
                     <template v-if="item.code === 'phone'">
                       <ProseA :href="`tel:${(item?.description || '').replace(/[^\d+]/g, '')}`">
                         {{ item.description }}
@@ -391,15 +391,17 @@ function handleError(error: unknown, context: string): void {
                         {{ item.description }}
                       </ProseA>
                     </template>
-                    <template v-else-if="item.code !== 'comments'">
+                    <template v-else-if="item.code === 'comments'">
+                      <div class="min-h-5 max-h-20 pe-1 overflow-y-auto scrollbar-thin scrollbar-transparent">
+                        {{ item.description }}
+                      </div>
+                    </template>
+                    <template v-else>
                       <ProseA :href="item.description">
                         {{ item.description }}
                       </ProseA>
                     </template>
-                    <template v-else>
-                      {{ item.description }}
-                    </template>
-                  </span>
+                  </div>
                 </template>
               </B24DescriptionList>
             </div>

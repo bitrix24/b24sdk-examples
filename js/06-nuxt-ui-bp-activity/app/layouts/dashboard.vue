@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { IntegratorNav, Logo, ModalForIntegrators } from '#components'
+import { IntegratorNav, Logo } from '#components'
 import { EActivityCategory } from '~/types'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
 import useSearch from '~/composables/useSearch'
 import PulseCircleIcon from '@bitrix24/b24icons-vue/main/PulseCircleIcon'
-import InterconnectionIcon from '@bitrix24/b24icons-vue/crm/InterconnectionIcon'
 import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
@@ -20,9 +19,6 @@ useHead({
     class: 'text-base-master dark:text-base-150 bg-base-50 dark:bg-base-dark font-b24-system antialiased'
   }
 })
-
-const overlay = useOverlay()
-const modalForIntegrators = overlay.create(ModalForIntegrators)
 
 const isDark = computed({
   get() {
@@ -64,57 +60,49 @@ const categories = computed(() => (handleClick: () => void) => {
   ] satisfies NavigationMenuItem[]
 })
 
-const helpItems = computed(() => (handleClick: () => void) => {
-  return [
-    {
-      label: t('component.nav.settings.settings'),
-      icon: SettingsIcon,
-      to: '/'
-    },
-    {
-      label: t('component.nav.settings.integrators'),
-      icon: InterconnectionIcon,
-      async onSelect(e: Event) {
-        e.preventDefault()
-        handleClick()
+const helpItems = computed(() => {
+  const result: NavigationMenuItem[] = []
 
-        const isSave = await modalForIntegrators.open()
-        if (!isSave) {
-          return
-        }
-      }
+  result.push({
+    label: t('component.nav.settings.settings'),
+    icon: SettingsIcon,
+    to: '/'
+  })
+
+  result.push({
+    label: t('component.nav.settings.help'),
+    icon: HelpIcon,
+    to: 'https://apidocs.bitrix24.com/',
+    target: '_blank'
+  })
+
+  result.push({
+    label: t('component.nav.settings.support'),
+    icon: PulseCircleIcon,
+    to: 'https://helpdesk.bitrix24.com/',
+    target: '_blank'
+  })
+
+  result.push({
+    label: isDark.value ? t('component.nav.settings.dark') : t('component.nav.settings.light'),
+    icon: isDark.value ? MoonIcon : SunIcon,
+    kbds: ['shift', 'd'],
+    badge: {
+      label: 'shift + d',
+      color: 'default' as const,
+      depth: 'light' as const,
+      useFill: false
     },
-    {
-      label: t('component.nav.settings.help'),
-      icon: HelpIcon,
-      to: 'https://apidocs.bitrix24.com/',
-      target: '_blank'
-    },
-    {
-      label: t('component.nav.settings.support'),
-      icon: PulseCircleIcon,
-      to: 'https://helpdesk.bitrix24.com/',
-      target: '_blank'
-    },
-    {
-      label: isDark.value ? t('component.nav.settings.dark') : t('component.nav.settings.light'),
-      icon: isDark.value ? MoonIcon : SunIcon,
-      kbds: ['shift', 'd'],
-      badge: {
-        label: 'shift + d',
-        color: 'default' as const,
-        depth: 'light' as const,
-        useFill: false
-      },
-      onSelect(e: Event) {
-        e?.preventDefault()
-        isDark.value = !isDark.value
-      }
+    onSelect(e: Event) {
+      e?.preventDefault()
+      isDark.value = !isDark.value
     }
-  ] satisfies NavigationMenuItem[]
+  })
+
+  return result
 })
 
-defineShortcuts(extractShortcuts(helpItems.value(() => {})))
+defineShortcuts(extractShortcuts(helpItems.value))
 </script>
 
 <template>
@@ -138,7 +126,7 @@ defineShortcuts(extractShortcuts(helpItems.value(() => {})))
         />
         <B24SidebarSpacer />
         <B24NavigationMenu
-          :items="helpItems(handleClick)"
+          :items="helpItems"
           variant="pill"
           orientation="vertical"
         />

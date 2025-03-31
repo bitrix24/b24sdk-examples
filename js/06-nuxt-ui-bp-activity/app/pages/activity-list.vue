@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch, computed } from 'vue'
 import type { IActivity } from '~/types'
-import { ModalLoader, ModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
+import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import type { Collections } from '@nuxt/content'
 import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
@@ -23,13 +23,15 @@ useHead({
   title: t('page.list.seo.title')
 })
 
+const { initApp } = useAppInit()
+
 // region Init ////
 const isShowDebug = ref(false)
 const isLoading = ref(true)
 const toast = useToast()
 const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
-const modalConfirm = overlay.create(ModalConfirm)
+const modalConfirm = overlay.create(ActivityItemModalConfirm)
 const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
 // endregion ////
 
@@ -85,7 +87,7 @@ watch(locale, () => {
 
 // region Actions ////
 async function showSlider(activity: IActivity): Promise<void> {
-  return activitySliderDetail.open({
+  activitySliderDetail.open({
     activity
   })
 }
@@ -160,6 +162,7 @@ const searchResults = useDynamicFilter<IActivity>(
 // region Lifecycle Hooks ////
 onMounted(async () => {
   try {
+    await initApp()
     await loadData()
   } catch (error: any) {
     /**
@@ -190,7 +193,7 @@ onUnmounted(() => {
 <template>
   <NuxtLayout name="dashboard">
     <template #header-title>
-      <ProseH1 class="mt-1 mb-0 max-lg:ps-3">
+      <ProseH1 class="mt-3 mb-0 max-lg:ps-3">
         {{ $t('page.list.seo.title') }}
       </ProseH1>
     </template>

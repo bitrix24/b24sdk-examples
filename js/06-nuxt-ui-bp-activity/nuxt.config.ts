@@ -11,9 +11,7 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/content',
     '@nuxtjs/i18n',
-    '@pinia/nuxt',
-    // @todo remove this - need use b24 app settings ////
-    '@pinia-plugin-persistedstate/nuxt'
+    '@pinia/nuxt'
   ],
   ssr: false,
   /**
@@ -53,17 +51,13 @@ export default defineNuxtConfig({
     ]
   },
   i18n: {
+    bundle: {
+      optimizeTranslationDirective: false,
+    },
     detectBrowserLanguage: false,
     strategy: 'no_prefix',
     lazy: true,
     defaultLocale: 'en',
     locales: locales
-  },
-  // @todo remove this - need use b24 app settings ////
-  piniaPersistedstate: {
-    cookieOptions: {
-      sameSite: 'strict'
-    },
-    storage: 'localStorage'
   }
 })
