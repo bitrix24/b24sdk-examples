@@ -1,3 +1,5 @@
+import { sleepAction } from '~/utils/sleep'
+
 /**
  * Some info about App
  * @todo not save this settings (persist: false)
@@ -20,6 +22,7 @@ export const useAppSettingsStore = defineStore(
       site: '',
       comments: ''
     })
+    const activityInstalled = reactive<string[]>([])
     // endregion ////
 
     // region Actions ////
@@ -38,12 +41,38 @@ export const useAppSettingsStore = defineStore(
       version.value = data.version || '1.0.0'
       isTrial.value = data.isTrial ?? true
       if (data.integrator) {
-        updateIntegrator(data.integrator)
+        Object.assign(integrator, data.integrator)
       }
+    }
+
+    /**
+     * Initialize store from batch response data
+     * @param activityList - Raw data from Bitrix24 API
+     */
+    function initFromBatchByActivityInstalled(
+      activityList: string[]
+    ) {
+      Object.assign(activityInstalled, activityList)
+    }
+
+    /**
+     * Save settings to Bitrix24
+     */
+    const saveSettings = async () => {
+      // Implementation for direct update
+      console.warn(
+        '>> b24.save:app.options',
+        {
+          integrator,
+          activityInstalled
+        }
+      )
+      await sleepAction(1000)
     }
 
     const updateIntegrator = (params: Partial<typeof integrator>) => {
       Object.assign(integrator, params)
+      saveSettings()
     }
 
     const integratorPreview = computed(() => {
@@ -93,23 +122,18 @@ export const useAppSettingsStore = defineStore(
 
       return result
     })
-
-    /**
-     * Save settings to Bitrix24
-     */
-    const saveSettings = async () => {
-      // Implementation for direct update
-    }
     // endregion ////
 
     return {
       version,
       isTrial,
       initFromBatch,
+      initFromBatchByActivityInstalled,
+      saveSettings,
       integrator,
       updateIntegrator,
       integratorPreview,
-      saveSettings
+      activityInstalled
     }
   }
 )

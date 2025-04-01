@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { IntegratorNav, Logo } from '#components'
 import { EActivityCategory } from '~/types'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
-import useSearch from '~/composables/useSearch'
+import { useUserSettingsStore } from '~/stores/userSettings'
 import PulseCircleIcon from '@bitrix24/b24icons-vue/main/PulseCircleIcon'
 import SettingsIcon from '@bitrix24/b24icons-vue/common-service/SettingsIcon'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
@@ -29,17 +29,18 @@ const isDark = computed({
   }
 })
 
-const { categoryActive } = useSearch()
-
+const userSettings = useUserSettingsStore()
 const categories = computed(() => (handleClick: () => void) => {
   return [
     {
       label: t('composables.useSearchInput.categories.all'),
       value: 'all',
-      active: categoryActive.value === 'all',
-      onSelect(e: Event) {
+      active: userSettings.filterParams.category === 'all',
+      async onSelect(e: Event) {
         e.preventDefault()
-        categoryActive.value = 'all'
+        userSettings.filterParams.category = 'all'
+
+        await userSettings.saveSettings()
 
         handleClick()
       }
@@ -48,10 +49,12 @@ const categories = computed(() => (handleClick: () => void) => {
       return {
         label: t(`composables.useSearchInput.categories.${value}`),
         value,
-        active: categoryActive.value === value,
-        onSelect(e: Event) {
+        active: userSettings.filterParams.category === value,
+        async onSelect(e: Event) {
           e.preventDefault()
-          categoryActive.value = value
+          userSettings.filterParams.category = value
+
+          await userSettings.saveSettings()
 
           handleClick()
         }

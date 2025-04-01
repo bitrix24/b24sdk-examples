@@ -1,9 +1,8 @@
 <script setup lang="ts">
+import { useUserSettingsStore } from '~/stores/userSettings'
 import AttentionIIcon from '@bitrix24/b24icons-vue/main/AttentionIIcon'
 
-defineProps<{}>()
-
-const emit = defineEmits<{ clear: [] }>()
+const userSettings = useUserSettingsStore()
 </script>
 
 <template>
@@ -18,7 +17,7 @@ const emit = defineEmits<{ clear: [] }>()
       :label="$t('component.activity.list.empty.action')"
       rounded
       depth="dark"
-      @click="emit('clear')"
+      @click="userSettings.clearFilter"
     />
   </div>
 </template>

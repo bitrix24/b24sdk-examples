@@ -43,4 +43,9 @@ export type FilterSetting = {
 } | {
   type: 'separator'
 }
+
+export interface IFilterParams {
+  category: 'all' | EActivityCategory
+  badge: Map<EActivityBadge, boolean>
+}
 // endregion ////

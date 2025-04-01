@@ -1,5 +1,6 @@
 // import type { BatchCommands, BitrixBatchResponse } from '~/types/bitrix'
 // import { useBitrix } from '~/services/bitrix'
+import type { EActivityBadge } from '~/types'
 
 /**
  * Composable handling application initialization
@@ -55,13 +56,20 @@ export const useAppInit = () => {
           comments: 'Important information'
         }
       })
+      appSettings.initFromBatchByActivityInstalled([
+        '/activities/en/appmarketplace',
+        '/activities/en/emailmarketing',
+        '/activities/en/sustainabilityinitiatives'
+      ])
+
       userSettings.initFromBatch({
         searchQuery: '',
         filterParams: {
           category: 'all',
-          sortBy: 'date'
+          badge: ['badge_2' as EActivityBadge]
         }
       })
+
       user.initFromBatch({
         NAME: 'SomeUserLogin',
         IS_ADMIN: true

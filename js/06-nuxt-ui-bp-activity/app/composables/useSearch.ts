@@ -1,29 +1,21 @@
+import { watch } from 'vue'
 import { useDebounce } from '@vueuse/core'
-import { nextTick, onMounted, ref, watch } from 'vue'
-import { scrollToTop } from '~/utils/scrollToTop'
-import type { FilterSetting, IActivity, EActivityCategory } from '~/types'
+import type { FilterSetting, IActivity } from '~/types'
 import { EActivityBadge } from '~/types'
+import { useUserSettingsStore } from '~/stores/userSettings'
+import { storeToRefs } from 'pinia'
 
-// region Init ////
-const activities = ref<IActivity[]>([])
-
-const searchInput = ref<HTMLElement | null>(null)
-const searchQuery = ref<string>('')
-const searchQueryDebounced = useDebounce<string>(searchQuery, 200)
-// endregion ////
-
-// region Categories ////
-const categoryActive = ref<'all' | EActivityCategory>('all')
-// endregion ////
-
-const useSearch = () => {
+const useSearch = (
+  activities: Ref<IActivity[]>
+) => {
   const { t } = useI18n()
 
-  // region Badge ////
-  const filterBadgeMap = ref<Map<EActivityBadge, boolean>>(new Map(
-    Object.values(EActivityBadge).map(key => [key, false])
-  ))
+  const userSettings = useUserSettingsStore()
+  const { searchQuery } = storeToRefs(userSettings)
 
+  const searchQueryDebounced = useDebounce(searchQuery, 200)
+
+  // region Badge ////
   const filterBadges = computed<FilterSetting[]>(() => {
     const badges = Object.values(EActivityBadge)
     const notInstallIndex = badges.indexOf(EActivityBadge.NotInstall)
@@ -43,76 +35,46 @@ const useSearch = () => {
       return {
         label: t(`composables.useSearchInput.badge.${badge}`),
         type: 'checkbox' as const,
-        checked: filterBadgeMap.value.get(badge),
-        onUpdateChecked(checked: boolean) {
-          filterBadgeMap.value.set(badge, checked)
+        checked: userSettings.filterParams.badge.get(badge),
+        async onUpdateChecked(checked: boolean) {
+          userSettings.filterParams.badge.set(badge, checked)
           if (
             badge === EActivityBadge.Install
             && checked
-            && filterBadgeMap.value.get(EActivityBadge.NotInstall)
+            && userSettings.filterParams.badge.get(EActivityBadge.NotInstall)
           ) {
-            filterBadgeMap.value.set(EActivityBadge.NotInstall, false)
+            userSettings.filterParams.badge.set(EActivityBadge.NotInstall, false)
           } else if (
             badge === EActivityBadge.NotInstall
             && checked
-            && filterBadgeMap.value.get(EActivityBadge.Install)
+            && userSettings.filterParams.badge.get(EActivityBadge.Install)
           ) {
-            filterBadgeMap.value.set(EActivityBadge.Install, false)
+            userSettings.filterParams.badge.set(EActivityBadge.Install, false)
           }
+
+          await userSettings.saveSettings()
         },
         onSelect(e: Event) {
           e.preventDefault()
-
-          nextTick(() => {
-            scrollToTop()
-          })
         }
       }
     })
   })
-
-  const isSomeBadgeFilter = computed<boolean>(() => {
-    for (const value of filterBadgeMap.value.values()) {
-      if (value) {
-        return true
-      }
-    }
-
-    return false
-  })
   // endregion ////
 
-  // region Actions ////
-  const makeClearFilter = () => {
-    searchQuery.value = ''
-
-    Object.values(EActivityBadge).forEach((badge) => {
-      filterBadgeMap.value.set(badge, false)
-    })
-
-    nextTick(() => {
-      scrollToTop()
-    })
-  }
-  // endregion ////
-
-  // region Data ////
+  // region Activities ////
   const activitiesList = computed(() => {
     let list = activities.value.filter((activity) => {
-      if (categoryActive.value === 'all') {
+      if (userSettings.filterParams.category === 'all') {
         return true
       }
 
-      return activity.categories?.includes(categoryActive.value)
+      return activity.categories?.includes(userSettings.filterParams.category)
     })
 
-    const activeFilters = Array.from(filterBadgeMap.value.entries())
-      .filter(([_, isActive]) => isActive)
-      .map(([badge]) => badge)
-
-    if (activeFilters.length > 0) {
+    if (userSettings.activeBadges.length > 0) {
       list = list.filter((activity) => {
-        return activeFilters.every((badge) => {
+        return userSettings.activeBadges.every((badge) => {
           if (badge === EActivityBadge.Install) {
             return activity.isInstall === true
           } else if (badge === EActivityBadge.NotInstall) {
@@ -129,46 +91,14 @@ const useSearch = () => {
   // endregion ////
 
   // region Watch ////
-  watch(searchQueryDebounced, (searchString) => {
-    /**
-     * @todo save app.props
-     */
-    const newUrl = new URL(window.location.href)
-
-    if (searchString === '') {
-      newUrl.searchParams.delete('search')
-    } else {
-      newUrl.searchParams.set('search', searchString)
-    }
-
-    nextTick(() => {
-      window.history.replaceState({}, '', newUrl)
-
-      scrollToTop()
-    })
-  })
-  // endregion ////
-
-  // region Mounted / Unmounted ////
-  onMounted(() => {
-    const searchParams = new URLSearchParams(window.location.search)
-
-    if (searchParams.has('search')) {
-      searchQuery.value = searchParams.get('search') || ''
-    }
+  watch(searchQueryDebounced, async () => {
+    await userSettings.saveSettings()
   })
   // endregion ////
 
   return {
-    activities,
-    searchInput,
-    searchQuery,
     searchQueryDebounced,
-    filterBadgeMap,
     filterBadges,
-    isSomeBadgeFilter,
-    makeClearFilter,
-    categoryActive,
     activitiesList
   }
 }

@@ -3,10 +3,12 @@ import { ref, onMounted, onUnmounted, computed } from 'vue'
 import type { IActivity } from '~/types'
 import { ModalLoader, ActivityItemModalConfirm, ActivityItemSliderDetail, ActivityListSkeleton, ActivityListEmpty } from '#components'
 import type { Collections } from '@nuxt/content'
+import { useUserSettingsStore } from '~/stores/userSettings'
+import { useAppSettingsStore } from '~/stores/appSettings'
+import { storeToRefs } from 'pinia'
 import useSearch from '~/composables/useSearch'
 import useDynamicFilter from '~/composables/useDynamicFilter'
 import { getBadgeProps } from '~/composables/useLabelMapBadge'
-import { sleepAction } from '~/utils/sleep'
 import * as locales from '@bitrix24/b24ui-nuxt/locale'
 import FileCheckIcon from '@bitrix24/b24icons-vue/main/FileCheckIcon'
 import Settings1Icon from '@bitrix24/b24icons-vue/main/SettingsIcon'
@@ -33,6 +35,7 @@ const overlay = useOverlay()
 const modalLoader = overlay.create(ModalLoader)
 const modalConfirm = overlay.create(ActivityItemModalConfirm)
 const activitySliderDetail = overlay.create(ActivityItemSliderDetail)
+const activities = ref<IActivity[]>([])
 // endregion ////
 
 // region Locale ////
@@ -41,15 +44,13 @@ const contentCollection = computed<keyof Collections>(() => `contentActivities_$
 // endregion ////
 
 // region Search ////
+const appSettings = useAppSettingsStore()
+const userSettings = useUserSettingsStore()
+const { searchQuery } = storeToRefs(userSettings)
 const {
-  activities,
-  searchInput,
-  searchQuery,
   filterBadges,
-  isSomeBadgeFilter,
-  makeClearFilter,
   activitiesList
-} = useSearch()
+} = useSearch(activities)
 // endregion ////
 
 // region Data ////
@@ -68,7 +69,7 @@ async function loadData(): Promise<void> {
   activities.value = data.map(
     activity => ({
       ...activity,
-      isInstall: false
+      isInstall: appSettings.activityInstalled.includes(activity.path)
     } as IActivity)
   )
 }
@@ -76,14 +77,20 @@ async function loadData(): Promise<void> {
 
 // region Actions ////
 async function showSlider(activity: IActivity): Promise<void> {
-  activitySliderDetail.open({
+  await activitySliderDetail.open({
     activity
   })
 }
 
 async function makeInstall(activity: IActivity): Promise<void> {
   modalLoader.open()
-  await sleepAction(1000)
+  /**
+   * @todo move to store
+   */
+  if (!appSettings.activityInstalled.includes(activity.path)) {
+    appSettings.activityInstalled.push(activity.path)
+    await appSettings.saveSettings()
+  }
 
   activity.isInstall = true
 
@@ -114,10 +121,17 @@ async function makeUnInstall(activity: IActivity): Promise<void> {
   }
 
   modalLoader.open()
-
-  await sleepAction()
-
   activity.isInstall = false
+
+  /**
+   * @todo move to store
+   */
+  const index = appSettings.activityInstalled.indexOf(activity.path)
+
+  if (index !== -1) {
+    appSettings.activityInstalled.splice(index, 1)
+    await appSettings.saveSettings()
+  }
 
   toast.add({
     title: t('page.list.make.uninstall.success.title'),
@@ -199,7 +213,6 @@ onUnmounted(() => {
       <div class="my-8 relative">
         <B24ButtonGroup no-split class="max-lg:ps-3 min-w-[110px] max-w-[400px]">
           <B24Input
-            ref="searchInput"
             v-model="searchQuery"
             type="search"
             :icon="SearchIcon"
@@ -226,7 +239,7 @@ onUnmounted(() => {
               <template #leading>
                 <Settings1Icon class="size-8" />
                 <B24Chip
-                  v-if="isSomeBadgeFilter"
+                  v-if="userSettings.isSomeBadgeActive"
                   standalone
                   class="absolute top-0 ltr:right-2 rtl:left-2"
                   size="2xs"
@@ -313,10 +326,7 @@ onUnmounted(() => {
         </template>
       </div>
 
-      <ActivityListEmpty
-        v-else
-        @clear="makeClearFilter"
-      />
+      <ActivityListEmpty v-else />
 
       <ProsePre v-if="isShowDebug">
         {{ activities }}

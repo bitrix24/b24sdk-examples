@@ -104,11 +104,15 @@ async function setInfo() {
             </div>
           </template>
 
-          <template #footer>
+          <template
+            v-if="user.isAdmin"
+            #footer
+          >
             <B24Button
-              class="p-0"
-              color="link"
+              class="px-1"
+              color="ai"
               size="xs"
+              rounded
               :label="t('component.nav.settings.integrators')"
               :icon="InterconnectionIcon"
               @click.stop="setInfo"
