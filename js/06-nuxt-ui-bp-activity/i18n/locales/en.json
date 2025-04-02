@@ -138,6 +138,25 @@
         "dark": "Dark",
         "light": "Light"
       }
+    },
+    "settings": {
+      "slider": {
+        "title": "Settings",
+        "description": "Important application options",
+        "history": {
+          "title": "History",
+          "alert": "Login history will help you investigate security breaches. You will see all devices and IP addresses a user used to log on to their account. You can also log out the offending user on all devices.",
+          "property": "Days to keep login history:",
+          "action": "View employees"
+        },
+        "log": {
+          "title": "Event log",
+          "alert": "The event log shows important events (usually user log-ons). You can always quickly check every log on: who, when and the user's IP address.",
+          "action": "View event log"
+        },
+        "save": "Save",
+        "cancel": "Cancel"
+      }
     }
   },
   "error": {

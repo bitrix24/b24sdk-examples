@@ -214,7 +214,7 @@ function handleError(error: unknown, context: string): void {
         v-model="progress"
         size="xs"
       />
-      <div class="px-10 py-8 bg-white dark:bg-white/10 ">
+      <div class="py-8 px-0.5 md:px-10 bg-white dark:bg-white/10 ">
         <!-- Content Section -->
         <section class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
           <!-- Form Section -->

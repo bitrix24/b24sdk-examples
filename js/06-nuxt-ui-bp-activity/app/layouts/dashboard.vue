@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { IntegratorNav, Logo } from '#components'
+import { SettingsSlider, IntegratorNav, Logo } from '#components'
 import { EActivityCategory } from '~/types'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
 import { useUserSettingsStore } from '~/stores/userSettings'
@@ -11,8 +11,9 @@ import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import HelpIcon from '@bitrix24/b24icons-vue/main/HelpIcon'
 
 const { t } = useI18n()
-const route = useRoute()
 const colorMode = useColorMode()
+const overlay = useOverlay()
+const settingsSlider = overlay.create(SettingsSlider)
 
 useHead({
   bodyAttrs: {
@@ -69,7 +70,10 @@ const helpItems = computed(() => {
   result.push({
     label: t('component.nav.settings.settings'),
     icon: SettingsIcon,
-    to: '/'
+    async onSelect(e: Event) {
+      e?.preventDefault()
+      await settingsSlider.open()
+    }
   })
 
   result.push({
@@ -110,7 +114,7 @@ defineShortcuts(extractShortcuts(helpItems.value))
 
 <template>
   <B24SidebarLayout
-    :use-light-content="route.path !== '/activity-list'"
+    :use-light-content="false"
   >
     <template #sidebar="{ handleClick }">
       <B24SidebarHeader>

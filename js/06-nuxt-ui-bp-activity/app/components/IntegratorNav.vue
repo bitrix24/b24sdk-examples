@@ -32,9 +32,9 @@ async function setInfo() {
     :arrow="{ width: 20, height: 10 }"
     :b24ui="{ content: 'w-72' }"
   >
-    <div class="mx-xs py-xs px-xs hover:bg-base-200 dark:hover:bg-white/10 rounded-md flex items-center justify-center">
+    <div class="mx-xs py-xs px-xs hover:bg-base-200 dark:hover:bg-white/10 rounded-md flex justify-center">
       <B24Button
-        class="max-w-[237px] ps-0 pe-0"
+        class="w-[237px] ps-0 pe-0"
         label="Integrator Info"
         color="link"
         use-dropdown
