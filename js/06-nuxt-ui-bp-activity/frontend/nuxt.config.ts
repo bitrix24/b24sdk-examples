@@ -29,14 +29,7 @@ export default defineNuxtConfig({
   },
   devServer: {
     port: 3000,
-    host: 'custom.mydomain.local',
-    /**
-     * @memo: You need set actual ssl for dev
-     */
-    https: {
-      key: '../../../../../source/ssl/custom.mydomain.local-key.pem',
-      cert: '../../../../../source/ssl/custom.mydomain.local.pem'
-    },
+    host: '0.0.0.0',
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')
     }
@@ -52,6 +45,14 @@ export default defineNuxtConfig({
     plugins: [
       tailwindcss()
     ]
+  },
+  content: {
+    /**
+     * @memo: Under Docker::Nginx not use
+     */
+    watch: {
+      enabled: false
+    }
   },
   i18n: {
     bundle: {

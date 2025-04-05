@@ -79,3 +79,66 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+---
+
+# Docker
+
+> These are experimental settings for using Docker.
+> Still in early Alpha
+
+## @todo
+## Docker
+
+```bash
+cp .env.dev.example .env.dev
+```
+
+### RESTART
+#### ALL 
+```bash
+docker-compose --env-file .env.dev stop
+
+## You must undestend -> ssl will be removed
+## docker volume prune
+docker-compose down --volumes --rmi all --remove-orphans
+docker-compose --env-file .env.dev up -d --build
+
+# restart all
+docker-compose down && docker-compose --env-file .env.dev up -d --build
+```
+
+```bash
+docker-compose --env-file .env.dev up -d --build frontend
+```
+
+### STATUS 
+```bash
+
+docker ps
+docker-compose --env-file .env.dev top
+```
+
+### LOG
+
+@todo 
+```bash
+cd /home/bitrix/06-nuxt-ui-bp-activity && docker-compose logs -f frontend
+cd /home/bitrix/06-nuxt-ui-bp-activity && docker-compose logs -f server
+cd /home/bitrix/06-nuxt-ui-bp-activity && docker-compose logs -f letsencrypt
+```
+
+```bash
+docker-compose --env-file .env.dev up --build frontend
+docker-compose --env-file .env.dev up --build -d frontend
+
+docker-compose --env-file .env.dev up server
+
+docker-compose --env-file .env.dev up --build server
+docker-compose --env-file .env.dev up --build letsencrypt
+
+```
+
+## Useful resources
+
+- SSL Server Test [Qualys](https://www.ssllabs.com/ssltest/index.html)
