@@ -24,7 +24,7 @@ composer.lock
 .vscode
 .idea
 .DS_Store
-*.pem
+# *.pem
 Thumbs.db
 /@tmp
 
