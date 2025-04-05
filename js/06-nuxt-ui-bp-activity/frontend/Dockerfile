@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:latest
 MAINTAINER B24Sdk <github.com/bitrix24>
 
 WORKDIR /frontend
