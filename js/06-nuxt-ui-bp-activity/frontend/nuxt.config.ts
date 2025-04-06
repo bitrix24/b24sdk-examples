@@ -38,6 +38,8 @@ export default defineNuxtConfig({
     port: 3000,
     // @todo use env for docker
     // host: '0.0.0.0',
+    // @todo use for tuna
+    host: '127.0.0.1',
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')
     }

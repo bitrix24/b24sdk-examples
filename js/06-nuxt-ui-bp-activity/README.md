@@ -96,6 +96,11 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ---
 
+# tuna.am
+> Blocked request. This host ("7z5n5j-146-120-15---.--.tuna.am") is not allowed.
+> To allow this host, add "7z5n5j-146-120-15---.--.tuna.am" to `server.allowedHosts` in vite.config.js.
+
+
 # Docker
 
 > These are experimental settings for using Docker.
