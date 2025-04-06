@@ -82,6 +82,20 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ---
 
+# App config
+
+> These are experimental settings for using B24.
+> Still in early Alpha
+
+## scopes
+
+- crm
+- bizproc
+- placement
+- user_brief
+
+---
+
 # Docker
 
 > These are experimental settings for using Docker.
