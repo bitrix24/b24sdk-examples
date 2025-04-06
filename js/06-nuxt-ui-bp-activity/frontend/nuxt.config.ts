@@ -1,7 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 import { readFileSync } from 'node:fs'
-
-const locales = JSON.parse(process.env.NUXT_PUBLIC_CONTENT_LOCALES || '[]')
+import { contentLocales } from './i18n.map'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -22,14 +21,23 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   css: ['~/assets/css/main.css'],
+  content: {
+    /**
+     * @memo: Under Docker::Nginx not use
+     */
+    watch: {
+      enabled: false
+    }
+  },
   runtimeConfig: {
     public: {
-      contentLocales: locales
+      contentLocales: contentLocales
     }
   },
   devServer: {
     port: 3000,
-    host: '0.0.0.0',
+    // @todo use env for docker
+    // host: '0.0.0.0',
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')
     }
@@ -46,14 +54,6 @@ export default defineNuxtConfig({
       tailwindcss()
     ]
   },
-  content: {
-    /**
-     * @memo: Under Docker::Nginx not use
-     */
-    watch: {
-      enabled: false
-    }
-  },
   i18n: {
     bundle: {
       optimizeTranslationDirective: false
@@ -62,6 +62,6 @@ export default defineNuxtConfig({
     strategy: 'no_prefix',
     lazy: true,
     defaultLocale: 'en',
-    locales: locales
+    locales: contentLocales
   }
 })

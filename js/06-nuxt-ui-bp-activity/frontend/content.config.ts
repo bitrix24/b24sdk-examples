@@ -1,6 +1,7 @@
 import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 import type { DefinedCollection } from '@nuxt/content'
 import { EActivityCategory } from './app/types'
+import { contentLocales } from './i18n.map'
 
 interface LocaleConfig {
   code: string
@@ -9,9 +10,11 @@ interface LocaleConfig {
 }
 
 const getLocales = (): LocaleConfig[] => {
+  /**
+   * @todo Refactor me
+   */
   try {
-    const rawLocales = process.env.NUXT_PUBLIC_CONTENT_LOCALES || '[]'
-    const locales: unknown = JSON.parse(rawLocales)
+    const locales: unknown = contentLocales
 
     if (!Array.isArray(locales)) throw new Error('Invalid locales format')
     return locales.filter((l): l is LocaleConfig =>
