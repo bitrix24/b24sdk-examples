@@ -1,9 +1,11 @@
 FROM node:latest
-MAINTAINER B24Sdk <github.com/bitrix24>
 
-WORKDIR /frontend
+LABEL maintainer="B24Sdk <github.com/bitrix24>"
+
+WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .

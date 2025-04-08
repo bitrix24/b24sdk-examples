@@ -37,9 +37,9 @@ export default defineNuxtConfig({
   devServer: {
     port: 3000,
     // @todo use env for docker
-    // host: '0.0.0.0',
+    host: '0.0.0.0',
     // @todo use for tuna
-    host: '127.0.0.1',
+    // host: '127.0.0.1',
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')
     }
@@ -52,6 +52,17 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-27',
 
   vite: {
+    server: {
+      /**
+       * @todo off for prod
+       */
+    //   allowedHosts: [
+    //     'all',
+    //     'xx7qw9-93-170-237-202.ru.tuna.am',
+    //     'zml87e-93-170-237-202.ru.tuna.am',
+    //     'a8o07q-93-170-237-202.ru.tuna.am'
+    //   ]
+    },
     plugins: [
       tailwindcss()
     ]

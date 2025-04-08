@@ -101,12 +101,33 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 > To allow this host, add "7z5n5j-146-120-15---.--.tuna.am" to `server.allowedHosts` in vite.config.js.
 
 
-# Docker
+# @todo
 
-> These are experimental settings for using Docker.
+> [!WARNING]  
+> These are experimental settings
+> 
 > Still in early Alpha
 
-## @todo
+---
+
+## Ngrok
+
+[ngrok.com](https://ngrok.com/)
+
+```bash
+ngrok http 3000
+```
+
+## Tuna
+
+[Tuna](https://tuna.am/en/docs/)
+
+```bash
+tuna http 3000
+```
+
+---
+
 ## Docker
 
 ```bash

@@ -1,5 +1,6 @@
 FROM nginx:latest
-MAINTAINER B24Sdk <github.com/bitrix24>
+
+LABEL maintainer="B24Sdk <github.com/bitrix24>"
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 
