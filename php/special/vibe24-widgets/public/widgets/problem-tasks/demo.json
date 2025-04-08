@@ -1,0 +1,33 @@
+{
+    "currentPage": 1,
+    "sortBy": "id",
+    "sortOrder": true,
+    "totalPages": 5,
+    "taskItems": [
+        {
+            "id": 1,
+            "title": "Task 1",
+            "deadline": "2024-10-12",
+            "responsibleName": "Responsible 1-demo",
+            "responsibleId": 1
+        },
+        {
+            "id": 2,
+            "title": "Task 2",
+            "deadline": "2024-10-13",
+            "responsibleName": "Responsible 2-demo",
+            "responsibleId": 2
+        },
+        {
+            "id": 3,
+            "title": "Task 3",
+            "deadline": "2024-10-14",
+            "responsibleName": "Responsible 3-demo",
+            "responsibleId": 3
+        }
+    ],
+    "user": {
+        "avatar": "https://whale-viable-wasp.ngrok-free.app/widgets/problem-tasks/assets/user.jpg",
+        "fullName": "Главный П."
+    }
+}

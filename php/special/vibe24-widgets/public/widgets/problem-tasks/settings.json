@@ -1,0 +1,19 @@
+{
+    "NAME": "Problem tasks",
+    "SECTIONS": "widgets_company_life",
+    "WIDGET_PARAMS": {
+        "rootNode": ".task-widget__container",
+        "lang": {
+            "ru": {
+                "W_TITLE": "Проблемные задачи",
+                "W_EMPTY": "Задачи не найдены",
+                "W_FILTER": "Фильтр по названию задачи"
+            },
+            "en": {
+                "W_TITLE": "Problem tasks",
+                "W_EMPTY": "No task found",
+                "W_FILTER": "Find task by title"
+            }
+        }
+    }
+}
