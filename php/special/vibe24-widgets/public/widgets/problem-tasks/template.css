@@ -1,0 +1,155 @@
+.task-widget__container {
+    width: 100%;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden; /* To prevent the pseudo-element from going outside the boundaries */
+    background-image: url('assets/background.jpg'); /* Path to your photo */
+    background-size: cover;
+    background-position: center;
+}
+
+.task-widget__container::before {
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Darkening */
+    z-index: 1; /* The pseudo-element will be under the content */
+}
+
+.task-widget__content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.w-title {
+    color: #ffffff; /* Light color for the title */
+    margin-bottom: 15px;
+    padding-bottom: 0;
+    font: var(--ui-font-weight-medium) 28px var(--ui-font-family-system);
+}
+
+.task-widget__left {
+    flex: 1;
+    margin-right: 16px;
+}
+
+.task-widget__filter {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.task-widget__right {
+    display: flex;
+    align-items: center;
+}
+
+.task-widget__user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.task-widget__avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+}
+
+.task-widget__user-name {
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff; /* Light color for the user name */
+}
+
+.task-table-wrapper {
+    background-color: #f5f5f5; /* Light gray background for the table */
+    padding: 0; /* Ensure there are no inner paddings */
+    border-radius: 10px; /* Rounded corners if necessary */
+    overflow: hidden; /* To prevent content from going outside the boundaries */
+}
+
+.task-widget__table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f5f5f5; /* Light gray background for the table */
+    margin: 0; /* Remove outer margins */
+}
+
+.task-widget__header {
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+}
+
+.task-table-container {
+    padding: 10px;
+}
+
+.task-widget__cell {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.task-widget__striped-row {
+    background-color: #eaeaea;
+}
+
+.task-widget__pagination {
+    /* margin-top: 10px; */
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5; /* Light gray background for the table */
+}
+
+.task-widget__link {
+    text-decoration: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.task-widget__link--disabled {
+    color: #ccc;
+    pointer-events: none;
+}
+
+.task-widget__page-info {
+    margin: 0 10px;
+}
+
+.task-widget__empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #ffffff;
+}
+
+.task-widget__empty-icon {
+    width: 64px;
+    height: 64px;
+    background-image: url('assets/empty-state-icon.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 16px;
+}
+
+.task-widget__empty-text {
+    font-size: 16px;
+    text-align: center;
+}

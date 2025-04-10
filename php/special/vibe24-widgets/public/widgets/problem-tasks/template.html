@@ -1,0 +1,83 @@
+<div class="task-widget__container">
+
+    <h3 class="w-title">{{ $Bitrix.Loc.getMessage('W_TITLE') }}</h3>
+
+    <div class="task-widget__content">
+
+        <div class="task-widget__left">
+            <!-- Поле для фильтрации задач -->
+            <input
+                type="text"
+                class="task-widget__filter"
+                :placeholder="$Bitrix.Loc.getMessage('W_FILTER')"
+                v-model="taskFilter"
+                @input="fetch({ filter: taskFilter, pageIndex: currentPage, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder })"
+            />
+
+            <div v-if="taskItems.length === 0" class="task-widget__empty-state">
+                <div class="task-widget__empty-icon"></div>
+                <p class="task-widget__empty-text">{{ $Bitrix.Loc.getMessage('W_EMPTY') }}</p>
+            </div>
+
+            <div v-else class="task-table-wrapper">
+                <div class="task-table-container">
+                    <table class="task-widget__table">
+                        <thead>
+                        <tr>
+                            <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'id', curSortBy: sortBy, curSortOrder: sortOrder})">
+                            ID
+                            <span v-if="sortBy === 'id'">
+                                {{ sortOrder === false ? '↑' : '↓' }}
+                            </span>
+                            </th>
+                            <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'title', curSortBy: sortBy, curSortOrder: sortOrder})">
+                            Задача
+                            <span v-if="sortBy === 'title'">
+                                {{ sortOrder === false ? '↑' : '↓' }}
+                            </span>
+                            </th>
+                            <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'deadline', curSortBy: sortBy, curSortOrder: sortOrder})">
+                            Срок
+                            <span v-if="sortBy === 'deadline'">
+                                {{ sortOrder === false ? '↑' : '↓' }}
+                            </span>
+                            </th>
+                            <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'responsibleName', curSortBy: sortBy, curSortOrder: sortOrder})">
+                            Ответственный
+                            <span v-if="sortBy === 'responsibleName'">
+                                {{ sortOrder === false ? '↑' : '↓' }}
+                            </span>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr
+                            v-for="(task, index) in taskItems"
+                            :key="task.id"
+                            :class="{ 'task-widget__striped-row': index % 2 !== 0 }"
+                            @click="openPath(`/company/personal/user/${task.responsibleId}/tasks/task/view/${task.id}/`)"
+                        >
+                            <td class="task-widget__cell">{{ task.id }}</td>
+                            <td class="task-widget__cell">{{ task.title }}</td>
+                            <td class="task-widget__cell">{{ task.deadline }}</td>
+                            <td class="task-widget__cell">{{ task.responsibleName }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>    
+                <div v-if="taskItems.length > 0" class="task-widget__pagination">
+                    <a href="#" @click="fetch({filter: taskFilter, pageIndex: currentPage - 1, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder})" :class="{ 'task-widget__link--disabled': currentPage === 1 }" class="task-widget__link">Предыдущая</a>
+                    <span class="task-widget__page-info">Страница {{ currentPage }} из {{ totalPages }}</span>
+                    <a href="#" @click="fetch({filter: taskFilter, pageIndex: currentPage + 1, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder})" :class="{ 'task-widget__link--disabled': currentPage === totalPages }" class="task-widget__link">Следующая</a>
+                </div>
+            </div>
+        </div>  
+        
+        <div class="task-widget__right">
+            <div class="task-widget__user-info">
+                <img :src="user.avatar" alt="User Avatar" class="task-widget__avatar" />
+                <span class="task-widget__user-name">{{ user.fullName }}</span>
+            </div>
+        </div>
+    </div>
+</div>
