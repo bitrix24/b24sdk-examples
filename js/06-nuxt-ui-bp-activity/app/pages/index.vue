@@ -84,7 +84,7 @@ onMounted(async () => {
 <template>
   <div class="flex flex-col items-center justify-center gap-16 h-screen">
     <h1 class="font-b24-secondary text-h1 sm:text-8xl font-light">
-      {{ $t('page.index.seo.title') }} *1*2
+      {{ $t('page.index.seo.title') }}
     </h1>
 
     <div class="flex flex-wrap items-center gap-3">
