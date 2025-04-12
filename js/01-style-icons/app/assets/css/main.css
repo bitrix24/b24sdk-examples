@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "@bitrix24/b24ui-nuxt";
 
 @layer components {
 	.h-screen-and-footer {

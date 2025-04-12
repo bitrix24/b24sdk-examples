@@ -1,17 +1,28 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+import { readFileSync } from 'node:fs'
 
+// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	compatibilityDate: '2024-11-03',
-	devtools: { enabled: false },
-	devServer: {
-		port: 3001
-	},
-	css: ['~/assets/css/main.css'],
-	postcss: {
-		plugins: {
-			tailwindcss: {},
-			autoprefixer: {},
-		},
-	},
-	modules: [],
+  modules: [
+    '@bitrix24/b24ui-nuxt',
+    '@nuxt/eslint'
+  ],
+  ssr: false,
+  devtools: { enabled: false },
+  css: ['~/assets/css/main.css'],
+  devServer: {
+    port: 3000,
+    loadingTemplate: () => {
+      return readFileSync('./template/devServer-loading.html', 'utf-8')
+    }
+  },
+  future: {
+    compatibilityVersion: 4
+  },
+  compatibilityDate: '2024-11-27',
+  vite: {
+    plugins: [
+      tailwindcss()
+    ]
+  }
 })
