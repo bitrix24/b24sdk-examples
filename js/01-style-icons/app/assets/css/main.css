@@ -1,11 +1,2 @@
 @import "tailwindcss";
 @import "@bitrix24/b24ui-nuxt";
-
-@layer components {
-	.h-screen-and-footer {
-		height: calc(100vh - 66px);
-	}
-	.h-full-and-footer {
-		height: calc(100vh - 73px);
-	}
-}

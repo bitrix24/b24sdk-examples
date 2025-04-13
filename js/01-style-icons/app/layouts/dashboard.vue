@@ -1,13 +1,18 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { Logo } from '#components'
+import { computed, useSlots } from 'vue'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
-import WheelIcon from '@bitrix24/b24icons-vue/common-service/WheelIcon'
 
 useHead({
   bodyAttrs: {
     class: 'text-base-master dark:text-base-150 bg-base-50 dark:bg-base-dark font-b24-system antialiased'
   }
+})
+
+const slots = useSlots()
+const hasFooterNavbar = computed(() => {
+  return !!slots['footer-navbar-left']
+    || !!slots['footer-navbar-center']
+    || !!slots['footer-right']
 })
 
 const route = useRoute()
@@ -46,76 +51,15 @@ const helpItems = computed<NavigationMenuItem[]>(() => {
       container: route.path === '/' ? 'lg:mt-4' : ''
     }"
   >
-    <template #sidebar>
-      <B24SidebarHeader>
-        <B24SidebarSection class="ps-[18px] flex-row  items-center justify-start gap-0.5 text-primary">
-          <Logo class="size-8" />
-          <ProseH4 class="mb-0 leading-none">
-            {{ '@todo app.title' }}
-          </ProseH4>
-        </B24SidebarSection>
-      </B24SidebarHeader>
-      <B24SidebarBody>
-        @todo Cat
-        <B24SidebarSpacer />
-        <B24NavigationMenu
-          :items="helpItems"
-          variant="pill"
-          orientation="vertical"
-        />
-      </B24SidebarBody>
-      <B24SidebarFooter>
-        @todo IntegratorNav
-      </B24SidebarFooter>
-    </template>
-
     <!-- Header -->
     <template #navbar>
-      <div class="ps-[18px]">
+      <ProseH1 class="max-w-1/4 mb-0 ps-3 lg:ps-4 text-nowrap truncate">
         <slot name="header-title" />
-      </div>
-      <B24NavbarSection>
-        <B24Button
-          color="link"
-          size="sm"
-          normal-case
-          :icon="WheelIcon"
-          :b24ui="{
-            base: 'font-light',
-            leadingIcon: 'text-info-text'
-          }"
-        >
-          <div class="flex flex-col">
-            <div class="text-3xs leading-tight opacity-70 text-base-500 items-center">
-              use case
-            </div>
-            <div
-              class="text-sm text-primary-link cursor-pointer transition-opacity hover:opacity-80 border-b border-dashed border-b-primary-link"
-            >
-              Some action
-            </div>
-          </div>
-        </B24Button>
-        <div class="flex flex-row gap-2xs items-end">
-          <WheelIcon class="size-xl2 text-info-text" />
-          <div class="flex flex-col">
-            <div class="text-3xs leading-tight opacity-70 text-base-500 items-center">
-              use case
-            </div>
-            <div
-              class="text-sm text-primary-link cursor-pointer transition-opacity hover:opacity-80 border-b border-dashed border-b-primary-link"
-              onclick="alert('[Some action].click')"
-            >
-              Some action
-            </div>
-          </div>
-        </div>
-      </B24NavbarSection>
-      <B24NavbarSection>
-        @todo B24NavbarSection 1
-      </B24NavbarSection>
+      </ProseH1>
+      <slot name="header-navbar" />
       <B24NavbarSpacer />
       <B24NavigationMenu
+        class="max-lg:hidden"
         :items="helpItems"
         variant="link"
         orientation="horizontal"
@@ -127,6 +71,36 @@ const helpItems = computed<NavigationMenuItem[]>(() => {
     </template>
 
     <!-- Content -->
-    <slot />
+    <div
+      :class="[
+        hasFooterNavbar ? 'mb-[73px]' : ''
+      ]"
+    >
+      <slot />
+    </div>
+
+    <!-- Footer -->
+    <div
+      v-if="hasFooterNavbar"
+      class="w-full h-7xl shadow-top-sm fixed left-0 bottom-0 py-3 px-4 lg:px-6 bg-white"
+    >
+      <div class="flex flex-row flex-nowrap items-center justify-between gap-1">
+        <div class="w-1/4 flex flex-row justify-start gap-4">
+          <slot name="footer-navbar-left">
+            &nbsp;
+          </slot>
+        </div>
+        <div class="w-2/4 flex flex-row justify-center gap-4">
+          <slot name="footer-navbar-center">
+            &nbsp;
+          </slot>
+        </div>
+        <div class="w-1/4 flex flex-row justify-end gap-1">
+          <slot name="footer-navbar-right">
+            &nbsp;
+          </slot>
+        </div>
+      </div>
+    </div>
   </B24StackedLayout>
 </template>
