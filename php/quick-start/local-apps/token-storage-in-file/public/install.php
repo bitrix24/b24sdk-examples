@@ -38,37 +38,17 @@ require_once '../layouts/header.php'
 				?></pre>
 		</div>
 	</div>
-<?php
-/**
- * b24jssdk ver old
- */
-/*/
-?>
-<script src="https://api.bitrix24.com/api/v1/"></script>
-<script>
-	BX24.init(() => {
-		BX24.installFinish();
-	});
-</script>
-<?php //*/?>
-<?php
-/**
- * b24jssdk ver new
- */
-//*/
-?>
 <script src="https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js"></script>
 <script type="module">
-try
-{
-	const $b24 = await B24Js.initializeB24Frame();
-	$b24.installFinish();
-}
-catch( error )
-{
-	console.error(error);
-}
+    try
+    {
+        const $b24 = await B24Js.initializeB24Frame();
+        $b24.installFinish();
+    }
+    catch( error )
+    {
+        console.error(error);
+    }
 </script>
-<?php //*/?>
 <?php
 require_once '../layouts/footer.php';
