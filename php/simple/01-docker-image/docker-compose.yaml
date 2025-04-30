@@ -6,5 +6,4 @@ services:
       PHP_IDE_CONFIG: "serverName=b24-php-sdk-examples-01.lan"
     volumes:
       - .:/var/www/html
-      - ./var/logs:/var/logs
     working_dir: /var/www/html
