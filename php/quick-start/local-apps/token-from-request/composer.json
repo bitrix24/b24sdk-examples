@@ -1,0 +1,5 @@
+{
+    "require": {
+        "bitrix24/b24phpsdk": "^1.1"
+    }
+}

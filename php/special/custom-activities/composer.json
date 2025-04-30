@@ -1,0 +1,27 @@
+{
+    "name": "bitrix24/b24phpsdk-custom-activities",
+    "description": "Example of working with the Bitrix24 PHP SDK using a local application and storing tokens",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "bitrix24/b24phpsdk": "^1.1.0",
+        "monolog/monolog": "^3",
+        "symfony/console": "^7",
+        "symfony/dotenv": "^7",
+        "symfony/event-dispatcher": "^7",
+        "symfony/filesystem": "^7"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "1.11.7",
+        "rector/rector": "^1",
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

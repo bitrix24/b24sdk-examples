@@ -126,7 +126,6 @@ try
 }
 catch(error)
 {
-	$logger.error(error)
 	result.addError(
 		(error instanceof Error)
 		? error
