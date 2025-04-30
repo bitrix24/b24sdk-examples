@@ -5,7 +5,6 @@
     <div class="task-widget__content">
 
         <div class="task-widget__left">
-            <!-- Поле для фильтрации задач -->
             <input
                 type="text"
                 class="task-widget__filter"
@@ -31,19 +30,19 @@
                             </span>
                             </th>
                             <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'title', curSortBy: sortBy, curSortOrder: sortOrder})">
-                            Задача
+                            {{ $Bitrix.Loc.getMessage('W_TASK') }}
                             <span v-if="sortBy === 'title'">
                                 {{ sortOrder === false ? '↑' : '↓' }}
                             </span>
                             </th>
                             <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'deadline', curSortBy: sortBy, curSortOrder: sortOrder})">
-                            Срок
+                            {{ $Bitrix.Loc.getMessage('W_DEADLINE') }}
                             <span v-if="sortBy === 'deadline'">
                                 {{ sortOrder === false ? '↑' : '↓' }}
                             </span>
                             </th>
                             <th class="task-widget__header" @click="fetch({filter: taskFilter, pageIndex: currentPage, newSortBy: 'responsibleName', curSortBy: sortBy, curSortOrder: sortOrder})">
-                            Ответственный
+                            {{ $Bitrix.Loc.getMessage('W_RESPONSIBLE') }}
                             <span v-if="sortBy === 'responsibleName'">
                                 {{ sortOrder === false ? '↑' : '↓' }}
                             </span>
@@ -66,9 +65,9 @@
                     </table>
                 </div>    
                 <div v-if="taskItems.length > 0" class="task-widget__pagination">
-                    <a href="#" @click="fetch({filter: taskFilter, pageIndex: currentPage - 1, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder})" :class="{ 'task-widget__link--disabled': currentPage === 1 }" class="task-widget__link">Предыдущая</a>
-                    <span class="task-widget__page-info">Страница {{ currentPage }} из {{ totalPages }}</span>
-                    <a href="#" @click="fetch({filter: taskFilter, pageIndex: currentPage + 1, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder})" :class="{ 'task-widget__link--disabled': currentPage === totalPages }" class="task-widget__link">Следующая</a>
+                    <a href="#" @click="fetch({filter: taskFilter, pageIndex: currentPage - 1, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder})" :class="{ 'task-widget__link--disabled': currentPage === 1 }" class="task-widget__link"> {{ $Bitrix.Loc.getMessage('W_PREVIOUS_PAGE') }}</a>
+                    <span class="task-widget__page-info">{{ $Bitrix.Loc.getMessage('W_PAGE') }} {{ currentPage }} {{ $Bitrix.Loc.getMessage('W_PAGE_FROM') }} {{ totalPages }}</span>
+                    <a href="#" @click="fetch({filter: taskFilter, pageIndex: currentPage + 1, newSortBy: '-', curSortBy: sortBy, curSortOrder: sortOrder})" :class="{ 'task-widget__link--disabled': currentPage === totalPages }" class="task-widget__link"> {{ $Bitrix.Loc.getMessage('W_NEXT_PAGE') }}</a>
                 </div>
             </div>
         </div>  

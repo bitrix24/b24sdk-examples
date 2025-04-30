@@ -4,15 +4,17 @@
     "WIDGET_PARAMS": {
         "rootNode": ".task-widget__container",
         "lang": {
-            "ru": {
-                "W_TITLE": "Проблемные задачи",
-                "W_EMPTY": "Задачи не найдены",
-                "W_FILTER": "Фильтр по названию задачи"
-            },
             "en": {
                 "W_TITLE": "Problem tasks",
                 "W_EMPTY": "No task found",
-                "W_FILTER": "Find task by title"
+                "W_FILTER": "Find task by title",
+                "W_PREVIOUS_PAGE": "Previous",
+                "W_NEXT_PAGE": "Next",
+                "W_PAGE_FROM": "of",
+                "W_TASK": "Task",
+                "W_DEADLINE": "Deadline",
+                "W_RESPONSIBLE": "Responsible",
+                "W_PAGE": "Page"
             }
         }
     }
