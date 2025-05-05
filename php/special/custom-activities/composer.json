@@ -1,6 +1,6 @@
 {
     "name": "bitrix24/b24phpsdk-custom-activities",
-    "description": "Example of working with the Bitrix24 PHP SDK using a local application and storing tokens",
+    "description": "Example of working with timeline widgets and configurable activity using the Bitrix24 PHP SDK",
     "minimum-stability": "stable",
     "license": "MIT",
     "config": {

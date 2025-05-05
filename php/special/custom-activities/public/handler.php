@@ -34,7 +34,7 @@ try
         if ($contactId !== 0)
         {
             $contactData = $B24->getCRMScope()->contact()->get($contactId);
-            $contactEmail = $contactData->contact()->EMAIL[0]->VALUE;
+            $contactEmail = count($contactData->contact()->EMAIL) > 0 ? $contactData->contact()->EMAIL[0]->VALUE : '';
         }
     }
     else
@@ -47,8 +47,8 @@ try
 }
 
 ?>
-<script src="https://api.bitrix24.com/api/v1/"></script>
-<script>
+<script src="https://unpkg.com/@bitrix24/b24jssdk@latest/dist/umd/index.min.js"></script>
+<script type="module">
 
     var documentId = 0;
     var contactEmail = '<?php echo $contactEmail; ?>';
@@ -56,148 +56,131 @@ try
     var dealId = <?php echo $dealId; ?>;
     var documents = [];
 
-    const layout = {
-    blocks: {
-        header: {
-            type: "text",
-            visible: true,
-            properties: {
-                value: "Подписать документ через Документолог",
-                size: "xl",
-            },
-        },
-        documentologInfoSection: {
-            type: "section",
-            visible: true,
-            properties: {
-                type: "withBorder",
-                imageSrc: "https://i.ibb.co/VJy8LCm/timeline-icon-1.png",
-                imageSize: "sm",
-                blocks: {
-                    documentologInfoPart1: {
-                        type: "text",
-                        properties: {
-                            value: 'Подписывайте документы электронной подписью',
-                            color: "base_70",
-                            size: "md",
-                            bold: true,
-                        }
-                    },
-                    documentologInfoPart2: {
-                        type: "link",
-                        properties: {
-                            text: 'Как работает подписание документов в Документолог?',
-                            size: "sm",
-                            action: {
-                                type: "redirect",
-                                uri: "https://documentolog.com/",
-                            },
-                        }
-                    },
-                }
-            }
-        },
-        documentologDocumentSection: {
-            type: "lineOfBlocks",
-            visible: true,
-            properties: {
-                blocks: {
-                    documentologDocumentBlock1: {
-                        type: "text",
-                        properties: {
-                            value: "Документ на подпись: ",
-                            color: "base_70"
-                        }
-                    },
-                    documentologDocumentBlock2: {
-                        type: "dropdownMenu",
-                        properties: {
-                            selectedValue: 0,
-                            values: {
-                                0: '- выберите документ -',
-                                1: '1',
-                                2: '2',
-                            }
-                        }
-                    },
-                }
-            }
-        },
-        errorMessageSection: {
-            type: "section",
-            visible: false,
-            properties: {
-                type: "warning",
-                blocks: {
-                    errorMessageNoDocument: {
-                        type: "text",
-                        visible: false,
-                        properties: {
-                            value: "Не выбран документ для отправки на подпись.",
-                            color: "warning",
-                        }
-                    },
-                    errorMessageNoContact: {
-                        type: "text",
-                        visible: false,
-                        properties: {
-                            value: "У сделки не указан контакт, который нужен, чтобы подписывать документы.",
-                            color: "warning",
-                        }
-                    },
-                    errorMessageNoClientEmail: {
-                        type: "lineOfBlocks",
-                        visible: false,
-                        properties: {
-                            blocks: {
-                                errorMsg: {
-                                    type: "text",
-                                    properties: {
-                                        value: "Для отправки документа получателю у него должен быть указан e-mail. ",
-                                        color: "warning"
-                                    }
-                                },
-                                linkToContact: {
-                                    type: "link",
-                                    properties: {
-                                        text: "Заполнить.",
-                                        "action": {
-                                            "type": "redirect",
-                                            "uri": "/crm/contact/details/" + contactId + "/",
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    errorMessageNoEmployeeEmail: {
-                        type: "text",
-                        visible: false,
-                        properties: {
-                            value: "Для отправки документа у вас должен быть указан e-mail в профиле Битрикс24.",
-                            color: "warning",
-                        }
-                    },
-                    errorMessageErrorWhileSending: {
-                        type: "text",
-                        visible: false,
-                        properties: {
-                            value: "Во время отправки документа произошла ошибка. Попробуйте позже.",
-                            color: "warning",
-                        }
-                    },
-                }
-            }
+    const $logger = B24Js.LoggerBrowser.build(
+		'e-sign-demo: handler',
+		true
+	);
+	
+	const $b24 = await B24Js.initializeB24Frame();
+	$b24.setLogger(
+		B24Js.LoggerBrowser.build('Core')
+	);
+	
+	$logger.warn('B24Frame.init');
+
+    $logger.info('contactEmail >> ',contactEmail);
+    $logger.info('documentId >> ',documentId);
+    $logger.info('contactId >> ',contactId);
+    $logger.info('dealId >> ',dealId);
+    $logger.info('documents >> ',documents);
+
+    getDocuments();
+
+    // Click on the "Send" button
+    $b24.placement.callCustomBind('bindPrimaryButtonClickCallback', null, () => {
+
+        $logger.info('bindPrimaryButtonClickCallback started');
+
+        $b24.placement.call('lock'); // lock user's interface
+
+        if (checkErrors() !== false) {
+
+            displayError(true);
+
+            $b24.placement.call('unlock');
+            return;
         }
-    },
-    primaryButton: {
-        title: "Отправить",
-        state: false ? 'disabled' : 'normal'
-    },
-    secondaryButton: {
-        title: "Отмена"
-    }
-};
+
+        displayError(false);
+
+        // Perform some actions, such as a request to the backend
+
+        const authInfo = $b24.auth.getAuthData();
+
+        try {
+            fetch('action.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'documentId': documentId,
+                    'authJson': JSON.stringify(authInfo),
+                    'action': 'signDocument',
+                    'dealId': dealId,
+                    'contactEmail': contactEmail,
+                    'employeeEmail': 'no@mail.com'
+                })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.indexOf('application/json') !== -1) {
+
+                    $b24.placement.call('unlock'); // unlock user's interface
+                    $b24.placement.call('finish'); // signal to the framework that the form has been processed successfully (no errors)
+
+                    return response.json();
+                } else {
+                    return response.text().then(text => {
+                        throw new Error('Unexpected response format: ' + text);
+                    });
+                }
+            })
+            .then(data => {
+                
+                $logger.info('Sending result:', data);
+                if (data.error) {
+
+                    prepareError('errorMessageErrorWhileSending', true);
+                    displayError(true);
+
+                    $b24.placement.call('unlock');
+                    return;
+                }
+            })
+            .catch(e => {
+                console.error('Error:', e.message);
+                
+                prepareError('errorMessageErrorWhileSending', true);
+                displayError(true);
+
+                $b24.placement.call('unlock');
+
+                return;
+            });
+        } catch (sendingError) {
+            
+            // console.error('Unexpected error:', sendingError);
+            $logger.error('Unexpected error:', sendingError);
+            
+            prepareError('errorMessageErrorWhileSending', true);
+            displayError(true);
+
+            $b24.placement.call('unlock');
+
+            return;
+        }
+    });
+
+    // click on the "Cancel" button:
+    $b24.placement.callCustomBind('bindSecondaryButtonClickCallback', null, () => {
+        $b24.placement.call('finish');
+    });
+
+    $b24.placement.callCustomBind('bindValueChangeCallback', 'esignServiceDocumentBlock2', (data) => {
+        documentId = parseInt(data.value, 10);
+
+        $logger.info('documentId: ', documentId);
+    });
+
+    $b24.placement.callCustomBind('bindEntityUpdateCallback', null, () => {
+        $logger.info('Entity updated');
+        updateDealData();
+    });
+
 
 function prepareLayout () {
 
@@ -207,11 +190,11 @@ function prepareLayout () {
                 type: "text",
                 visible: true,
                 properties: {
-                    value: "Подписать документ через Документолог",
+                    value: "Sign the document via E-Sign Service",
                     size: "xl",
                 },
             },
-            documentologInfoSection: {
+            esignServiceInfoSection: {
                 type: "section",
                 visible: true,
                 properties: {
@@ -219,49 +202,49 @@ function prepareLayout () {
                     imageSrc: "https://i.ibb.co/VJy8LCm/timeline-icon-1.png",
                     imageSize: "sm",
                     blocks: {
-                        documentologInfoPart1: {
+                        esignServiceInfoPart1: {
                             type: "text",
                             properties: {
-                                value: 'Подписывайте документы электронной подписью',
+                                value: 'Sign documents with an electronic signature',
                                 color: "base_70",
                                 size: "md",
                                 bold: true,
                             }
                         },
-                        documentologInfoPart2: {
+                        esignServiceInfoPart2: {
                             type: "link",
                             properties: {
-                                text: 'Как работает подписание документов в Документолог?',
+                                text: 'How does signing documents work in E-Sign Service?',
                                 size: "sm",
                                 action: {
                                     type: "redirect",
-                                    uri: "https://documentolog.com/",
+                                    value: "https://esign-system.com/help/",
                                 },
                             }
                         },
                     }
                 }
             },
-            documentologDocumentSection: {
+            esignServiceDocumentSection: {
                 type: "lineOfBlocks",
                 visible: true,
                 properties: {
                     blocks: {
-                        documentologDocumentBlock1: {
+                        esignServiceDocumentBlock1: {
                             type: "text",
                             properties: {
-                                value: "Документ на подпись: ",
+                                value: "Document for signature: ",
                                 color: "base_70"
                             }
                         },
-                        documentologDocumentBlock2: {
+                        esignServiceDocumentBlock2: {
                             type: "dropdownMenu",
                             properties: {
                                 selectedValue: 0,
                                 values: documents.reduce((acc, document) => {
                                     acc[document.id] = document.title;
                                     return acc;
-                                }, {0: '- выберите документ -'})
+                                }, {0: '- select a document -'})
                             }
                         },
                     }
@@ -277,7 +260,7 @@ function prepareLayout () {
                             type: "text",
                             visible: false,
                             properties: {
-                                value: "Не выбран документ для отправки на подпись.",
+                                value: "No document selected for signing.",
                                 color: "warning",
                             }
                         },
@@ -285,7 +268,7 @@ function prepareLayout () {
                             type: "text",
                             visible: false,
                             properties: {
-                                value: "У сделки не указан контакт, который нужен, чтобы подписывать документы.",
+                                value: "The deal does not have a contact specified, which is required to sign documents.",
                                 color: "warning",
                             }
                         },
@@ -297,17 +280,17 @@ function prepareLayout () {
                                     errorMsg: {
                                         type: "text",
                                         properties: {
-                                            value: "Для отправки документа получателю у него должен быть указан e-mail. ",
+                                            value: "To send the document to the recipient, they must have an email address specified. ",
                                             color: "warning"
                                         }
                                     },
                                     linkToContact: {
                                         type: "link",
                                         properties: {
-                                            text: "Заполнить.",
-                                            "action": {
-                                                "type": "redirect",
-                                                "uri": "/crm/contact/details/" + contactId + "/",
+                                            text: "Fill in.",
+                                            action: {
+                                                type: "redirect",
+                                                value: "/crm/contact/details/" + contactId + "/",
                                             }
                                         }
                                     }
@@ -318,7 +301,7 @@ function prepareLayout () {
                             type: "text",
                             visible: false,
                             properties: {
-                                value: "Для отправки документа у вас должен быть указан e-mail в профиле Битрикс24.",
+                                value: "To send the document, you must have an email address specified in your Bitrix24 profile.",
                                 color: "warning",
                             }
                         },
@@ -326,7 +309,7 @@ function prepareLayout () {
                             type: "text",
                             visible: false,
                             properties: {
-                                value: "Во время отправки документа произошла ошибка. Попробуйте позже.",
+                                value: "An error occurred while sending the document. Please try again later.",
                                 color: "warning",
                             }
                         },
@@ -335,199 +318,93 @@ function prepareLayout () {
             }
         },
         primaryButton: {
-            title: "Отправить",
+            title: "Send",
             state: false ? 'disabled' : 'normal'
         },
         secondaryButton: {
-            title: "Отмена"
+            title: "Cancel"
         }
     };
 
-    console.log('prepared layout: ', result);
+    $logger.info('prepared layout >> ', result);
+    // console.log('prepared layout: ', result);
 
     return result;
 }
 
 function prepareError (errorBlockId, show = true) {
-    console.log('errorBlockId: ', errorBlockId);
-    console.log('errorBlockId: ', show);
-    BX24.placement.call('setLayoutItemState', {id: errorBlockId, visible: show});
+    $logger.info('errorBlockId >> ', errorBlockId);
+
+    $logger.info('errorBlockId >> ', show);
+
+    $b24.placement.call('setLayoutItemState', {id: errorBlockId, visible: show});
 }
 
 function displayError (show = true) {
-    BX24.placement.call('setLayoutItemState', {id: "errorMessageSection", visible: show});
+    $b24.placement.call('setLayoutItemState', {id: "errorMessageSection", visible: show});
 }
 
-function updateDealData () {
-    BX24.callMethod('crm.deal.get', {id: dealId}, function(result) {
-        console.log('Deal data: ', result.data());
+async function updateDealData () {
 
-        contactId = result.data().CONTACT_ID;
+    let response = await $b24.callMethod('crm.deal.get', {id: dealId});
+	const dealData = response.getData().result;
 
-        BX24.callMethod('crm.contact.get', {id: contactId}, function(contactResult) {
-            console.log('Contact data: ', contactResult.data());
+    $logger.info('dealData >> ', dealData);
 
-            contactEmail = contactResult.data().EMAIL[0].VALUE;
+    contactId = dealData.CONTACT_ID;
+    $logger.info('contactId >> ', contactId);
 
-            checkErrors();
-        });
-    });
+    if (contactId > 0) {
+        response = await $b24.callMethod('crm.contact.get', {id: contactId});
+        const contactData = response.getData().result;
+        $logger.info('contactData >> ', contactData);
+
+        contactEmail = (contactData.EMAIL && contactData.EMAIL.length > 0) ? contactData.EMAIL[0].VALUE : '';
+        $logger.info('contactEmail >> ', contactEmail);
+    } else {
+        contactEmail = '';
+    }
+
+    checkErrors();
 }
 
-function getDocuments () {
-    BX24.callMethod(
-        'crm.documentgenerator.document.list', 
-        {
-            'filter': {
-                "entityTypeId": 2, // сделки
-                "entityId": dealId
-            }
-        }, 
-        function(result) {
-            var documentData = result.data();
+async function getDocuments () {
 
-            console.log('Documents: ', result.data());
-            if (documentData.documents.length > 0) {
-                documents = documentData.documents.map(doc => ({
-                    id: doc.id,
-                    title: doc.title
-                }));
-                console.log('prepared documents: ', documents);
-
-                BX24.placement.call('setLayout', prepareLayout());
-            }
-            
+    let response = await $b24.callMethod('crm.documentgenerator.document.list', {
+        'filter': {
+            "entityTypeId": 2, // deals
+            "entityId": dealId
         }
-    );
-}
+    });
+
+	const docData = response.getData().result;
+
+    $logger.info('docData >> ', docData);
+
+    if (docData.documents.length > 0) {
+        documents = docData.documents.map(doc => ({
+            id: doc.id,
+            title: doc.title
+        }));
+        $logger.info('documents >> ', documents);
+
+        $b24.placement.call('setLayout', prepareLayout())
+    }
+};
 
 function checkErrors() {
     prepareError('errorMessageNoDocument', (documentId === 0));
     prepareError('errorMessageNoContact', (contactId === 0));
     
     if (contactId !== 0) prepareError('errorMessageNoClientEmail', (contactEmail === ''));
-    // prepareError('errorMessageNoEmployeeEmail', false);
+
     prepareError('errorMessageErrorWhileSending', false);
 
-    console.log('check contactEmail: ', (contactEmail === ''));
-    console.log('check contactId: ', (contactId === 0));
-    console.log('check documentId: ', (documentId === 0));
+    $logger.info('check contactEmail >> ', (contactEmail === ''));
+    $logger.info('check contactId >> ', (contactId === 0));
+    $logger.info('check documentId >> ', (documentId === 0));
 
     return (documentId === 0 || contactEmail === '');
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    BX24.init(function() {
-        console.log("BX24 initialized successfully.");
-
-        console.log('contactEmail: ', contactEmail);
-        console.log('documentId: ', documentId);
-        console.log('contactId: ', contactId);
-
-        getDocuments();
-
-        // клик по кнопке "Отправить":
-        BX24.placement.call('bindPrimaryButtonClickCallback', null, () => {
-            BX24.placement.call('lock'); // заблокировать интерфейс
-
-            if (checkErrors() !== false) {
-
-                displayError(true);
-
-                BX24.placement.call('unlock');
-                return;
-            }
-
-            displayError(false);
-
-            // Выполняем какие-то действия. Запрос в бэк, например
-            const authInfo = BX24.getAuth();
-
-            try {
-                fetch('action.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: new URLSearchParams({
-                        'documentId': documentId,
-                        'authJson': JSON.stringify(authInfo),
-                        'action': 'signDocument',
-                        'dealId': dealId,
-                        'contactEmail': contactEmail,
-                        'employeeEmail': 'no@mail.com'
-                    })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    const contentType = response.headers.get('content-type');
-                    if (contentType && contentType.indexOf('application/json') !== -1) {
-
-                        BX24.placement.call('unlock'); // разблокировать интерфейс
-                        BX24.placement.call('finish'); // подать встройке сигнал, что форма успешно обработана (ошибок нет)
-
-                        return response.json();
-                    } else {
-                        return response.text().then(text => {
-                            throw new Error('Unexpected response format: ' + text);
-                        });
-                    }
-                })
-                .then(data => {
-                    console.log('Sending result:', data);
-                    if (data.error) {
-
-                        prepareError('errorMessageErrorWhileSending', true);
-                        displayError(true);
-
-                        BX24.placement.call('unlock');
-                        return;
-                    }
-                })
-                .catch(e => {
-                    console.error('Error:', e.message);
-                    
-                    prepareError('errorMessageErrorWhileSending', true);
-                    displayError(true);
-
-                    BX24.placement.call('unlock');
-
-                    return;
-                });
-            } catch (sendingError) {
-                
-                console.error('Unexpected error:', sendingError);
-                
-                prepareError('errorMessageErrorWhileSending', true);
-                displayError(true);
-
-                BX24.placement.call('unlock');
-
-                return;
-            }
-        });
-
-        // клик по кнопке "Отмена":
-        BX24.placement.call('bindSecondaryButtonClickCallback', null, () => {
-            BX24.placement.call('finish');
-        });
-
-        BX24.placement.call('bindValueChangeCallback', 'documentologDocumentBlock2', (data) => {
-            documentId = parseInt(data.value, 10);
-            // displayError('errorMessageNoDocument');
-            
-            console.log('Выбран документ: ', data);
-            console.log('documentId: ', documentId);
-        });
-
-        BX24.placement.call('bindEntityUpdateCallback', null, () => {
-            console.log('Entity updated');
-            updateDealData();
-        });
-
-    });
-});
 
 </script>

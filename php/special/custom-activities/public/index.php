@@ -33,7 +33,7 @@ require_once '../layouts/header.php';
 try
 {
 	const $logger = B24Js.LoggerBrowser.build(
-		'local-apps: token-storage-in-file : index',
+		'local-apps: e-sign integration : index',
 		true
 	);
 	
@@ -58,5 +58,4 @@ catch( error )
 	console.error(error);
 }
 </script>
-<?php //*/?>
 <?php require_once '../layouts/footer.php';

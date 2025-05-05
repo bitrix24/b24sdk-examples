@@ -83,10 +83,10 @@ class Application
                     PlacementLocationCode::CRM_DEAL_DETAIL_ACTIVITY,
                     sprintf('https://%s/handler.php', $hostUrl),
                     [
-                        'RU' => [
-                            'TITLE' => 'Документолог',
-                            'DESCRIPTION' => 'Подписание документов в системе электронного документооборота',
-                        ]
+                        'EN' => [
+                            'TITLE' => 'E-Sign',
+                            'DESCRIPTION' => 'Signing documents in the electronic document management system',
+                        ],
                     ],
                     [
                         'useBuiltInInterface' => 'Y'

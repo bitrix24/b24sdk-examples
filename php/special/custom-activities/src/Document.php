@@ -59,21 +59,21 @@ class Document {
 
         if (in_array($status, [0, 2])) {
             $buttons = [
-                'title' => 'Подписать',
+                'title' => 'Sign',
                 'action' => [
                     'type' => 'redirect',
                     'id' => 'sign',
-                    'uri' => 'https://documentolog.com/sign/' . $externalDocumentId,
+                    'uri' => 'https://esign-system.com/sign/' . $externalDocumentId,
                 ],
                 'type' => 'primary',
             ];
         }
 
         $statusTexts = [
-            0 => 'не подписан',
-            1 => 'подписан клиентом',
-            2 => 'подписан сотрудником',
-            3 => 'подписан'
+            0 => 'unsigned',
+            1 => 'signed by client',
+            2 => 'signed by employee',
+            3 => 'signed',
         ];
 
         $statusTypes = [
@@ -88,7 +88,7 @@ class Document {
                 'code' => 'document'
             ],
             'header' => [
-                'title' => 'Подписать документ',
+                'title' => 'Sign document',
                 'tags' => [
                     'status' => ['title' => $statusTexts[$status], 'type' => $statusTypes[$status]],
                 ]
@@ -101,12 +101,12 @@ class Document {
                     'docName' => [
                         'type' => 'withTitle',
                         'properties' => [
-                            'title' => 'документ',
+                            'title' => 'document',
                             'inline' => false,
                             'block' => [
                                 'type' => 'text',
                                 'properties' => [
-                                    'value' => 'Сюда втыкаем название документа',
+                                    'value' => 'Here is the document name',
                                     'multiline' => true,
                                 ],
                             ]
@@ -115,7 +115,7 @@ class Document {
                     'contact' => [
                         'type' => 'withTitle',
                         'properties' => [
-                            'title' => 'e-mail клиента',
+                            'title' => 'Client email',
                             'inline' => false,
                             'block' => [
                                 'type' => 'text',
@@ -129,7 +129,7 @@ class Document {
                     'employee' => [
                         'type' => 'withTitle',
                         'properties' => [
-                            'title' => 'e-mail сотрудника',
+                            'title' => 'Employee email',
                             'inline' => false,
                             'block' => [
                                 'type' => 'text',
@@ -162,26 +162,16 @@ class Document {
             'dealId' => $dealId
         ]);
 
-        $buttons = [
-            'title' => 'Подписать',
-            'action' => [
-                'type' => 'redirect',
-                'id' => 'sign',
-                'uri' => 'https://ya.ru'
-            ],
-            'type' => 'primary',
-        ];
-
         $result = $this->b24->getMainScope()->core->call(
             'crm.activity.configurable.add',
             [
                 'ownerTypeId' => 2, // deal
                 'ownerId' => $dealId,
                 'fields' => [
-                    'responsibleId' => 1, // вообще надо получать текущего пользователя
+                    'responsibleId' => 1, // actually we need to get the responsibleId from the deal
                     'isIncomingChannel' => 'N',
-                    'originatorId' => 'documentolog',
-                    'originId' => $externalDocumentId, // id в источнике данных (guid инвойса).
+                    'originatorId' => 'esignService',
+                    'originId' => $externalDocumentId, // id of a document in the external system (guid or something else).
                     'completed' => 'N',
                 ],
                 'layout' => $this->prepareConfigurableActivity(0, $employeeEmail, $contactEmail, $externalDocumentId)
@@ -196,7 +186,7 @@ class Document {
             [
                 'filter' => [
                     'originId' => $externalDocumentId,
-                    'originatorId' => 'documentolog',
+                    'originatorId' => 'esignService',
                 ],
                 'select' => ['ID', 'OWNER_ID', 'OWNER_TYPE_ID', 'ORIGIN_ID', 'ORIGINATOR_ID', 'COMPLETED'],
             ]
@@ -210,13 +200,15 @@ class Document {
         if (count($result->getResponseData()->getResult()) > 0) {
             $activityId = $result->getResponseData()->getResult()[0]['ID'];
 
-            // Формируем обновленную структуру с новым статусом
+            // Make the updated structure with the new status
 
             // $layout = $this->prepareConfigurableActivity($newStatus, ...);
 
             $completed = $newStatus == 3 ? 'Y' : 'N';
             
-            // обновляем дело в таймлайне
+
+            // update activity
+
             /*
             $result = $this->b24->getMainScope()->core->call(
                 'crm.activity.configurable.update',

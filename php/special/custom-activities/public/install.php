@@ -44,6 +44,5 @@ catch( error )
 	console.error(error);
 }
 </script>
-<?php //*/?>
 <?php
 require_once '../layouts/footer.php';
