@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import b24style from '@bitrix24/b24style'
 
 export default {
 	content: [
@@ -13,7 +14,7 @@ export default {
 		extend: {},
 	},
 	plugins: [
-		require('@bitrix24/b24style')({
+		b24style({
 			logs: false,
 			useLocalFonts: false,
 		})
