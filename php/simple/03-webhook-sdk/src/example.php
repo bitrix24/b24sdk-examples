@@ -15,14 +15,17 @@ use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 
 require_once 'vendor/autoload.php';
+
 try {
+    print('Show all env variables:');
+    print_r($_ENV);
+    print('=====================' . PHP_EOL);
+
     // init bitrix24-php-sdk service from webhook
-    $b24Service = ServiceBuilderFactory::createServiceBuilderFromWebhook(
-        'INSERT_HERE_WEBHOOK_URL'
-    );
+    $b24Service = ServiceBuilderFactory::createServiceBuilderFromWebhook($_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL']);
 
     // call any api method from universal interface core->call
-    var_dump($b24Service->core->call('user.current')->getResponseData()->getResult());
+    var_dump($b24Service->core->call('profile')->getResponseData()->getResult());
 
     // call method crm.lead.add from scope CRM
     $addedLeadId = $b24Service->getCRMScope()->lead()->add([
@@ -46,7 +49,6 @@ try {
     print(sprintf('lead id %s', $leadData->ID) . PHP_EOL);
     print(sprintf('lead title: %s', $leadData->TITLE) . PHP_EOL);
     print_r($leadData);
-
 } catch (InvalidArgumentException $exception) {
     print(sprintf('ERROR IN CONFIGURATION OR CALL ARGS: %s', $exception->getMessage()) . PHP_EOL);
     print($exception::class . PHP_EOL);

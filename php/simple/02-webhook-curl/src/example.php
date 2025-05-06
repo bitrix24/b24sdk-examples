@@ -13,9 +13,12 @@
 // At this level of abstraction, you will have to handle errors that will occur on your own.
 // These are errors when working with the network, errors when working with Bitrix24
 
+print('Show all env variables:');
+print_r($_ENV);
+print('=====================' . PHP_EOL);
 
-// Define variables
-$bitrix24WebhookURL = 'INSERT YOUR WEBHOOK URL HERE';
+// Define incoming webhook from
+$bitrix24WebhookURL = $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'];
 
 // we call method crm.lead.add that's why we need add scope CRM in webhook settings
 $method = 'crm.lead.add';
