@@ -1,4 +1,4 @@
-# Bitrix24 UI Starter
+# Bitrix24 UI Kit Demo example
 
 Look at docs to learn more:
 
