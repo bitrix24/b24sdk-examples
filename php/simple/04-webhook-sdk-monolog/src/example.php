@@ -18,29 +18,33 @@ use Monolog\Logger;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\UidProcessor;
 
-require_once 'vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 // init psr-3 compatible logger
 // https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
 $logger = new Logger('App');
 // rotating
 // in production you MUST use logrotate or other specific util
-$rotatingFileHandler = new RotatingFileHandler('b24-php-sdk.log', 30);
+$rotatingFileHandler = new RotatingFileHandler( '/var/logs/b24-php-sdk.log', 30);
 $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
 $logger->pushHandler($rotatingFileHandler);
 $logger->pushProcessor(new MemoryUsageProcessor(true, true));
 $logger->pushProcessor(new UidProcessor());
 
 try {
+    print('Show all env variables:');
+    print_r($_ENV);
+    print('=====================' . PHP_EOL);
+
     // init bitrix24-php-sdk service from webhook
     $b24Service = ServiceBuilderFactory::createServiceBuilderFromWebhook(
-        'INSERT_HERE_WEBHOOK_URL',
+        $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
         null,
         $logger
     );
 
     // call any api method from universal interface core->call
-    var_dump($b24Service->core->call('user.current')->getResponseData()->getResult());
+    var_dump($b24Service->core->call('profile')->getResponseData()->getResult());
 
     // call method crm.lead.add from scope CRM
     $addedLeadId = $b24Service->getCRMScope()->lead()->add([

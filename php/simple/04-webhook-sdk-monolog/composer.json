@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "bitrix24/b24phpsdk": "dev-dev",
+    "php": "^8.3",
+    "bitrix24/b24phpsdk": "1.3.*",
     "monolog/monolog": "^3"
   },
   "require-dev": {
