@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "@bitrix24/b24ui-nuxt";
+
+.slider-bg {
+  background-image: url('/images/back.png');
+  background-size: cover;
+  background-position: center;
+}
