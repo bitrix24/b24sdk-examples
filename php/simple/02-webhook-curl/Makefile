@@ -31,10 +31,10 @@ MAKEFLAGS += --no-print-directory
 ROOT_DIR := $(shell pwd)
 
 help:
-	@echo "------------------------------------"
-	@echo "Bitrix24 PHP SDK examples           "
-	@echo "call an incoming webhook with cURL  "
-	@echo "------------------------------------"
+	@echo "-----------------------------------------"
+	@echo "Bitrix24 PHP SDK examples                "
+	@echo "02 — call an incoming webhook with cURL  "
+	@echo "-----------------------------------------"
 	@echo ""
 	@echo "docker-build              - build containers"
 	@echo "docker-up                 - run docker"

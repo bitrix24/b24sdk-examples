@@ -31,10 +31,10 @@ MAKEFLAGS += --no-print-directory
 ROOT_DIR := $(shell pwd)
 
 help:
-	@echo "-------------------------"
-	@echo "Bitrix24 PHP SDK examples"
-	@echo "default makefile example "
-	@echo "-------------------------"
+	@echo "------------------------------"
+	@echo "Bitrix24 PHP SDK examples     "
+	@echo "01 — default makefile example "
+	@echo "------------------------------"
 	@echo ""
 	@echo "docker-build              - build containers"
 	@echo "docker-up                 - run docker"
