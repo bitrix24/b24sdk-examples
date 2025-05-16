@@ -25,7 +25,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 $logger = new Logger('App');
 // rotating
 // in production you MUST use logrotate or other specific util
-$rotatingFileHandler = new RotatingFileHandler( '/var/logs/b24-php-sdk.log', 30);
+$rotatingFileHandler = new RotatingFileHandler( '/var/logs/b24-php-sdk.log', 1);
 $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
 $logger->pushHandler($rotatingFileHandler);
 $logger->pushProcessor(new MemoryUsageProcessor(true, true));
