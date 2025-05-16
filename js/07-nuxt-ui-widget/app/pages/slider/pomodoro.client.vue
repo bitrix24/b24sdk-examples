@@ -132,7 +132,7 @@ onMounted(async () => {
               class="justify-end items-end"
               :b24ui="{
                 leadingIcon: 'size-5 text-base-900',
-                label: 'text-8xl text-base-900',
+                label: 'text-8xl text-base-900'
               }"
               @end="stopFocusSession"
             />
