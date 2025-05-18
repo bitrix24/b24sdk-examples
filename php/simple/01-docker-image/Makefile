@@ -70,3 +70,7 @@ docker-down-clear:
 .PHONY: php-cli-bash
 php-cli-bash:
 	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: php-cli-app-run
+php-cli-app-run:
+	$(DOCKER_COMPOSE) run --rm php-cli php -f src/example.php

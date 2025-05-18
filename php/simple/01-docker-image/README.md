@@ -34,3 +34,7 @@ make docker-build
 make php-cli-bash
 php -f src/example.php
 ```
+4. You also can run an example with a call docker compose of your host system 
+```shell
+make php-cli-app-run
+```
