@@ -9,8 +9,6 @@ Application template for education purposes.
   docker               - docker contatainers
     php-cli            - default php-cli container
   src                  - source code
-  .env                 - environment variables
-  .gitignore           - gitignore file
   docker-compose.yaml  - docker compose file
   Makefile             - makefile
   README.md            - readme file with instructions    

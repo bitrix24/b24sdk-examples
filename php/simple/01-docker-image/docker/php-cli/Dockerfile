@@ -9,15 +9,9 @@
 # https://github.com/mlocati/docker-php-extension-installer#readme
 FROM mlocati/php-extension-installer:2.4 AS php-extension-installer
 
-# Separate Composer stage to install PHP dependencies efficiently
-# https://hub.docker.com/_/composer
-FROM composer:2.8 AS composer
-
 # Using official PHP 8.3 CLI image based on Debian Bookworm for development purposes
 FROM php:8.3-cli-bookworm AS dev-php
 
-# Copy Composer binary from the official Composer image
-COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Copy PHP extension installer script from mlocati's image
 COPY --from=php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
 
