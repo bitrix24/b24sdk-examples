@@ -36,3 +36,7 @@ php -f src/example.php
 ```shell
 make php-cli-app-run
 ```
+## Must read documentation
+- [Docker fundamentals](https://docs.docker.com/get-started/introduction/)
+- [Makefile tutorial](https://makefiletutorial.com/#getting-started)
+

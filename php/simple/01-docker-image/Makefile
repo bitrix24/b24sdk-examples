@@ -9,12 +9,6 @@
 export UID=$(shell id -u)
 export GID=$(shell id -g)
 
-# Load environment variables from .env and optional .env.local (no error if missing)
-# All variables will be exported to subprocesses (e.g., Docker, shell commands)
-include .env
--include .env.local
-export
-
 # Default Docker commands, can be overridden if needed (different setups, old docker-compose, CI quirks, etc.)
 DOCKER?=docker
 DOCKER_COMPOSE?=docker compose
@@ -36,6 +30,7 @@ help:
 	@echo "01 — default makefile example "
 	@echo "------------------------------"
 	@echo ""
+	@echo "🐳 Work with application containers"
 	@echo "docker-build              - build containers"
 	@echo "docker-up                 - run docker"
 	@echo "docker-down               - stop docker"
