@@ -1,6 +1,6 @@
 {
-  "name": "b24sdk-examples/b24phpsdk-monolog-example",
-  "description": "Example for work with bitrix24-php-sdk via webhook",
+  "name": "b24sdk-examples/04-webhook-sdk-monolog",
+  "description": "Example for work with bitrix24-php-sdk via webhook and monolog",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
