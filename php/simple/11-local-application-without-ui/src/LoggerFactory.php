@@ -55,10 +55,14 @@ readonly class LoggerFactory
             $logger->pushHandler($rotatingFileHandler);
             $logger->pushProcessor(new MemoryUsageProcessor(true, true));
             $logger->pushProcessor(new UidProcessor());
-        } elseif ($loggerName !== null) {
-            $logger = $logger->withName($loggerName);
+
+            return $logger;
         }
 
-        return $logger;
+        if ($loggerName === null) {
+            return $logger->withName(self::LOGGER_NAME);
+        }
+
+        return $logger->withName($loggerName);
     }
 }

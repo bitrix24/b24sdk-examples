@@ -24,5 +24,3 @@ $logger = LoggerFactory::create();
 $logger->debug('index.start', [
     'request' => $_REQUEST,
 ]);
-
-var_dump($_REQUEST);

@@ -64,6 +64,8 @@ help:
 	@echo "ngrok-up                  - run ngrok and expose 10888 port to public internet address"
 	@echo "ngrok-down                - shutdown ngrok"
 	@echo ""
+	@echo "🚀 Work with application:"
+	@echo "php-cli-app               - run container php-cli and run cli application «b24:test-command»"
 	@echo "php-cli-bash              - run container php-cli and open shell with arguments"
 	@echo ""
 	@echo "🎓 Examples"
