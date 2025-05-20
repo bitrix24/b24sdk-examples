@@ -71,6 +71,13 @@ readonly class Bitrix24ServiceBuilderFactory
     private static function getApplicationProfile(): ApplicationProfile
     {
         try {
+            /**
+             * @var array{
+             *       BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID: string,
+             *       BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET: string,
+             *       BITRIX24_PHP_SDK_APPLICATION_SCOPE: string
+             *   } $_ENV
+             */
             $profile = ApplicationProfile::initFromArray($_ENV);
             LoggerFactory::create()->debug('getApplicationProfile.finish');
             return $profile;
