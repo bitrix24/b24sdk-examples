@@ -77,12 +77,12 @@ final readonly class InstallController
                 'statusCode' => $response->getStatusCode(),
             ]);
             return $response;
-        } catch (Throwable $exception) {
+        } catch (Throwable $throwable) {
             $this->logger->error('InstallController.error', [
-                'message' => $exception->getMessage(),
-                'trace' => $exception->getTraceAsString(),
+                'message' => $throwable->getMessage(),
+                'trace' => $throwable->getTraceAsString(),
             ]);
-            return new Response(sprintf('error on placement request processing: %s', $exception->getMessage()), 500);
+            return new Response(sprintf('error on placement request processing: %s', $throwable->getMessage()), 500);
         }
     }
 }

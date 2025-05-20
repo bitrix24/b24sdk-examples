@@ -26,15 +26,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 readonly class Bitrix24ServiceBuilderFactory
 {
-    private const string LOGGER_NAME ='b24-php-sdk';
+    private const string LOGGER_NAME = 'b24-php-sdk';
 
     /**
-     * @param EventInterface $b24Event
-     * @return ServiceBuilder
      * @throws InvalidArgumentException
      * @throws WrongConfigurationException
      */
-
     public static function createFromIncomingEvent(EventInterface $b24Event): ServiceBuilder
     {
         return (new ServiceBuilderFactory(EventDispatcherFactory::create(), LoggerFactory::create()))->init(
@@ -52,7 +49,7 @@ readonly class Bitrix24ServiceBuilderFactory
     {
         // init bitrix24 service builder auth data from saved auth token
         $logger = LoggerFactory::create(self::LOGGER_NAME);
-        $authRepository = AuthRepositoryFactory::create($logger);
+        $localAppAuthRepository = AuthRepositoryFactory::create($logger);
 
         return (new ServiceBuilderFactory(
             EventDispatcherFactory::create(),
@@ -61,8 +58,8 @@ readonly class Bitrix24ServiceBuilderFactory
             // load app profile from /config/.env.local to $_ENV and create ApplicationProfile object
             self::getApplicationProfile(),
             // load oauth tokens and portal URL stored in /config/auth.json.local to LocalAppAuth object
-            $authRepository->getAuth()->getAuthToken(),
-            $authRepository->getAuth()->getDomainUrl()
+            $localAppAuthRepository->getAuth()->getAuthToken(),
+            $localAppAuthRepository->getAuth()->getDomainUrl()
         );
     }
 

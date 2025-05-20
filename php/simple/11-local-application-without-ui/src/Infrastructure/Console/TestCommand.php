@@ -50,22 +50,16 @@ class TestCommand extends Command
         parent::__construct();
     }
 
-    /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int
-     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.TestCommand.start');
 
-        $io = new SymfonyStyle($input, $output);
+        $symfonyStyle = new SymfonyStyle($input, $output);
         try {
-            $io->writeln(['Hello world!', '', 'start request to bitrix24 with saved token']);
+            $symfonyStyle->writeln(['Hello world!', '', 'start request to bitrix24 with saved token']);
             $user = $this->b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
 
-            $io->writeln(
+            $symfonyStyle->writeln(
                 sprintf(
                     'user info: %s',
                     sprintf(
@@ -80,21 +74,22 @@ class TestCommand extends Command
                 )
             );
         } catch (BaseException $exception) {
-            $io->caution('Bitrix24 error');
-            $io->text(
+            $symfonyStyle->caution('Bitrix24 error');
+            $symfonyStyle->text(
                 [
-                    sprintf('%s', $exception->getMessage()),
+                    $exception->getMessage(),
                 ]
             );
         } catch (Throwable $exception) {
-            $io->caution('fatal error');
-            $io->text(
+            $symfonyStyle->caution('fatal error');
+            $symfonyStyle->text(
                 [
                     $exception->getMessage(),
                     $exception->getTraceAsString(),
                 ]
             );
         }
+
         $this->logger->debug('Command.TestCommand.finish');
 
         return self::SUCCESS;

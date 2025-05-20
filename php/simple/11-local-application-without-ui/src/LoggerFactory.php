@@ -24,6 +24,7 @@ use Psr\Log\LoggerInterface;
 readonly class LoggerFactory
 {
     private const string FILE_NAME = '/var/logs/app.log';
+
     private const string LOGGER_NAME = 'app';
 
     /**
@@ -39,6 +40,7 @@ readonly class LoggerFactory
             if (!array_key_exists('BITRIX24_PHP_SDK_LOG_LEVEL', $_ENV)) {
                 throw new InvalidArgumentException('in $_ENV variables not found key BITRIX24_PHP_SDK_LOG_LEVEL');
             }
+
             if (!array_key_exists('BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT', $_ENV)) {
                 throw new InvalidArgumentException('in $_ENV variables not found key BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT');
             }
