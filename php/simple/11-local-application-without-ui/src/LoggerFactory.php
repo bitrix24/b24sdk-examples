@@ -49,7 +49,7 @@ readonly class LoggerFactory
             $rotatingFileHandler = new RotatingFileHandler(
                 dirname(__DIR__) . self::FILE_NAME,
                 (int)$_ENV['BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT'],
-                (int)$_ENV['BITRIX24_PHP_SDK_LOG_LEVEL']
+                Logger::toMonologLevel($_ENV['BITRIX24_PHP_SDK_LOG_LEVEL'])
             );
             $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
 
