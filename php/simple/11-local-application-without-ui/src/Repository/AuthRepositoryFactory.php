@@ -18,7 +18,7 @@ use Bitrix24\SDK\Application\Local\Repository\LocalAppAuthRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
-readonly class AuthRepositoryFactory
+final readonly class AuthRepositoryFactory
 {
     public static function create(LoggerInterface $logger): LocalAppAuthRepositoryInterface
     {

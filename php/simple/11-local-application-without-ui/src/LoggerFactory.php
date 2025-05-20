@@ -23,7 +23,7 @@ use Psr\Log\LoggerInterface;
 
 readonly class LoggerFactory
 {
-    private const string LOG_FILE_NAME = '/var/logs/application.log';
+    private const string FILE_NAME = '/var/logs/app.log';
     private const string LOGGER_NAME = 'app';
 
     /**
@@ -39,11 +39,14 @@ readonly class LoggerFactory
             if (!array_key_exists('BITRIX24_PHP_SDK_LOG_LEVEL', $_ENV)) {
                 throw new InvalidArgumentException('in $_ENV variables not found key BITRIX24_PHP_SDK_LOG_LEVEL');
             }
+            if (!array_key_exists('BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT', $_ENV)) {
+                throw new InvalidArgumentException('in $_ENV variables not found key BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT');
+            }
 
             // rotating
             $rotatingFileHandler = new RotatingFileHandler(
-                dirname(__DIR__) . self::LOG_FILE_NAME,
-                0,
+                dirname(__DIR__) . self::FILE_NAME,
+                (int)$_ENV['BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT'],
                 (int)$_ENV['BITRIX24_PHP_SDK_LOG_LEVEL']
             );
             $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
