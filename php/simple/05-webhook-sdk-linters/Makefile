@@ -36,7 +36,7 @@ help:
 	@echo "05 — add linters for check source code      "
 	@echo "--------------------------------------------"
 	@echo ""
-	@echo "🐳 Work with application containers:"
+	@echo "🐳 Work with application containers"
 	@echo "docker-build              - build containers"
 	@echo "docker-up                 - run docker"
 	@echo "docker-down               - stop docker"
