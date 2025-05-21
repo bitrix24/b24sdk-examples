@@ -42,3 +42,11 @@ make php-cli-bash
 php -f src/example.php
 ```
 
+4. You also can run an example with a call docker compose of your host system
+```shell
+make php-cli-app
+```
+## Must read documentation
+- [Docker fundamentals](https://docs.docker.com/get-started/introduction/)
+- [Makefile tutorial](https://makefiletutorial.com/#getting-started)
+
