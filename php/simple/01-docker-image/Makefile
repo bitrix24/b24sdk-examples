@@ -35,6 +35,9 @@ help:
 	@echo "docker-up                 - run docker"
 	@echo "docker-down               - stop docker"
 	@echo "docker-down-clear         - stop docker and remove orphaned containers"
+	@echo ""
+	@echo "🚀 Work with application:"
+	@echo "php-cli-app               - run container php-cli and run console script"
 	@echo "php-cli-bash              - run container php-cli and open shell with arguments"
 	@echo ""
 
@@ -66,6 +69,6 @@ docker-down-clear:
 php-cli-bash:
 	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
 
-.PHONY: php-cli-app-run
-php-cli-app-run:
+.PHONY: php-cli-app
+php-cli-app:
 	$(DOCKER_COMPOSE) run --rm php-cli php -f src/example.php
