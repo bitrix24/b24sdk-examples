@@ -32,6 +32,7 @@ help:
 	@echo ""
 	@echo "🐳 Work with application containers"
 	@echo "docker-build              - build containers"
+	@echo "docker-rebuild            - rebuild containers, reset your environment"
 	@echo "docker-up                 - run docker"
 	@echo "docker-down               - stop docker"
 	@echo "docker-down-clear         - stop docker and remove orphaned containers"
