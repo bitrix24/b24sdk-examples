@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App;
 
 use App\Controller\InstallController;
+use App\Controller\PlacementController;
 use App\Repository\AuthRepositoryFactory;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,3 +25,24 @@ $logger = LoggerFactory::create();
 $logger->debug('index.start', [
     'request' => $_REQUEST,
 ]);
+
+// create placement controller
+$placementController = new PlacementController($logger);
+
+$incomingRequest = Request::createFromGlobals();
+$logger->debug('index.init', [
+    'request' => $incomingRequest->request->all(),
+    'query' => $incomingRequest->query->all()
+]);
+// process request with controller
+$result = $placementController->process($incomingRequest);
+?>
+
+<pre>
+    Main placement, auth tokens from bitrix24:
+    <?= print_r($_REQUEST, true) ?>
+    Results from placement controller:
+<?php
+$result->send();
+?>
+</pre>

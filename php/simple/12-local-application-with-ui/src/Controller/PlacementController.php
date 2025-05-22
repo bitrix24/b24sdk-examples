@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
-readonly class PlacementController
+final readonly class PlacementController
 {
     public function __construct(
         private LoggerInterface $logger
@@ -51,7 +51,7 @@ readonly class PlacementController
             $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest($placementRequest->getRequest());
             $currentUser = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
             $userInfo = sprintf(
-                'current user info:' . PHP_EOL .
+                'current user info, auth data from placement request:' . PHP_EOL .
                 'user id – %s' . PHP_EOL .
                 'user name - %s %s' . PHP_EOL .
                 'is admin - %s',

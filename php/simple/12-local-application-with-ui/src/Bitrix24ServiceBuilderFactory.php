@@ -29,6 +29,24 @@ readonly class Bitrix24ServiceBuilderFactory
     private const string LOGGER_NAME = 'b24-php-sdk';
 
     /**
+     * Create Bitrix24 Service builder with auth tokens received from placement request
+     *
+     * @param Request $request
+     * @return ServiceBuilder
+     * @throws InvalidArgumentException
+     * @throws WrongConfigurationException
+     */
+    public static function createFromPlacementRequest(Request $request): ServiceBuilder
+    {
+        return ServiceBuilderFactory::createServiceBuilderFromPlacementRequest(
+            $request,
+            self::getApplicationProfile(),
+            EventDispatcherFactory::create(),
+            LoggerFactory::create(self::LOGGER_NAME),
+        );
+    }
+
+    /**
      * @throws InvalidArgumentException
      * @throws WrongConfigurationException
      */

@@ -13,10 +13,14 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Bitrix24ServiceBuilderFactory;
 use Bitrix24\SDK\Application\Local\Entity\LocalAppAuth;
 use Bitrix24\SDK\Application\Local\Repository\LocalAppAuthRepositoryInterface;
 use Bitrix24\SDK\Application\Requests\Events\OnApplicationInstall\OnApplicationInstall;
+use Bitrix24\SDK\Application\Requests\Events\OnApplicationUninstall\OnApplicationUninstall;
+use Bitrix24\SDK\Application\Requests\Placement\PlacementRequest;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
+use Bitrix24\SDK\Services\Main\Common\EventHandlerMetadata;
 use Bitrix24\SDK\Services\RemoteEventsFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,37 +43,66 @@ final readonly class InstallController
         ]);
 
         try {
-            // check is this request are valid bitrix24 event request?
-            if (!RemoteEventsFactory::isCanProcess($incomingRequest)) {
+            // check is this request are valid placement request?
+            if (!PlacementRequest::isCanProcess($incomingRequest)) {
                 $this->logger->error('InstallController.process.unknownRequest', [
                     'request' => $incomingRequest->request->all()
                 ]);
                 throw new InvalidArgumentException(
-                    'InstallController controller can process only install event requests from bitrix24'
+                    'install controller can process only placement requests from bitrix24'
                 );
             }
 
-            $b24Event = RemoteEventsFactory::init($this->logger)->createEvent($incomingRequest, null);
-            $this->logger->debug('InstallController.process.eventRequest', [
-                'eventClassName' => $b24Event::class,
-                'eventCode' => $b24Event->getEventCode(),
-                'eventPayload' => $b24Event->getEventPayload(),
-            ]);
+            $placementRequest = new PlacementRequest($incomingRequest);
+            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest($placementRequest->getRequest());
 
-            if (!$b24Event instanceof OnApplicationInstall) {
-                throw new InvalidArgumentException(
-                    'InstallController controller can process only install events from bitrix24'
-                );
-            }
+            // your code can't trust data in request before you check is this request data valid
+            $b24ServiceBuilder->getMainScope()->main()->guardValidateCurrentAuthToken();
 
-            // save auth tokens and application token
+            // ok, request data is valid, let's install application
+            // step 1
+            // save admin auth token without application_token key
+            // they will arrive at OnApplicationInstall event
             $this->appAuthRepository->save(
                 new LocalAppAuth(
-                    $b24Event->getAuth()->authToken,
-                    $b24Event->getAuth()->domain,
-                    $b24Event->getAuth()->application_token
+                    $placementRequest->getAccessToken(),
+                    $placementRequest->getDomainUrl(),
+                    null
                 )
             );
+
+
+            // step 2
+            // register application lifecycle event handlers
+            $currentB24UserId = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile()->ID;
+            $eventHandlerUrl = sprintf(
+                'https://%s/event-handler.php',
+                $placementRequest->getRequest()->server->get('HTTP_HOST')
+            );
+            $this->logger->debug('InstallController.process.startBindEventHandlers', [
+                'eventHandlerUrl' => $eventHandlerUrl
+            ]);
+
+            $b24ServiceBuilder->getMainScope()->eventManager()->bindEventHandlers(
+                [
+                    // register event handlers for implemented in SDK events
+                    new EventHandlerMetadata(
+                        OnApplicationInstall::CODE,
+                        $eventHandlerUrl,
+                        $currentB24UserId
+                    ),
+                    new EventHandlerMetadata(
+                        OnApplicationUninstall::CODE,
+                        $eventHandlerUrl,
+                        $currentB24UserId,
+                    ),
+
+                ]
+            );
+            $this->logger->debug('InstallController.process.finishBindEventHandlers');
+
+            // Yes, that's all, if you need to install some bizproc-activity, create userfields, register other handlers, etc
+            // you can do it in a background task or a custom step in the application onboarding wizard
 
             $response = new Response('OK', 200);
             $this->logger->debug('InstallController.process.finish', [
@@ -78,7 +111,7 @@ final readonly class InstallController
             ]);
             return $response;
         } catch (Throwable $throwable) {
-            $this->logger->error('InstallController.error', [
+            $this->logger->error('InstallController.process.error', [
                 'message' => $throwable->getMessage(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
