@@ -48,13 +48,15 @@ help:
 	@echo "composer-dumpautoload     - regenerate composer autoload file"
 	@echo "composer                  - run composer and pass arguments"
 	@echo ""
+	@echo "🚀 Work with application:"
+	@echo "php-cli-app               - run container php-cli and run console script"
 	@echo "php-cli-bash              - run container php-cli and open shell with arguments"
 	@echo ""
 	@echo "🎓 Examples"
 	@echo "If you want build docker containers, put this command in shell:"
 	@echo "make docker-build"
 
-# init project
+# work with containers
 .PHONY: docker-build
 docker-build:
 	$(DOCKER_COMPOSE) build
@@ -78,10 +80,7 @@ docker-down:
 docker-down-clear:
 	$(DOCKER_COMPOSE) down --volumes --remove-orphans
 
-.PHONY: php-cli-bash
-php-cli-bash:
-	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
-
+# work with composer
 .PHONY: composer-install
 composer-install:
 	$(DOCKER_COMPOSE) run --rm php-cli composer install
@@ -100,3 +99,12 @@ composer-dumpautoload:
 .PHONY: composer
 composer:
 	$(DOCKER_COMPOSE) run --rm php-cli composer $(filter-out $@,$(MAKECMDGOALS))
+
+# work with applicationy
+.PHONY: php-cli-bash
+php-cli-bash:
+	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: php-cli-app
+php-cli-app:
+	$(DOCKER_COMPOSE) run --rm php-cli php -f src/example.php

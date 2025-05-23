@@ -9,6 +9,7 @@ Call REST-API for education purposes.
   docker               - docker contatainers
     php-cli            - default php-cli container
   src                  - source code
+    example.php        - file with example code
   vendor               - folder with dependencies from composer.json  
   .env                 - environment variables
   .env.local           - uncommitted file with local overrides  
@@ -43,7 +44,6 @@ make docker-build
 ```shell
 make composer-install
 ```
-
 5. Enter into docker container `php-cli` and run example
 ```shell
 make php-cli-bash
