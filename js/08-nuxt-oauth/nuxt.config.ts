@@ -43,7 +43,8 @@ export default defineNuxtConfig({
     server: {
       // allow incoming requests from this host
       allowedHosts: [
-        'currently-main-panda.cloudpub.ru'
+        'currently-main-panda.cloudpub.ru',
+        'sullenly-meteoric-partridge.cloudpub.ru'
       ],
       // and don't forget CORS, if needed:
       cors: true
