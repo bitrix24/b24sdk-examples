@@ -4,12 +4,10 @@ import { LoggerBrowser, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 import type { ListPayload } from '@bitrix24/b24jssdk'
 import type { BitrixCompany } from '~/types'
 
-const $logger = LoggerBrowser.build('api/companies.get', true)
+const $logger = LoggerBrowser.build('api/companies.get/', true)
 
 export default defineEventHandler(async (event) => {
-  const session = await requireUserSession(event)
-
-  const { $b24 } = useBitrix24(event, session, $logger)
+  const { $b24 } = await useBitrix24(event, $logger)
 
   const { page } = getQuery(event)
   const pageNumber = Number.parseInt(page as string) || 1
@@ -26,16 +24,11 @@ export default defineEventHandler(async (event) => {
       start
     )
 
-    $logger.log(
+    $logger.log({
+      method: 'crm.item.list',
       page,
-      'crm.item.list',
-      {
-        entityTypeId: EnumCrmEntityTypeId.company,
-        select: ['id', 'title'],
-        order: { id: 'ASC' }
-      },
       start
-    )
+    })
 
     const data = response.getData() as ListPayload<BitrixCompany>
 
@@ -48,15 +41,14 @@ export default defineEventHandler(async (event) => {
     $logger.log({
       nextPage,
       next,
-      // list,
-      total
+      total,
+      duration: time?.duration ?? '?'
     })
 
     return {
       nextPage,
       list,
-      total,
-      time
+      total
     }
   } catch (error) {
     $logger.error('Bitrix24 Error:', error)

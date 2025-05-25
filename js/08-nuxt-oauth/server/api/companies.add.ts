@@ -2,12 +2,10 @@ import { defineEventHandler, getQuery } from 'h3'
 import { useBitrix24 } from '~~/server/composables/useBitrix24'
 import { LoggerBrowser, EnumCrmEntityTypeId } from '@bitrix24/b24jssdk'
 
-const $logger = LoggerBrowser.build('api/companies.add', true)
+const $logger = LoggerBrowser.build('api/companies.add/', true)
 
 export default defineEventHandler(async (event) => {
-  const session = await requireUserSession(event)
-
-  const { $b24 } = useBitrix24(event, session, $logger)
+  const { $b24 } = await useBitrix24(event, $logger)
 
   const { count } = getQuery(event)
   const countAdd = Number.parseInt(count as string) || 1
@@ -26,10 +24,7 @@ export default defineEventHandler(async (event) => {
   })
 
   try {
-    const response = await $b24.callBatchByChunk(commands)
-    const data = response.getData()
-
-    $logger.log(data)
+    await $b24.callBatchByChunk(commands)
     return listTitle
   } catch (error) {
     $logger.error('Bitrix24 Error:', error)

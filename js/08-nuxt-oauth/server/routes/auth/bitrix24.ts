@@ -2,7 +2,7 @@ import { EnumAppStatus, LoggerBrowser } from '@bitrix24/b24jssdk'
 import type { B24OAuthParams } from '@bitrix24/b24jssdk'
 import { makeAuthToken, useBitrix24 } from '~~/server/composables/useBitrix24'
 
-const $logger = LoggerBrowser.build('rout/auth.bitrix24.post', true)
+const $logger = LoggerBrowser.build('rout/auth.bitrix24/', true)
 
 interface QueryParameters {
   state?: string
@@ -71,8 +71,7 @@ export default defineEventHandler(async (event) => {
     })
 
     // save user ////
-    const session = await requireUserSession(event)
-    const { getUserInfo } = useBitrix24(event, session, $logger)
+    const { getUserInfo } = await useBitrix24(event, $logger)
     const userInfo = await getUserInfo()
 
     await setUserSession(event, {

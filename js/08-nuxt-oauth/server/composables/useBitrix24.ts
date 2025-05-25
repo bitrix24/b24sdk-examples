@@ -1,5 +1,5 @@
 import { B24OAuth, LoggerBrowser, LoggerType } from '@bitrix24/b24jssdk'
-import type { B24OAuthSecret, PayloadOAuthToken, NumberString, B24OAuthParams, AuthData, CallbackRefreshAuth } from '@bitrix24/b24jssdk'
+import type { B24OAuthSecret, PayloadOAuthToken, NumberString, B24OAuthParams, AuthData } from '@bitrix24/b24jssdk'
 import type { User, UserSessionRequired } from '#auth-utils'
 import type { H3Event } from 'h3'
 
@@ -39,11 +39,11 @@ function getLogger(logger: null | LoggerBrowser = null) {
   return logger
 }
 
-export const useBitrix24 = (
+export const useBitrix24 = async (
   event: H3Event,
-  session: UserSessionRequired,
   logger: null | LoggerBrowser = null
 ) => {
+  const session: UserSessionRequired = await requireUserSession(event)
   const config = useRuntimeConfig()
 
   const $logger = getLogger(logger)
@@ -67,26 +67,19 @@ export const useBitrix24 = (
     } as B24OAuthSecret
   )
 
-  $logger.info(
-    session.secure.b24Oauth,
-    {
-      clientId: config.public.appClientId,
-      clientSecret: config.appClientSecret
-    }
-  )
-
-  $b24.setCallbackRefreshAuth(async ({
-    authData,
-    b24OAuthParams
-  }: {
+  $b24.setCallbackRefreshAuth(async ({ authData, b24OAuthParams }: {
     authData: AuthData
     b24OAuthParams: B24OAuthParams
   }): Promise<void> => {
-    $logger.warn('auto RefreshAuth', authData, b24OAuthParams)
+    $logger.log({
+      title: 'auto RefreshAuth',
+      authData: authData.access_token,
+      b24OAuthParams: b24OAuthParams.clientEndpoint
+    })
 
     await setUserSession(event, {
       secure: {
-        b24OAuthParams
+        b24Oauth: b24OAuthParams
       }
     })
   })
