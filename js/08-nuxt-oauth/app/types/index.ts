@@ -7,6 +7,6 @@ export interface IStep {
 // endregion ////
 
 export interface BitrixCompany {
-  id: string
+  id: number
   title: string
 }
