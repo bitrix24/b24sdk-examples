@@ -6,6 +6,7 @@ const { user } = useUserSession()
 const companies = ref<BitrixCompany[]>([])
 const page = ref(1)
 const hasMore = ref(true)
+const isInited = ref(false)
 const loading = ref(false)
 const error = ref<string | null>(null)
 
@@ -16,7 +17,7 @@ const loadMore = async () => {
     loading.value = true
     error.value = null
 
-    const { data } = await useFetch<{
+    const response = await $fetch<{
       nextPage: number | null
       list: BitrixCompany[]
       total: number
@@ -25,16 +26,17 @@ const loadMore = async () => {
       query: { page: page.value }
     })
 
-    if (data.value) {
-      companies.value = [...companies.value, ...data.value.list]
-      hasMore.value = !!data.value.nextPage
-      page.value = data.value.nextPage || page.value
+    if (response) {
+      companies.value = [...companies.value, ...response.list]
+      hasMore.value = !!response.nextPage
+      page.value = response.nextPage || page.value
     }
   } catch (err) {
     error.value = 'Failed to load companies'
     console.error('Error:', err)
   } finally {
     loading.value = false
+    isInited.value = true
   }
 }
 
@@ -45,13 +47,13 @@ const resetPagination = () => {
 }
 
 const addCompany = async (count: number = 1000) => {
-  if (loading.value) return
+  if (!isInited.value) return
 
   try {
-    loading.value = true
+    isInited.value = false
     error.value = null
 
-    await useFetch('/api/companies.add', {
+    await $fetch('/api/companies.add', {
       method: 'GET',
       query: { count: count }
     })
@@ -82,7 +84,10 @@ defineExpose({
 </script>
 
 <template>
-  <div>
+  <div v-if="!isInited">
+    Loading ...
+  </div>
+  <div v-else>
     <B24Alert v-if="error" :title="error" color="danger" />
     <div v-if="companies.length">
       <ul class="list-inside list-decimal">
