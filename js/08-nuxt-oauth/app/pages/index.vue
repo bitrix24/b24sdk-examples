@@ -10,9 +10,12 @@ definePageMeta({
   middleware: ['auth']
 })
 
-const { loggedIn, user, clear: clearSession } = useUserSession()
+const { loggedIn, user, session, clear: clearSession } = useUserSession()
 
-const companiesList = ref(null)
+const companiesList = ref<null | {
+  loadMore: () => Promise<void>
+  addCompany: (companyId: number) => Promise<void>
+}>(null)
 
 const $logger = LoggerBrowser.build('OAut.index', true)
 const isInit = ref(false)
@@ -31,7 +34,6 @@ const makeOpenSliderForUser = () => {
 }
 
 const makeCrmListShow = () => {
-  $logger.info('@todo testRefreshToken')
   crmListShow.value = true
 }
 
@@ -46,6 +48,13 @@ async function addCompany(count: number = 1000) {
     await companiesList.value.addCompany(count)
   }
 }
+
+onMounted(() => {
+  $logger.info({
+    user: user.value,
+    session: session.value
+  })
+})
 </script>
 
 <template>
@@ -98,9 +107,10 @@ async function addCompany(count: number = 1000) {
       <B24Slideover
         v-model:open="crmListShow"
         title="Company list"
+        description="get from server side"
       >
         <template #body>
-          <div class="mx-2 mt-2 mb-5 p-4 bg-white min-h-screen">
+          <div class="mx-2 mt-2 mb-5 p-4 bg-white min-h-screen rounded">
             <CompanyList ref="companiesList" />
           </div>
         </template>
