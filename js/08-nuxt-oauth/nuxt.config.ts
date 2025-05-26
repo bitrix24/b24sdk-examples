@@ -12,22 +12,10 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
   runtimeConfig: {
-    session: {
-      maxAge: 60 * 60 * 24 * 7, // 1 week,
-      password: process.env.NUXT_SESSION_PASSWORD || ''
-    },
-    /**
-     * @memo this will be overwritten from .env or Docker_*
-     * @see https://nuxt.com/docs/guide/going-further/runtime-config#example
-     */
-    appClientSecret: '',
-    appScope: '',
-    public: {
-      appClientId: ''
-    }
   },
   devServer: {
-    port: 3000
+    port: 3000,
+    host: '127.0.0.1'
     // host: 'custom.mydomain.local',
     // https: {
     //   key: 'E:/source/ssl/custom.mydomain.local-key.pem',

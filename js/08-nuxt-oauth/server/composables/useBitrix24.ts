@@ -1,25 +1,7 @@
 import { B24OAuth, LoggerBrowser, LoggerType } from '@bitrix24/b24jssdk'
-import type { B24OAuthSecret, PayloadOAuthToken, NumberString, B24OAuthParams, AuthData } from '@bitrix24/b24jssdk'
-import type { User, UserSessionRequired } from '#auth-utils'
+import type { B24OAuthSecret, B24OAuthParams, AuthData } from '@bitrix24/b24jssdk'
+import type { UserSessionRequired } from '#auth-utils'
 import type { H3Event } from 'h3'
-
-export const makeAuthToken = async (
-  serverDomain: string,
-  code: string
-): Promise<PayloadOAuthToken> => {
-  const config = useRuntimeConfig()
-  const data = await $fetch(`https://${serverDomain}/oauth/token/`, {
-    method: 'POST',
-    query: {
-      grant_type: 'authorization_code',
-      client_id: config.public.appClientId,
-      client_secret: config.appClientSecret,
-      code
-    }
-  })
-
-  return data as PayloadOAuthToken
-}
 
 function getLogger(logger: null | LoggerBrowser = null) {
   if (null === logger) {
@@ -62,8 +44,8 @@ export const useBitrix24 = async (
   const $b24 = new B24OAuth(
     session.secure.b24Oauth,
     {
-      clientId: config.public.appClientId,
-      clientSecret: config.appClientSecret
+      clientId: config.oauth.bitrix24.clientId,
+      clientSecret: config.oauth.bitrix24.clientSecret
     } as B24OAuthSecret
   )
 
@@ -84,35 +66,7 @@ export const useBitrix24 = async (
     })
   })
 
-  const getUserInfo = async (): Promise<User> => {
-    const response = await $b24.callMethod('profile')
-
-    const data: {
-      ID: NumberString
-      NAME: string
-      ADMIN: boolean
-      LAST_NAME: string
-      PERSONAL_GENDER: string
-      PERSONAL_PHOTO: string
-      TIME_ZONE: string
-      TIME_ZONE_OFFSET: number
-    } = response.getData().result
-
-    return {
-      id: Number.parseInt(data.ID),
-      isAdmin: data.ADMIN,
-      targetOrigin: $b24.getTargetOrigin(),
-      name: data.NAME,
-      lastName: data.LAST_NAME,
-      gender: data.PERSONAL_GENDER,
-      photo: data.PERSONAL_PHOTO,
-      timeZone: data.TIME_ZONE,
-      timeZoneOffset: data.TIME_ZONE_OFFSET
-    }
-  }
-
   return {
-    $b24,
-    getUserInfo
+    $b24
   }
 }

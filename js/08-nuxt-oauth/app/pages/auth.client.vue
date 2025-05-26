@@ -12,29 +12,16 @@ definePageMeta({
 })
 
 const toast = useToast()
-const config = useRuntimeConfig()
 
 const $logger = LoggerBrowser.build('Auth.step1', true)
-const b24Url = ref('https://b24-08ime0.bitrix24.by')
-
-const generateAuthUrl = (
-  origin: string,
-  state: string
-) => {
-  const url = new URL(`${origin}/oauth/authorize/`)
-  url.search = new URLSearchParams({
-    client_id: config.public.appClientId,
-    state
-  }).toString()
-  return url.toString()
-}
+const b24Url = ref('')
 
 async function goToB24() {
-  let origin: string = ''
+  let authorizationServer: string = ''
 
   try {
     const queryUrl = new URL(b24Url.value)
-    origin = queryUrl.origin
+    authorizationServer = queryUrl.origin
   } catch (error) {
     $logger.error(error)
     toast.add({
@@ -44,16 +31,12 @@ async function goToB24() {
     return
   }
 
-  /**
-   * @memo It is worth using your token received from the server part for greater reliability
-   * But let's not complicate the example
-   * @see app/middleware/auth.ts
-   */
-  const stateInfo = '123'
-  const url = generateAuthUrl(origin, stateInfo)
-  $logger.info('Go to:', url.toString())
-
-  window.location.href = url.toString()
+  navigateTo({
+    path: '/auth/bitrix24',
+    query: { authorizationServer }
+  }, {
+    external: true
+  })
 }
 </script>
 

@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@bitrix24/b24jssdk': file:../../b24jssdk/packages/jssdk
-
 importers:
 
   .:
@@ -15,8 +12,8 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5(vue@3.5.14(typescript@5.8.3))
       '@bitrix24/b24jssdk':
-        specifier: file:..\..\b24jssdk\packages\jssdk
-        version: file:../../b24jssdk/packages/jssdk
+        specifier: file:..\..\..\b24jssdk\packages\jssdk
+        version: file:../../../b24jssdk/packages/jssdk
       '@bitrix24/b24ui-nuxt':
         specifier: ^0.6.5
         version: 0.6.7(@babel/parser@7.27.2)(axios@1.9.0)(embla-carousel@8.6.0)(jwt-decode@4.0.0)(magicast@0.3.5)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0))(vue-router@4.5.1(vue@3.5.14(typescript@5.8.3)))(vue@3.5.14(typescript@5.8.3))(zod@3.25.20)
@@ -24,8 +21,8 @@ importers:
         specifier: ^3.16.2
         version: 3.17.4(@parcel/watcher@2.5.1)(@types/node@22.15.21)(db0@0.3.2)(eslint@9.27.0(jiti@2.4.2))(ioredis@5.6.1)(lightningcss@1.30.1)(magicast@0.3.5)(optionator@0.9.4)(rollup@4.41.0)(terser@5.39.2)(typescript@5.8.3)(vite@6.3.5(@types/node@22.15.21)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.39.2)(yaml@2.8.0))(yaml@2.8.0)
       nuxt-auth-utils:
-        specifier: 0.5.20
-        version: 0.5.20(magicast@0.3.5)
+        specifier: file:..\..\..\..\demo\nuxt-auth-utils
+        version: file:../../../../demo/nuxt-auth-utils(magicast@0.3.5)
     devDependencies:
       '@nuxt/eslint':
         specifier: ^1.3.0
@@ -184,8 +181,8 @@ packages:
     peerDependencies:
       vue: ^3.5.13
 
-  '@bitrix24/b24jssdk@file:../../b24jssdk/packages/jssdk':
-    resolution: {directory: ../../b24jssdk/packages/jssdk, type: directory}
+  '@bitrix24/b24jssdk@file:../../../b24jssdk/packages/jssdk':
+    resolution: {directory: ../../../b24jssdk/packages/jssdk, type: directory}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
 
   '@bitrix24/b24style@1.0.1':
@@ -891,11 +888,11 @@ packages:
     resolution: {integrity: sha512-FOrOq52l7u8goR5yncX14+k+Ewi5djnrt1JwXeS/FvnwAPOiveFhiczCDuvXdssAwamtrV2hp5Rw9v+n2T7hQg==}
     engines: {node: '>=20.6.0'}
 
-  '@poppinss/string@1.5.0':
-    resolution: {integrity: sha512-Ilq9xAASmDPuK50rlUkLFpxZl7g/b4AwaGUbr3mYns+mZow6gToTvbbYk/PhVA3HU2Corug/aWWVGysOWnHcwQ==}
+  '@poppinss/string@1.6.0':
+    resolution: {integrity: sha512-HfAf9VqTvo31BsruwgwEauQ316RNODdryk6QgYZo4qTV50s0h1H9HmIr+QjwwI3u4Sz7r4Q1dd1EVaLB7pWlaw==}
 
-  '@poppinss/utils@6.9.3':
-    resolution: {integrity: sha512-K69WMVtmGcl0zJii9Zm5iav5VmxD3hw1JtN5cGqhTMr7UMSLSjeZPuETwZgjKqw86Dd1YcrWLU0+cVCTkemQJg==}
+  '@poppinss/utils@6.9.4':
+    resolution: {integrity: sha512-KJe9/ebFBqb4fFBdadgN4YgT4bHAKdWhLAFzjaeDqx5vOCtD3C+byN5DrORVNbwAjt+rb8beP8pXaWZWx+WmTA==}
     engines: {node: '>=18.16.0'}
 
   '@rolldown/pluginutils@1.0.0-beta.9':
@@ -3548,8 +3545,8 @@ packages:
   nth-check@2.1.1:
     resolution: {integrity: sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==}
 
-  nuxt-auth-utils@0.5.20:
-    resolution: {integrity: sha512-hoXopfYeK4Cdu17WxxDWYc66EH7ZYG8JUodPxxef9vjfXOXqz3s1gxi/JWsiqkwN6s7K1RpKEESZGg1EopCgAA==}
+  nuxt-auth-utils@file:../../../../demo/nuxt-auth-utils:
+    resolution: {directory: ../../../../demo/nuxt-auth-utils, type: directory}
     peerDependencies:
       '@atproto/api': ^0.13.15
       '@atproto/oauth-client-node': ^0.2.0
@@ -5043,7 +5040,7 @@ snapshots:
   '@adonisjs/hash@9.1.1':
     dependencies:
       '@phc/format': 1.0.0
-      '@poppinss/utils': 6.9.3
+      '@poppinss/utils': 6.9.4
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -5232,7 +5229,7 @@ snapshots:
     dependencies:
       vue: 3.5.14(typescript@5.8.3)
 
-  '@bitrix24/b24jssdk@file:../../b24jssdk/packages/jssdk':
+  '@bitrix24/b24jssdk@file:../../../b24jssdk/packages/jssdk':
     dependencies:
       '@types/luxon': 3.6.2
       axios: 1.9.0
@@ -6170,7 +6167,7 @@ snapshots:
 
   '@poppinss/object-builder@1.1.0': {}
 
-  '@poppinss/string@1.5.0':
+  '@poppinss/string@1.6.0':
     dependencies:
       '@lukeed/ms': 2.0.2
       '@types/bytes': 3.1.5
@@ -6181,11 +6178,11 @@ snapshots:
       slugify: 1.6.6
       truncatise: 0.0.8
 
-  '@poppinss/utils@6.9.3':
+  '@poppinss/utils@6.9.4':
     dependencies:
       '@poppinss/exception': 1.2.1
       '@poppinss/object-builder': 1.1.0
-      '@poppinss/string': 1.5.0
+      '@poppinss/string': 1.6.0
       flattie: 1.1.1
       safe-stable-stringify: 2.5.0
       secure-json-parse: 4.0.0
@@ -8924,7 +8921,7 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nuxt-auth-utils@0.5.20(magicast@0.3.5):
+  nuxt-auth-utils@file:../../../../demo/nuxt-auth-utils(magicast@0.3.5):
     dependencies:
       '@adonisjs/hash': 9.1.1
       '@nuxt/kit': 3.17.4(magicast@0.3.5)

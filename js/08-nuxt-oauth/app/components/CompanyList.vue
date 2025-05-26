@@ -69,7 +69,7 @@ const addCompany = async (count: number = 1000) => {
 
 const makeOpenSliderForCompany = (companyId: number) => {
   window.open(
-    `${user.value?.targetOrigin}/crm/company/details/${companyId}/`
+    `${user.value?.bitrix24?.targetOrigin}/crm/company/details/${companyId}/`
   )
 
   return Promise.resolve()
@@ -90,7 +90,7 @@ defineExpose({
   <div v-else>
     <B24Alert v-if="error" :title="error" color="danger" />
     <div v-if="companies.length">
-      <ul class="list-inside list-decimal">
+      <ul class="list-inside list-decimal text-xs text-base-250">
         <li v-for="company in companies" :key="company.id">
           <B24Link is-action target="_blank" @click.stop="makeOpenSliderForCompany(company.id)">
             {{ company.title }}
@@ -98,7 +98,7 @@ defineExpose({
           <small class="pl-1">[id: {{ company.id }}]</small>
         </li>
       </ul>
-      <div class="w-full mt-4 flex flex-row justify-center">
+      <div class="w-full mt-4 flex flex-row justify-center gap-4">
         <B24Button
           v-if="hasMore"
           color="link"
@@ -109,6 +109,15 @@ defineExpose({
           size="xs"
           rounded
           @click="loadMore"
+        />
+        <B24Button
+          rounded
+          label="+100"
+          color="ai"
+          size="xs"
+          use-clock
+          loading-auto
+          @click.stop="addCompany(100)"
         />
       </div>
     </div>

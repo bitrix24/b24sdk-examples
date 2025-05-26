@@ -12,11 +12,6 @@ definePageMeta({
 
 const { loggedIn, user, session, clear: clearSession } = useUserSession()
 
-const companiesList = ref<null | {
-  loadMore: () => Promise<void>
-  addCompany: (companyId: number) => Promise<void>
-}>(null)
-
 const $logger = LoggerBrowser.build('OAut.index', true)
 const isInit = ref(false)
 const crmListShow = ref(false)
@@ -27,7 +22,7 @@ onMounted(async () => {
 
 const makeOpenSliderForUser = () => {
   window.open(
-    `${user.value?.targetOrigin}/company/personal/user/${user.value?.id}/`
+    `${user.value?.bitrix24?.targetOrigin}/company/personal/user/${user.value?.bitrix24?.id}/`
   )
 
   return Promise.resolve()
@@ -41,12 +36,6 @@ async function logout() {
   isInit.value = false
   await clearSession()
   await navigateTo('/auth')
-}
-
-async function addCompany(count: number = 1000) {
-  if (companiesList.value) {
-    await companiesList.value.addCompany(count)
-  }
 }
 
 onMounted(() => {
@@ -69,29 +58,22 @@ onMounted(() => {
         <B24Alert
           class="w-[600px] rounded-lg bg-white pr-4"
           orientation="horizontal"
-          :avatar="{ src: user?.photo || '' }"
-          :title="[
-            user?.lastName,
-            user?.name
-          ].join(' ')"
+          :avatar="{ src: user?.bitrix24?.photo || 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MiA0MiIgZmlsbD0iY3VycmVudENvbG9yIiBjbGFzcz0ic2l6ZS0yNCB0ZXh0LWJhc2UtbWFzdGVyIGRhcms6dGV4dC1iYXNlLTIwMCI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNMjIuMDkgMTcuOTI2aC0xLjM4NnYzLjcxNmgzLjU1MXYtMS4zODZIMjIuMDl6bS0uNjE2IDcuMzU2YTQuNzE4IDQuNzE4IDAgMSAxIDAtOS40MzYgNC43MTggNC43MTggMCAwIDEgMCA5LjQzNm05LjE5NS02QTUuMTkgNS4xOSAwIDAgMCAyMy43MjEgMTRhNS4xOSA1LjE5IDAgMCAwLTkuODcyIDEuNjlBNi4yMzQgNi4yMzQgMCAwIDAgMTUuMjMzIDI4aDE0Ljc2MWMyLjQ0NCAwIDQuNDI1LTEuNzI0IDQuNDI1LTQuNDI1IDAtMy40OTctMy40MDYtNC4zNzktMy43NS00LjI5MyIvPjwvc3ZnPg==' }"
+          :title="user?.bitrix24?.name"
           :description="[
-            user?.isAdmin ? 'Administrator' : '',
-            user?.targetOrigin ?? '?'
+            user?.bitrix24?.isAdmin ? 'Administrator' : '',
+            user?.bitrix24?.targetOrigin ?? '?'
           ].join(' ')"
           :actions="[
             {
               label: 'My profile',
               color: 'ai',
-              onClick() {
-                makeOpenSliderForUser()
-              }
+              onClick: makeOpenSliderForUser
             },
             {
               label: 'Crm List',
               color: 'collab',
-              onClick() {
-                makeCrmListShow()
-              }
+              onClick: makeCrmListShow
             }
           ]"
         />
@@ -110,21 +92,12 @@ onMounted(() => {
         description="get from server side"
       >
         <template #body>
-          <div class="mx-2 mt-2 mb-5 p-4 bg-white min-h-screen rounded">
-            <CompanyList ref="companiesList" />
+          <div class="mx-2 mt-2 mb-5 p-4 bg-white min-h-[calc(100vh_-_160px)] rounded">
+            <CompanyList />
           </div>
         </template>
 
         <template #footer>
-          <B24Button
-            rounded
-            label="+100"
-            color="ai"
-            size="sm"
-            use-clock
-            loading-auto
-            @click.stop="addCompany(100)"
-          />
           <B24Button
             rounded
             label="Close"
@@ -135,15 +108,6 @@ onMounted(() => {
           />
         </template>
       </B24Slideover>
-    </template>
-    <template v-else>
-      <B24Button
-        v-if="!loggedIn"
-        color="ai"
-        to="/auth"
-      >
-        OAuth.start
-      </B24Button>
     </template>
   </div>
 </template>
