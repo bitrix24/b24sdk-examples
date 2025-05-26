@@ -100,7 +100,7 @@ composer-dumpautoload:
 composer:
 	$(DOCKER_COMPOSE) run --rm php-cli composer $(filter-out $@,$(MAKECMDGOALS))
 
-# work with applicationy
+# work with application
 .PHONY: php-cli-bash
 php-cli-bash:
 	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
