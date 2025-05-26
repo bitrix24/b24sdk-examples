@@ -61,4 +61,6 @@ make php-cli-app
 - [Docker fundamentals](https://docs.docker.com/get-started/introduction/)
 - [Makefile tutorial](https://makefiletutorial.com/#getting-started)
 - [Composer](https://getcomposer.org/doc/)
+- [PSR-3](https://www.php-fig.org/psr/psr-3/)
+- [RFC-5424 The Syslog Protocol](https://datatracker.ietf.org/doc/html/rfc5424)
 - [Monolog](https://github.com/Seldaek/monolog)
