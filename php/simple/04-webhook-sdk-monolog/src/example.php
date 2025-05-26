@@ -95,18 +95,13 @@ try {
     // call undefined function
     fooo();
 } catch (InvalidArgumentException $exception) {
-    $logger->critical(
-        sprintf('configuration error: %s', $exception->getMessage()),
-        ['exception' => $exception]
+    $logger->critical('app.configuration.problem', ['exception' => $exception]
     );
     print(sprintf('ERROR IN CONFIGURATION OR CALL ARGS: %s', $exception->getMessage()) . PHP_EOL);
     print($exception::class . PHP_EOL);
     print($exception->getTraceAsString());
 } catch (Throwable $throwable) {
-    $logger->critical(
-        sprintf('fatal error: %s', $throwable->getMessage()),
-        ['exception' => $throwable]
-    );
+    $logger->critical('app.failure', ['exception' => $throwable,]);
     print(sprintf('FATAL ERROR: %s', $throwable->getMessage()) . PHP_EOL);
     print($throwable::class . PHP_EOL);
     print($throwable->getTraceAsString());
