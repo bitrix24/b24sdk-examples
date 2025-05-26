@@ -9,6 +9,7 @@ Call REST-API for education purposes.
   docker               - docker contatainers
     php-cli            - default php-cli container
   src                  - source code
+    example.php        - example application
   var                  - source code
     logs               - directory with application logs on host machine
   vendor               - folder with dependencies from composer.json  
