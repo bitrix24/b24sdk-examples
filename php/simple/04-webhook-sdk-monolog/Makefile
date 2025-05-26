@@ -48,6 +48,8 @@ help:
 	@echo "composer-dumpautoload     - regenerate composer autoload file"
 	@echo "composer                  - run composer and pass arguments"
 	@echo ""
+	@echo "🚀 Work with application:"
+	@echo "php-cli-app               - run container php-cli and run console script"
 	@echo "php-cli-bash              - run container php-cli and open shell with arguments"
 	@echo ""
 	@echo "🎓 Examples"
@@ -100,3 +102,12 @@ composer-dumpautoload:
 .PHONY: composer
 composer:
 	$(DOCKER_COMPOSE) run --rm php-cli composer $(filter-out $@,$(MAKECMDGOALS))
+
+# work with application
+.PHONY: php-cli-bash
+php-cli-bash:
+	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: php-cli-app
+php-cli-app:
+	$(DOCKER_COMPOSE) run --rm php-cli php -f src/example.php

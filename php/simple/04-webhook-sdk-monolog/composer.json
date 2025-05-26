@@ -15,6 +15,12 @@
     "monolog/monolog": "^3"
   },
   "require-dev": {
-    "roave/security-advisories": "dev-latest"
+    "roave/security-advisories": "dev-latest",
+    "ergebnis/composer-normalize": "^2"
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
   }
 }
