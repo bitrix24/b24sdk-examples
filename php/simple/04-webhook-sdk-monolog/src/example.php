@@ -104,8 +104,7 @@ try {
     // call undefined function
     fooo();
 } catch (InvalidArgumentException $exception) {
-    $logger->critical('app.configuration.problem', ['exception' => $exception]
-    );
+    $logger->critical('app.configuration.problem', ['exception' => $exception]);
     print(sprintf('ERROR IN CONFIGURATION OR CALL ARGS: %s', $exception->getMessage()) . PHP_EOL);
     print($exception::class . PHP_EOL);
     print($exception->getTraceAsString());

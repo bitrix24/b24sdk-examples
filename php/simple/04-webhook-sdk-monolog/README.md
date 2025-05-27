@@ -65,3 +65,6 @@ make php-cli-app
 - [PSR-3](https://www.php-fig.org/psr/psr-3/)
 - [RFC-5424 The Syslog Protocol](https://datatracker.ietf.org/doc/html/rfc5424)
 - [Monolog](https://github.com/Seldaek/monolog)
+- [tail](https://man7.org/linux/man-pages/man1/tail.1.html)
+- [grep](https://man7.org/linux/man-pages/man1/grep.1.html)
+- [lnav](https://lnav.org/)
