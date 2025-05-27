@@ -42,7 +42,8 @@ if (!array_key_exists('BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT', $_ENV)) {
 // - MemoryUsageProcessor: memory usage processor
 // - UidProcessor: unique id processor
 // - IntrospectionProcessor: introspection processor
-
+// formatters:
+// - default
 $logger = new Logger('App');
 // rotating
 // in production you MUST use logrotate or other specific util
