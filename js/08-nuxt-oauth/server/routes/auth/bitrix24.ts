@@ -1,5 +1,6 @@
 import { EnumAppStatus } from '@bitrix24/b24jssdk'
 import type { B24OAuthParams } from '@bitrix24/b24jssdk'
+import { defineOAuthBitrix24EventHandler } from '~~/server/utils/oauth/bitrix24'
 
 export default defineOAuthBitrix24EventHandler({
   config: {},

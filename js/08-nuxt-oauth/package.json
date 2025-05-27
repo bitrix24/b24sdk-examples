@@ -12,15 +12,14 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "dev-link_b24jssdk": "pnpm update @bitrix24/b24jssdk",
-    "dev-link_nuxt-auth-utils": "pnpm update nuxt-auth-utils"
+    "dev-link_b24jssdk": "pnpm update @bitrix24/b24jssdk"
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.5",
     "@bitrix24/b24jssdk": "file:..\\..\\..\\b24jssdk\\packages\\jssdk",
     "@bitrix24/b24ui-nuxt": "^0.6.5",
     "nuxt": "^3.16.2",
-    "nuxt-auth-utils": "file:..\\..\\..\\..\\demo\\nuxt-auth-utils"
+    "nuxt-auth-utils": "^0.5.20"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.3.0",
