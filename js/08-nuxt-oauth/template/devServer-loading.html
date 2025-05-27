@@ -41,7 +41,7 @@
 					const r = {};
 					return e.integrity && (r.integrity = e.integrity),
 					e.referrerPolicy && (r.referrerPolicy = e.referrerPolicy),
-						e.crossOrigin === "use-credentials" ? r.credentials = "include" : e.crossOrigin === "anonymous" ? r.credentials = "omit" : r.credentials = "same-origin",
+						e.crossOrigin === "use-credentials" ? r.credentials = "include" : e.crossOrigin === "anonymous" ? r.credentials = "omit" : r.credentials = "same-origin"
 						r
 				}
 				function i(e) {
