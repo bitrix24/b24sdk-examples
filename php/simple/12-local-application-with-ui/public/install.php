@@ -57,7 +57,12 @@ else: ?>
     </pre>
     <script src="//api.bitrix24.com/api/v1/"></script>
     <script>
-        BX24.installFinish();
+        console.log('Hello world from installer');
+        document.addEventListener("DOMContentLoaded", function () {
+            BX24.init(function () {
+                BX24.installFinish();
+            });
+        });
     </script>
     <?php
     //send response to stdout

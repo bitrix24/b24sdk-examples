@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Controller\InstallController;
 use App\Controller\PlacementController;
-use App\Repository\AuthRepositoryFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';

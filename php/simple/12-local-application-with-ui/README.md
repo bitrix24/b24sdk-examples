@@ -1,4 +1,4 @@
-# Local Bitrix24 application without UI
+# Local Bitrix24 application with UI
 
 **❗do not use this template in production**
 
