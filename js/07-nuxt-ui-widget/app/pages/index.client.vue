@@ -12,7 +12,7 @@ const $b24 = await $initializeB24Frame()
 function openWidget() {
   window.setTimeout(() => {
     $b24.slider.openSliderAppPage({
-      place: 'slider-pomodoro',
+      place: 'slider-pause',
       bx24_width: 320,
       bx24_label: {
         bgColor: 'violet',
