@@ -32,9 +32,17 @@ if (!array_key_exists('BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT', $_ENV)) {
 // init psr-3 compatible logger
 // https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
 //
+// Monolog config
 // channels:
 // - App: application channel
 // - b24-php-sdk: bitrix24-php-sdk channel
+// handlers:
+// - RotatingFileHandler: rotating file handler
+// processors:
+// - MemoryUsageProcessor: memory usage processor
+// - UidProcessor: unique id processor
+// - IntrospectionProcessor: introspection processor
+
 $logger = new Logger('App');
 // rotating
 // in production you MUST use logrotate or other specific util
