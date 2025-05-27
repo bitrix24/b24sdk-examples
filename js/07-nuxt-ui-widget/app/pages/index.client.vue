@@ -4,8 +4,10 @@ useHead({
 })
 
 // region Init ////
+const { $logger } = useAppInit('Index')
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()
+$logger.info('Hi from index')
 // endregion ////
 
 // region Action ////

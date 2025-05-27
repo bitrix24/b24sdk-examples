@@ -1,12 +1,12 @@
 <script setup lang="ts">
 // region Init ////
-const { $logger } = useAppInit()
+const { $logger } = useAppInit('BG')
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()
+$logger.info('Hi from bg')
 // endregion ////
 
 // region Action ////
-$logger.info('Hi from bg')
 window.setTimeout(() => {
   $b24.slider.openSliderAppPage({
     place: 'slider-pomodoro',

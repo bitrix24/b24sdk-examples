@@ -39,7 +39,8 @@ export default defineNuxtConfig({
     server: {
       // allow incoming requests from this host
       allowedHosts: [
-        'whale-viable-wasp.ngrok-free.app'
+        'whale-viable-wasp.ngrok-free.app',
+        'currently-main-panda.cloudpub.ru'
       ],
       // and don't forget CORS, if needed:
       cors: true
