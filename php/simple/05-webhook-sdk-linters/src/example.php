@@ -34,6 +34,16 @@ $logger->pushProcessor(new MemoryUsageProcessor(true, true));
 $logger->pushProcessor(new UidProcessor());
 $logger->pushProcessor(new IntrospectionProcessor());
 
+
+/**
+ * @param positive-int $a
+ * @return int
+ */
+function testPhpStan(int $a): int
+{
+    return $a * 2;
+}
+
 try {
     print('Show all env variables:');
     print_r($_ENV);
@@ -48,6 +58,12 @@ try {
 
     // call any api method from universal interface core->call
     var_dump($b24Service->core->call('profile')->getResponseData()->getResult());
+
+    // demonstrate phpstan
+    // invalid user input from request
+    $arr = ['1',2];
+    // wrong types for function call arguments
+    // $res = testPhpStan($arr[0]);
 
     // call method crm.lead.add from scope CRM
     $addedLeadId = $b24Service->getCRMScope()->lead()->add([

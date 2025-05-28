@@ -78,4 +78,8 @@ make php-cli-app
 - [tail](https://man7.org/linux/man-pages/man1/tail.1.html)
 - [grep](https://man7.org/linux/man-pages/man1/grep.1.html)
 - [lnav](https://lnav.org/)
-- []
+- [Composer License Checker](https://github.com/dominikb/composer-license-checker)
+- [PHP Coding Standards Fixer](https://cs.symfony.com/)
+- [PHPStan](https://phpstan.org/)
+- [rector](https://getrector.com/documentation)
+- [Composer dependency analyser](https://github.com/shipmonk-rnd/composer-dependency-analyser)
