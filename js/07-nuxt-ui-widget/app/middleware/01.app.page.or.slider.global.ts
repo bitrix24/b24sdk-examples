@@ -51,8 +51,11 @@ export default defineNuxtRouteMiddleware(async (
       let goTo: null | string = null
 
       switch (optionsPlace) {
-        case 'slider-pomodoro':
-          goTo = `${baseDir}slider/pomodoro`
+        case 'slider-start':
+          goTo = `${baseDir}slider/start`
+          break
+        case 'slider-pause':
+          goTo = `${baseDir}slider/pause`
           break
       }
 
