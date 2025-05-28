@@ -55,6 +55,7 @@ help:
 	@echo "lint-phpstan              - check source code with PhpStan"
 	@echo "lint-rector               - check source code with Rector"
 	@echo "lint-rector-fix           - 🪄 fix source code with Rector"
+	@echo "lint-dependency-analyser  - find unused, shadow and misplaced composer dependencies"
 	@echo ""
 	@echo "🚀 Work with application:"
 	@echo "php-cli-app               - run container php-cli and run console script"
