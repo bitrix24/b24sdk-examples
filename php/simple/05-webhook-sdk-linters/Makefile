@@ -56,6 +56,8 @@ help:
 	@echo "lint-rector               - check source code with Rector"
 	@echo "lint-rector-fix           - 🪄 fix source code with Rector"
 	@echo ""
+	@echo "🚀 Work with application:"
+	@echo "php-cli-app               - run container php-cli and run console script"
 	@echo "php-cli-bash              - run container php-cli and open shell with arguments"
 	@echo ""
 	@echo "🎓 Examples"
@@ -85,10 +87,6 @@ docker-down:
 .PHONY: docker-down-clear
 docker-down-clear:
 	$(DOCKER_COMPOSE) down --volumes --remove-orphans
-
-.PHONY: php-cli-bash
-php-cli-bash:
-	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: composer-install
 composer-install:
@@ -133,3 +131,15 @@ lint-rector:
 .PHONY: lint-rector-fix
 lint-rector-fix:
 	docker-compose run --rm php-cli vendor/bin/rector process
+.PHONY: lint-dependency-analyser
+lint-dependency-analyser:
+	docker-compose run --rm php-cli vendor/bin/composer-dependency-analyser
+
+# work with application
+.PHONY: php-cli-bash
+php-cli-bash:
+	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: php-cli-app
+php-cli-app:
+	$(DOCKER_COMPOSE) run --rm php-cli php -f src/example.php

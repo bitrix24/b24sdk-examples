@@ -63,3 +63,19 @@ make composer-install
 make php-cli-bash
 php -f src/example.php
 ```
+6. You also can run an example with a call docker compose of your host system
+```shell
+make php-cli-app
+```
+
+## Must read documentation
+- [Docker fundamentals](https://docs.docker.com/get-started/introduction/)
+- [Makefile tutorial](https://makefiletutorial.com/#getting-started)
+- [Composer](https://getcomposer.org/doc/)
+- [PSR-3](https://www.php-fig.org/psr/psr-3/)
+- [RFC-5424 The Syslog Protocol](https://datatracker.ietf.org/doc/html/rfc5424)
+- [Monolog](https://github.com/Seldaek/monolog)
+- [tail](https://man7.org/linux/man-pages/man1/tail.1.html)
+- [grep](https://man7.org/linux/man-pages/man1/grep.1.html)
+- [lnav](https://lnav.org/)
+- []

@@ -16,6 +16,7 @@ use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
+use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\UidProcessor;
 
@@ -25,12 +26,13 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 // https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
 $logger = new Logger('App');
 // rotating
-// in production you MUST use logrotate or other specific util
+// in production, you MUST use logrotate or other specific util
 $rotatingFileHandler = new RotatingFileHandler('/var/logs/b24-php-sdk.log', 30);
 $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
 $logger->pushHandler($rotatingFileHandler);
 $logger->pushProcessor(new MemoryUsageProcessor(true, true));
 $logger->pushProcessor(new UidProcessor());
+$logger->pushProcessor(new IntrospectionProcessor());
 
 try {
     print('Show all env variables:');
@@ -70,18 +72,12 @@ try {
     print(sprintf('lead title: %s', $leadData->TITLE) . PHP_EOL);
     print_r($leadData);
 } catch (InvalidArgumentException $exception) {
-    $logger->critical(
-        sprintf('configuration error: %s', $exception->getMessage()),
-        ['exception' => $exception->getTrace()]
-    );
+    $logger->critical('app.configuration.problem', ['exception' => $exception]);
     print(sprintf('ERROR IN CONFIGURATION OR CALL ARGS: %s', $exception->getMessage()) . PHP_EOL);
     print($exception::class . PHP_EOL);
     print($exception->getTraceAsString());
 } catch (Throwable $throwable) {
-    $logger->critical(
-        sprintf('fatal error: %s', $throwable->getMessage()),
-        ['exception' => $throwable->getTrace()]
-    );
+    $logger->critical('app.failure', ['exception' => $throwable,]);
     print(sprintf('FATAL ERROR: %s', $throwable->getMessage()) . PHP_EOL);
     print($throwable::class . PHP_EOL);
     print($throwable->getTraceAsString());
