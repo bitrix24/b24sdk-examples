@@ -6,7 +6,7 @@ use Lendable\ComposerLicenseChecker\LicenseConfigurationBuilder;
 
 return (new LicenseConfigurationBuilder())
     ->addLicenses(
-        // And other licenses you wish to allow.
+    // And other licenses you wish to allow.
         'MIT',
         'Apache-2.0',
         'BSD-3-Clause',

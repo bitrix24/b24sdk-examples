@@ -39,10 +39,10 @@ $logger->pushProcessor(new IntrospectionProcessor());
  * @param positive-int $a
  * @return int
  */
-function testPhpStan(int $a): int
-{
-    return $a * 2;
-}
+//function testPhpStan($a)
+//{
+//    return $a * 2;
+//}
 
 try {
     print('Show all env variables:');
@@ -61,9 +61,11 @@ try {
 
     // demonstrate phpstan
     // invalid user input from request
-    $arr = ['1',2];
+    // $arr = array('1', 2);
     // wrong types for function call arguments
     // $res = testPhpStan($arr[0]);
+    // $res = testPhpStan(3);
+    // var_dump($res);
 
     // call method crm.lead.add from scope CRM
     $addedLeadId = $b24Service->getCRMScope()->lead()->add([
