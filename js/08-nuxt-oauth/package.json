@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^1.0.5",
-    "@bitrix24/b24jssdk": "file:..\\..\\..\\b24jssdk\\packages\\jssdk",
+    "@bitrix24/b24jssdk": "^0.4.3",
     "@bitrix24/b24ui-nuxt": "^0.6.5",
     "nuxt": "^3.16.2",
     "nuxt-auth-utils": "^0.5.20"
