@@ -96,12 +96,12 @@ final readonly class RobotInstallMetadata
          * Каждое правило в массиве может быть строкой или массивом типа документа в полном или частичном варианте.
          * @var array
          */
-        public array $filter,
+        public array $filter = [],
         /**
          * Дает возможность открывать дополнительные настройки робота в слайдере приложения.
          * @var bool
          */
-        public bool $isUsePlacement
+        public bool $isUsePlacement = false
     ) {
     }
 }
