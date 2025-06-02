@@ -24,7 +24,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 // add to log all incoming requests
 $logger = LoggerFactory::create();
-$logger->debug('event-handler.php', [
+$logger->debug('event-handler-simple.php', [
     'request' => $_REQUEST,
 ]);
 

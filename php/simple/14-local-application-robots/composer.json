@@ -17,10 +17,13 @@
   "require": {
     "bitrix24/b24phpsdk": "dev-dev",
     "monolog/monolog": "^3",
-    "symfony/console": "7.2.*",
-    "symfony/filesystem": "7.2.*",
-    "symfony/debug-bundle": "7.2.*",
-    "fig/http-message-util": "^1"
+    "symfony/console": "^7.3",
+    "symfony/filesystem": "^7.3",
+    "symfony/debug-bundle": "^7.3",
+    "fig/http-message-util": "^1",
+    "symfony/dependency-injection": "^7.3",
+    "symfony/config": "^7.3",
+    "symfony/yaml": "^7.3"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2",
