@@ -25,6 +25,9 @@ class DI
     private static self $instance;
     private ContainerBuilder $container;
 
+    /**
+     * @throws Exception
+     */
     private function __construct()
     {
         $container = new ContainerBuilder();

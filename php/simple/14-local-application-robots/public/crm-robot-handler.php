@@ -18,17 +18,14 @@ use App\DI\DI;
 use App\Repository\AuthRepositoryFactory;
 use Bitrix24\SDK\Application\Workflows\Robots\Common\RobotRequest;
 use Bitrix24\SDK\Services\Workflows\Robot\Request\IncomingRobotRequest;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// add to log all incoming requests
-$logger = LoggerFactory::create();
+$logger = DI::get(LoggerInterface::class);
+
 $logger->debug('event-handler.php', [
     'request' => $_REQUEST,
 ]);
-
-$ob = DI::get(AuthRepositoryFactory::class);
-
-var_dump($ob);
