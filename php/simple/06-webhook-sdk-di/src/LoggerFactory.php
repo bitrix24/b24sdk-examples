@@ -21,7 +21,7 @@ use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\UidProcessor;
 use Psr\Log\LoggerInterface;
 
-readonly class LoggerFactory
+final readonly class LoggerFactory
 {
     private const string FILE_NAME = '/var/logs/app.log';
 

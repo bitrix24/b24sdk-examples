@@ -31,7 +31,7 @@ class DI
     private function __construct()
     {
         $container = new ContainerBuilder();
-        $fileLocator = new FileLocator(dirname(__DIR__ , 2). '/config');
+        $fileLocator = new FileLocator(dirname(__DIR__, 2) . '/config');
         $loader = new YamlFileLoader($container, $fileLocator);
         $loader->load('services.yaml');
         $container->compile();
@@ -39,7 +39,6 @@ class DI
     }
 
     /**
-     *
      * @param $id
      * @return mixed
      * @throws ContainerExceptionInterface
