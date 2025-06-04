@@ -38,6 +38,7 @@ require_once dirname(__DIR__) . '/vendor/autoload.php';
  */
 $logger = DI::get(LoggerInterface::class);
 $logger->info("============================");
+
 // init object without factory method or DI
 $alphaService = new Alpha(
     new Beta($logger),
@@ -53,13 +54,13 @@ $alphaService = Alpha::init($logger);
 $alphaService->run();
 $logger->info("------------------");
 
+// init object with DI
+$alphaService = DI::get(Alpha::class);
 /**
  * @var Alpha $alphaService
  */
 $alphaService = DI::get(Alpha::class);
 $alphaService->run();
-exit();
-
 
 try {
     print('Show all env variables:');
