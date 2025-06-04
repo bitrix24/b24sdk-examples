@@ -33,7 +33,7 @@ ROOT_DIR := $(shell pwd)
 help:
 	@echo "--------------------------------------------"
 	@echo "Bitrix24 PHP SDK examples                   "
-	@echo "05 — add linters for check source code      "
+	@echo "06 — add DI container                       "
 	@echo "--------------------------------------------"
 	@echo ""
 	@echo "🐳 Work with application containers"

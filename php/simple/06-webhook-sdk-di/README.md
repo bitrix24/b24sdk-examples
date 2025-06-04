@@ -1,4 +1,4 @@
-# Add linters phpstan, rector, PHP CS Fixer
+# Add DI container
 
 **❗do not use this template in production**
 
@@ -7,10 +7,16 @@ Call REST-API for education purposes.
 ## Folder structure
 
 ```
+  config                   - config files
+    services.yaml          - DI config
   docker                   - docker contatainers
     php-cli                - default php-cli container
   src                      - source code
-  var                      - source code
+    DI
+        DI.php             - DI container factory
+    Services
+                           - Example services for DI    
+  var                      
     logs                   - directory with application logs on host machine
   vendor                   - folder with dependencies from composer.json
   .allowed-licenses.php    - allowed licenses for composer dependencies
