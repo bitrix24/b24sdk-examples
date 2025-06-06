@@ -1,0 +1,13 @@
+services:
+  php-cli:
+    build:
+      context: ./docker/php-cli
+    environment:
+      PHP_IDE_CONFIG: "serverName=b24-php-sdk-examples-04.lan"
+      BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL: ${BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL}
+      BITRIX24_PHP_SDK_LOG_LEVEL: ${BITRIX24_PHP_SDK_LOG_LEVEL}
+      BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT: ${BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT}
+    volumes:
+      - .:/var/www/html
+      - ./var/logs:/var/logs
+    working_dir: /var/www/html
