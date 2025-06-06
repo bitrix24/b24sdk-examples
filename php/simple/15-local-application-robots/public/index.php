@@ -13,21 +13,22 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Controller\InstallController;
 use App\Controller\PlacementController;
-use App\Repository\AuthRepositoryFactory;
 use Symfony\Component\HttpFoundation\Request;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// load config from env file
-Bootstrap::loadConfigFromEnvFile();
-$log = LoggerFactory::create();
+// add to log all incoming requests
+$logger = LoggerFactory::create();
+$logger->debug('index.start', [
+    'request' => $_REQUEST,
+]);
+
 // create placement controller
-$placementController = new PlacementController($log);
+$placementController = new PlacementController($logger);
 
 $incomingRequest = Request::createFromGlobals();
-$log->debug('index.init', [
+$logger->debug('index.init', [
     'request' => $incomingRequest->request->all(),
     'query' => $incomingRequest->query->all()
 ]);

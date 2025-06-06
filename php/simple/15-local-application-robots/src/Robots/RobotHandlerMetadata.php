@@ -23,11 +23,7 @@ final readonly class RobotHandlerMetadata
          * Допустимые символы — a-z, A-Z, 0-9, точка, дефис и нижнее подчеркивание _
          * @var non-empty-string
          */
-        public string $robotCode,
-        /**
-         * @var class-string
-         */
-        public string $handlerClassName
+        public string $robotCode
     ) {
     }
 }

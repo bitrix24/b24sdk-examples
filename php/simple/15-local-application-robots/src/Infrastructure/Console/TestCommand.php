@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Console;
 
+use App\Bitrix24ServiceBuilderFactory;
+use App\Robots\RobotHandlerInterface;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
 use Bitrix24\SDK\Services\Main\Common\EventHandlerMetadata;
 use Bitrix24\SDK\Services\ServiceBuilder;
@@ -34,7 +36,11 @@ use Throwable;
 class TestCommand extends Command
 {
     public function __construct(
-        private readonly ServiceBuilder $b24ServiceBuilder,
+        /**
+         * @var $robotHandlers RobotHandlerInterface[]
+         */
+        private iterable $robotHandlers,
+        private readonly Bitrix24ServiceBuilderFactory $b24ServiceBuilderFactory,
         private readonly LoggerInterface $logger
     ) {
         // best practices recommend to call the parent constructor first and
@@ -50,7 +56,7 @@ class TestCommand extends Command
         $symfonyStyle = new SymfonyStyle($input, $output);
         try {
             $symfonyStyle->writeln(['Hello world!', '', 'start request to bitrix24 with saved token']);
-            $user = $this->b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
+            $user = $this->b24ServiceBuilderFactory::createFromStoredToken()->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
 
             $symfonyStyle->writeln(
                 sprintf(
@@ -92,59 +98,48 @@ class TestCommand extends Command
 
                 switch ($menuItem) {
                     case 'Get crm-robots list':
-                        $items = $this->b24ServiceBuilder->getBizProcScope()->robot()->list();
+                        $items = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->robot()->list();
                         dump($items->getRobots());
                         break;
                     case 'Install crm-robots':
-                        $b24UserId = $this->b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile()->ID;
-
-
-                        $installResult = $this->b24ServiceBuilder->getBizProcScope()->robot()->add(
-                            'weather_robot',
-                            'https://cb99-193-34-225-254.ngrok-free.app/crm-robot-handler-simple.php',
-                            $b24UserId,
-                            [
-                                'ru' => 'Тестовый робот 1'
-                            ],
-                            true,
-                            [
-                                'city' => [
-                                    'name' => [
-                                        'ru' => 'Город'
-                                    ],
-                                    'type' => 'string',
-                                ],
-                                'country' => [
-                                    'name' => [
-                                        'ru' => 'Страна'
-                                    ],
-                                    'type' => 'string',
-                                ]
-                            ],
-                            false,
-                            [
-                                'temperature' => [
-                                    'name' => [
-                                        'ru' => 'Температура',
-                                    ],
-                                    'type' => 'int',
-                                ]
-                            ]
-                        );
-                        dump($installResult->isSuccess());
-
-
                         var_dump('Install crm-robots');
+
+                        foreach ($this->robotHandlers as $robotHandler) {
+                            try {
+                                $installMetadata = $robotHandler->getInstallMetadata(
+                                //todo pass handler url from config
+                                    'https://6afa-193-34-225-254.ngrok-free.app/crm-robot-handler.php',
+                                    $user->ID,
+                                );
+                                // todo add to batch
+                                $installResult = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->robot()->add(
+                                    $installMetadata->robotCode,
+                                    $installMetadata->handlerUrl,
+                                    $installMetadata->b24AuthUserId,
+                                    $installMetadata->name,
+                                    $installMetadata->isUseSubscription,
+                                    $installMetadata->properties,
+                                    $installMetadata->isUsePlacement,
+                                    $installMetadata->returnProperties
+                                );
+                                var_dump($installResult->isSuccess());
+                            } catch (Throwable $exception) {
+                                $this->logger->error('Install crm-robots error', [
+                                    'exception' => $exception,
+                                ]);
+                                var_dump($exception->getMessage());
+                                //var_dump($exception->getTrace());
+                            }
+                        }
+                        var_dump('Install crm-robots finish');
                         break;
                     case 'Uninstall crm-robots':
                         var_dump('Uninstall crm-robots');
 
-                        foreach ($this->b24ServiceBuilder->getBizProcScope()->robot()->list()->getRobots() as $robot) {
-                            $uninstallResult = $this->b24ServiceBuilder->getBizProcScope()->robot()->delete($robot);
+                        foreach ($this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->robot()->list()->getRobots() as $robot) {
+                            $uninstallResult = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->robot()->delete($robot);
                             dump($uninstallResult->isSuccess());
                         }
-
-
 
 
                         break;

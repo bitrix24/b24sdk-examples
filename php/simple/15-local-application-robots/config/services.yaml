@@ -1,0 +1,34 @@
+services:
+    _defaults:
+      autowire: true
+      autoconfigure: false
+      public: true
+
+    App\Controller\:
+      resource: '../src/Controller/*'
+    App\Repository\:
+      resource: '../src/Repository/*'
+    App\Robots\:
+      resource: '../src/Robots/*/Handler.php'
+      tags:
+        - { name: 'app.crm_robot_handler'}
+    App\Infrastructure\Console\TestCommand:
+      arguments:
+        - !tagged_iterator 'app.crm_robot_handler'
+
+    App\Robots\RobotHandler:
+      arguments:
+        - !tagged_iterator 'app.crm_robot_handler'
+
+    App\LoggerFactory:
+      public: true
+    App\Bitrix24ServiceBuilderFactory:
+      public: true
+
+    Bitrix24\SDK\Application\Local\Repository\LocalAppAuthRepositoryInterface:
+      class: Bitrix24\SDK\Application\Local\Repository\LocalAppAuthRepository
+      autowire: true
+    Psr\Log\LoggerInterface:
+      class: App\LoggerFactory
+      autowire: true
+      factory: [ '@App\LoggerFactory', 'create' ]

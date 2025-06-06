@@ -13,17 +13,19 @@ declare(strict_types=1);
 
 namespace App\Robots\Weather;
 
+use App\Robots\RobotHandlerInterface;
 use App\Robots\RobotHandlerMetadata;
 use App\Robots\RobotInstallMetadata;
-use Bitrix24\SDK\Application\Workflows\Robots\Common\RobotHandlerInterface;
 use Bitrix24\SDK\Application\Workflows\Robots\Common\RobotMetadata;
 use Bitrix24\SDK\Application\Workflows\Robots\Common\RobotRequest;
 use Bitrix24\SDK\Application\Workflows\Robots\Common\RobotResponse;
 use Bitrix24\SDK\Services\Workflows\Common\WorkflowDocumentType;
 use Psr\Log\LoggerInterface;
 
-final readonly class Handler
+final readonly class Handler implements RobotHandlerInterface
 {
+    private const CODE = 'weather_robot';
+
     public function __construct(
         private LoggerInterface $logger
     ) {
@@ -36,10 +38,20 @@ final readonly class Handler
      */
     public function handle(RobotRequest $robotRequest): RobotResponse
     {
+        $this->logger->debug('Weather.RobotHandler.start', [
+            'code' => $robotRequest->code,
+            'properties' => $robotRequest->properties,
+        ]);
+        // сложная бизнес-логика
+
+        sleep(20);
+
+
+        $this->logger->debug('Weather.RobotHandler.finish');
         return new RobotResponse(
-            'event_token_payload',
-            (new Result(1, 'temperature is 1 degree'))->toArray(),
-            'log message'
+            $robotRequest->eventToken,
+            (new Result(50, 'temperature is 50 degrees'))->toArray(),
+            'log message from robot'
         );
     }
 
@@ -49,10 +61,7 @@ final readonly class Handler
      */
     public function getHandlerMetadata(): RobotHandlerMetadata
     {
-        return new RobotHandlerMetadata(
-            'weather_robot',
-            self::class,
-        );
+        return new RobotHandlerMetadata(self::CODE);
     }
 
     /**
@@ -64,7 +73,7 @@ final readonly class Handler
     public function getInstallMetadata(?string $handlerUrl, ?int $b24UserId): RobotInstallMetadata
     {
         return new RobotInstallMetadata(
-            'weather_robot',
+            self::CODE,
             $handlerUrl,
             $b24UserId,
             true,
