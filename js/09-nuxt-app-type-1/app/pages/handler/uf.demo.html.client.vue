@@ -10,10 +10,10 @@ definePageMeta({
 })
 
 // region Init ////
-const { $logger } = useAppInit('Index')
+const { $logger } = useAppInit('uf-placement')
 const { $initializeB24Frame } = useNuxtApp()
 const $b24 = await $initializeB24Frame()
-$logger.info('Hi from index')
+$logger.info('Hi from uf-placement')
 // endregion ////
 
 // region Init ////
