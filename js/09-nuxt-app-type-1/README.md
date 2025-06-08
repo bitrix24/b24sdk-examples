@@ -1,4 +1,4 @@
-# Bitrix24 UI Starter
+# @bitrix24/b24ui-playground-nuxt-app-type-1
 
 Scopes: `crm,userfieldconfig,placement`
 
