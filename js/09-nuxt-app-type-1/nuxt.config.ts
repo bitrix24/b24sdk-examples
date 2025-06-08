@@ -23,10 +23,13 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {}
   },
-  routeRules: {
-    '/': { redirect: '/index.html' },
-    '/install': { redirect: '/install.html' }
-  },
+  // todo remove this
+  // routeRules: {
+  //   '/': { redirect: '/index.html' },
+  //   '/install': { redirect: '/install.html' }
+  //   // '/slider/demo': { redirect: '/slider/demo.html' },
+  //   // '/handler/uf.demo': { redirect: '/handler/uf.demo.html' }
+  // },
   devServer: {
     loadingTemplate: () => {
       return readFileSync('./template/devServer-loading.html', 'utf-8')

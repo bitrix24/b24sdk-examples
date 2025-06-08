@@ -36,6 +36,9 @@ importers:
       archiver:
         specifier: ^7.0.1
         version: 7.0.1
+      consola:
+        specifier: ^3.4.2
+        version: 3.4.2
       eslint:
         specifier: ^9.28.0
         version: 9.28.0(jiti@2.4.2)

@@ -28,7 +28,8 @@
     "@nuxt/eslint": "^1.4.1",
     "archiver": "^7.0.1",
     "eslint": "^9.28.0",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "consola": "^3.4.2"
   },
   "packageManager": "pnpm@10.11.1"
 }

@@ -1,9 +1,5 @@
 # Bitrix24 UI Starter
 
-> **WARNING**
-> We are still updating this page
-> Some data may be missing here — we will complete it shortly.
-
 Scopes: `crm,userfieldconfig,placement`
 
 Look at docs to learn more:

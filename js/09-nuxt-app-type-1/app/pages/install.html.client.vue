@@ -93,7 +93,7 @@ const steps = ref<Record<string, IStep>>({
           method: 'userfieldtype.add',
           params: {
             USER_TYPE_ID: typeId,
-            HANDLER: `${appUrl}handler.uf.demo.html`,
+            HANDLER: `${appUrl}handler/uf.demo.html`,
             TITLE: `[${import.meta.dev ? 'dev' : 'prod'}] Type Demo`,
             DESCRIPTION: `Test userfield type for documentation with updated description`,
             OPTIONS: {

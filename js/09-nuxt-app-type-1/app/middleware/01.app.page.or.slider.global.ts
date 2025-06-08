@@ -49,7 +49,7 @@ export default defineNuxtRouteMiddleware(async (
       let goTo: null | string = null
 
       if (optionsPlace === 'slider-demo') {
-        goTo = `${baseDir}slider/demo`
+        goTo = `${baseDir}slider/demo.html`
       }
       // else if (optionsPlace === 'feedback') {
       //   goTo = `${baseDir}feedback`

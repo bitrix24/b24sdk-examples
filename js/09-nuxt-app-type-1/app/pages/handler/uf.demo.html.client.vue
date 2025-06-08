@@ -38,6 +38,19 @@ async function refreshData() {
     { x: ++i, y: getRandomInt() }
   ]
 }
+
+function openSliderDemo() {
+  $b24.slider.openSliderAppPage({
+    place: 'slider-demo',
+    bx24_width: 320,
+    bx24_label: {
+      bgColor: 'violet',
+      text: '🍅 Pomodoro',
+      color: '#ffffff'
+    },
+    bx24_title: 'Pomodoro'
+  })
+}
 // endregion ////
 
 // region Lifecycle Hooks ////
@@ -111,7 +124,7 @@ async function resizeWindow() {
         ]"
       />
       <div class="isolate relative p-t-2 min-h-40 w-full h-full flex flex-col flex-nowrap justify-end items-center gap-4">
-        <VisXYContainer :data="data" height="120">
+        <VisXYContainer :data="data" height="120" @click.stop="openSliderDemo">
           <VisArea curve-type="basis" :x="x" :y="y" color="#7437d3" />
         </VisXYContainer>
       </div>
