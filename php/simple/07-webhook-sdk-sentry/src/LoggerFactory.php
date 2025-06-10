@@ -21,6 +21,10 @@ use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\UidProcessor;
 use Psr\Log\LoggerInterface;
+use Monolog\Level;
+use Sentry\Monolog\Handler as SentryHandler;
+use Sentry\Monolog\BreadcrumbHandler;
+use Sentry\SentrySdk;
 
 final readonly class LoggerFactory
 {
@@ -59,6 +63,25 @@ final readonly class LoggerFactory
             $logger->pushProcessor(new MemoryUsageProcessor(true, true));
             $logger->pushProcessor(new IntrospectionProcessor());
             $logger->pushProcessor(new UidProcessor());
+
+            // add sentry support
+            // Add a breadcrumb handler to record logs as breadcrumbs
+            $logger->pushHandler(
+                new BreadcrumbHandler(
+                    hub: SentrySdk::getCurrentHub(),
+                    level: Level::Info
+                )
+            );
+
+            // Add a Sentry handler to send logs as events
+            $logger->pushHandler(
+                new SentryHandler(
+                    hub: SentrySdk::getCurrentHub(),
+                    level: Level::Error,
+                    bubble: true,
+                    fillExtraContext: false
+                )
+            );
 
             return $logger;
         }
