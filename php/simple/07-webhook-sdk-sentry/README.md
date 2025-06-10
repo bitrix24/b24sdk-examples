@@ -1,9 +1,11 @@
 # Add Sentry integration
+
 **❗do not use this template in production**
 
 Call REST-API for education purposes.
 
 ## Folder structure
+
 ```
   docker                   - docker contatainers
     php-cli                - default php-cli container
@@ -24,35 +26,45 @@ Call REST-API for education purposes.
   README.md                - readme file with instructions
   rector.php               - rector settings file    
 ```
+
 ## Architecture
+
 1. All code run in a docker container.
 2. Typical operations described in Makefile
 
 To work with Bitrix24 REST API you **must** create an incoming webhook in your dev-portal with scope `crm`.
 
 3. All files in `src` folder must be checked with linters:
+
 - PHP CS Fixer
 - phpstan
 - rector
 - allowed licenses
- 
+
 See makefile, section «Work with linters and checks»
 
 ## How to work with example
 
 1. Add webhook url in new file `.env.local`
+
 ```
 BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL=https://your-bitrix24-portal-url
 ```
+
 2. See all available commands in a make file
+
 ```shell
 make
 ```
+
 3. Build docker containers
+
 ```shell
 make docker-build
 ```
+
 4. Install dependencies from composer
+
 ```shell
 make composer-install
 ```
@@ -76,6 +88,7 @@ make php-cli-app
 
 - [Docker fundamentals](https://docs.docker.com/get-started/introduction/)
 - [Makefile tutorial](https://makefiletutorial.com/#getting-started)
+- [Sentry](https://sentry.io/welcome/)
 
 ### Command line utils
 
