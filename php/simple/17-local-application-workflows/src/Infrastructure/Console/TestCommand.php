@@ -16,6 +16,7 @@ namespace App\Infrastructure\Console;
 use App\Bitrix24ServiceBuilderFactory;
 use App\Workflow\Activities\ActivityHandlerInterface;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
+use Bitrix24\SDK\Services\Workflows\Common\DocumentType;
 use Bitrix24\SDK\Services\Workflows\Common\WorkflowAutoExecutionType;
 use Bitrix24\SDK\Services\Workflows\Common\WorkflowDocumentType;
 use Psr\Log\LoggerInterface;
@@ -146,7 +147,7 @@ class TestCommand extends Command
                     case 'workflow template: delete added template':
                         $output->writeln('try to delete added template');
                         $ask = new QuestionHelper();
-                        $rawBizProcTemplateId = $ask->ask($input, $output, new Question('Какой id шаблона БП удаляем?' . PHP_EOL));
+                        $rawBizProcTemplateId = $ask->ask($input, $output, new Question('Enter template Id?' . PHP_EOL));
 
                         // todo add checks
                         $bizProcTemplateId = (int)$rawBizProcTemplateId;
@@ -164,6 +165,50 @@ class TestCommand extends Command
                         if ($deleteResult) {
                             $output->writeln('<info>template deleted successfully</info>');
                         }
+                        break;
+                    case 'workflow: start':
+                        $output->writeln('try to start workflow');
+                        $ask = new QuestionHelper();
+                        $rawBizProcTemplateId = $ask->ask($input, $output, new Question('Enter template Id: ' . PHP_EOL));
+                        // todo add checks
+                        $bizProcTemplateId = (int)$rawBizProcTemplateId;
+                        $rawContactId = $ask->ask($input, $output, new Question('Enter contact Id: ' . PHP_EOL));
+                        $contactId = (int)$rawContactId;
+                        // see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-workflow-start.html
+                        $workflowInstanceId = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->workflow()->start(
+                            DocumentType::crmContact,
+                            $bizProcTemplateId,
+                            $contactId,
+                            [
+                                'discount_percentage' => 10,
+                                'comment' => 'comment from php cli'
+                            ]
+                        )->getRunningWorkflowInstanceId();
+                        dump($workflowInstanceId);
+                        break;
+                    case 'workflow: instance list':
+                        $output->writeln('workflow: instance list');
+                        $items = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->workflow()->instances()->getInstances();
+                        $table = new Table($output);
+                        $table->setHeaders([
+                            'workflow instance ID',
+                            'ENTITY',
+                            'MODULE_ID',
+                            'DOCUMENT_ID',
+                            'TEMPLATE_ID',
+                            'STARTED'
+                        ]);
+                        foreach ($items as $item) {
+                            $table->addRow([
+                                $item->ID,
+                                $item->ENTITY,
+                                $item->MODULE_ID,
+                                $item->DOCUMENT_ID,
+                                $item->TEMPLATE_ID,
+                                $item->STARTED?->format('Y-m-d H:i:s'),
+                            ]);
+                        }
+                        $table->render();
                         break;
                     case 'exit🚪':
                         return Command::SUCCESS;
