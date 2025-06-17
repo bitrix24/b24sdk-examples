@@ -187,6 +187,7 @@ class TestCommand extends Command
                         dump($workflowInstanceId);
                         break;
                     case 'workflow: instance list':
+                        // see https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-workflow-instances.html
                         $output->writeln('workflow: instance list');
                         $items = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->workflow()->instances()->getInstances();
                         $table = new Table($output);
@@ -209,6 +210,41 @@ class TestCommand extends Command
                             ]);
                         }
                         $table->render();
+                        break;
+                    case 'workflow: terminate':
+                        $output->writeln([
+                            'workflow: terminate',
+                            'This method stops the specified workflow. All data related to the workflow will be preserved.',
+                            'https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-workflow-terminate.html'
+                        ]);
+
+                        $ask = new QuestionHelper();
+                        $rawWorkflowItemId = $ask->ask($input, $output, new Question('Enter workflow Id: ' . PHP_EOL));
+
+                        $result = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->workflow()->terminate(
+                            $rawWorkflowItemId,
+                            'terminate workflow from cli'
+                        )->isSuccess();
+                        if ($result) {
+                            $output->writeln('<info>workflow terminated successfully</info>');
+                        }
+                        break;
+                    case 'workflow: kill':
+                        $output->writeln([
+                            'workflow: kill',
+                            'This method deletes the running workflow along with all process data.',
+                            'https://apidocs.bitrix24.com/api-reference/bizproc/bizproc-workflow-kill.html'
+                        ]);
+
+                        $ask = new QuestionHelper();
+                        $rawWorkflowItemId = $ask->ask($input, $output, new Question('Enter workflow Id: ' . PHP_EOL));
+
+                        $result = $this->b24ServiceBuilderFactory::createFromStoredToken()->getBizProcScope()->workflow()->kill(
+                            $rawWorkflowItemId
+                        )->isSuccess();
+                        if ($result) {
+                            $output->writeln('<info>workflow killed successfully</info>');
+                        }
                         break;
                     case 'exit🚪':
                         return Command::SUCCESS;
