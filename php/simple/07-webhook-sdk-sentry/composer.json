@@ -21,7 +21,7 @@
     "symfony/dependency-injection": "^7.3",
     "symfony/config": "^7.3",
     "symfony/yaml": "^7.3",
-    "sentry/sentry": "*"
+    "sentry/sentry": "^4"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2",

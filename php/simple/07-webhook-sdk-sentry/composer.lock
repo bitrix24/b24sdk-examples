@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bea96ced1a1447d042b35172496783a",
+    "content-hash": "27c41510dbe6b9b38680919ae293d217",
     "packages": [
         {
             "name": "bitrix24/b24phpsdk",
@@ -1307,16 +1307,16 @@
         },
         {
             "name": "sentry/sentry",
-            "version": "dev-master",
+            "version": "4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "77359d0ccd353d2c0116750a37322de0c26c7a59"
+                "reference": "b54a0eaedfc27fc2da587e64455a66cd29cd3c4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/77359d0ccd353d2c0116750a37322de0c26c7a59",
-                "reference": "77359d0ccd353d2c0116750a37322de0c26c7a59",
+                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/b54a0eaedfc27fc2da587e64455a66cd29cd3c4d",
+                "reference": "b54a0eaedfc27fc2da587e64455a66cd29cd3c4d",
                 "shasum": ""
             },
             "require": {
@@ -1346,7 +1346,6 @@
             "suggest": {
                 "monolog/monolog": "Allow sending log messages to Sentry by using the included Monolog handler."
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -1381,7 +1380,7 @@
             ],
             "support": {
                 "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/master"
+                "source": "https://github.com/getsentry/sentry-php/tree/4.13.0"
             },
             "funding": [
                 {
@@ -1393,7 +1392,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2025-06-09T16:18:44+00:00"
+            "time": "2025-06-10T15:39:27+00:00"
         },
         {
             "name": "symfony/clock",
@@ -1550,12 +1549,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5e7cd96684d8d229b9478fb0d224c60bf0cb2c3d"
+                "reference": "32c3794a2617f993a2ea39ddc0ec5076b4a3923e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/5e7cd96684d8d229b9478fb0d224c60bf0cb2c3d",
-                "reference": "5e7cd96684d8d229b9478fb0d224c60bf0cb2c3d",
+                "url": "https://api.github.com/repos/symfony/console/zipball/32c3794a2617f993a2ea39ddc0ec5076b4a3923e",
+                "reference": "32c3794a2617f993a2ea39ddc0ec5076b4a3923e",
                 "shasum": ""
             },
             "require": {
@@ -1636,7 +1635,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-07T15:59:31+00:00"
+            "time": "2025-06-09T15:40:54+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -1792,12 +1791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dotenv.git",
-                "reference": "45a56b57f7c1e5246e093fc154c409659dcb9ed6"
+                "reference": "ebba9fe62f10f9831fb05b52142a7e785001fc0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dotenv/zipball/45a56b57f7c1e5246e093fc154c409659dcb9ed6",
-                "reference": "45a56b57f7c1e5246e093fc154c409659dcb9ed6",
+                "url": "https://api.github.com/repos/symfony/dotenv/zipball/ebba9fe62f10f9831fb05b52142a7e785001fc0d",
+                "reference": "ebba9fe62f10f9831fb05b52142a7e785001fc0d",
                 "shasum": ""
             },
             "require": {
@@ -1858,7 +1857,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-02T14:13:49+00:00"
+            "time": "2025-06-09T15:40:54+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -3292,12 +3291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "071913545309736c0e86cee9294f3c27cb2a9bdc"
+                "reference": "ae766e3cc9e1b9dd1ea475f9c7901f6ccfb36946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/071913545309736c0e86cee9294f3c27cb2a9bdc",
-                "reference": "071913545309736c0e86cee9294f3c27cb2a9bdc",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/ae766e3cc9e1b9dd1ea475f9c7901f6ccfb36946",
+                "reference": "ae766e3cc9e1b9dd1ea475f9c7901f6ccfb36946",
                 "shasum": ""
             },
             "require": {
@@ -3380,7 +3379,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-02T14:13:49+00:00"
+            "time": "2025-06-09T15:40:54+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -3467,12 +3466,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/uid.git",
-                "reference": "117fafe987fe73cb6e2d84bb91cd82f6d71f3ea5"
+                "reference": "1771bfe862003671629c4294321e48f06eceaedd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/uid/zipball/117fafe987fe73cb6e2d84bb91cd82f6d71f3ea5",
-                "reference": "117fafe987fe73cb6e2d84bb91cd82f6d71f3ea5",
+                "url": "https://api.github.com/repos/symfony/uid/zipball/1771bfe862003671629c4294321e48f06eceaedd",
+                "reference": "1771bfe862003671629c4294321e48f06eceaedd",
                 "shasum": ""
             },
             "require": {
@@ -3533,7 +3532,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-02T14:13:49+00:00"
+            "time": "2025-06-09T15:40:54+00:00"
         },
         {
             "name": "symfony/var-exporter",
@@ -3618,12 +3617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "7ff400ad8a4038c6b7e7b206c0c04d117ef0f4d8"
+                "reference": "11c4807e059985b96fa509510c8e9a1ae044f72c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/7ff400ad8a4038c6b7e7b206c0c04d117ef0f4d8",
-                "reference": "7ff400ad8a4038c6b7e7b206c0c04d117ef0f4d8",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/11c4807e059985b96fa509510c8e9a1ae044f72c",
+                "reference": "11c4807e059985b96fa509510c8e9a1ae044f72c",
                 "shasum": ""
             },
             "require": {
@@ -3682,7 +3681,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-03T06:58:38+00:00"
+            "time": "2025-06-09T15:40:54+00:00"
         }
     ],
     "packages-dev": [
@@ -4560,12 +4559,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "249dcda9c44983db36b41a107374603afc13fa47"
+                "reference": "9ffd04b68f95a87c889cd50280b8955c3ebf6a5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/249dcda9c44983db36b41a107374603afc13fa47",
-                "reference": "249dcda9c44983db36b41a107374603afc13fa47",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/9ffd04b68f95a87c889cd50280b8955c3ebf6a5d",
+                "reference": "9ffd04b68f95a87c889cd50280b8955c3ebf6a5d",
                 "shasum": ""
             },
             "require": {
@@ -4658,7 +4657,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-07T21:13:09+00:00"
+            "time": "2025-06-11T11:44:48+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -4666,12 +4665,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "ce1fd2d47799bb60668643bc6220f6278a4c1d02"
+                "reference": "0b25270d355b622cd1908301ffd6dcac56cc6eab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/ce1fd2d47799bb60668643bc6220f6278a4c1d02",
-                "reference": "ce1fd2d47799bb60668643bc6220f6278a4c1d02",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/0b25270d355b622cd1908301ffd6dcac56cc6eab",
+                "reference": "0b25270d355b622cd1908301ffd6dcac56cc6eab",
                 "shasum": ""
             },
             "require": {
@@ -4732,9 +4731,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.4.2"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/master"
             },
-            "time": "2025-06-03T18:27:04+00:00"
+            "time": "2025-06-10T18:41:04+00:00"
         },
         {
             "name": "lendable/composer-license-checker",
@@ -4929,12 +4928,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7dbe4b30dea422466194c591076a708db060290e"
+                "reference": "5c03b2661000f9f411c2309c5167e8d0863939ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7dbe4b30dea422466194c591076a708db060290e",
-                "reference": "7dbe4b30dea422466194c591076a708db060290e",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/5c03b2661000f9f411c2309c5167e8d0863939ab",
+                "reference": "5c03b2661000f9f411c2309c5167e8d0863939ab",
                 "shasum": ""
             },
             "require": {
@@ -4980,7 +4979,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-06-09T11:15:36+00:00"
+            "time": "2025-06-11T09:12:01+00:00"
         },
         {
             "name": "react/cache",
@@ -5513,16 +5512,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.0.17",
+            "version": "2.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "caa4ffda1d48bde44434e6ba95d132ec32e7fd40"
+                "reference": "be3a452085b524a04056e3dfe72d861948711062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/caa4ffda1d48bde44434e6ba95d132ec32e7fd40",
-                "reference": "caa4ffda1d48bde44434e6ba95d132ec32e7fd40",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/be3a452085b524a04056e3dfe72d861948711062",
+                "reference": "be3a452085b524a04056e3dfe72d861948711062",
                 "shasum": ""
             },
             "require": {
@@ -5560,7 +5559,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.0.17"
+                "source": "https://github.com/rectorphp/rector/tree/2.0.18"
             },
             "funding": [
                 {
@@ -5568,7 +5567,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-05-30T10:59:08+00:00"
+            "time": "2025-06-11T11:19:37+00:00"
         },
         {
             "name": "roave/security-advisories",
@@ -5576,12 +5575,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "1eb2c3ac8130315972955def682482a1972b8d8d"
+                "reference": "2ee01cea0d374b4a5301313a19b00462367ee1e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/1eb2c3ac8130315972955def682482a1972b8d8d",
-                "reference": "1eb2c3ac8130315972955def682482a1972b8d8d",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2ee01cea0d374b4a5301313a19b00462367ee1e9",
+                "reference": "2ee01cea0d374b4a5301313a19b00462367ee1e9",
                 "shasum": ""
             },
             "conflict": {
@@ -5744,9 +5743,12 @@
                 "dolibarr/dolibarr": "<19.0.2|==21.0.0.0-beta",
                 "dompdf/dompdf": "<2.0.4",
                 "doublethreedigital/guest-entries": "<3.1.2",
+                "drupal/admin_audit_trail": "<1.0.5",
                 "drupal/ai": "<1.0.5",
                 "drupal/alogin": "<2.0.6",
                 "drupal/cache_utility": "<1.2.1",
+                "drupal/commerce_alphabank_redirect": "<1.0.3",
+                "drupal/commerce_eurobank_redirect": "<2.1.1",
                 "drupal/config_split": "<1.10|>=2,<2.0.2",
                 "drupal/core": ">=6,<6.38|>=7,<7.102|>=8,<10.3.14|>=10.4,<10.4.5|>=11,<11.0.13|>=11.1,<11.1.5",
                 "drupal/core-recommended": ">=7,<7.102|>=8,<10.2.11|>=10.3,<10.3.9|>=11,<11.0.8",
@@ -5755,11 +5757,13 @@
                 "drupal/gdpr": "<3.0.1|>=3.1,<3.1.2",
                 "drupal/google_tag": "<1.8|>=2,<2.0.8",
                 "drupal/ignition": "<1.0.4",
+                "drupal/lightgallery": "<1.6",
                 "drupal/link_field_display_mode_formatter": "<1.6",
                 "drupal/matomo": "<1.24",
                 "drupal/oauth2_client": "<4.1.3",
                 "drupal/oauth2_server": "<2.1",
                 "drupal/obfuscate": "<2.0.1",
+                "drupal/quick_node_block": "<2",
                 "drupal/rapidoc_elements_field_formatter": "<1.0.1",
                 "drupal/spamspan": "<3.2.1",
                 "drupal/tfa": "<1.10",
@@ -6515,7 +6519,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-06-09T18:07:09+00:00"
+            "time": "2025-06-11T19:04:50+00:00"
         },
         {
             "name": "sebastian/diff",
