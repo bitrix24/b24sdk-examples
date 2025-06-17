@@ -1,0 +1,43 @@
+# This file is part of the b24sdk-examples package.
+#
+# © Maksim Mesilov <mesilov.maxim@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+# Grab the PHP extension installer script from mlocati's image
+# https://github.com/mlocati/docker-php-extension-installer#readme
+FROM mlocati/php-extension-installer:2.4 AS php-extension-installer
+
+# Using official PHP 8.3 CLI image based on Debian Bookworm for development purposes
+FROM php:8.3-cli-bookworm AS dev-php
+
+# Copy PHP extension installer script from mlocati's image
+COPY --from=php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
+
+# Link to the source repository for this image (OCI standard label)
+LABEL "org.opencontainers.image.source"="https://github.com/bitrix24/b24sdk-examples"
+
+ARG UID=10001
+ARG GID=10001
+
+RUN <<EOF
+  groupmod --gid=${GID} www-data
+  usermod --uid=${UID} --gid=${GID} www-data
+EOF
+
+RUN <<EOF
+  apt-get update
+  apt-get install --no-install-recommends --no-install-suggests -q -y \
+          unzip
+  apt-get clean
+  rm -rf /var/lib/apt/lists/*
+EOF
+
+RUN install-php-extensions amqp bcmath excimer intl pcntl opcache yaml zip
+
+WORKDIR /var/www/html
+
+RUN chown www-data:www-data /var/www/html
+
+USER www-data
