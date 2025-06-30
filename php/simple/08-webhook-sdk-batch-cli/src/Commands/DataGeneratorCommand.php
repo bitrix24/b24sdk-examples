@@ -44,7 +44,7 @@ class DataGeneratorCommand extends Command
 
         $output->writeln('Start Generate demo data...');
 
-        $filename = '/var/tmp/import.csv';
+        $filename = '/var/tmp/demo-data.csv';
         $demoContactsCount = 7000;
 
         $faker = Faker\Factory::create('en_EN');

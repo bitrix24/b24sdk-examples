@@ -11,6 +11,7 @@
  */
 
 use App\Commands\DataGeneratorCommand;
+use App\Commands\ImportDataCommand;
 use App\DI\DI;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -50,4 +51,5 @@ if ($_SERVER['APP_DEBUG']) {
 
 $application = new Application();
 $application->add(DI::get(DataGeneratorCommand::class));
+$application->add(DI::get(ImportDataCommand::class));
 $application->run($input);

@@ -138,6 +138,10 @@ lint-rector:
 lint-rector-fix:
 	docker-compose run --rm php-cli vendor/bin/rector process
 
-.PHONY: php-cli-app
+.PHONY: php-cli-generate-demo-data
 php-cli-generate-demo-data:
 	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:data-generator
+
+.PHONY: php-cli-import
+php-cli-import:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:import-data

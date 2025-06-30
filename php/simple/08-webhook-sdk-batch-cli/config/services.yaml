@@ -9,6 +9,8 @@ services:
 
     App\Commands\DataGeneratorCommand:
       public: true
+    App\Commands\ImportDataCommand:
+      public: true
 
     Psr\Log\LoggerInterface:
       class: App\LoggerFactory
