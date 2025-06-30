@@ -19,7 +19,8 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-
+use League\Csv\Writer;
+use Faker;
 
 #[AsCommand(
     name: 'b24:data-generator',
@@ -41,7 +42,34 @@ class DataGeneratorCommand extends Command
     {
         $this->logger->debug('Command.DataGeneratorCommand.start');
 
-        $output->writeln('Generate demo data...');
+        $output->writeln('Start Generate demo data...');
+
+        $filename = '/var/tmp/import.csv';
+        $demoContactsCount = 7000;
+
+        $faker = Faker\Factory::create('en_EN');
+        $writer = Writer::createFromPath($filename, 'w+');
+        $writer->insertOne(['name', 'second_name', 'phone', 'email']);
+
+        $items = [];
+        for ($i = 0; $i < $demoContactsCount; $i++) {
+            $items[] = [
+                $faker->firstName(),
+                $faker->lastName(),
+                $faker->e164PhoneNumber(),
+                $faker->email()
+            ];
+        }
+        $writer->insertAll($items);
+        $output->writeln([
+                '',
+                sprintf(
+                    '<info>Successfully generated %s demo-contacts and saved in «volumes» folder</info>',
+                    $demoContactsCount,
+                ),
+                ''
+            ]
+        );
 
         $this->logger->debug('Command.DataGeneratorCommand.finish');
 
