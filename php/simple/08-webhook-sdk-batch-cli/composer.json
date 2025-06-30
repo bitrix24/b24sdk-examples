@@ -26,6 +26,7 @@
     "fakerphp/faker": "1.23.*"
   },
   "require-dev": {
+    "symfony/debug-bundle": "^7.3",
     "ergebnis/composer-normalize": "^2",
     "lendable/composer-license-checker": "^1",
     "roave/security-advisories": "dev-latest",
