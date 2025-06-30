@@ -55,12 +55,12 @@ $alphaService->run();
 $logger->info("------------------");
 
 // init object with DI
-$alphaService = DI::get(Alpha::class);
 /**
  * @var Alpha $alphaService
  */
 $alphaService = DI::get(Alpha::class);
 $alphaService->run();
+exit();
 
 try {
     print('Show all env variables:');

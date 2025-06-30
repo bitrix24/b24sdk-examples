@@ -39,13 +39,13 @@ class DI
     }
 
     /**
-     * @param $id
+     * @param non-empty-string $id
      * @return mixed
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws Exception
      */
-    public static function get($id): mixed
+    public static function get(string $id): mixed
     {
         if (!isset(self::$instance)) {
             self::$instance = new self();
