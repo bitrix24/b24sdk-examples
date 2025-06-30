@@ -38,13 +38,13 @@ use League\Csv\Writer;
         $logger = new Logger('App');
         // rotating
         // in production you MUST use logrotate or other specific util
-        $rotatingFileHandler = new RotatingFileHandler('b24-php-sdk.log', 30);
+        $rotatingFileHandler = new RotatingFileHandler('/var/logs/b24-php-sdk.log', 30);
         $rotatingFileHandler->setFilenameFormat('{filename}-{date}', 'Y-m-d');
         $logger->pushHandler($rotatingFileHandler);
         $logger->pushProcessor(new MemoryUsageProcessor(true, true));
         $logger->pushProcessor(new UidProcessor());
 
-        $filename = 'import.csv';
+        $filename = '/var/tmp/import.csv';
         $demoContactsCount = 3000;
         // check call arguments
         $b24Webhook = (string)$input->getOption('webhook');
