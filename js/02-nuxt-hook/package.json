@@ -1,33 +1,31 @@
 {
-	"name": "@bitrix24/b24jssdk-playground-hook",
-	"private": true,
-	"version": "0.0.0",
-	"type": "module",
-	"scripts": {
-		"dev": "nuxi dev",
-		"build": "nuxi build",
-		"generate": "nuxi generate",
-		"preview": "nuxt preview",
-		"postinstall": "nuxt prepare"
-	},
-	"dependencies": {
-		"@bitrix24/b24icons-vue": "latest",
-		"@bitrix24/b24jssdk": "latest",
-		"@bitrix24/b24style": "latest",
-		"@headlessui/vue": "^1.7.23",
-		"@nuxtjs/i18n": "^8.5.5",
-		"@tailwindcss/forms": "^0.5.7",
-		"@tailwindcss/typography": "^0.5.2",
-		"autoprefixer": "^10.4.20",
-		"luxon": "^3.5.0",
-		"nuxt": "^3.13.2",
-		"postcss": "^8.4.47",
-		"tailwind-merge": "^2.5.3",
-		"tailwindcss": "^3.4.11",
-		"vue": "latest",
-		"vue-router": "latest"
-	},
-	"devDependencies": {
-		"@types/luxon": "^3.4.2"
-	}
+  "name": "@bitrix24/b24jssdk-playground-hook",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "generate": "nuxi generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "dev-link_b24jssdk": "pnpm update @bitrix24/b24jssdk"
+  },
+  "dependencies": {
+    "@bitrix24/b24icons-vue": "^2.0.2",
+    "@bitrix24/b24jssdk": "file:..\\..\\..\\b24jssdk\\packages\\jssdk",
+    "@bitrix24/b24ui-nuxt": "^0.7.0",
+    "@nuxtjs/i18n": "^9.5.6",
+    "luxon": "^3.6.1",
+    "nuxt": "^3.17.5"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.6.2",
+    "@nuxt/eslint": "^1.4.1",
+    "eslint": "^9.30.0",
+    "typescript": "^5.8.3"
+  },
+  "packageManager": "pnpm@10.11.1"
 }
