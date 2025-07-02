@@ -25,24 +25,38 @@ const listCases = ref([
 </script>
 
 <template>
-  <div class="mt-xl text-md text-base-900 border border-base-30 rounded-md px-lg2 py-sm2 shadow-sm bg-white dark:bg-base-200/10">
-    <dl class="divide-y divide-base-300">
-      <div
-        v-for="(caseData, caseIndex) in listCases"
-        :key="caseIndex"
-        class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
-      >
-        <dt>
-          <ProseH6 class="mb-0">
-            {{ caseData }}
-          </ProseH6>
-        </dt>
-        <dd>
-          <ProseCode class="mb-0">
-            {{ formatterIban.printFormat(caseData, ' ') }}
-          </ProseCode>
-        </dd>
+  <div>
+    <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <ProseH1>
+          IBAN
+        </ProseH1>
+        <ProseP>IBAN formatting demonstration.</ProseP>
       </div>
-    </dl>
+      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+        Hm..
+      </B24Advice>
+    </div>
+    <B24Separator />
+    <div class="mt-8 text-md text-base-900 border border-base-30 rounded-md px-lg2 py-sm2 shadow-sm bg-white dark:bg-base-200/10">
+      <dl class="divide-y divide-base-300">
+        <div
+          v-for="(caseData, caseIndex) in listCases"
+          :key="caseIndex"
+          class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+        >
+          <dt>
+            <ProseH6 class="mb-0">
+              {{ caseData }}
+            </ProseH6>
+          </dt>
+          <dd>
+            <ProseCode class="mb-0">
+              {{ formatterIban.printFormat(caseData, ' ') }}
+            </ProseCode>
+          </dd>
+        </div>
+      </dl>
+    </div>
   </div>
 </template>

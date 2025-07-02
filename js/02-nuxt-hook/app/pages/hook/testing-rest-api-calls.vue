@@ -22,7 +22,7 @@ import TrashBinIcon from '@bitrix24/b24icons-vue/main/TrashBinIcon'
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 
 useHead({
-  title: 'Testing Rest-Api calls'
+  title: 'Testing Rest-Api Calls'
 })
 
 // region Init ////
@@ -492,8 +492,14 @@ const problemMessageList = (result: IResult) => {
 </script>
 
 <template>
-  <div>
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-x-10 gap-y-2">
+  <div class="flex flex-col items-top justify-top gap-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <ProseH1>
+          Testing Rest-Api Calls
+        </ProseH1>
+        <ProseP>Shows a sample of data.</ProseP>
+      </div>
       <div v-show="result.isSuccess" class="basis-1/4">
         <div
           v-if="$isInitB24Helper"
@@ -530,17 +536,15 @@ const problemMessageList = (result: IResult) => {
           <SpinnerIcon class="m-auto animate-spin stroke-2 size-10" />
         </div>
       </div>
-      <div class="flex-1 w-full">
-        <B24Alert color="warning">
-          <template #description>
-            You need to set environment variables in the <ProseCode>.env</ProseCode> file.<br>
-            Scopes: <ProseCode>user_brief</ProseCode>, <ProseCode>crm</ProseCode><br><br>
-            To view query results, open the developer console.
-          </template>
-        </B24Alert>
-      </div>
+      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+        You need to set environment variables in the <ProseCode>.env</ProseCode> file.<br>
+        Scopes: <ProseCode>user_brief</ProseCode>, <ProseCode>crm</ProseCode><br><br>
+        To view query results, open the developer console.
+      </B24Advice>
     </div>
-    <div class="mt-xl flex flex-col sm:flex-row gap-10">
+    <B24Separator />
+
+    <div class="flex flex-col sm:flex-row gap-10">
       <div class="flex basis-1/4">
         <B24ButtonGroup orientation="vertical" class="w-full">
           <B24Chip :text="listCallToMax">

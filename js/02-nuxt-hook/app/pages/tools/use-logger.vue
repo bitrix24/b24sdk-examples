@@ -106,14 +106,21 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
 </script>
 
 <template>
-  <div>
-    <B24Alert color="warning">
-      <template #description>
+  <div class="flex flex-col items-top justify-top gap-8">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <ProseH1>
+          LoggerBrowser
+        </ProseH1>
+        <ProseP>Example of working with the LoggerBrowser object.</ProseP>
+      </div>
+      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
         To view the result, open the developer console.
-      </template>
-    </B24Alert>
+      </B24Advice>
+    </div>
+    <B24Separator />
 
-    <div class="mt-4 flex flex-col flex-nowrap gap-2">
+    <div class="flex flex-col flex-nowrap gap-2">
       <B24Textarea
         v-model="debugMessage"
         placeholder="Enter a message for the log"
@@ -132,7 +139,7 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
       </div>
     </div>
 
-    <div class="mt-xl grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div
         v-for="(type) in loggerTypeList"
         :key="type.index"

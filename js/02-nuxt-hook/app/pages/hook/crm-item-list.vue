@@ -93,14 +93,20 @@ actionCompanyList()
 
 <template>
   <ClientOnly>
-    <ProseH1>
-      List of companies
-    </ProseH1>
-    <ProseP>Shows a selection of data from CRM by company.</ProseP>
-
+    <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <ProseH1>
+          List of companies
+        </ProseH1>
+        <ProseP>Shows a selection of data from CRM by company.</ProseP>
+      </div>
+      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+        You need to set environment variables in the <ProseCode>.env</ProseCode> file
+      </B24Advice>
+    </div>
     <B24Separator />
 
-    <div class="mt-6 flex flex-col lg:flex-row gap-2">
+    <div class="mt-8 flex flex-col lg:flex-row gap-2">
       <B24Button
         color="primary"
         :icon="CompanyIcon"

@@ -77,9 +77,18 @@ if (!result.isSuccess) {
 </script>
 
 <template>
-  <B24Alert color="warning">
-    <template #description>
-      To view the result, open the developer console.
-    </template>
-  </B24Alert>
+  <div>
+    <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
+      <div>
+        <ProseH1>
+          Result
+        </ProseH1>
+        <ProseP>Example of working with the Result object</ProseP>
+      </div>
+      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+        To view the result, open the developer console.
+      </B24Advice>
+    </div>
+    <B24Separator />
+  </div>
 </template>
