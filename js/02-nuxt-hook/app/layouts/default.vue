@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
+import HomeIcon from '@bitrix24/b24icons-vue/outline/HomeIcon'
 
 const colorMode = useColorMode()
 
@@ -85,12 +86,13 @@ defineShortcuts(extractShortcuts(helpItems.value))
   >
     <template #sidebar>
       <B24SidebarHeader>
-        <B24SidebarSection class="ps-[18px] flex-row  items-center justify-start gap-0.5 text-primary">
-          <ProseA href="/">
-            <ProseH4 class="mb-0 leading-none">
+        <B24SidebarSection class="ps-[20px]">
+          <B24Link href="/" class="leading-none flex flex-row items-center justify-start gap-0.5 text-blue-500 hover:text-cyan-500">
+            <HomeIcon class="size-6 flex" />
+            <ProseH4 class="mb-0 flex">
               Bitrix24::hooks
             </ProseH4>
-          </ProseA>
+          </B24Link>
         </B24SidebarSection>
       </B24SidebarHeader>
       <B24SidebarBody>

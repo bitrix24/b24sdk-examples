@@ -1,187 +1,117 @@
 <script setup lang="ts">
 import { DateTime } from 'luxon'
-import { ref, reactive, computed, type Ref } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { LoggerBrowser, B24LangList } from '@bitrix24/b24jssdk'
 import Search1Icon from '@bitrix24/b24icons-vue/main/Search1Icon'
 import AlertIcon from '@bitrix24/b24icons-vue/button/AlertIcon'
 import FileDownloadIcon from '@bitrix24/b24icons-vue/main/FileDownloadIcon'
 import CompanyIcon from '@bitrix24/b24icons-vue/crm/CompanyIcon'
-
-import {
-  LoggerBrowser,
-  Result,
-  B24Hook,
-  EnumCrmEntityTypeId,
-  Text, B24LangList
-} from '@bitrix24/b24jssdk'
-import type { IResult, ISODate } from '@bitrix24/b24jssdk'
 
 useHead({
   title: 'List of companies'
 })
 
 const $logger = LoggerBrowser.build(
-  'Demo: crm.items.list',
-  import.meta.env?.DEV === true
+  'Demo: crm-item-ist',
+  import.meta.dev
 )
 
-/**
- * @todo fix this
- * @memo this work at server side
- */
-const config = useRuntimeConfig()
-const $b24 = B24Hook.fromWebhookUrl(config.public.b24Hook)
-$b24.setLogger($logger)
-const b24Domain = $b24.getTargetOrigin()
+const b24CurrentLang = ref<string>(B24LangList.en)
+const isProcessing = ref(false)
+const dataList = ref<Company[]>([])
+const result = reactive({
+  isSuccess: true,
+  errors: [] as string[]
+})
 
-let result: IResult = reactive(new Result())
-const isProcessLoadB24: Ref<boolean> = ref(false)
-const dataList: Ref<{
+interface Company {
   id: number
   title: string
   createdTime: DateTime
-}[]> = ref([])
-const problemMessageList = computed(() => {
-  let problemMessageList: string[] = []
-  const problem = result.getErrorMessages()
-  if (typeof (problem || '') === 'string') {
-    problemMessageList.push(problem.toString())
-  } else if (Array.isArray(problem)) {
-    problemMessageList = problemMessageList.concat(problem)
-  }
-
-  return problemMessageList
-})
-
-const openSlider = async (id: number): Promise<void> => {
-  window.open(
-    `${b24Domain}/crm/company/details/${id}/`
-  )
-
-  return Promise.resolve()
-}
-// $b24.offClientSideWarning() ////
-
-const b24CurrentLang: Ref<string> = ref(B24LangList.en)
-
-const actionCompanyAdd = async (needAdd: number = 10): Promise<void> => {
-  result = reactive(new Result())
-
-  const commands = []
-
-  if (needAdd < 1) {
-    needAdd = 1
-  } else if (needAdd > 50) {
-    needAdd = 50
-  }
-
-  let iterator = 0
-  while (iterator < needAdd) {
-    iterator++
-    commands.push({
-      method: 'crm.item.add',
-      params: {
-        entityTypeId: EnumCrmEntityTypeId.company,
-        fields: {
-          title: Text.getUuidRfc4122(),
-          comments: '[B]Auto generate[/B] from [URL=https://bitrix24.github.io/b24jssdk/]@bitrix24/b24jssdk-playground[/URL]'
-        }
-      }
-    })
-  }
-
-  let data: any
-  isProcessLoadB24.value = true
-
-  return $b24.callBatch(
-    commands,
-    true
-  )
-    .then((response: Result) => {
-      data = response.getData()
-      $logger.info('response >> ', data)
-
-      return actionCompanyList()
-    })
-    .catch((error: Error | string) => {
-      result.addError(error)
-      $logger.error(error)
-    })
-    .finally(() => {
-      isProcessLoadB24.value = false
-      $logger.info('load >> stop ')
-    })
+  detailUrl: string
 }
 
-const actionCompanyList = async (): Promise<void> => {
-  result = reactive(new Result())
+const problemMessageList = computed(() => result.errors)
 
-  const commands = {
-    CompanyList: {
-      method: 'crm.item.list',
-      params: {
-        entityTypeId: EnumCrmEntityTypeId.company,
-        order: { id: 'desc' },
-        select: [
-          'id',
-          'title',
-          'createdTime'
-        ]
-      }
+const openSlider = (url: string) => {
+  window.open(url)
+}
+
+const actionCompanyList = async () => {
+  result.isSuccess = true
+  result.errors = []
+  isProcessing.value = true
+
+  try {
+    const response = await $fetch('/api/companies')
+
+    if (!response.success || !response.items) {
+      throw new Error(response.message || 'Failed to load companies')
     }
+
+    dataList.value = response.items.map((item: any) => ({
+      id: item.id,
+      title: item.title,
+      createdTime: DateTime.fromISO(item.createdTime),
+      detailUrl: item.detailUrl
+    }))
+  } catch (error: any) {
+    result.isSuccess = false
+    result.errors = [error.message || 'Failed to load companies']
+  } finally {
+    isProcessing.value = false
   }
-
-  let data: any
-
-  isProcessLoadB24.value = true
-
-  return $b24.callBatch(
-    commands,
-    true
-  )
-    .then((response: Result) => {
-      data = response.getData()
-      $logger.info('response >> ', data)
-
-      dataList.value = (data.CompanyList.items || []).map((item: any) => {
-        return {
-          id: Number(item.id),
-          title: item.title,
-          createdTime: Text.toDateTime(item.createdTime as ISODate)
-        }
-      })
-    })
-    .catch((error: Error | string) => {
-      result.addError(error)
-      $logger.error(error)
-    })
-    .finally(() => {
-      isProcessLoadB24.value = false
-      $logger.info('load >> stop ')
-    })
 }
 
+const actionCompanyAdd = async (needAdd = 10) => {
+  result.isSuccess = true
+  result.errors = []
+  isProcessing.value = true
+
+  try {
+    const response = await $fetch('/api/companies', {
+      method: 'POST',
+      body: { needAdd }
+    })
+
+    if (!response.success) {
+      throw new Error(response.message || 'Unknown error occurred')
+    }
+
+    await actionCompanyList()
+  } catch (error: any) {
+    result.isSuccess = false
+    result.errors = [error.message || 'Failed to add companies']
+  } finally {
+    isProcessing.value = false
+  }
+}
+
+// Initial data loading
 actionCompanyList()
 </script>
 
 <template>
-  <div>
-    <B24Alert color="warning">
-      <template #description>
-        You need to set environment variables in the <ProseCode>.env</ProseCode> file
-      </template>
-    </B24Alert>
+  <ClientOnly>
+    <ProseH1>
+      List of companies
+    </ProseH1>
+    <ProseP>Shows a selection of data from CRM by company.</ProseP>
+
+    <B24Separator />
+
     <div class="mt-6 flex flex-col lg:flex-row gap-2">
       <B24Button
         color="primary"
         :icon="CompanyIcon"
-        :disabled="isProcessLoadB24"
         label="Add some companies"
+        loading-auto
         @click="actionCompanyAdd(50)"
       />
       <B24Button
         :icon="FileDownloadIcon"
-        :disabled="isProcessLoadB24"
         label="Load 50 latest companies"
+        loading-auto
         @click="actionCompanyList"
       />
     </div>
@@ -190,13 +120,13 @@ actionCompanyList()
       class="mt-5 flex flex-col gap-1.5"
     >
       <div
-        v-if="!isProcessLoadB24 && dataList.length < 1"
+        v-if="!isProcessing && dataList.length < 1"
         class="flex flex-col flex-nowrap justify-between items-center my-4 text-base-500"
       >
         <Search1Icon class="h-10 w-10" />
         <div>No data available</div>
       </div>
-      <div v-if="isProcessLoadB24" class="flex flex-col flex-nowrap justify-between items-center my-4 text-base-500">
+      <div v-if="isProcessing" class="flex flex-col flex-nowrap justify-between items-center my-4 text-base-500">
         <AlertIcon class="h-10 w-10" />
         <div>Processing ...</div>
       </div>
@@ -231,7 +161,7 @@ actionCompanyList()
               <td>
                 <B24Link
                   is-action
-                  @click="openSlider(company.id)"
+                  @click="openSlider(company.detailUrl)"
                 >
                   {{ company.title }}
                 </B24Link>
@@ -258,5 +188,5 @@ actionCompanyList()
         </ProseUl>
       </template>
     </B24Alert>
-  </div>
+  </ClientOnly>
 </template>
