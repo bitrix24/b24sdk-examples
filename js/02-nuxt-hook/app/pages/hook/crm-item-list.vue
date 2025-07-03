@@ -6,6 +6,7 @@ import Search1Icon from '@bitrix24/b24icons-vue/main/Search1Icon'
 import AlertIcon from '@bitrix24/b24icons-vue/button/AlertIcon'
 import FileDownloadIcon from '@bitrix24/b24icons-vue/main/FileDownloadIcon'
 import CompanyIcon from '@bitrix24/b24icons-vue/crm/CompanyIcon'
+import type { BaseResponse, CompaniesResponse, Company } from '#shared/types/base'
 
 useHead({
   title: 'List of companies'
@@ -24,13 +25,6 @@ const result = reactive({
   errors: [] as string[]
 })
 
-interface Company {
-  id: number
-  title: string
-  createdTime: DateTime
-  detailUrl: string
-}
-
 const problemMessageList = computed(() => result.errors)
 
 const openSlider = (url: string) => {
@@ -43,10 +37,10 @@ const actionCompanyList = async () => {
   isProcessing.value = true
 
   try {
-    const response = await $fetch('/api/companies')
+    const response = await $fetch<CompaniesResponse>('/api/companies')
 
     if (!response.success || !response.items) {
-      throw new Error(response.message || 'Failed to load companies')
+      throw new Error(response.error || 'Failed to load companies')
     }
 
     dataList.value = response.items.map((item: any) => ({
@@ -69,13 +63,13 @@ const actionCompanyAdd = async (needAdd = 10) => {
   isProcessing.value = true
 
   try {
-    const response = await $fetch('/api/companies', {
+    const response = await $fetch<BaseResponse>('/api/companies', {
       method: 'POST',
       body: { needAdd }
     })
 
     if (!response.success) {
-      throw new Error(response.message || 'Unknown error occurred')
+      throw new Error(response.error || 'Unknown error occurred')
     }
 
     await actionCompanyList()

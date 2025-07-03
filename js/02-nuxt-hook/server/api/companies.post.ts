@@ -1,5 +1,6 @@
 import { B24Hook, EnumCrmEntityTypeId, LoggerBrowser, Text } from '@bitrix24/b24jssdk'
 import { defineEventHandler, readBody } from 'h3'
+import type { BaseResponse } from '#shared/types/base'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
@@ -10,7 +11,7 @@ export default defineEventHandler(async (event) => {
     import.meta.dev
   )
 
-  const $b24 = B24Hook.fromWebhookUrl(config.public.b24Hook)
+  const $b24 = B24Hook.fromWebhookUrl(config.b24Hook)
   $b24.setLogger($logger)
 
   const needAdd = Math.min(50, Math.max(1, body.needAdd || 10))
@@ -31,11 +32,11 @@ export default defineEventHandler(async (event) => {
 
     $logger.info('response >> ', response.getData())
 
-    return { success: true }
+    return { success: true } as BaseResponse
   } catch (error: any) {
     return {
       success: false,
-      message: error.message || 'Failed to create companies'
-    }
+      error: error.message || 'Failed to create companies'
+    } as BaseResponse
   }
 })

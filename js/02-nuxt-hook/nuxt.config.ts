@@ -19,12 +19,7 @@ export default defineNuxtConfig({
    */
   runtimeConfig: {
     b24Hook: '',
-    public: {
-      /**
-       * @todo remove this
-       */
-      b24Hook: ''
-    }
+    public: {}
   },
   devServer: {
     port: 3000,

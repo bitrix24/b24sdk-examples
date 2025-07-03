@@ -1,5 +1,6 @@
 import { B24Hook, EnumCrmEntityTypeId, LoggerBrowser } from '@bitrix24/b24jssdk'
 import { defineEventHandler } from 'h3'
+import type { CompaniesResponse, Company } from '#shared/types/base'
 
 export default defineEventHandler(async () => {
   const config = useRuntimeConfig()
@@ -9,7 +10,7 @@ export default defineEventHandler(async () => {
     import.meta.dev
   )
 
-  const $b24 = B24Hook.fromWebhookUrl(config.public.b24Hook)
+  const $b24 = B24Hook.fromWebhookUrl(config.b24Hook)
   $b24.setLogger($logger)
 
   try {
@@ -24,7 +25,7 @@ export default defineEventHandler(async () => {
       }
     }, true)
 
-    const items = (response.getData().CompanyList.items || []).map((item: any) => ({
+    const items: Company[] = (response.getData().CompanyList.items || []).map((item: any) => ({
       id: Number(item.id),
       title: item.title,
       createdTime: item.createdTime,
@@ -35,11 +36,11 @@ export default defineEventHandler(async () => {
     return {
       success: true,
       items
-    }
+    } as CompaniesResponse
   } catch (error: any) {
     return {
       success: false,
-      message: error.message || 'Failed to load companies'
-    }
+      error: error.message || 'Failed to load companies'
+    } as CompaniesResponse
   }
 })
