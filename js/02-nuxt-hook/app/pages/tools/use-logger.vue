@@ -8,13 +8,8 @@ useHead({
   title: 'LoggerBrowser'
 })
 
-const isDevelopment: Ref<boolean> = ref(import.meta.env?.DEV === true)
+const { $logger } = useAppInit('Demo: Logger')
 const debugMessage: Ref<string> = ref('This is a test message for debugging.')
-
-const $logger = LoggerBrowser.build(
-  'Demo: Logger',
-  isDevelopment.value
-)
 
 function clearConsole(): void {
   console.clear()
@@ -114,24 +109,35 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
         </ProseH1>
         <ProseP>Example of working with the LoggerBrowser object.</ProseP>
       </div>
-      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
         To view the result, open the developer console.
       </B24Advice>
     </div>
-    <B24Separator />
 
-    <div class="flex flex-col flex-nowrap gap-2">
+    <div class="flex flex-col flex-nowrap gap-2 bg-base-50 dark:bg-base-dark dark:bg-base-100/10 px-10 py-8 -mx-10">
       <B24Textarea
         v-model="debugMessage"
+        name="debugMessage"
         placeholder="Enter a message for the log"
       />
       <div class="flex flex-col lg:flex-row gap-2">
         <B24Button
+          color="primary"
+          size="sm"
+          rounded
           :icon="SendIcon"
           label="Send log"
           @click="makeLoggAll"
         />
         <B24Button
+          color="link"
+          depth="dark"
+          size="sm"
+          rounded
           :icon="TrashBinIcon"
           label="Clear console"
           @click="clearConsole"
@@ -146,7 +152,7 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
         class="px-lg2 py-sm2 border border-base-30 rounded-md shadow-sm hover:shadow-md sm:rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white dark:bg-base-200/10 text-base-500 dark:text-base-200"
       >
         <div class="px-4 sm:px-0">
-          <ProseH3 >
+          <ProseH3>
             {{ type.index }}
           </ProseH3>
           <ProseP class="text-sm">
@@ -174,7 +180,10 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
                 <B24Button
                   :icon="SendIcon"
                   label="Send"
-                  size="sm"
+                  color="link"
+                  depth="dark"
+                  rounded
+                  size="xs"
                   :disabled="!type.state.value"
                   @click="makeLog(type.type)"
                 />

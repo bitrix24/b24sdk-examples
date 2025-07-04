@@ -44,7 +44,11 @@ const listCases: TypeCase[] = [
         </ProseH1>
         <ProseP>A couple of examples of date and time processing.</ProseP>
       </div>
-      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
         Using the <ProseA href="https://moment.github.io/luxon/" target="_blank">
           <ProseCode>Luxon</ProseCode>
         </ProseA> library
@@ -52,7 +56,7 @@ const listCases: TypeCase[] = [
     </div>
     <B24Separator />
 
-    <div class="mt-8 text-md text-base-900 border border-base-30 rounded-md px-lg2 py-sm2 shadow-sm bg-white dark:bg-base-200/10">
+    <div class="text-md text-base-900 border border-base-30 rounded-md px-lg2 py-sm2 shadow-sm bg-white dark:bg-base-200/10">
       <dl class="divide-y divide-base-300">
         <div
           v-for="(caseData, caseIndex) in listCases"

@@ -12,10 +12,7 @@ useHead({
   title: 'List of companies'
 })
 
-const $logger = LoggerBrowser.build(
-  'Demo: crm-item-ist',
-  import.meta.dev
-)
+const { $logger } = useAppInit('Demo: crm-item-ist')
 
 const b24CurrentLang = ref<string>(B24LangList.en)
 const isProcessing = ref(false)
@@ -38,7 +35,7 @@ const actionCompanyList = async () => {
 
   try {
     const response = await $fetch<CompaniesResponse>('/api/companies')
-
+    $logger.log(response)
     if (!response.success || !response.items) {
       throw new Error(response.error || 'Failed to load companies')
     }
@@ -67,7 +64,7 @@ const actionCompanyAdd = async (needAdd = 10) => {
       method: 'POST',
       body: { needAdd }
     })
-
+    $logger.log(response)
     if (!response.success) {
       throw new Error(response.error || 'Unknown error occurred')
     }
@@ -94,7 +91,11 @@ actionCompanyList()
         </ProseH1>
         <ProseP>Shows a selection of data from CRM by company.</ProseP>
       </div>
-      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
         You need to set environment variables in the <ProseCode>.env</ProseCode> file
       </B24Advice>
     </div>
@@ -105,12 +106,18 @@ actionCompanyList()
         color="primary"
         :icon="CompanyIcon"
         label="Add some companies"
+        size="sm"
+        rounded
         loading-auto
         @click="actionCompanyAdd(50)"
       />
       <B24Button
         :icon="FileDownloadIcon"
         label="Load 50 latest companies"
+        color="link"
+        depth="dark"
+        size="sm"
+        rounded
         loading-auto
         @click="actionCompanyList"
       />

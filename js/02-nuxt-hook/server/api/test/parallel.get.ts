@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
   const $logger = LoggerBrowser.build(
-    'Demo: test:sequential',
+    'Demo: test:parallel',
     import.meta.dev
   )
 
@@ -16,10 +16,11 @@ export default defineEventHandler(async (event) => {
   const count = Number(getQuery(event).count) || 10
 
   try {
+    const promises = []
     for (let i = 0; i < count; i++) {
-      await $b24.callMethod('user.current')
-      $logger.log(`step: ${i + 1}`)
+      promises.push($b24.callMethod('user.current'))
     }
+    await Promise.all(promises)
     $logger.log(`done`)
 
     return {
@@ -28,7 +29,7 @@ export default defineEventHandler(async (event) => {
   } catch (error: any) {
     return {
       success: false,
-      error: error.message || 'Failed to load sequential'
+      error: error.message || 'Failed to load parallel'
     } as BaseResponse
   }
 })

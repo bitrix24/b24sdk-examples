@@ -5,10 +5,7 @@ useHead({
   title: 'Result'
 })
 
-const $logger = LoggerBrowser.build(
-  'Demo: Result',
-  true
-)
+const { $logger } = useAppInit('Demo: Result')
 
 // This function contains errors ////
 function proc1(): Result {
@@ -85,7 +82,11 @@ if (!result.isSuccess) {
         </ProseH1>
         <ProseP>Example of working with the Result object</ProseP>
       </div>
-      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
         To view the result, open the developer console.
       </B24Advice>
     </div>

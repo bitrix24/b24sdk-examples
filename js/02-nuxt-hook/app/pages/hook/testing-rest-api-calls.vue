@@ -10,22 +10,19 @@ import SendContactIcon from '@bitrix24/b24icons-vue/crm/SendContactIcon'
 import CompanyIcon from '@bitrix24/b24icons-vue/crm/CompanyIcon'
 import TrashBinIcon from '@bitrix24/b24icons-vue/main/TrashBinIcon'
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
-import type { ProfileResponse, UserProfile } from '#shared/types/base'
+import type { BaseResponse, ProfileResponse, UserProfile, CompaniesResponse, CompanyInfoResponse } from '#shared/types/base'
 
 useHead({
   title: 'Testing Rest-Api Calls'
 })
 
 // region Init ////
-const $logger = LoggerBrowser.build(
-  'Demo: Testing Rest-Api Calls',
-  import.meta.dev
-)
+const { $logger } = useAppInit('Demo: Testing Rest-Api Calls')
 
 const { formatterNumber } = useFormatter()
 
 const b24CurrentLang = ref<string>(B24LangList.en)
-let result = reactive({
+const result = reactive({
   isSuccess: true,
   errors: [] as string[]
 })
@@ -144,7 +141,8 @@ const makeSelectItemsList_v1 = async () => {
   status.value.time.start = DateTime.now()
 
   try {
-    await $fetch(`/api/test/sequential?count=${listCallToMax.value}`)
+    const response = await $fetch<BaseResponse>(`/api/test/sequential?count=${listCallToMax.value}`)
+    $logger.log(response)
     listCallToMax.value = listCallToMax.value * 2
   } catch (error: any) {
     result.isSuccess = false
@@ -168,7 +166,8 @@ async function makeSelectItemsList_v2() {
   status.value.time.start = DateTime.now()
 
   try {
-    await $fetch(`/api/test/parallel?count=${listCallToMaxAll.value}`)
+    const response = await $fetch<BaseResponse>(`/api/test/parallel?count=${listCallToMaxAll.value}`)
+    $logger.log(response)
     listCallToMaxAll.value = listCallToMaxAll.value * 2
   } catch (error: any) {
     result.isSuccess = false
@@ -192,9 +191,10 @@ async function makeSelectItemsList_v3() {
   status.value.time.start = DateTime.now()
 
   try {
-    const response = await $fetch('/api/test/get-all-companies')
+    const response = await $fetch<CompaniesResponse>('/api/test/companies-all')
+    $logger.log(response)
     if (response.success) {
-      const ttl = response.items.length
+      const ttl = (response?.items || []).length
       status.value.resultInfo = `It was chosen: ${ttl} elements`
     } else {
       throw new Error(response.error)
@@ -222,9 +222,10 @@ async function makeSelectItemsList_v4() {
   status.value.time.start = DateTime.now()
 
   try {
-    const response = await $fetch('/api/test/get-large-companies')
+    const response = await $fetch<CompaniesResponse>('/api/test/companies-large')
+    $logger.log(response)
     if (response.success) {
-      const ttl = response.companies.length
+      const ttl = (response.items || []).length
       status.value.resultInfo = `It was chosen: ${ttl} elements`
     } else {
       throw new Error(response.error)
@@ -258,10 +259,11 @@ async function makeCallBatch_v1() {
   status.value.time.start = DateTime.now()
 
   try {
-    await $fetch('/api/test/batch-create', {
+    const response = await $fetch<BaseResponse>('/api/test/companies-batch-add', {
       method: 'POST',
       body: { count: needAdd.value }
     })
+    $logger.log(response)
     status.value.resultInfo = `It was add: ${needAdd.value} elements`
     needAdd.value = needAdd.value + 10
     if (needAdd.value > 50) {
@@ -293,10 +295,11 @@ async function makeSelectItemsList_v6() {
 
   try {
     if (Number.isNaN(needEntityId)) {
-      throw new Error('Wrong entity Id')
+      throw new TypeError('Wrong entity Id')
     }
 
-    const response = await $fetch(`/api/test/batch-fetch?companyId=${needEntityId}`)
+    const response = await $fetch<CompanyInfoResponse>(`/api/test/company-batch-fetch?companyId=${needEntityId}`)
+    $logger.log(response)
     if (response.success) {
       const assigned = response.assigned
       let assignedInfo = ''
@@ -308,7 +311,7 @@ async function makeSelectItemsList_v6() {
           assigned.NAME
         ].join(' ')
       }
-      status.value.resultInfo = `entityId: ${response.company.item?.id || '?'}; assigned: ${assignedInfo}`
+      status.value.resultInfo = `entityId: ${response.company?.id || '?'}; assigned: ${assignedInfo}`
     } else {
       throw new Error(response.error)
     }
@@ -324,349 +327,6 @@ const makeOpenSliderForUser = (userId: number) => {
   window.open(`${hostName.value}/company/personal/user/${userId}/`)
 }
 // endregion ////
-
-// const _OLD_makeSelectItemsList_v1 = async () => {
-//   return new Promise((resolve) => {
-//     reInitStatus()
-//     status.value.isProcess = true
-//     status.value.title = 'Testing Sequential Calls'
-//     status.value.messages.push(`In the loop we call $b24.callMethod one after another ${listCallToMax.value} times.`)
-//     status.value.messages.push('With a large number of requests, B24 will start to pause between calls.')
-//     status.value.progress.value = 0
-//     status.value.progress.max = listCallToMax.value
-//     status.value.time.start = DateTime.now()
-//
-//     return resolve(null)
-//   })
-//     .then(async () => {
-//       let iterator = status.value.progress.max || 0
-//       while (iterator > 0) {
-//         iterator--
-//         if (null !== status.value.progress.value) {
-//           status.value.progress.value++
-//         }
-//         $logger.log(`>> Testing Sequential Calls >>> ${status.value.progress.value} | ${status.value.progress.max}`)
-//
-//         // await $b24.callMethod(
-//         //   'user.current'
-//         // )
-//       }
-//     })
-//     .then(() => {
-//       listCallToMax.value = listCallToMax.value * 2
-//     })
-//     .catch((error: Error | string) => {
-//       // result.addError(error)
-//       $logger.error(error)
-//     })
-//     .finally(() => {
-//       stopMakeProcess()
-//     })
-// }
-//
-// const listCallToMaxAll: Ref<number> = ref(10)
-//
-// async function makeSelectItemsList_v2() {
-//   return new Promise((resolve) => {
-//     reInitStatus()
-//     status.value.isProcess = true
-//     status.value.title = 'Testing Parallel Calls'
-//     status.value.messages.push(`We use Promise.all. We send ${listCallToMaxAll.value} calls at once.`)
-//     status.value.messages.push('With a large number of requests, B24 will start to pause between calls.')
-//     status.value.progress.value = 0
-//     status.value.progress.max = listCallToMaxAll.value
-//     status.value.time.start = DateTime.now()
-//
-//     return resolve(null)
-//   })
-//     .then(async () => {
-//       const list = []
-//       let iterator = status.value.progress.max || 0
-//
-//       while (iterator > 0) {
-//         iterator--
-//         list.push(
-//           $b24.callMethod(
-//             'user.current',
-//             {}
-//           ).finally(() => {
-//             (status.value.progress.value as number)++
-//             $logger.log(`>> Testing Parallel Calls >>> ${status.value.progress.value} | ${status.value.progress.max}`)
-//           })
-//         )
-//       }
-//
-//       await Promise.all(list)
-//     })
-//     .then(() => {
-//       listCallToMaxAll.value = listCallToMaxAll.value * 2
-//     })
-//     .catch((error: Error | string) => {
-//       result.addError(error)
-//       $logger.error(error)
-//     })
-//     .finally(() => {
-//       stopMakeProcess()
-//     })
-// }
-//
-// async function makeSelectItemsList_v3() {
-//   return new Promise((resolve) => {
-//     reInitStatus()
-//     status.value.isProcess = true
-//     status.value.title = 'Getting All Elements'
-//     status.value.messages.push('We call the queries sequentially one after another and get the entire list of elements.')
-//     status.value.messages.push('This is not an optimal implementation for receiving large amounts of data.')
-//     status.value.messages.push('With a large number of requests, B24 will start to pause between calls.')
-//     status.value.progress.value = 0
-//     status.value.progress.max = 100
-//     status.value.time.start = DateTime.now()
-//
-//     return resolve(null)
-//   })
-//     .then(async () => {
-//       return $b24.callListMethod(
-//         'crm.item.list',
-//         {
-//           entityTypeId: EnumCrmEntityTypeId.company
-//         },
-//         (progress: number) => {
-//           status.value.progress.value = progress
-//           $logger.log(`>> Getting All Elements >>> ${status.value.progress.value}`)
-//         },
-//         'items'
-//       )
-//         .then((response) => {
-//           const ttl = response.getData().length
-//           $logger.log(`>> Getting All Elements >>> ttl: ${ttl}`)
-//           status.value.resultInfo = `It was chosen: ${formatterNumber?.format(ttl)} elements`
-//         })
-//     })
-//     .catch((error: Error | string) => {
-//       result.addError(error)
-//       $logger.error(error)
-//     })
-//     .finally(() => {
-//       stopMakeProcess()
-//     })
-// }
-//
-// async function makeSelectItemsList_v4() {
-//   return new Promise((resolve) => {
-//     reInitStatus()
-//     status.value.isProcess = true
-//     status.value.title = 'Retrieve Large Volumes of Data'
-//     status.value.messages.push('Using Bitrix24 recommendations, we make a specific sequence of calls.')
-//     status.value.messages.push('With a large number of requests, B24 will start to pause between calls.')
-//
-//     status.value.processInfo = 'processing'
-//     status.value.progress.animation = true
-//     status.value.progress.indicator = false
-//     status.value.progress.value = null
-//     status.value.time.start = DateTime.now()
-//
-//     return resolve(null)
-//   })
-//     .then(async () => {
-//       const generator = $b24.fetchListMethod(
-//         'crm.item.list',
-//         {
-//           entityTypeId: EnumCrmEntityTypeId.company,
-//           select: [
-//             'id',
-//             'title'
-//           ]
-//         },
-//         'id',
-//         'items'
-//       )
-//
-//       let ttl = 0
-//
-//       for await (const entities of generator) {
-//         for (const entity of entities) {
-//           ttl++
-//           $logger.log(`>> Retrieve Large Volumes of Data >>> entity ${ttl} ...`, entity)
-//
-//           status.value.processInfo = `[id:${entity.id}] ${entity.title}`
-//         }
-//       }
-//       status.value.resultInfo = `It was chosen: ${formatterNumber.format(ttl)} elements`
-//     })
-//     .catch((error: Error | string) => {
-//       result.addError(error)
-//       $logger.error(error)
-//     })
-//     .finally(() => {
-//       stopMakeProcess()
-//     })
-// }
-//
-// const needAdd = ref(10)
-//
-// async function makeCallBatch_v1() {
-//   if (needAdd.value < 1) {
-//     needAdd.value = 5
-//   } else if (needAdd.value > 50) {
-//     needAdd.value = 5
-//   }
-//
-//   return new Promise((resolve) => {
-//     reInitStatus()
-//     status.value.isProcess = true
-//     status.value.title = 'Testing the batch processing work'
-//     status.value.messages.push(`There will be one request. However, it contains ${needAdd.value} commands to create an entities.`)
-//     status.value.messages.push('With a large number of requests, B24 will start to pause between calls.')
-//
-//     status.value.progress.animation = true
-//     status.value.progress.indicator = false
-//     status.value.progress.value = null
-//     status.value.time.start = DateTime.now()
-//
-//     return resolve(null)
-//   })
-//     .then(() => {
-//       const commands = []
-//
-//       let iterator = 0
-//       while (iterator < needAdd.value) {
-//         iterator++
-//         commands.push({
-//           method: 'crm.item.add',
-//           params: {
-//             entityTypeId: EnumCrmEntityTypeId.company,
-//             fields: {
-//               title: Text.getUuidRfc4122(),
-//               comments: '[B]Auto generate[/B] from [URL=https://bitrix24.github.io/b24jssdk/]@bitrix24/b24jssdk-playground[/URL]'
-//             }
-//           }
-//         })
-//       }
-//
-//       $logger.info('Testing the batch processing work >> send >>> ', commands)
-//       return $b24.callBatch(
-//         commands,
-//         true
-//       )
-//     })
-//     .then((response: Result) => {
-//       const data: any = response.getData()
-//       $logger.info('Testing the batch processing work >> response >>> ', data)
-//
-//       status.value.resultInfo = `It was add: ${needAdd.value} elements`
-//     })
-//     .then(() => {
-//       needAdd.value = needAdd.value + 10
-//       if (needAdd.value > 50) {
-//         needAdd.value = 5
-//       }
-//     })
-//     .catch((error: Error | string) => {
-//       result.addError(error)
-//       $logger.error(error)
-//     })
-//     .finally(() => {
-//       stopMakeProcess()
-//     })
-// }
-//
-// async function makeSelectItemsList_v6() {
-//   const promptEntityId = prompt(
-//     'Please provide your company Id'
-//   )
-//
-//   const needEntityId = Number(promptEntityId)
-//
-//   return new Promise((resolve) => {
-//     reInitStatus()
-//     status.value.isProcess = true
-//     status.value.title = 'Testing the batch fetch work'
-//     status.value.messages.push(`The entity and its responsible person data will be selected.`)
-//     status.value.messages.push('With a large number of requests, B24 will start to pause between calls.')
-//
-//     status.value.progress.animation = true
-//     status.value.progress.indicator = false
-//     status.value.progress.value = null
-//     status.value.time.start = DateTime.now()
-//
-//     return resolve(null)
-//   })
-//     .then(() => {
-//       if (Number.isNaN(needEntityId)) {
-//         return Promise.reject(new Error('Wrong entity Id'))
-//       }
-//
-//       const commands = {
-//         getCompany: {
-//           method: 'crm.item.get',
-//           params: {
-//             entityTypeId: EnumCrmEntityTypeId.company,
-//             id: needEntityId
-//           }
-//         },
-//         getAssigned: {
-//           method: 'user.get',
-//           params: {
-//             ID: '$result[getCompany][item][assignedById]'
-//           }
-//         }
-//       }
-//
-//       $logger.info('Testing the batch fetch work >> send >>> ', commands)
-//       return $b24.callBatch(
-//         commands,
-//         true
-//       )
-//     })
-//     .then((response: Result) => {
-//       const data: any = response.getData()
-//       $logger.info('Testing the batch fetch work >> response >>> ', data)
-//
-//       const assigned = data.getAssigned[0] as UserBrief | null
-//
-//       let assignedInfo = ''
-//       if (assigned) {
-//         assignedInfo = [
-//           `id: ${assigned.ID}`,
-//           assigned.ACTIVE ? 'active' : 'not active',
-//           assigned.LAST_NAME,
-//           assigned.NAME
-//         ].join(' ')
-//       }
-//
-//       status.value.resultInfo = `entityId: ${data.getCompany.item?.id || '?'}; assigned: ${assignedInfo}`
-//     })
-//     .catch((error: Error | string) => {
-//       result.addError(error)
-//       $logger.error(error)
-//     })
-//     .finally(() => {
-//       stopMakeProcess()
-//     })
-// }
-//
-// const makeOpenSliderForUser = async (userId: number) => {
-//   window.open(
-//     `${b24Domain}/company/personal/user/${userId}/`
-//   )
-//
-//   return Promise.resolve()
-// }
-// // endregion ////
-//
-// // region Error ////
-// const problemMessageList = (result: IResult) => {
-//   let problemMessageList: string[] = []
-//   const problem = result.getErrorMessages()
-//   if (typeof (problem || '') === 'string') {
-//     problemMessageList.push(problem.toString())
-//   } else if (Array.isArray(problem)) {
-//     problemMessageList = problemMessageList.concat(problem)
-//   }
-//
-//   return problemMessageList
-// }
-// // endregion ////
 </script>
 
 <template>
@@ -679,34 +339,18 @@ const makeOpenSliderForUser = (userId: number) => {
         <ProseP>Shows a sample of data.</ProseP>
       </div>
       <div v-show="result.isSuccess" class="basis-1/4">
-        <div
-          v-if="profileData"
-          class="px-lg2 py-sm2 border border-base-100 rounded-lg hover:shadow-md hover:-translate-y-px col-auto md:col-span-2 lg:col-span-1 bg-white cursor-pointer"
-          @click.stop="makeOpenSliderForUser(profileData?.ID || 0)"
-        >
-          <div class="flex items-center gap-4">
-            <B24Avatar
-              :src="profileData?.PERSONAL_PHOTO || ''"
-              :alt="profileData?.LAST_NAME || 'user'"
-            />
-            <div class="font-medium">
-              <div class="text-nowrap text-xs text-base-500 dark:text-base-400">
-                {{ hostName.replace('https://', '') }}
-              </div>
-              <div class="text-nowrap hover:underline text-info-link">
-                {{ [profileData?.LAST_NAME, profileData?.NAME].join(' ') }}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div v-else class="flex items-center justify-between py-sm2 text-info">
-          <SpinnerIcon class="m-auto animate-spin stroke-2 size-10" />
-        </div>
+
       </div>
-      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
-        All sensitive operations are processed on the server side.<br>
-        Scopes: <ProseCode>user_brief</ProseCode>, <ProseCode>crm</ProseCode><br><br>
-        To view query results, open the developer console.
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <div>
+          All sensitive operations are processed on the server side.<br>
+          Scopes: <ProseCode>user_brief</ProseCode>, <ProseCode>crm</ProseCode><br><br>
+          To view query results, open the developer console.
+        </div>
       </B24Advice>
     </div>
     <B24Separator />
@@ -766,18 +410,31 @@ const makeOpenSliderForUser = (userId: number) => {
       </div>
       <div class="flex-1">
         <div class="p-lg2 border border-base-100 rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white">
-          <div>
-            <div class="w-full flex items-center justify-between">
-              <ProseH1>
-                {{ status.title }}
-              </ProseH1>
-              <B24Button
-                :icon="TrashBinIcon"
-                label="Clear console"
-                @click="clearConsole"
-              />
-            </div>
-            <div v-show="status.messages.length > 0" class="mt-2">
+          <B24Advice
+            class="w-full"
+            :b24ui="{ descriptionWrapper: 'w-full' }"
+            :avatar="{ src: profileData?.PERSONAL_PHOTO }"
+          >
+            <div
+              v-if="profileData"
+              class="col-auto md:col-span-2 lg:col-span-1 cursor-pointer"
+              @click.stop="makeOpenSliderForUser(profileData?.ID || 0)"
+            >
+              <div class="w-full flex items-center justify-between">
+                <ProseH1>
+                  {{ status.title }}
+                </ProseH1>
+                <B24Button
+                  color="link"
+                  depth="dark"
+                  size="sm"
+                  rounded
+                  :icon="TrashBinIcon"
+                  label="Clear console"
+                  @click.stop="clearConsole"
+                />
+              </div>
+              <div v-show="status.messages.length > 0" class="mt-2">
               <ProseP
                 v-for="(message, index) in status.messages"
                 :key="index"
@@ -786,6 +443,28 @@ const makeOpenSliderForUser = (userId: number) => {
                 {{ message }}
               </ProseP>
             </div>
+              <B24Separator class="my-4" />
+              <div class="font-medium">
+                <div class="text-nowrap text-xs text-base-500 dark:text-base-400">
+                  {{ hostName.replace('https://', '') }}
+                </div>
+                <div class="text-nowrap hover:underline text-info-link">
+                  {{ [profileData?.LAST_NAME, profileData?.NAME].join(' ') }}
+                </div>
+                <B24Badge
+                  v-if="profileData?.ADMIN"
+                  use-fill
+                  color="danger"
+                  label="Administrator"
+                />
+              </div>
+            </div>
+            <div v-else class="flex items-center justify-between py-sm2 text-info">
+              <SpinnerIcon class="m-auto animate-spin stroke-2 size-10" />
+            </div>
+          </B24Advice>
+          <div>
+
           </div>
           <div class="text-md text-base-900">
             <dl class="divide-y divide-base-100">
@@ -827,7 +506,7 @@ const makeOpenSliderForUser = (userId: number) => {
                 class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
               >
                 <dt class="text-sm font-medium leading-6">
-									&nbsp;
+                  &nbsp;
                 </dt>
                 <dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
                   {{ status.resultInfo }}
@@ -855,6 +534,7 @@ const makeOpenSliderForUser = (userId: number) => {
               </template>
             </B24Progress>
           </div>
+
         </div>
         <B24Alert
           v-show="!result.isSuccess"

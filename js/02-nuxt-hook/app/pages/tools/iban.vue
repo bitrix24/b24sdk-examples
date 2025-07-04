@@ -33,7 +33,11 @@ const listCases = ref([
         </ProseH1>
         <ProseP>IBAN formatting demonstration.</ProseP>
       </div>
-      <B24Advice :avatar="{ src: '/avatar/assistant.png' }">
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
         Hm..
       </B24Advice>
     </div>

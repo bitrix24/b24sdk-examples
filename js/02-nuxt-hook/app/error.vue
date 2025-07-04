@@ -7,10 +7,13 @@ const $props = defineProps({
   error: Object as () => NuxtError
 })
 
+const errorBase = useError()
+console.error(errorBase.value)
+
 const errorData = ref({
   code: $props.error?.statusCode || 400,
   title: $props.error?.statusMessage || 'Error',
-  description: ($props.error?.data as any)?.description || '',
+  description: ($props.error?.data as any)?.description || errorBase?.value?.message || '',
   clearErrorIsShow: ($props.error?.data as any)?.isShowClearError === true,
   clearErrorHref: ($props.error?.data as any)?.clearErrorHref || '/',
   clearErrorTitle: ($props.error?.data as any)?.clearErrorTitle || 'Clear errors',

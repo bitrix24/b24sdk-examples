@@ -14,13 +14,22 @@ export default defineEventHandler(async () => {
   $b24.setLogger($logger)
 
   try {
-    const profile = await $b24.callMethod('user.current')
+    const response = await $b24.callBatch({
+      currentUser: { method: 'user.current' },
+      profile: { method: 'profile' }
+    })
 
-    $logger.log(profile.getData().result)
+    const data = response.getData()
+    $logger.log(data)
 
     return {
       success: true,
-      profile: { ...(profile.getData().result || {}) } as UserProfile,
+      profile: {
+        ...(data.currentUser || {}),
+        ...({
+          ADMIN: (data.profile || {}).ADMIN
+        })
+      } as UserProfile,
       hostName: $b24.getTargetOrigin()
     } as ProfileResponse
   } catch (error: any) {

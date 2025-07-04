@@ -8,6 +8,9 @@ import HomeIcon from '@bitrix24/b24icons-vue/outline/HomeIcon'
 const colorMode = useColorMode()
 
 useHead({
+  htmlAttrs: {
+    class: 'scrollbar-transparent'
+  },
   bodyAttrs: {
     class: 'text-base-master dark:text-base-150 bg-base-50 dark:bg-base-dark font-b24-system antialiased'
   }
