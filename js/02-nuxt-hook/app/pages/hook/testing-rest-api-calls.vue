@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue'
 import { DateTime, Interval } from 'luxon'
-import { B24LangList, LoggerBrowser, useFormatter } from '@bitrix24/b24jssdk'
+import { B24LangList, useFormatter } from '@bitrix24/b24jssdk'
 import SendIcon from '@bitrix24/b24icons-vue/main/SendIcon'
 import ParallelQueueIcon from '@bitrix24/b24icons-vue/main/ParallelQueueIcon'
 import SequentialQueueIcon from '@bitrix24/b24icons-vue/main/SequentialQueueIcon'
@@ -338,9 +338,6 @@ const makeOpenSliderForUser = (userId: number) => {
         </ProseH1>
         <ProseP>Shows a sample of data.</ProseP>
       </div>
-      <div v-show="result.isSuccess" class="basis-1/4">
-
-      </div>
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
@@ -435,14 +432,14 @@ const makeOpenSliderForUser = (userId: number) => {
                 />
               </div>
               <div v-show="status.messages.length > 0" class="mt-2">
-              <ProseP
-                v-for="(message, index) in status.messages"
-                :key="index"
-                class="w-full text-sm text-base-500"
-              >
-                {{ message }}
-              </ProseP>
-            </div>
+                <ProseP
+                  v-for="(message, index) in status.messages"
+                  :key="index"
+                  class="w-full text-sm text-base-500"
+                >
+                  {{ message }}
+                </ProseP>
+              </div>
               <B24Separator class="my-4" />
               <div class="font-medium">
                 <div class="text-nowrap text-xs text-base-500 dark:text-base-400">
@@ -463,9 +460,6 @@ const makeOpenSliderForUser = (userId: number) => {
               <SpinnerIcon class="m-auto animate-spin stroke-2 size-10" />
             </div>
           </B24Advice>
-          <div>
-
-          </div>
           <div class="text-md text-base-900">
             <dl class="divide-y divide-base-100">
               <div
@@ -534,7 +528,6 @@ const makeOpenSliderForUser = (userId: number) => {
               </template>
             </B24Progress>
           </div>
-
         </div>
         <B24Alert
           v-show="!result.isSuccess"
