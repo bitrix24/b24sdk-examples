@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, type Ref, type ComputedRef } from 'vue'
-import { LoggerBrowser, LoggerType } from '@bitrix24/b24jssdk'
+import { LoggerType } from '@bitrix24/b24jssdk'
 import TrashBinIcon from '@bitrix24/b24icons-vue/main/TrashBinIcon'
 import SendIcon from '@bitrix24/b24icons-vue/main/SendIcon'
 

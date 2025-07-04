@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { DateTime } from 'luxon'
 import { ref, reactive, computed } from 'vue'
-import { LoggerBrowser, B24LangList } from '@bitrix24/b24jssdk'
+import { B24LangList } from '@bitrix24/b24jssdk'
 import Search1Icon from '@bitrix24/b24icons-vue/main/Search1Icon'
 import AlertIcon from '@bitrix24/b24icons-vue/button/AlertIcon'
 import FileDownloadIcon from '@bitrix24/b24icons-vue/main/FileDownloadIcon'

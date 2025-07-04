@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Result, LoggerBrowser } from '@bitrix24/b24jssdk'
+import { Result } from '@bitrix24/b24jssdk'
 
 useHead({
   title: 'Result'
