@@ -9,10 +9,12 @@ interface UserProfile {
   PERSONAL_PHOTO: string
 }
 
-interface Company {
+interface Entity {
   id: number
   title: string
   createdTime: DateTime
+}
+interface Company extends Entity {
   detailUrl: string
 }
 
