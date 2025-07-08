@@ -36,6 +36,10 @@ const pages = computed<NavigationMenuItem[]>(() => {
       to: '/hook/testing-rest-api-calls'
     },
     {
+      label: 'Testing Contacts and Companies',
+      to: '/hook/testing-contacts-companies'
+    },
+    {
       label: 'LoggerBrowser',
       to: '/tools/use-logger'
     },
