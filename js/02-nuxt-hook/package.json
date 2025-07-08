@@ -5,8 +5,8 @@
   "packageManager": "pnpm@10.12.4",
   "type": "module",
   "scripts": {
-    "dev": "nuxi dev",
-    "build": "nuxi build",
+    "dev": "nuxt dev",
+    "build": "nuxt build",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
@@ -26,5 +26,11 @@
     "@nuxt/eslint": "^1.5.2",
     "eslint": "^9.30.1",
     "typescript": "^5.8.3"
+  },
+  "dd_resolutions": {
+    "@bitrix24/b24jssdk": "0.4.4"
+  },
+  "resolutions": {
+    "nuxt": "3.17.5"
   }
 }
