@@ -1,18 +1,21 @@
 services:
-    _defaults:
-      autowire: true
-      autoconfigure: false
-      public: true
+  _defaults:
+    autowire: true
+    autoconfigure: false
+    public: true
 
-    App\LoggerFactory:
-      public: true
+  App\LoggerFactory:
+    public: true
 
-    App\Commands\DataGeneratorCommand:
-      public: true
-    App\Commands\ImportDataCommand:
-      public: true
+  App\Commands\DataGeneratorCommand:
+    public: true
+  App\Commands\ImportDataCommand:
+    public: true
+  App\Commands\ExportDataCommand:
+    public: true
 
-    Psr\Log\LoggerInterface:
-      class: App\LoggerFactory
-      autowire: true
-      factory: [ '@App\LoggerFactory', 'create' ]
+
+  Psr\Log\LoggerInterface:
+    class: App\LoggerFactory
+    autowire: true
+    factory: [ '@App\LoggerFactory', 'create' ]

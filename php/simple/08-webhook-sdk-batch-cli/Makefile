@@ -36,19 +36,19 @@ help:
 	@echo "05 — add linters for check source code      "
 	@echo "--------------------------------------------"
 	@echo ""
-	@echo "🐳 Work with application containers:"
+	@echo "🐳 Work with application containers"
 	@echo "docker-build               - build containers"
 	@echo "docker-up                  - run docker"
 	@echo "docker-down                - stop docker"
 	@echo "docker-down-clear          - stop docker and remove orphaned containers"
 	@echo ""
-	@echo "📦 Work with composer:"
+	@echo "📦 Work with composer"
 	@echo "composer-install           - install dependencies from composer"
 	@echo "composer-update            - update dependencies from composer"
 	@echo "composer-dumpautoload      - regenerate composer autoload file"
 	@echo "composer                   - run composer and pass arguments"
 	@echo ""
-	@echo "👮 Work with linters and checks:"
+	@echo "👮 Work with linters and checks"
 	@echo "lint-allowed-licenses      - check dependencies for white-list licenses"
 	@echo "lint-cs-fixer              - check source code with PHP CS Fixer"
 	@echo "lint-cs-fixer-fix          - 🪄 fix source code with PHP CS Fixer"
@@ -56,10 +56,10 @@ help:
 	@echo "lint-rector                - check source code with Rector"
 	@echo "lint-rector-fix            - 🪄 fix source code with Rector"
 	@echo ""
-	@echo "php-cli-bash               - run container php-cli and open shell with arguments"
-	@echo ""
-	@echo "🚀 Work with application:"
-	@echo "php-cli-generate-demo-data - run container php-cli and run console script"
+	@echo "🚀 Work with application"
+	@echo "php-cli-generate-demo-data - run container php-cli and generate demo data"
+	@echo "php-cli-import             - run container php-cli and import data to bitrix24"
+	@echo "php-cli-export             - run container php-cli and export data from bitrix24"
 	@echo "php-cli-bash               - run container php-cli and open shell with arguments"
 	@echo ""
 	@echo "🎓 Examples"
@@ -89,10 +89,6 @@ docker-down:
 .PHONY: docker-down-clear
 docker-down-clear:
 	$(DOCKER_COMPOSE) down --volumes --remove-orphans
-
-.PHONY: php-cli-bash
-php-cli-bash:
-	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: composer-install
 composer-install:
@@ -138,6 +134,11 @@ lint-rector:
 lint-rector-fix:
 	docker-compose run --rm php-cli vendor/bin/rector process
 
+# application
+.PHONY: php-cli-bash
+php-cli-bash:
+	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
+
 .PHONY: php-cli-generate-demo-data
 php-cli-generate-demo-data:
 	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:data-generator
@@ -145,3 +146,7 @@ php-cli-generate-demo-data:
 .PHONY: php-cli-import
 php-cli-import:
 	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:import-data
+
+.PHONY: php-cli-export
+php-cli-export:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:export-data

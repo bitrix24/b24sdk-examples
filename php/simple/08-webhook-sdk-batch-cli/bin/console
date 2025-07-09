@@ -11,6 +11,7 @@
  */
 
 use App\Commands\DataGeneratorCommand;
+use App\Commands\ExportDataCommand;
 use App\Commands\ImportDataCommand;
 use App\DI\DI;
 use Symfony\Component\Console\Application;
@@ -52,4 +53,5 @@ if ($_SERVER['APP_DEBUG']) {
 $application = new Application();
 $application->add(DI::get(DataGeneratorCommand::class));
 $application->add(DI::get(ImportDataCommand::class));
+$application->add(DI::get(ExportDataCommand::class));
 $application->run($input);
