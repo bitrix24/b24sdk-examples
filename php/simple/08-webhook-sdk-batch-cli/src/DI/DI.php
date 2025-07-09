@@ -23,7 +23,8 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 class DI
 {
     private static self $instance;
-    private ContainerBuilder $container;
+
+    private readonly ContainerBuilder $container;
 
     /**
      * @throws Exception
@@ -32,15 +33,15 @@ class DI
     {
         $container = new ContainerBuilder();
         $fileLocator = new FileLocator(dirname(__DIR__, 2) . '/config');
-        $loader = new YamlFileLoader($container, $fileLocator);
-        $loader->load('services.yaml');
+        $yamlFileLoader = new YamlFileLoader($container, $fileLocator);
+        $yamlFileLoader->load('services.yaml');
+
         $container->compile();
         $this->container = $container;
     }
 
     /**
      * @param non-empty-string $id
-     * @return mixed
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      * @throws Exception

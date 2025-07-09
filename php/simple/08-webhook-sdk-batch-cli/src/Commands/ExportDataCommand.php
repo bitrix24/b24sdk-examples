@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the b24sdk-examples package.
  *
@@ -46,13 +47,13 @@ class ExportDataCommand extends Command
 
         $output->writeln('Start export demo data from Bitrix24...');
 
-        $b24Service = ServiceBuilderFactory::createServiceBuilderFromWebhook(
+        $serviceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
             null,
             $this->logger
         );
 
-        $contactsInCrmCount = $b24Service->getCRMScope()->contact()->countByFilter();
+        $contactsInCrmCount = $serviceBuilder->getCRMScope()->contact()->countByFilter();
         if ($contactsInCrmCount < 3000) {
             $output->writeln([
                 '<warning>Contacts count in CRM is less than 3000, export will be aborted</warning>',
@@ -90,7 +91,7 @@ class ExportDataCommand extends Command
         $progressBar->start();
         // batch call to bitrix24, data read with 2500 elements per one api-call
         foreach (
-            $b24Service->getCRMScope()->contact()->batch->list(
+            $serviceBuilder->getCRMScope()->contact()->batch->list(
                 [],
                 [],
                 ['ID', 'NAME', 'SECOND_NAME', 'PHONE', 'EMAIL'],
@@ -109,6 +110,7 @@ class ExportDataCommand extends Command
             ]);
             $progressBar->advance();
         }
+
         $progressBar->finish();
         $output->writeln(
             [

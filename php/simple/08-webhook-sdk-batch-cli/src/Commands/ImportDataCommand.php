@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the b24sdk-examples package.
  *
@@ -48,16 +49,17 @@ class ImportDataCommand extends Command
 
         $output->writeln('Start import demo data to Bitrix24...');
 
-        $b24Service = ServiceBuilderFactory::createServiceBuilderFromWebhook(
+        $serviceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
             null,
             $this->logger
         );
 
         $filename = '/var/tmp/demo-data.csv';
-        $fs = new Filesystem();
-        if (!$fs->exists($filename)) {
-            $output->writeln([
+        $filesystem = new Filesystem();
+        if (!$filesystem->exists($filename)) {
+            $output->writeln(
+                [
                     '',
                     sprintf(
                         '<error>file «%s» not found, you must call «make php-cli-generate-demo-data»</error>',
@@ -67,27 +69,34 @@ class ImportDataCommand extends Command
                 ]
             );
         }
+
         // read data from file
         $reader = Reader::createFromPath($filename, 'r');
         $reader->setHeaderOffset(0);
+
         $records = $reader->getRecords();
 
         // convert flat row to bitrix24 contact data structure
         $b24Contacts = [];
-        foreach ($records as $fileRow) {
+        foreach ($records as $record) {
             $b24Contacts[] = [
-                'NAME' => $fileRow['name'],
-                'SECOND_NAME' => $fileRow['second_name'],
+                'NAME' => $record['name'],
+                'SECOND_NAME' => $record['second_name'],
                 'EMAIL' => [
-                    'VALUE' => $fileRow['email'],
-                    'VALUE_TYPE' => EmailValueType::work
+                    [
+                        'VALUE' => $record['email'],
+                        'VALUE_TYPE' => EmailValueType::work->value
+                    ]
                 ],
                 'PHONE' => [
-                    'VALUE' => $fileRow['phone'],
-                    'VALUE_TYPE' => PhoneValueType::work
+                    [
+                        'VALUE' => $record['phone'],
+                        'VALUE_TYPE' => PhoneValueType::work->value
+                    ]
                 ]
             ];
         }
+
         // add contacts to bitrix24 via batch call
         $output->writeln(['start adding contacts to Bitrix24 via batch call...', '']);
         ProgressBar::setFormatDefinition(
@@ -99,10 +108,18 @@ class ImportDataCommand extends Command
         $progressBar->setMessage('wait for first batch call response...');
         $progressBar->start();
         // batch call crm.contact.add with 50 elements per one api-call
-        foreach ($b24Service->getCRMScope()->contact()->batch->add($b24Contacts) as $addContactResult) {
-            $progressBar->setMessage(sprintf('last added contact id - %s', $addContactResult->getId()));
+        foreach ($serviceBuilder->getCRMScope()->contact()->batch->add($b24Contacts) as $addContactResult) {
+            $progressBar->setMessage(
+                sprintf(
+                    'last added contact id - %s | operating - %s seconds',
+                    $addContactResult->getId(),
+                    // see https://apidocs.bitrix24.com/limits.html
+                    round($addContactResult->getResponseData()->getTime()->operating, 2)
+                )
+            );
             $progressBar->advance();
         }
+
         $progressBar->finish();
         $output->writeln(['', '<info>Contacts successfully added to Bitrix24 </info>']);
 

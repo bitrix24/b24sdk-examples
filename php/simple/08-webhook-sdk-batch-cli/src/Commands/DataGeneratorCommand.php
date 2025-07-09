@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the b24sdk-examples package.
  *
@@ -47,21 +48,23 @@ class DataGeneratorCommand extends Command
         $filename = '/var/tmp/demo-data.csv';
         $demoContactsCount = 7000;
 
-        $faker = Faker\Factory::create('en_EN');
+        $generator = Faker\Factory::create('en_EN');
         $writer = Writer::createFromPath($filename, 'w+');
         $writer->insertOne(['name', 'second_name', 'phone', 'email']);
 
         $items = [];
         for ($i = 0; $i < $demoContactsCount; $i++) {
             $items[] = [
-                $faker->firstName(),
-                $faker->lastName(),
-                $faker->e164PhoneNumber(),
-                $faker->email()
+                $generator->firstName(),
+                $generator->lastName(),
+                $generator->e164PhoneNumber(),
+                $generator->email()
             ];
         }
+
         $writer->insertAll($items);
-        $output->writeln([
+        $output->writeln(
+            [
                 '',
                 sprintf(
                     '<info>Successfully generated %s demo-contacts and saved in «volumes» folder</info>',
