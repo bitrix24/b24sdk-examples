@@ -22,6 +22,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'b24:export-data',
@@ -30,6 +31,23 @@ use Symfony\Component\Console\Output\OutputInterface;
 )]
 class ExportDataCommand extends Command
 {
+    private bool $isShouldStopWork = false;
+
+    public function getSubscribedSignals(): array
+    {
+        return [
+            SIGINT, // Interrupt
+            SIGTERM // Terminate
+        ];
+    }
+
+    public function handleSignal(int $signal, int|false $previousExitCode = 0): false|int
+    {
+        $this->isShouldStopWork = true;
+
+        return parent::handleSignal($signal, $previousExitCode);
+    }
+
     public function __construct(
         private readonly LoggerInterface $logger
     ) {
@@ -42,8 +60,9 @@ class ExportDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.ExportDataCommand.start');
+        $io = new SymfonyStyle($input, $output);
 
-        $output->writeln('Start export demo data from Bitrix24...');
+        $io->writeln('Start export demo data from Bitrix24...');
 
         $serviceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -53,25 +72,15 @@ class ExportDataCommand extends Command
 
         $contactsInCrmCount = $serviceBuilder->getCRMScope()->contact()->countByFilter();
         if ($contactsInCrmCount < 3000) {
-            $output->writeln([
-                '<warning>Contacts count in CRM is less than 3000, export will be aborted</warning>',
+            $io->warning([
+                'Contacts count in CRM is less than 3000, export will be aborted',
                 'use command "b24:import-data" to import more demo data',
             ]);
 
             return self::SUCCESS;
         }
 
-        $output->writeln(
-            [
-                '',
-                sprintf(
-                    'contacts count in CRM - %s items',
-                    $contactsInCrmCount
-                ),
-                ''
-            ]
-        );
-
+        $io->info(sprintf('contacts count in CRM - %s items', $contactsInCrmCount));
         $exportFilename = sprintf('/var/tmp/b24export-%s.csv', (new DateTime())->format('Y-m-d-H-i-s'));
         $writer = Writer::createFromPath(
             $exportFilename,
@@ -96,8 +105,14 @@ class ExportDataCommand extends Command
                 $contactsInCrmCount
             ) as $contact
         ) {
-            $progressBar->setMessage(sprintf('last exported contact id - %s', $contact->ID));
+            // process POSIX signals and gracefully shutdown long-running task
+            if ($this->isShouldStopWork) {
+                $io->caution('Process interrupted, try to gracefully shutdown long-running task...');
 
+                return self::FAILURE;
+            }
+
+            $progressBar->setMessage(sprintf('last exported contact id - %s', $contact->ID));
             $writer->insertOne([
                 $contact->ID,
                 $contact->NAME,
@@ -110,13 +125,7 @@ class ExportDataCommand extends Command
         }
 
         $progressBar->finish();
-        $output->writeln(
-            [
-                '',
-                '<info>Contacts successfully exported from Bitrix24 to «volumes» folder</info>',
-                ''
-            ]
-        );
+        $io->info('Contacts successfully exported from Bitrix24 to «volumes» folder');
 
         $this->logger->debug('Command.ExportDataCommand.finish');
 

@@ -53,7 +53,7 @@ class ImportDataCommand extends Command
     public function __construct(
         private readonly LoggerInterface $logger
     ) {
-        // best practices recommend to call the parent constructor first and
+        // best practices recommend calling the parent constructor first and
         // then set your own properties. That wouldn't work in this case
         // because configure() needs the properties set in this constructor
         parent::__construct();
@@ -113,10 +113,12 @@ class ImportDataCommand extends Command
         $progressBar->setFormat('custom');
         $progressBar->setMessage('wait for first batch call response...');
         $progressBar->start();
+
         // batch call crm.contact.add with 50 elements per one api-call
         foreach ($serviceBuilder->getCRMScope()->contact()->batch->add($b24Contacts) as $addContactResult) {
+            // process POSIX signals and gracefully shutdown long-running task
             if ($this->isShouldStopWork) {
-                $io->caution('Process interrupted, try to gracefully shutdown...');
+                $io->caution('Process interrupted, try to gracefully shutdown long-running task...');
 
                 return self::FAILURE;
             }
