@@ -6,12 +6,17 @@ Call REST-API for education purposes.
 
 ## Folder structure
 ```
+  bin                      - executable applications
+    console                - application entrypoint
+  config                   - config folder
+    services.yaml          - DI config  
   docker                   - docker contatainers
     php-cli                - default php-cli container
   src                      - source code
   var                      - source code
     logs                   - directory with application logs on host machine
   vendor                   - folder with dependencies from composer.json
+  volumes                  - folder with demo data
   .allowed-licenses.php    - allowed licenses for composer dependencies
   .env                     - environment variables
   .env.local               - uncommitted file with local overrides  

@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
+use Carbon\CarbonImmutable;
+use DateTimeImmutable;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -123,12 +125,31 @@ class ImportDataCommand extends Command
                 return self::FAILURE;
             }
 
+            // Process throttling information from bitrix24 api
+            // see https://apidocs.bitrix24.com/limits.html
+            $operatingThreshold = 400;
+            $operatingWaitTimeout = 60;
+            $currentOperatingValue = round($addContactResult->getResponseData()->getTime()->operating);
+            $operatingResetAt = CarbonImmutable::createFromTimestamp($addContactResult->getResponseData()->getTime()->operatingResetAt);
+            $operatingWait = round($operatingResetAt->diffInSeconds(CarbonImmutable::now()));
+            if ($currentOperatingValue > $operatingThreshold) {
+                $io->writeln(['', '', sprintf('Your operating value is too high - %s!', $currentOperatingValue)]);
+                $io->info(sprintf('We must wait for %s seconds before next batch call...', $operatingWaitTimeout));
+
+                $start = time();
+                while ((time() - $start) < $operatingWaitTimeout) {
+                    $io->write(sprintf("\rWaiting... %d seconds remaining ", $operatingWaitTimeout - (time() - $start)));
+                    usleep(200000);
+                }
+                $io->write("\r");
+            }
+
             $progressBar->setMessage(
                 sprintf(
-                    'last added contact id - %s | operating - %s seconds',
+                    'last added contact id - %s | operating - %s seconds, reset after %s seconds',
                     $addContactResult->getId(),
-                    // see https://apidocs.bitrix24.com/limits.html
-                    round($addContactResult->getResponseData()->getTime()->operating, 2)
+                    $currentOperatingValue,
+                    $operatingWait
                 )
             );
             $progressBar->advance();
