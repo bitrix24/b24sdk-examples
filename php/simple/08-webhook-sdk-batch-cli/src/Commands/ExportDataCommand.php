@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-require_once 'vendor/autoload.php';
-
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use DateTime;
 use League\Csv\Writer;

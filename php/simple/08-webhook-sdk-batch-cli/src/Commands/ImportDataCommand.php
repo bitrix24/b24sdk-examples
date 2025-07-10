@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-require_once 'vendor/autoload.php';
-
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -23,6 +21,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use League\Csv\Reader;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
 use Bitrix24\SDK\Services\CRM\Common\Result\SystemFields\Types\EmailValueType;
 use Bitrix24\SDK\Services\CRM\Common\Result\SystemFields\Types\PhoneValueType;
@@ -34,6 +33,23 @@ use Bitrix24\SDK\Services\CRM\Common\Result\SystemFields\Types\PhoneValueType;
 )]
 class ImportDataCommand extends Command
 {
+    private bool $isShouldStopWork = false;
+
+    public function getSubscribedSignals(): array
+    {
+        return [
+            SIGINT, // Interrupt
+            SIGTERM // Terminate
+        ];
+    }
+
+    public function handleSignal(int $signal, int|false $previousExitCode = 0): false|int
+    {
+        $this->isShouldStopWork = true;
+
+        return parent::handleSignal($signal, $previousExitCode);
+    }
+
     public function __construct(
         private readonly LoggerInterface $logger
     ) {
@@ -46,8 +62,7 @@ class ImportDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.ImportDataCommand.start');
-
-        $output->writeln('Start import demo data to Bitrix24...');
+        $io = new SymfonyStyle($input, $output);
 
         $serviceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -58,27 +73,18 @@ class ImportDataCommand extends Command
         $filename = '/var/tmp/demo-data.csv';
         $filesystem = new Filesystem();
         if (!$filesystem->exists($filename)) {
-            $output->writeln(
-                [
-                    '',
-                    sprintf(
-                        '<error>file «%s» not found, you must call «make php-cli-generate-demo-data»</error>',
-                        $filename
-                    ),
-                    ''
-                ]
-            );
+            $io->error(sprintf('file «%s» not found in folder «volumes», you must call «make php-cli-generate-demo-data»', basename($filename)));
+            return self::FAILURE;
         }
 
-        // read data from file
         $reader = Reader::createFromPath($filename, 'r');
         $reader->setHeaderOffset(0);
-
         $records = $reader->getRecords();
-
         // convert flat row to bitrix24 contact data structure
         $b24Contacts = [];
+        // read data from a file into memory
         foreach ($records as $record) {
+            // accumulate data into array
             $b24Contacts[] = [
                 'NAME' => $record['name'],
                 'SECOND_NAME' => $record['second_name'],
@@ -98,7 +104,7 @@ class ImportDataCommand extends Command
         }
 
         // add contacts to bitrix24 via batch call
-        $output->writeln(['start adding contacts to Bitrix24 via batch call...', '']);
+        $io->writeln(['Start adding contacts to Bitrix24 via batch call...', '']);
         ProgressBar::setFormatDefinition(
             'custom',
             " %message%\n%current%/%max% [%bar%] %percent:3s%% \n  %elapsed:6s%/%estimated:-6s% %memory:6s%"
@@ -109,6 +115,12 @@ class ImportDataCommand extends Command
         $progressBar->start();
         // batch call crm.contact.add with 50 elements per one api-call
         foreach ($serviceBuilder->getCRMScope()->contact()->batch->add($b24Contacts) as $addContactResult) {
+            if ($this->isShouldStopWork) {
+                $io->caution('Process interrupted, try to gracefully shutdown...');
+
+                return self::FAILURE;
+            }
+
             $progressBar->setMessage(
                 sprintf(
                     'last added contact id - %s | operating - %s seconds',

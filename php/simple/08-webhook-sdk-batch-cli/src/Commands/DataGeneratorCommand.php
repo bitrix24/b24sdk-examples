@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-require_once 'vendor/autoload.php';
-
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
