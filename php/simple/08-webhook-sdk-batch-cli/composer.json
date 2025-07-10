@@ -1,0 +1,42 @@
+{
+  "name": "b24sdk-examples/b24phpsdk-batch-cli-example",
+  "description": "Example for work with bitrix24-php-sdk with batch and cli",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maksim Mesilov",
+      "email": "mesilov.maxim@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "src"
+    }
+  },
+  "require": {
+    "bitrix24/b24phpsdk": "dev-dev",
+    "monolog/monolog": "^3",
+    "symfony/console": "^7.3",
+    "symfony/config": "^7.3",
+    "symfony/filesystem": "^7.3",
+    "symfony/dependency-injection": "^7.3",
+    "symfony/yaml": "^7.3",
+    "league/csv": "9.*",
+    "fakerphp/faker": "1.23.*"
+  },
+  "require-dev": {
+    "symfony/debug-bundle": "^7.3",
+    "ergebnis/composer-normalize": "^2",
+    "lendable/composer-license-checker": "^1",
+    "roave/security-advisories": "dev-latest",
+    "phpstan/phpstan": "2.*",
+    "rector/rector": "2.*",
+    "friendsofphp/php-cs-fixer": "*"
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
+  }
+}
