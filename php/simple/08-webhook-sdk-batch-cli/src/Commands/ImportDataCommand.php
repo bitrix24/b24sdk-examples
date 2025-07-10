@@ -37,6 +37,7 @@ class ImportDataCommand extends Command
 {
     private bool $isShouldStopWork = false;
 
+    #[\Override]
     public function getSubscribedSignals(): array
     {
         return [
@@ -45,6 +46,7 @@ class ImportDataCommand extends Command
         ];
     }
 
+    #[\Override]
     public function handleSignal(int $signal, int|false $previousExitCode = 0): false|int
     {
         $this->isShouldStopWork = true;
@@ -64,7 +66,7 @@ class ImportDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.ImportDataCommand.start');
-        $io = new SymfonyStyle($input, $output);
+        $symfonyStyle = new SymfonyStyle($input, $output);
 
         $serviceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -75,12 +77,13 @@ class ImportDataCommand extends Command
         $filename = '/var/tmp/demo-data.csv';
         $filesystem = new Filesystem();
         if (!$filesystem->exists($filename)) {
-            $io->error(sprintf('file «%s» not found in folder «volumes», you must call «make php-cli-generate-demo-data»', basename($filename)));
+            $symfonyStyle->error(sprintf('file «%s» not found in folder «volumes», you must call «make php-cli-generate-demo-data»', basename($filename)));
             return self::FAILURE;
         }
 
         $reader = Reader::createFromPath($filename, 'r');
         $reader->setHeaderOffset(0);
+
         $records = $reader->getRecords();
         // convert flat row to bitrix24 contact data structure
         $b24Contacts = [];
@@ -106,7 +109,7 @@ class ImportDataCommand extends Command
         }
 
         // add contacts to bitrix24 via batch call
-        $io->writeln(['Start adding contacts to Bitrix24 via batch call...', '']);
+        $symfonyStyle->writeln(['Start adding contacts to Bitrix24 via batch call...', '']);
         ProgressBar::setFormatDefinition(
             'custom',
             " %message%\n%current%/%max% [%bar%] %percent:3s%% \n  %elapsed:6s%/%estimated:-6s% %memory:6s%"
@@ -120,38 +123,45 @@ class ImportDataCommand extends Command
         foreach ($serviceBuilder->getCRMScope()->contact()->batch->add($b24Contacts) as $addContactResult) {
             // process POSIX signals and gracefully shutdown long-running task
             if ($this->isShouldStopWork) {
-                $io->caution('Process interrupted, try to gracefully shutdown long-running task...');
+                $symfonyStyle->caution('Process interrupted, try to gracefully shutdown long-running task...');
 
                 return self::FAILURE;
             }
 
             // Process throttling information from bitrix24 api
-            // see https://apidocs.bitrix24.com/limits.html
-            $operatingThreshold = 400;
-            $operatingWaitTimeout = 60;
-            $currentOperatingValue = round($addContactResult->getResponseData()->getTime()->operating);
-            $operatingResetAt = CarbonImmutable::createFromTimestamp($addContactResult->getResponseData()->getTime()->operatingResetAt);
-            $operatingWait = round($operatingResetAt->diffInSeconds(CarbonImmutable::now()));
-            if ($currentOperatingValue > $operatingThreshold) {
-                $io->writeln(['', '', sprintf('Your operating value is too high - %s!', $currentOperatingValue)]);
-                $io->info(sprintf('We must wait for %s seconds before next batch call...', $operatingWaitTimeout));
+            if ($addContactResult->getResponseData()->getTime()->operatingResetAt !== null &&
+                $addContactResult->getResponseData()->getTime()->operating !== null) {
+                // see https://apidocs.bitrix24.com/limits.html
+                $operatingThreshold = 400;
+                $operatingWaitTimeout = 60;
+                $currentOperatingValue = round($addContactResult->getResponseData()->getTime()->operating);
+                $operatingResetAt = CarbonImmutable::createFromTimestamp($addContactResult->getResponseData()->getTime()->operatingResetAt);
+                $operatingWait = round($operatingResetAt->diffInSeconds(CarbonImmutable::now()));
+                if ($currentOperatingValue > $operatingThreshold) {
+                    $symfonyStyle->writeln(['', '', sprintf('Your operating value is too high - %s!', $currentOperatingValue)]);
+                    $symfonyStyle->info(sprintf('We must wait for %s seconds before next batch call...', $operatingWaitTimeout));
 
-                $start = time();
-                while ((time() - $start) < $operatingWaitTimeout) {
-                    $io->write(sprintf("\rWaiting... %d seconds remaining ", $operatingWaitTimeout - (time() - $start)));
-                    usleep(200000);
+                    $start = time();
+                    while ((time() - $start) < $operatingWaitTimeout) {
+                        $symfonyStyle->write(sprintf("\rWaiting... %d seconds remaining ", $operatingWaitTimeout - (time() - $start)));
+                        usleep(200000);
+                    }
+
+                    $symfonyStyle->write("\r");
                 }
-                $io->write("\r");
+
+                $progressBar->setMessage(
+                    sprintf(
+                        'last added contact id - %s | operating - %s seconds, reset after %s seconds',
+                        $addContactResult->getId(),
+                        $currentOperatingValue,
+                        $operatingWait
+                    )
+                );
+            } else {
+                $progressBar->setMessage(sprintf('last added contact id - %s', $addContactResult->getId()));
             }
 
-            $progressBar->setMessage(
-                sprintf(
-                    'last added contact id - %s | operating - %s seconds, reset after %s seconds',
-                    $addContactResult->getId(),
-                    $currentOperatingValue,
-                    $operatingWait
-                )
-            );
             $progressBar->advance();
         }
 

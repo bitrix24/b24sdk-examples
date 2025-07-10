@@ -33,6 +33,7 @@ class ExportDataCommand extends Command
 {
     private bool $isShouldStopWork = false;
 
+    #[\Override]
     public function getSubscribedSignals(): array
     {
         return [
@@ -41,6 +42,7 @@ class ExportDataCommand extends Command
         ];
     }
 
+    #[\Override]
     public function handleSignal(int $signal, int|false $previousExitCode = 0): false|int
     {
         $this->isShouldStopWork = true;
@@ -60,9 +62,9 @@ class ExportDataCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.ExportDataCommand.start');
-        $io = new SymfonyStyle($input, $output);
+        $symfonyStyle = new SymfonyStyle($input, $output);
 
-        $io->writeln('Start export demo data from Bitrix24...');
+        $symfonyStyle->writeln('Start export demo data from Bitrix24...');
 
         $serviceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -72,7 +74,7 @@ class ExportDataCommand extends Command
 
         $contactsInCrmCount = $serviceBuilder->getCRMScope()->contact()->countByFilter();
         if ($contactsInCrmCount < 3000) {
-            $io->warning([
+            $symfonyStyle->warning([
                 'Contacts count in CRM is less than 3000, export will be aborted',
                 'use command "b24:import-data" to import more demo data',
             ]);
@@ -80,7 +82,7 @@ class ExportDataCommand extends Command
             return self::SUCCESS;
         }
 
-        $io->info(sprintf('contacts count in CRM - %s items', $contactsInCrmCount));
+        $symfonyStyle->info(sprintf('contacts count in CRM - %s items', $contactsInCrmCount));
         $exportFilename = sprintf('/var/tmp/b24export-%s.csv', (new DateTime())->format('Y-m-d-H-i-s'));
         $writer = Writer::createFromPath(
             $exportFilename,
@@ -107,7 +109,7 @@ class ExportDataCommand extends Command
         ) {
             // process POSIX signals and gracefully shutdown long-running task
             if ($this->isShouldStopWork) {
-                $io->caution('Process interrupted, try to gracefully shutdown long-running task...');
+                $symfonyStyle->caution('Process interrupted, try to gracefully shutdown long-running task...');
 
                 return self::FAILURE;
             }
@@ -125,7 +127,7 @@ class ExportDataCommand extends Command
         }
 
         $progressBar->finish();
-        $io->info('Contacts successfully exported from Bitrix24 to «volumes» folder');
+        $symfonyStyle->info('Contacts successfully exported from Bitrix24 to «volumes» folder');
 
         $this->logger->debug('Command.ExportDataCommand.finish');
 
