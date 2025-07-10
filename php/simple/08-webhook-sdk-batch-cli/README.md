@@ -47,24 +47,73 @@ See makefile, section «Work with linters and checks»
 ## How to work with example
 
 1. Add webhook url in new file `.env.local`
+
 ```
 BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL=https://your-bitrix24-portal-url
 ```
+
 2. See all available commands in a make file
+
 ```shell
 make
 ```
+
 3. Build docker containers
+
 ```shell
 make docker-build
 ```
+
 4. Install dependencies from composer
+
 ```shell
 make composer-install
 ```
 
 5. Enter into docker container `php-cli` and run example
+
 ```shell
 make php-cli-bash
-php -f src/etl-cli-example.php -- --webhook="YOUR_WEBHOOK"
+php -f src/example.php
 ```
+
+6. You also can run an example with a call docker compose of your host system
+
+```shell
+make php-cli-app
+```
+
+## Must read documentation
+
+### Infrastructure
+
+- [Docker fundamentals](https://docs.docker.com/get-started/introduction/)
+- [Makefile tutorial](https://makefiletutorial.com/#getting-started)
+- [Sentry](https://sentry.io/welcome/)
+
+### Command line utils
+
+- [tail](https://man7.org/linux/man-pages/man1/tail.1.html)
+- [grep](https://man7.org/linux/man-pages/man1/grep.1.html)
+- [lnav](https://lnav.org/)
+
+### Application
+
+- [Composer](https://getcomposer.org/doc/)
+- [PSR-3](https://www.php-fig.org/psr/psr-3/)
+- [RFC-5424 The Syslog Protocol](https://datatracker.ietf.org/doc/html/rfc5424)
+- [Monolog](https://github.com/Seldaek/monolog)
+- [DependencyInjection Component](https://symfony.com/doc/current/components/dependency_injection.html)
+- [Config Component](https://symfony.com/doc/current/components/config.html)
+- [Yaml Component](https://symfony.com/doc/current/components/yaml.html)
+- [Console Component](https://symfony.com/doc/current/components/console.html)
+- [FakerPHP](https://fakerphp.org/)
+- [league/csv](https://csv.thephpleague.com/)
+
+### Linters and checkers for PHP
+
+- [Composer License Checker](https://github.com/dominikb/composer-license-checker)
+- [PHP Coding Standards Fixer](https://cs.symfony.com/)
+- [PHPStan](https://phpstan.org/)
+- [rector](https://getrector.com/documentation)
+- [Composer dependency analyser](https://github.com/shipmonk-rnd/composer-dependency-analyser)
