@@ -133,12 +133,12 @@ class ImportDataCommand extends Command
                 $addContactResult->getResponseData()->getTime()->operating !== null) {
                 // see https://apidocs.bitrix24.com/limits.html
                 $operatingThreshold = 400;
-                $operatingWaitTimeout = 60;
+                $operatingWaitTimeout = 10;
                 $currentOperatingValue = round($addContactResult->getResponseData()->getTime()->operating);
                 $operatingResetAt = CarbonImmutable::createFromTimestamp($addContactResult->getResponseData()->getTime()->operatingResetAt);
                 $operatingWait = round($operatingResetAt->diffInSeconds(CarbonImmutable::now()));
                 if ($currentOperatingValue > $operatingThreshold) {
-                    $symfonyStyle->writeln(['', '', sprintf('Your operating value is too high - %s!', $currentOperatingValue)]);
+                    $symfonyStyle->writeln(['', '', sprintf('(⊙_⊙) oh senpai your operating value is too high - %s!', $currentOperatingValue)]);
                     $symfonyStyle->info(sprintf('We must wait for %s seconds before next batch call...', $operatingWaitTimeout));
 
                     $start = time();

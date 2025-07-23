@@ -1,5 +1,5 @@
 parameters:
-  level: 4
+  level: 8
   paths:
     - src/
   bootstrapFiles:
@@ -8,6 +8,4 @@ parameters:
     jobSize: 20
     maximumNumberOfProcesses: 8
     minimumNumberOfJobsPerProcess: 2
-  editorUrlTitle: '%%relFile%%:%%line%%'
-  editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
   treatPhpDocTypesAsCertain: false
