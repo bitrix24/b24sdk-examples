@@ -238,6 +238,90 @@ async function makeSelectItemsList_v4() {
   }
 }
 
+async function makeSelectItemsList_v4_1() {
+  reInitStatus()
+  status.value.isProcess = true
+  status.value.title = 'callMethod(crm.deal.list)'
+  status.value.messages = []
+  status.value.processInfo = 'processing'
+  status.value.progress.animation = true
+  status.value.progress.indicator = false
+  status.value.progress.value = null
+  status.value.time.start = DateTime.now()
+
+  try {
+    const response = await $fetch<CompaniesResponse>('/api/test/callMethod')
+    $logger.log(response)
+    if (response.success) {
+      const ttl = (response.items || []).length
+      status.value.resultInfo = `It was chosen: ${ttl} elements`
+    } else {
+      throw new Error(response.error)
+    }
+  } catch (error: any) {
+    result.isSuccess = false
+    result.errors = [error.data?.error || error.message]
+  } finally {
+    stopMakeProcess()
+  }
+}
+
+async function makeSelectItemsList_v4_2() {
+  reInitStatus()
+  status.value.isProcess = true
+  status.value.title = 'callListMethod(crm.deal.list)'
+  status.value.messages = []
+  status.value.processInfo = 'processing'
+  status.value.progress.animation = true
+  status.value.progress.indicator = false
+  status.value.progress.value = null
+  status.value.time.start = DateTime.now()
+
+  try {
+    const response = await $fetch<CompaniesResponse>('/api/test/callListMethod')
+    $logger.log(response)
+    if (response.success) {
+      const ttl = (response.items || []).length
+      status.value.resultInfo = `It was chosen: ${ttl} elements`
+    } else {
+      throw new Error(response.error)
+    }
+  } catch (error: any) {
+    result.isSuccess = false
+    result.errors = [error.data?.error || error.message]
+  } finally {
+    stopMakeProcess()
+  }
+}
+
+async function makeSelectItemsList_v4_3() {
+  reInitStatus()
+  status.value.isProcess = true
+  status.value.title = 'fetchListMethod(crm.deal.list)'
+  status.value.messages = []
+  status.value.processInfo = 'processing'
+  status.value.progress.animation = true
+  status.value.progress.indicator = false
+  status.value.progress.value = null
+  status.value.time.start = DateTime.now()
+
+  try {
+    const response = await $fetch<CompaniesResponse>('/api/test/fetchListMethod')
+    $logger.log(response)
+    if (response.success) {
+      const ttl = (response.items || []).length
+      status.value.resultInfo = `It was chosen: ${ttl} elements`
+    } else {
+      throw new Error(response.error)
+    }
+  } catch (error: any) {
+    result.isSuccess = false
+    result.errors = [error.data?.error || error.message]
+  } finally {
+    stopMakeProcess()
+  }
+}
+
 const needAdd = ref(10)
 async function makeCallBatch_v1() {
   if (needAdd.value < 1) {
@@ -353,7 +437,7 @@ const makeOpenSliderForUser = (userId: number) => {
     <B24Separator />
 
     <div class="flex flex-col sm:flex-row gap-10">
-      <div class="flex basis-1/4">
+      <div class="flex flex-col gap-10 basis-1/4">
         <B24ButtonGroup orientation="vertical" class="w-full">
           <B24Chip :text="listCallToMax">
             <B24Button
@@ -402,6 +486,29 @@ const makeOpenSliderForUser = (userId: number) => {
             label="batch fetch"
             :disabled="status.isProcess"
             @click="makeSelectItemsList_v6"
+          />
+        </B24ButtonGroup>
+        <B24ButtonGroup  orientation="vertical" class="w-ful">
+          <B24Button
+            class="w-full"
+            :icon="SpeedMeterIcon"
+            label="callMethod(crm.deal.list)"
+            :disabled="status.isProcess"
+            @click="makeSelectItemsList_v4_1"
+          />
+          <B24Button
+            class="w-full"
+            :icon="SpeedMeterIcon"
+            label="callListMethod(crm.deal.list)"
+            :disabled="status.isProcess"
+            @click="makeSelectItemsList_v4_2"
+          />
+          <B24Button
+            class="w-full"
+            :icon="SpeedMeterIcon"
+            label="fetchListMethod(crm.deal.list)"
+            :disabled="status.isProcess"
+            @click="makeSelectItemsList_v4_3"
           />
         </B24ButtonGroup>
       </div>
