@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useFormatter } from '@bitrix24/b24jssdk'
 
-useHead({
-  title: 'IBAN'
+definePageMeta({
+  title: 'IBAN',
+  description: 'IBAN formatting demonstration.'
 })
 
 const { formatterIban } = useFormatter()
@@ -27,12 +28,6 @@ const listCases = ref([
 <template>
   <div>
     <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
-      <div>
-        <ProseH1>
-          IBAN
-        </ProseH1>
-        <ProseP>IBAN formatting demonstration.</ProseP>
-      </div>
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"

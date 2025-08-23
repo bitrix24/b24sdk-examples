@@ -32,10 +32,7 @@ export default defineNuxtConfig({
       return readFileSync('./template/devServer-loading.html', 'utf-8')
     }
   },
-  future: {
-    compatibilityVersion: 4
-  },
-  compatibilityDate: '2024-11-27',
+  compatibilityDate: '2025-07-16',
   vite: {
     plugins: [
       tailwindcss()
@@ -51,12 +48,8 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
-    bundle: {
-      optimizeTranslationDirective: false
-    },
     detectBrowserLanguage: false,
     strategy: 'no_prefix',
-    lazy: true,
     langDir: 'locales',
     locales: [
       {
@@ -148,13 +141,11 @@ export default defineNuxtConfig({
         name: 'عربي',
         file: 'ar.json'
       },
-
       {
         code: 'en',
         name: 'English',
         file: 'en.json'
       }
-
     ],
     /**
      * @memo defaultLocale mast be last at locales[]

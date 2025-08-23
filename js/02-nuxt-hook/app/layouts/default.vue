@@ -3,17 +3,22 @@ import { computed } from 'vue'
 import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
-import HomeIcon from '@bitrix24/b24icons-vue/outline/HomeIcon'
-
-const colorMode = useColorMode()
 
 useHead({
   htmlAttrs: {
     class: 'scrollbar-transparent'
   },
-  bodyAttrs: {
-    class: 'text-base-master dark:text-base-150 bg-base-50 dark:bg-base-dark font-b24-system antialiased'
-  }
+  bodyAttrs: {}
+})
+
+const colorMode = useColorMode()
+
+const route = useRoute()
+const pageTitle = computed(() => route.meta?.title || '')
+const pageDescription = computed(() => route.meta?.description || '')
+useSeoMeta({
+  title: pageTitle.value,
+  description: pageDescription.value
 })
 
 const isDark = computed({
@@ -67,9 +72,7 @@ const helpItems = computed(() => {
     kbds: ['shift', 'd'],
     badge: {
       label: 'shift + d',
-      color: 'default' as const,
-      depth: 'light' as const,
-      useFill: false
+      color: 'default' as const
     },
     onSelect(e: Event) {
       e?.preventDefault()
@@ -85,41 +88,52 @@ defineShortcuts(extractShortcuts(helpItems.value))
 
 <template>
   <B24SidebarLayout
-    :use-light-content="true"
+    :use-light-content="route.path !== '/'"
   >
     <template #sidebar>
       <B24SidebarHeader>
-        <B24SidebarSection class="ps-[20px]">
-          <B24Link href="/" class="leading-none flex flex-row items-center justify-start gap-0.5 text-blue-500 hover:text-cyan-500">
-            <HomeIcon class="size-6 flex" />
-            <ProseH4 class="mb-0 flex">
+        <div class="h-full flex items-center relative my-0 ps-[25px] pe-xs rtl:pe-[25px]">
+          <B24Link href="/" class="mt-0 text-(--ui-color-design-selection-content)">
+            <ProseH4 class="font-medium mb-0">
               Bitrix24::hooks
             </ProseH4>
           </B24Link>
-        </B24SidebarSection>
+        </div>
       </B24SidebarHeader>
       <B24SidebarBody>
         <B24NavigationMenu
           :items="pages"
-          variant="pill"
           orientation="vertical"
         />
         <B24SidebarSpacer />
         <B24NavigationMenu
           :items="helpItems"
-          variant="pill"
           orientation="vertical"
         />
       </B24SidebarBody>
     </template>
-    <template #navbar />
+    <!-- / <template #navbar /> / -->
 
     <!-- Header -->
-    <div>
+    <template #content-top>
+      <!-- / header-title / -->
       <slot name="header-title">
-        <!-- / header-title / -->
+        <div class="w-full flex flex-col gap-[20px]">
+          <div class="flex items-center gap-[12px]">
+            <div class="w-full flex flex-col items-start gap-[10px]">
+              <ProseH2 class="font-semibold mb-0">
+                {{ pageTitle }}
+              </ProseH2>
+              <ProseP small accent="less">
+                {{ pageDescription }}
+              </ProseP>
+            </div>
+          </div>
+        </div>
       </slot>
-    </div>
+    </template>
+
+    <template #content-actions />
 
     <!-- Content -->
     <slot />

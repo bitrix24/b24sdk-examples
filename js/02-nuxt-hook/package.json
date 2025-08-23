@@ -2,7 +2,7 @@
   "name": "@bitrix24/b24jssdk-playground-hook",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@10.12.4",
+  "packageManager": "pnpm@10.15.0",
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
@@ -16,21 +16,15 @@
   "dependencies": {
     "@bitrix24/b24icons-vue": "^2.0.2",
     "@bitrix24/b24jssdk-nuxt": "^0.4.5",
-    "@bitrix24/b24ui-nuxt": "^0.7.0",
-    "@nuxtjs/i18n": "^9.5.6",
-    "luxon": "^3.6.1",
-    "nuxt": "^3.17.6"
+    "@bitrix24/b24ui-nuxt": "^1.0.1",
+    "@nuxtjs/i18n": "^10.0.6",
+    "luxon": "^3.7.1",
+    "nuxt": "^4.0.3"
   },
   "devDependencies": {
-    "@types/luxon": "^3.6.2",
-    "@nuxt/eslint": "^1.5.2",
-    "eslint": "^9.30.1",
-    "typescript": "^5.8.3"
-  },
-  "dd_resolutions": {
-    "@bitrix24/b24jssdk": "0.4.4"
-  },
-  "resolutions": {
-    "nuxt": "3.17.5"
+    "@types/luxon": "^3.7.1",
+    "@nuxt/eslint": "^1.9.0",
+    "eslint": "^9.34.0",
+    "typescript": "^5.9.2"
   }
 }
