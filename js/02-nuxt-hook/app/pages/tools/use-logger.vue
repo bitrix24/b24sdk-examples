@@ -4,8 +4,9 @@ import { LoggerType } from '@bitrix24/b24jssdk'
 import TrashBinIcon from '@bitrix24/b24icons-vue/main/TrashBinIcon'
 import SendIcon from '@bitrix24/b24icons-vue/main/SendIcon'
 
-useHead({
-  title: 'LoggerBrowser'
+definePageMeta({
+  pageTitle: 'LoggerBrowser',
+  pageDescription: 'Example of working with the LoggerBrowser object.'
 })
 
 const { $logger } = useAppInit('Demo: Logger')
@@ -65,7 +66,7 @@ type LoggerTypeList = {
 
 const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>(() => {
   return Object.keys(LoggerType).map((key: string) => {
-    const loggerType = LoggerType[key] as LoggerType
+    const loggerType = LoggerType[key as 'desktop' | 'log' | 'info' | 'warn' | 'error' | 'trace']
     const row = {
       index: key,
       description: '?',
@@ -101,24 +102,18 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
 </script>
 
 <template>
-  <div class="flex flex-col items-top justify-top gap-8">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-8">
-      <div>
-        <ProseH1>
-          LoggerBrowser
-        </ProseH1>
-        <ProseP>Example of working with the LoggerBrowser object.</ProseP>
-      </div>
+  <div>
+    <AdviceBanner>
       <B24Advice
-        class="w-full max-w-[550px]"
+        class=" w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
         :avatar="{ src: '/avatar/assistant.png' }"
       >
         To view the result, open the developer console.
       </B24Advice>
-    </div>
+    </AdviceBanner>
 
-    <div class="flex flex-col flex-nowrap gap-2 bg-base-50 dark:bg-base-dark dark:bg-base-100/10 px-10 py-8 -mx-10">
+    <FormWrapper class="mb-[15px]">
       <B24Textarea
         v-model="debugMessage"
         name="debugMessage"
@@ -126,63 +121,60 @@ const loggerTypeList: ComputedRef<LoggerTypeList[]> = computed<LoggerTypeList[]>
       />
       <div class="flex flex-col lg:flex-row gap-2">
         <B24Button
-          color="primary"
-          size="sm"
-          rounded
+          color="air-primary"
           :icon="SendIcon"
           label="Send log"
           @click="makeLoggAll"
         />
         <B24Button
-          color="link"
-          depth="dark"
-          size="sm"
-          rounded
+          color="air-tertiary-no-accent"
           :icon="TrashBinIcon"
           label="Clear console"
           @click="clearConsole"
         />
       </div>
-    </div>
+    </FormWrapper>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       <div
         v-for="(type) in loggerTypeList"
         :key="type.index"
-        class="px-lg2 py-sm2 border border-base-30 rounded-md shadow-sm hover:shadow-md sm:rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white dark:bg-base-200/10 text-base-500 dark:text-base-200"
+        class="px-lg2 py-sm2 rounded-md col-auto md:col-span-2 lg:col-span-1 style-blurred-bg"
       >
-        <div class="px-4 sm:px-0">
+        <div>
           <ProseH3>
             {{ type.index }}
           </ProseH3>
-          <ProseP class="text-sm">
+          <ProseP small accent="less">
             {{ type.description }}
           </ProseP>
         </div>
-        <div class="mt-4 border-t border-base-100">
-          <dl class="divide-y divide-base-100">
-            <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt class="text-sm font-medium leading-6">
-                State
+        <div class="mt-4">
+          <dl class="divide-y divide-(--ui-color-divider-vibrant-accent-more)">
+            <div class="py-2 grid grid-cols-3 gap-4 px-0 items-center">
+              <dt>
+                <ProseP small accent="less-more">
+                  State
+                </ProseP>
               </dt>
-              <dd class="mt-1 sm:col-span-2 sm:mt-0">
+              <dd class="mt-0 col-span-2">
                 <B24Switch
                   v-model="type.state.value"
                   @change="toggleLogger(type.type)"
                 />
               </dd>
             </div>
-            <div class="px-2 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-              <dt class="text-sm font-medium leading-6">
-                Action
+            <div class="py-2 grid grid-cols-3 gap-4 px-0 items-center">
+              <dt>
+                <ProseP small accent="less-more">
+                  Action
+                </ProseP>
               </dt>
-              <dd class="mt-1 sm:col-span-2 sm:mt-0">
+              <dd class="mt-0 col-span-2">
                 <B24Button
                   :icon="SendIcon"
                   label="Send"
-                  color="link"
-                  depth="dark"
-                  rounded
+                  color="air-secondary"
                   size="xs"
                   :disabled="!type.state.value"
                   @click="makeLog(type.type)"

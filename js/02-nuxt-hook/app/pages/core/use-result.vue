@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import { Result } from '@bitrix24/b24jssdk'
+import { computed } from 'vue'
 
-useHead({
-  title: 'Result'
+definePageMeta({
+  pageTitle: 'Result',
+  pageDescription: 'Example of working with the Result object'
+})
+
+const route = useRoute()
+const pageTitle: ComputedRef<string> = computed(() => (route.meta?.pageTitle ?? '') as string)
+const pageDescription: ComputedRef<string> = computed(() => (route.meta?.pageDescription ?? '') as string)
+useSeoMeta({
+  title: pageTitle.value,
+  description: pageDescription.value
 })
 
 const { $logger } = useAppInit('Demo: Result')
@@ -74,22 +84,13 @@ if (!result.isSuccess) {
 </script>
 
 <template>
-  <div>
-    <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
-      <div>
-        <ProseH1>
-          Result
-        </ProseH1>
-        <ProseP>Example of working with the Result object</ProseP>
-      </div>
-      <B24Advice
-        class="w-full max-w-[550px]"
-        :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
-      >
-        To view the result, open the developer console.
-      </B24Advice>
-    </div>
-    <B24Separator />
-  </div>
+  <AdviceCenter>
+    <B24Advice
+      class="w-full max-w-[550px]"
+      :b24ui="{ descriptionWrapper: 'w-full' }"
+      :avatar="{ src: '/avatar/assistant.png' }"
+    >
+      <ProseP>To view the result, open the developer console.</ProseP>
+    </B24Advice>
+  </AdviceCenter>
 </template>

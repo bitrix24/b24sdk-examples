@@ -2,8 +2,8 @@
 import { useFormatter } from '@bitrix24/b24jssdk'
 
 definePageMeta({
-  title: 'IBAN',
-  description: 'IBAN formatting demonstration.'
+  pageTitle: 'IBAN',
+  pageDescription: 'IBAN formatting demonstration.'
 })
 
 const { formatterIban } = useFormatter()
@@ -27,35 +27,32 @@ const listCases = ref([
 
 <template>
   <div>
-    <div class="mb-8 flex flex-col sm:flex-row items-center justify-between gap-8">
+    <AdviceBanner>
       <B24Advice
-        class="w-full max-w-[550px]"
+        class=" w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
         :avatar="{ src: '/avatar/assistant.png' }"
       >
         Hm..
       </B24Advice>
-    </div>
-    <B24Separator />
-    <div class="mt-8 text-md text-base-900 border border-base-30 rounded-md px-lg2 py-sm2 shadow-sm bg-white dark:bg-base-200/10">
-      <dl class="divide-y divide-base-300">
-        <div
-          v-for="(caseData, caseIndex) in listCases"
-          :key="caseIndex"
-          class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
-        >
-          <dt>
-            <ProseH6 class="mb-0">
-              {{ caseData }}
-            </ProseH6>
-          </dt>
-          <dd>
-            <ProseCode class="mb-0">
-              {{ formatterIban.printFormat(caseData, ' ') }}
-            </ProseCode>
-          </dd>
-        </div>
-      </dl>
-    </div>
+    </AdviceBanner>
+    <dl class="divide-y divide-(--ui-color-divider-vibrant-accent-more)">
+      <div
+        v-for="(caseData, caseIndex) in listCases"
+        :key="caseIndex"
+        class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0 sm:items-center"
+      >
+        <dt>
+          <ProseH6 class="mb-0">
+            {{ caseData }}
+          </ProseH6>
+        </dt>
+        <dd class="">
+          <ProseCode class="mb-0 text-nowrap">
+            {{ formatterIban.printFormat(caseData, ' ') }}
+          </ProseCode>
+        </dd>
+      </div>
+    </dl>
   </div>
 </template>

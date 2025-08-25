@@ -21,9 +21,9 @@ export default defineEventHandler(async () => {
   const $b24 = B24Hook.fromWebhookUrl(config.b24Hook)
   $b24.setLogger($logger)
 
-  const now = new Date();
-  const sixMonthAgo = new Date();
-  sixMonthAgo.setMonth(now.getMonth() - 6);
+  const now = new Date()
+  const sixMonthAgo = new Date()
+  sixMonthAgo.setMonth(now.getMonth() - 6)
 
   try {
     const response = await $b24.callListMethod(
@@ -49,11 +49,11 @@ export default defineEventHandler(async () => {
           'OPPORTUNITY',
           'IS_MANUAL_OPPORTUNITY',
           'ASSIGNED_BY_ID',
-          'DATE_CREATE',
+          'DATE_CREATE'
         ],
         order: {
           TITLE: 'ASC',
-          OPPORTUNITY: 'ASC',
+          OPPORTUNITY: 'ASC'
         }
       },
       (progress: number) => {
@@ -75,7 +75,6 @@ export default defineEventHandler(async () => {
       items
     } as BaseResponse & { items?: CrmSomeEntity[] }
   } catch (error: any) {
-
     $logger.error(error)
 
     return {

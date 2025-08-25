@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { NuxtError } from '#app'
-import LetCatInIcon from '@bitrix24/b24icons-vue/specialized/LetCatInIcon'
+
+useHead({
+  bodyAttrs: {
+    class: 'edge-dark'
+  }
+})
 
 const $props = defineProps({
   error: Object as () => NuxtError
@@ -27,34 +32,33 @@ const handleError = () => clearError({ redirect: errorData.value.clearErrorHref 
 
 <template>
   <div class="flex flex-col">
-    <div class="px-lg mb-xs2">
-      <LetCatInIcon class="text-info w-full h-[50vh]" />
-    </div>
-    <div class="my-sm flex flex-col justify-center items-center">
-      <div class="mb-1 text-xs text-base-400 ">
+    <div class="my-[24px] py-[24px] flex flex-col justify-center items-center h-[calc(100vh-60px)] backdrop-blur-sm bg-(--ui-color-design-outline-na-bg)">
+      <ProseP small accent="less">
         [code: {{ errorData.code }}]
-      </div>
-      <ProseH1 class="mb-4 text-h1 text-base-master font-normal">
+      </ProseP>
+      <ProseH1>
         {{ errorData.title }}
       </ProseH1>
-      <div
+      <ProseP
         v-show="errorData.description"
-        class="text-h3 text-base-800"
+        accent="default"
       >
         {{ errorData.description }}
+      </ProseP>
+      <div class="my-4 flex flex-col sm:flex-row items-center justify-center gap-[10px] ">
+        <B24Button
+          v-show="!errorData.homePageIsHide"
+          color="air-primary"
+          :to="errorData.homePageHref"
+          :label="errorData.homePageTitle"
+        />
+        <B24Button
+          v-show="errorData.clearErrorIsShow"
+          color="air-secondary"
+          :label="errorData.clearErrorTitle"
+          @click="handleError"
+        />
       </div>
-      <NuxtLink
-        v-show="!errorData.homePageIsHide"
-        class="mt-4 text-md font-medium text-white bg-blue px-4 py-2 rounded hover:bg-blue-400 active:bg-blue-600"
-        :to="errorData.homePageHref"
-      >{{ errorData.homePageTitle }}</NuxtLink>
-      <button
-        v-show="errorData.clearErrorIsShow"
-        class="mt-4 text-md font-medium text-white bg-blue px-4 py-2 rounded hover:bg-blue-400 active:bg-blue-600"
-        @click="handleError"
-      >
-        {{ errorData.clearErrorTitle }}
-      </button>
     </div>
   </div>
 </template>

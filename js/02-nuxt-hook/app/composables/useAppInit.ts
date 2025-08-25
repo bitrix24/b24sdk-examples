@@ -1,4 +1,5 @@
 import { LoggerBrowser, AjaxError } from '@bitrix24/b24jssdk'
+import type { SidebarLayoutInstance } from '@bitrix24/b24ui-nuxt'
 
 export interface ProcessErrorData {
   description?: string
@@ -9,6 +10,8 @@ export interface ProcessErrorData {
   homePageHref?: string
   homePageTitle?: string
 }
+
+let sidebarLayoutInstance: null | SidebarLayoutInstance['api'] = null
 
 /**
  * Composable handling application initialization
@@ -56,9 +59,23 @@ export const useAppInit = (loggerTitle?: string) => {
     })
   }
 
+  function setRootSideBarApi(instance: SidebarLayoutInstance['api']) {
+    sidebarLayoutInstance = instance
+  }
+
+  const getRootSideBarApi = (): null | SidebarLayoutInstance['api'] => {
+    if (!sidebarLayoutInstance) {
+      return null
+    }
+
+    return sidebarLayoutInstance as unknown as SidebarLayoutInstance['api']
+  }
+
   return {
     $logger,
     initApp,
+    setRootSideBarApi,
+    getRootSideBarApi,
     processErrorGlobal
   }
 }

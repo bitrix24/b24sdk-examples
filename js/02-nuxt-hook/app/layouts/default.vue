@@ -1,33 +1,93 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { NavigationMenuItem } from '@bitrix24/b24ui-nuxt'
+import type { NavigationMenuItem, BadgeProps, SidebarLayoutInstance } from '@bitrix24/b24ui-nuxt'
 import SunIcon from '@bitrix24/b24icons-vue/main/SunIcon'
+import SunIconAir from '@bitrix24/b24icons-vue/outline/SunIcon'
 import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
+import MoonIconAir from '@bitrix24/b24icons-vue/outline/MoonIcon'
+import { useAppInit } from '~/composables/useAppInit'
 
-useHead({
-  htmlAttrs: {
-    class: 'scrollbar-transparent'
-  },
-  bodyAttrs: {}
-})
-
+type colorMode = 'dark' | 'light' | 'edgeDark' | 'edgeLight'
 const colorMode = useColorMode()
+const mode = ref<colorMode>(colorMode.value as colorMode)
 
 const route = useRoute()
-const pageTitle = computed(() => route.meta?.title || '')
-const pageDescription = computed(() => route.meta?.description || '')
+const pageTitle: ComputedRef<string> = computed(() => (route.meta?.pageTitle ?? '') as string)
+const pageDescription: ComputedRef<string> = computed(() => (route.meta?.pageDescription ?? '') as string)
 useSeoMeta({
   title: pageTitle.value,
   description: pageDescription.value
 })
 
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
+const itemsForColorMode = computed(() => {
+  return [
+    {
+      label: 'dark',
+      code: 'dark',
+      icon: MoonIcon
+    },
+    {
+      label: 'light',
+      code: 'light',
+      icon: SunIcon
+    },
+    {
+      label: 'edge-dark',
+      code: 'edgeDark',
+      icon: MoonIconAir
+    },
+    {
+      label: 'edge-light',
+      code: 'edgeLight',
+      icon: SunIconAir
+    }
+  ]
+})
+
+function toggleMode() {
+  switch (mode.value) {
+    case 'dark':
+      mode.value = 'light'
+      colorMode.preference = 'light'
+      break
+    case 'light':
+      mode.value = 'edgeDark'
+      colorMode.preference = 'edge-dark'
+      break
+    case 'edgeDark':
+      mode.value = 'edgeLight'
+      colorMode.preference = 'edge-light'
+      break
+    case 'edgeLight':
+    default:
+      mode.value = 'dark'
+      colorMode.preference = 'dark'
+      break
   }
+}
+
+const colorModeIcon = computed(() => {
+  const theme = itemsForColorMode.value.find((row) => {
+    return row.code === mode.value
+  })
+
+  if (theme) {
+    return theme.icon
+  }
+
+  return MoonIcon
+})
+
+const colorModeLabel = computed(() => {
+  const theme = itemsForColorMode.value.find((row) => {
+    return row.code === mode.value
+  })
+
+  if (theme) {
+    return theme.label
+  }
+
+  return mode.value
 })
 
 const pages = computed<NavigationMenuItem[]>(() => {
@@ -67,16 +127,16 @@ const helpItems = computed(() => {
   const result: NavigationMenuItem[] = []
 
   result.push({
-    label: isDark.value ? 'Dark' : 'Light',
-    icon: isDark.value ? MoonIcon : SunIcon,
+    label: colorModeLabel.value,
+    icon: colorModeIcon.value,
     kbds: ['shift', 'd'],
     badge: {
       label: 'shift + d',
-      color: 'default' as const
+      color: 'air-secondary' as BadgeProps['color']
     },
     onSelect(e: Event) {
       e?.preventDefault()
-      isDark.value = !isDark.value
+      toggleMode()
     }
   })
 
@@ -84,18 +144,33 @@ const helpItems = computed(() => {
 })
 
 defineShortcuts(extractShortcuts(helpItems.value))
+
+const { setRootSideBarApi } = useAppInit()
+
+const currentSidebarRef = ref<SidebarLayoutInstance | null>(null)
+console.log(currentSidebarRef.value)
+
+onMounted(() => {
+  if (currentSidebarRef.value) {
+    setRootSideBarApi(currentSidebarRef?.value.api as unknown as SidebarLayoutInstance['api'])
+  }
+})
 </script>
 
 <template>
   <B24SidebarLayout
-    :use-light-content="route.path !== '/'"
+    ref="currentSidebarRef"
+    :use-light-content="!(['/', '/core/use-result', '/tools/use-logger', '/hook/testing-rest-api-calls'].includes(route.path))"
+    :b24ui="{
+      containerWrapper: !(['/', '/core/use-result', '/tools/use-logger', '/hook/testing-rest-api-calls'].includes(route.path)) ? 'light' : ''
+    }"
   >
     <template #sidebar>
       <B24SidebarHeader>
         <div class="h-full flex items-center relative my-0 ps-[25px] pe-xs rtl:pe-[25px]">
           <B24Link href="/" class="mt-0 text-(--ui-color-design-selection-content)">
             <ProseH4 class="font-medium mb-0">
-              Bitrix24::hooks
+              Bitrix24::Hooks
             </ProseH4>
           </B24Link>
         </div>
@@ -109,31 +184,38 @@ defineShortcuts(extractShortcuts(helpItems.value))
         <B24NavigationMenu
           :items="helpItems"
           orientation="vertical"
+          :b24ui="{
+            linkLeadingBadge: '-top-[10px] left-[34px]'
+          }"
         />
       </B24SidebarBody>
     </template>
     <!-- / <template #navbar /> / -->
 
     <!-- Header -->
-    <template #content-top>
-      <!-- / header-title / -->
-      <slot name="header-title">
-        <div class="w-full flex flex-col gap-[20px]">
-          <div class="flex items-center gap-[12px]">
-            <div class="w-full flex flex-col items-start gap-[10px]">
-              <ProseH2 class="font-semibold mb-0">
-                {{ pageTitle }}
-              </ProseH2>
-              <ProseP small accent="less">
-                {{ pageDescription }}
-              </ProseP>
+    <template v-if="!(['/', '/core/use-result'].includes(route.path))" #content-top>
+      <div class="w-full flex flex-col gap-[20px]">
+        <div class="lg:backdrop-blur-sm lg:backdrop-brightness-110 px-[15px] py-[10px] flex flex-col items-start justify-between gap-[20px] rounded-(--ui-border-radius-md)">
+          <!-- / header-title / -->
+          <div class="w-full flex flex-row items-center justify-between gap-[20px]">
+            <div class="flex-1 flex flex-row items-center justify-end gap-[12px]">
+              <div class="flex-1">
+                <ProseH2 class="text-(--b24ui-typography-label-color) leading-[29px] font-(--ui-font-weight-light)">
+                  {{ pageTitle }}
+                </ProseH2>
+                <ProseP small accent="less">
+                  {{ pageDescription }}
+                </ProseP>
+              </div>
             </div>
           </div>
+          <!-- / header-actions / -->
+          <div class="flex-1 hidden sm:flex flex-row items-center justify-end gap-[12px]">
+            <slot name="header-actions" />
+          </div>
         </div>
-      </slot>
+      </div>
     </template>
-
-    <template #content-actions />
 
     <!-- Content -->
     <slot />
