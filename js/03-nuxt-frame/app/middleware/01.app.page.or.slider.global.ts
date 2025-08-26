@@ -1,7 +1,5 @@
-import {
-	LoggerBrowser
-} from "@bitrix24/b24jssdk"
-import { type RouteLocationNormalized } from 'vue-router'
+import { LoggerBrowser } from "@bitrix24/b24jssdk"
+import type { RouteLocationNormalized } from 'vue-router'
 
 const $logger = LoggerBrowser.build(
 	'middleware:app.page.or.slider.global',
@@ -19,7 +17,7 @@ function isSkipB24(fullPath: string): boolean
 	{
 		return true
 	}
-	
+
 	return false
 }
 
@@ -27,7 +25,7 @@ export default defineNuxtRouteMiddleware(async (
 	to: RouteLocationNormalized,
 	from: RouteLocationNormalized
 ) => {
-	
+
 	/**
 	 * @memo skip middleware on server
 	 */
@@ -35,31 +33,31 @@ export default defineNuxtRouteMiddleware(async (
 	{
 		return
 	}
-	
+
 	$logger.log('>> start')
 	$logger.info({
 		to: to.path,
 		from: from.path
 	})
-	
+
 	if(isSkipB24(to.path))
 	{
 		$logger.log('middleware >> Skip')
 		return Promise.resolve()
 	}
-	
+
 	try
 	{
 		const { $initializeB24Frame } = useNuxtApp()
 		const $b24 = await $initializeB24Frame()
-		
+
 		$logger.log('>> placement.options', $b24.placement.options)
-		
+
 		if($b24.placement.options?.place)
 		{
 			const optionsPlace: string = $b24.placement.options.place
 			let goTo: null|string = null
-			
+
 			if(optionsPlace === 'app.options')
 			{
 				goTo = `${baseDir}app.options`
@@ -72,7 +70,7 @@ export default defineNuxtRouteMiddleware(async (
 			{
 				goTo = `${baseDir}feedback`
 			}
-			
+
 			if(
 				null !== goTo
 				&& to.path !== goTo
@@ -82,7 +80,7 @@ export default defineNuxtRouteMiddleware(async (
 				return navigateTo(goTo)
 			}
 		}
-		
+
 		$logger.log('>> stop')
 	}
 	catch(error: any)
@@ -97,9 +95,9 @@ export default defineNuxtRouteMiddleware(async (
 			cause: error,
 			fatal: true
 		})
-		
+
 		$logger.error('', appError)
-		
+
 		showError(appError)
 		return Promise.reject(appError)
 	}

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { DateTime } from 'luxon'
 import { onMounted, onUnmounted, reactive, type Ref, ref, type ComputedRef, computed } from 'vue'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 import {
 	type SelectedUser,
-	B24Frame,
 	B24LangList,
 	useB24Helper,
 	LoadDataType,
@@ -15,7 +15,6 @@ import {
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 import UserGroupIcon from '@bitrix24/b24icons-vue/common-b24/UserGroupIcon'
 import BtnClockIcon from '@bitrix24/b24icons-vue/button-specialized/BtnClockIcon'
-import Toggle from '~/components/Toggle.vue'
 import { useI18n } from '#imports'
 
 // region Init ////
@@ -91,10 +90,10 @@ onMounted(async () =>
 	{
 		const { $initializeB24Frame } = useNuxtApp()
 		$b24 = await $initializeB24Frame()
-		
+
 		$b24.setLogger(LoggerBrowser.build('Core >> Slider', true))
 		b24CurrentLang.value = $b24.getLang()
-		
+
 		if(locales.value.filter(i => i.code === b24CurrentLang.value).length > 0)
 		{
 			setLocale(b24CurrentLang.value)
@@ -104,9 +103,9 @@ onMounted(async () =>
 		{
 			$logger.warn('not support locale >>>', b24CurrentLang.value)
 		}
-		
+
 		await $b24.parent.setTitle('[playgrounds] App Options')
-		
+
 		await initB24Helper(
 			$b24,
 			[
@@ -114,11 +113,11 @@ onMounted(async () =>
 				LoadDataType.UserOptions,
 			]
 		)
-		
+
 		isInit.value = true
 		processStatus.value.save = false
 		processStatus.value.apply = false
-		
+
 		window.setTimeout(async () =>
 		{
 			makeRestore()
@@ -164,37 +163,37 @@ const makeFitWindow = async () =>
 const makeRestore = (): void =>
 {
 	const optionsManager = getB24Helper().userOptions;
-	
+
 	optionsData.keyFloat = optionsManager.getFloat(
 		'keyFloat',
 		defaultData.keyFloat
 	)
-	
+
 	optionsData.keyInteger = optionsManager.getInteger(
 		'keyInteger',
 		defaultData.keyInteger
 	)
-	
+
 	optionsData.keyBool = optionsManager.getBoolYN(
 		'keyBool',
 		defaultData.keyBool
 	)
-	
+
 	optionsData.keyString = optionsManager.getString(
 		'keyString',
 		defaultData.keyString
 	)
-	
+
 	optionsData.keyDate = optionsManager.getDate(
 		'keyDate',
 		defaultData.keyDate
 	)
-	
+
 	optionsData.keyDateTime = optionsManager.getDate(
 		'keyDateTime',
 		defaultData.keyDateTime
 	)
-	
+
 	const tmpList = optionsManager.getJsonArray(
 		'keyArray',
 		defaultData.keyArray
@@ -204,12 +203,12 @@ const makeRestore = (): void =>
 	{
 		optionsData.keyArray.push(Text.toInteger(userId))
 	})
-	
+
 	optionsData.keyObject = optionsManager.getJsonObject(
 		'keyObject',
 		defaultData.keyObject
 	) as Record<string, string>
-	
+
 	$logger.info({
 		come: optionsManager.data,
 		def: defaultData,
@@ -229,7 +228,7 @@ const makeSave = async (): Promise<void> =>
 	{
 		await makeApply()
 		processStatus.value.save = false
-		
+
 		await makeClosePage()
 	}
 	catch( error: any )
@@ -245,14 +244,14 @@ const makeSave = async (): Promise<void> =>
 			fatal: true
 		})
 	}
-	
+
 	processStatus.value.save = false
 }
 
 const makeApply = async (): Promise<void> =>
 {
 	processStatus.value.apply = true
-	
+
 	try
 	{
 		await getB24Helper().userOptions.save(
@@ -278,14 +277,14 @@ const makeApply = async (): Promise<void> =>
 				},
 			}
 		)
-		
+
 		processStatus.value.apply = false
 	}
 	catch( error: any )
 	{
-		
+
 		$logger.error(error)
-		
+
 		showError({
 			statusCode: 404,
 			statusMessage: error?.message || error,
@@ -296,7 +295,7 @@ const makeApply = async (): Promise<void> =>
 			fatal: true
 		})
 	}
-	
+
 	processStatus.value.apply = false
 }
 
@@ -305,9 +304,9 @@ const makeSelectUsersV1 = async () =>
 	try
 	{
 		const selectedUsers = await $b24.dialog.selectUsers()
-		
+
 		optionsData.keyArray = []
-		
+
 		selectedUsers.forEach((row: SelectedUser) =>
 		{
 			const userId = Text.toInteger(row.id)
@@ -325,9 +324,9 @@ const makeSelectUsersV2 = async () =>
 	try
 	{
 		const selectedUsers = await $b24.dialog.selectUsers()
-		
+
 		optionsData.keyObject = {}
-		
+
 		selectedUsers.forEach((row: SelectedUser) =>
 		{
 			const userId = Text.toInteger(row.id)
@@ -345,14 +344,14 @@ const makeSelectUsersV2 = async () =>
 const onDateChange = ($event: Event): null|DateTime =>
 {
 	const element = $event.target as HTMLInputElement
-	
+
 	const tmpDate = element.valueAsDate;
-	
+
 	if(!(tmpDate instanceof Date))
 	{
 		return null
 	}
-	
+
 	return DateTime.fromJSDate(tmpDate).set({
 		hour: 0,
 		minute: 0,
@@ -364,14 +363,14 @@ const onDateChange = ($event: Event): null|DateTime =>
 const onDateTimeChange = ($event: Event): null|DateTime =>
 {
 	const element = $event.target as HTMLInputElement
-	
+
 	let tmpDateTime = element.value;
-	
+
 	if(!Type.isStringFilled(tmpDateTime))
 	{
 		return null
 	}
-	
+
 	return DateTime.fromFormat(tmpDateTime, 'y-MM-dd\'T\'HH:mm').set({
 		second: 0,
 		millisecond: 0
@@ -404,13 +403,11 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 									keyFloat
 								</dt>
 								<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-									<input
-										type="number"
-										step="15.03"
-										v-model.number="optionsData.keyFloat"
-										class="border border-base-300 text-base-900 rounded block w-full p-2.5 disabled:opacity-75"
+									<B24InputNumber
+                    v-model.number="optionsData.keyFloat"
+                    :step="15.03"
 										:disabled="isProcess"
-									>
+									/>
 								</dd>
 							</div>
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -418,13 +415,11 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 									keyInteger
 								</dt>
 								<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-									<input
-										type="number"
-										step="2"
-										v-model.number="optionsData.keyInteger"
-										class="border border-base-300 text-base-900 rounded block w-full p-2.5 disabled:opacity-75"
+									<B24InputNumber
+                    v-model.number="optionsData.keyInteger"
+                    :step="2"
 										:disabled="isProcess"
-									>
+									/>
 								</dd>
 							</div>
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -432,10 +427,7 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 									keyBool
 								</dt>
 								<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-									<Toggle
-										v-model="optionsData.keyBool"
-										disabled:opacity-75
-									/>
+									<B24Switch v-model="optionsData.keyBool" />
 								</dd>
 							</div>
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -443,12 +435,11 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 									keyString
 								</dt>
 								<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-									<input
-										type="text"
-										v-model="optionsData.keyString"
-										class="border border-base-300 text-base-900 rounded block w-full p-2.5 disabled:opacity-75"
+									<B24Input
+                    v-model="optionsData.keyString"
+                    type="text"
 										:disabled="isProcess"
-									>
+									/>
 								</dd>
 							</div>
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -456,14 +447,13 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 									keyDate
 								</dt>
 								<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-									<input
+									<B24Input
 										type="date"
 										:value="optionsData.keyDate?.toISODate()"
-										@change="(event) => optionsData.keyDate = onDateChange(event)"
 										autocomplete="off"
-										class="border border-base-300 text-base-900 rounded block w-full p-2.5 disabled:opacity-75"
-										:disabled="isProcess"
-									>
+                    :disabled="isProcess"
+                    @change="(event) => optionsData.keyDate = onDateChange(event)"
+                  />
 								</dd>
 							</div>
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -471,14 +461,13 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 									keyDateTime
 								</dt>
 								<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-									<input
+									<B24Input
 										type="datetime-local"
 										:value="optionsData.keyDateTime?.toFormat('y-MM-dd\'T\'HH:mm')"
-										@change="(event) => optionsData.keyDateTime = onDateTimeChange(event)"
 										autocomplete="off"
-										class="border border-base-300 text-base-900 rounded block w-full p-2.5 disabled:opacity-75"
-										:disabled="isProcess"
-									>
+                    :disabled="isProcess"
+                    @change="(event) => optionsData.keyDateTime = onDateTimeChange(event)"
+                  />
 								</dd>
 							</div>
 							<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -546,7 +535,7 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 						<BtnClockIcon class="w-lg h-lg" v-if="processStatus.save"/>
 						<span v-else>Save</span>
 					</button>
-					
+
 					<button
 						@click="makeApply"
 						:disabled="isProcess"
@@ -555,7 +544,7 @@ const onDateTimeChange = ($event: Event): null|DateTime =>
 						<BtnClockIcon class="w-lg h-lg" v-if="processStatus.apply && !processStatus.save"/>
 						<span v-else>Apply</span>
 					</button>
-					
+
 					<button
 						@click="makeClosePage"
 						:disabled="isProcess"

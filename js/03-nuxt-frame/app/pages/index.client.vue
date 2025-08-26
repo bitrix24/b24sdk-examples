@@ -5,7 +5,6 @@ import {
 	LoggerBrowser,
 	Result,
 	B24LangList,
-	B24Frame,
 	useB24Helper,
 	LoadDataType,
 	useFormatter
@@ -14,13 +13,10 @@ import type {
 	IResult,
 	SelectedUser,
 	TypePullMessage,
-	StatusClose
+	StatusClose,
+	B24Frame
 } from '@bitrix24/b24jssdk'
 
-import Info from '~/components/Info.vue'
-import Avatar from '~/components/Avatar.vue'
-import ProgressBar from '~/components/ProgressBar.vue'
-import Tabs from '~/components/Tabs.vue'
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 import Settings2Icon from '@bitrix24/b24icons-vue/actions/Settings2Icon'
 import UserGroupIcon from '@bitrix24/b24icons-vue/common-b24/UserGroupIcon'
@@ -36,6 +32,7 @@ import MessengerIcon from '@bitrix24/b24icons-vue/social/MessengerIcon'
 import DialogueIcon from '@bitrix24/b24icons-vue/crm/DialogueIcon'
 import PulseIcon from '@bitrix24/b24icons-vue/main/PulseIcon'
 import { useI18n } from '#imports'
+import type {Locale} from "vue-i18n";
 
 definePageMeta({
 	layout: 'page',
@@ -153,19 +150,19 @@ onMounted(async() =>
 		$b24.setLogger(LoggerBrowser.build('Core', true))
 		b24CurrentLang.value = $b24.getLang()
 		formatterNumber.setDefLocale($b24.getLang())
-		
+
 		if(locales.value.filter(i => i.code === b24CurrentLang.value).length > 0)
 		{
-			setLocale(b24CurrentLang.value)
+			await setLocale(b24CurrentLang.value as Locale)
 			$logger.log('setLocale >>>', b24CurrentLang.value)
 		}
 		else
 		{
 			$logger.warn('not support locale >>>', b24CurrentLang.value)
 		}
-		
+
 		await $b24.parent.setTitle('[playgrounds] Testing Frame')
-		
+
 		await initB24Helper(
 			$b24,
 			[
@@ -177,17 +174,17 @@ onMounted(async() =>
 			]
 		)
 		$isInitB24Helper.value = true
-		
+
 		usePullClient()
 		useSubscribePullClient(
 			makeSendPullCommandHandler.bind(this),
 			'main'
 		)
 		startPullClient()
-		
+
 		isInit.value = true
 		isReload.value = false
-		
+
 		await makeFitWindow()
 	}
 	catch(error: any)
@@ -219,7 +216,7 @@ const b24Helper = computed(() => {
 	{
 		return getB24Helper()
 	}
-	
+
 	return null
 })
 // endregion ////
@@ -238,7 +235,7 @@ const reloadData = async(): Promise<void> =>
 	])
 	.then(() => {
 		isReload.value = false
-		
+
 		return makeFitWindow()
 	})
 }
@@ -249,7 +246,7 @@ const isSliderMode = computed((): boolean =>
 	{
 		return false
 	}
-	
+
 	return $b24?.placement.isSliderMode
 })
 
@@ -264,9 +261,9 @@ const makeFitWindow = async() =>
 
 const stopMakeProcess = () =>
 {
-	
+
 	status.value.time.stop = DateTime.now()
-	
+
 	if(
 		status.value.time.stop
 		&& status.value.time.start
@@ -278,7 +275,7 @@ const stopMakeProcess = () =>
 		)
 	}
 	status.value.processInfo = null
-	
+
 	makeFitWindow()
 	.then(() => {
 		status.value.isProcess = false
@@ -293,7 +290,7 @@ const clearConsole = () =>
 const reInitStatus = () =>
 {
 	result = reactive(new Result())
-	
+
 	status.value.isProcess = false
 	status.value.title = 'Specify what we will test'
 	status.value.messages = []
@@ -316,7 +313,7 @@ const makeReloadWindow = async() =>
 	status.value.progress.animation = true
 	status.value.progress.indicator = false
 	status.value.progress.value = null
-	
+
 	return $b24.parent.reloadWindow()
 		.catch((error: Error|string) =>
 		{
@@ -381,9 +378,9 @@ const makeOpenSliderForUser = async(userId: number) =>
 	)
 		.then((response: StatusClose) =>
 		{
-			
+
 			$logger.warn(response)
-			
+
 			if(
 				!response.isOpenAtNewWindow
 				&& response.isClose
@@ -448,7 +445,7 @@ const makeOpenUfList = async(url: string) =>
 	const path = $b24.slider.getUrl(url)
 	path.searchParams.set('moduleId', 'crm')
 	path.searchParams.set('entityId', 'CRM_DEAL')
-	
+
 	return $b24.slider.openPath(
 		path,
 		950
@@ -462,22 +459,22 @@ const makeImCallTo = async(isVideo: boolean = true) =>
 		reInitStatus()
 		status.value.isProcess = true
 		status.value.title = 'test imCallTo'
-		
+
 		status.value.progress.animation = true
 		status.value.progress.indicator = false
 		status.value.progress.value = null
 		status.value.time.start = DateTime.now()
-		
+
 		return resolve(null)
 	})
 	.then(async() =>
 	{
 		status.value.messages.push('use $b24.dialog.selectUser to select a user')
-		
+
 		const selectedUser = await $b24.dialog.selectUser()
-		
+
 		$logger.info(selectedUser)
-		
+
 		if(selectedUser)
 		{
 			if(Number(selectedUser.id) === (b24Helper.value?.profileInfo.data.id || 0))
@@ -490,7 +487,7 @@ const makeImCallTo = async(isVideo: boolean = true) =>
 				isVideo
 			)
 		}
-		
+
 		return Promise.reject(new Error('User not selected'))
 	})
 	.catch((error: Error|string) =>
@@ -512,33 +509,33 @@ const makeImPhoneTo = async() =>
 		status.value.isProcess = true
 		status.value.title = 'test ImPhoneTo'
 		status.value.messages.push('use $b24.parent.imPhoneTo to make call')
-		
+
 		status.value.progress.animation = true
 		status.value.progress.indicator = false
 		status.value.progress.value = null
 		status.value.time.start = DateTime.now()
-		
+
 		return resolve(null)
 	})
 		.then(async() =>
 		{
-			
+
 			const promptPhone = prompt(
 				'Please provide phone'
 			)
-			
+
 			if(null === promptPhone)
 			{
 				return Promise.resolve()
 			}
-			
+
 			const phone = String(promptPhone)
-			
+
 			if(phone.length < 1)
 			{
 				return Promise.reject(new Error('Empty phone number'))
 			}
-			
+
 			return $b24.parent.imPhoneTo(
 				phone
 			)
@@ -566,7 +563,7 @@ const makeImOpenMessenger = async() =>
 		status.value.progress.indicator = false
 		status.value.progress.value = null
 		status.value.time.start = DateTime.now()
-		
+
 		return resolve(null)
 	})
 		.then(async() =>
@@ -574,14 +571,14 @@ const makeImOpenMessenger = async() =>
 			const promptDialogId = prompt(
 				'Please provide dialogId (number|`chat${number}`|`sg${number}`|`imol|${number}`|undefined)'
 			)
-			
+
 			if(null === promptDialogId)
 			{
 				return Promise.resolve()
 			}
-			
+
 			let dialogId: any = String(promptDialogId)
-			
+
 			if(dialogId.length < 1)
 			{
 				dialogId = undefined
@@ -594,7 +591,7 @@ const makeImOpenMessenger = async() =>
 			{
 				dialogId = Number(dialogId)
 			}
-			
+
 			return $b24.parent.imOpenMessenger(
 				dialogId
 			)
@@ -622,7 +619,7 @@ const makeImOpenMessengerWithYourself = async() =>
 		status.value.progress.indicator = false
 		status.value.progress.value = null
 		status.value.time.start = DateTime.now()
-		
+
 		return resolve(null)
 	})
 		.then(async() =>
@@ -647,14 +644,14 @@ const makeImOpenHistory = async() =>
 	const promptDialogId = prompt(
 		'Please provide dialogId (number|`chat${number}`|`imol|${number})'
 	)
-	
+
 	if(null === promptDialogId)
 	{
 		return Promise.resolve()
 	}
-	
+
 	let dialogId: any = String(promptDialogId)
-	
+
 	if(
 		!dialogId.startsWith('chat')
 		&& !dialogId.startsWith('imol')
@@ -662,8 +659,7 @@ const makeImOpenHistory = async() =>
 	{
 		dialogId = Number(dialogId)
 	}
-	
-	debugger
+
 	return $b24.parent.imOpenHistory(
 		dialogId
 	)
@@ -677,20 +673,20 @@ const makeSelectUsers = async() =>
 		status.value.isProcess = true
 		status.value.title = 'test $b24.dialog.selectUsers'
 		status.value.messages.push('use $b24.dialog.selectUsers to select a user')
-		
+
 		status.value.progress.animation = true
 		status.value.progress.indicator = false
 		status.value.progress.value = null
 		status.value.time.start = DateTime.now()
-		
+
 		return resolve(null)
 	})
 	.then(async() =>
 	{
 		const selectedUsers = await $b24.dialog.selectUsers()
-		
+
 		$logger.info(selectedUsers)
-		
+
 		const list = selectedUsers.map((row: SelectedUser): string =>
 		{
 			return [
@@ -698,12 +694,12 @@ const makeSelectUsers = async() =>
 				row.name,
 			].join(' ')
 		})
-		
+
 		if(list.length < 1)
 		{
 			list.push('~ empty ~')
 		}
-		
+
 		status.value.resultInfo = `list: ${list.join('; ')}`
 	})
 	.catch((error: Error|string) =>
@@ -731,7 +727,7 @@ const makeSendPullCommand = async(
 		status.value.title = 'test pull.application.event.add'
 		status.value.messages.push('use $b24.dialog.selectUsers to select a user')
 		status.value.messages.push('use pull.application.event.add for send event')
-		
+
 		status.value.progress.animation = true
 		status.value.progress.indicator = false
 		status.value.progress.value = null
@@ -747,18 +743,18 @@ const makeSendPullCommand = async(
 				row.name,
 			].join(' ')
 		})
-		
+
 		if(list.length < 1)
 		{
 			list.push('~ empty ~')
 		}
-		
+
 		params.userList = list
-		
+
 		$logger.warn('>> pull.send >>>', params)
-		
+
 		status.value.time.start = DateTime.now()
-		
+
 		return $b24.callMethod(
 			'pull.application.event.add',
 			{
@@ -782,17 +778,17 @@ const makeSendPullCommand = async(
 const makeSendPullCommandHandler = (message: TypePullMessage): void =>
 {
 	$logger.warn('<< pull.get <<<', message)
-	
+
 	if(message.command === 'reload.options')
 	{
 		$logger.info("Get pull command for update. Reinit the application")
 		reloadData()
 		return
 	}
-	
+
 	status.value.resultInfo = `command: ${message.command}; params: ${JSON.stringify(message.params)}`
 	stopMakeProcess()
-	
+
 }
 // endregion ////
 
@@ -809,7 +805,7 @@ const problemMessageList = (result: IResult) =>
 	{
 		problemMessageList = problemMessageList.concat(problem);
 	}
-	
+
 	return problemMessageList;
 }
 // endregion ////
@@ -817,15 +813,15 @@ const problemMessageList = (result: IResult) =>
 watch(defTabIndex, async() =>
 {
 	await nextTick()
-	
+
 	await $b24.parent.fitWindow()
 })
 </script>
 
 <template>
-	<ClientOnly>
-		<div class="mx-lg my-sm flex flex-col">
-		<div class=""
+  <div class="mx-lg my-sm flex flex-col">
+		<div
+class=""
 		     :class="{
 				'overflow-hidden': !isInit || isReload
 			}"
@@ -846,7 +842,7 @@ watch(defTabIndex, async() =>
 							@click.stop="makeOpenSliderForUser(b24Helper?.profileInfo.data.id || 0)"
 						>
 							<div class="flex items-center gap-4">
-								<Avatar
+								<B24Avatar
 									:src="b24Helper?.profileInfo.data.photo || ''"
 									:alt="b24Helper?.profileInfo.data.lastName || 'user' "
 								/>
@@ -874,18 +870,18 @@ watch(defTabIndex, async() =>
 						</div>
 					</div>
 					<div class="w-0 flex-1">
-						<Info>
+						<B24Alert>
 							Scopes: <code>user_brief</code>, <code>crm</code>, <code>pull</code><br>
 							To view query results, open the developer console.
-						</Info>
+						</B24Alert>
 					</div>
 				</div>
 				<div class="my-sm px-2 rounded-lg bg-white ">
-					<Tabs
-						:items="tabsItems"
+					<B24Tabs
 						v-model="defTabIndex"
+						:items="tabsItems"
 					>
-						<template #item="{ item }">
+						<template #content="{ item }">
 							<div class="p-4">
 								<div>
 									<h3 class="text-h3 font-semibold leading-7 text-base-900">{{item.label}}</h3>
@@ -908,16 +904,16 @@ watch(defTabIndex, async() =>
 											</div>
 										</dl>
 										<div
-											class="pt-6"
 											v-if="!isSliderMode"
+											class="pt-6"
 										>
-											<Info>Try changing the language at the bottom of the page</Info>
+											<B24Alert>Try changing the language at the bottom of the page</B24Alert>
 										</div>
 										<div
-											class="pt-6"
 											v-else
+											class="pt-6"
 										>
-											<Info>The application is opened in slider mode</Info>
+											<B24Alert>The application is opened in slider mode</B24Alert>
 										</div>
 									</div>
 									<div v-else-if="item.key === 'appInfo'" class="space-y-3">
@@ -1054,14 +1050,12 @@ watch(defTabIndex, async() =>
 												</dd>
 											</div>
 											<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-												<dt class="text-sm font-medium leading-6">specific URLs for a box or
-													cloud
-												</dt>
+												<dt class="text-sm font-medium leading-6">specific URLs for a box or cloud</dt>
 												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
 													<ul role="list" class="divide-y divide-base-100">
 														<li class="flex items-center justify-start pb-4 pl-0 pr-5 text-sm leading-1">
 															<div class="flex items-center">
-																<div class="truncate font-medium">MainSettings</div>
+																<ProseP>MainSettings</ProseP>
 															</div>
 															<div class="ml-4 flex-shrink-0">
 																<div
@@ -1073,7 +1067,7 @@ watch(defTabIndex, async() =>
 														</li>
 														<li class="flex items-center justify-start py-4 pl-0 pr-5 text-sm leading-1">
 															<div class="flex items-center">
-																<div class="truncate font-medium">UfList</div>
+																<ProseP>UfList</ProseP>
 															</div>
 															<div class="ml-4 flex-shrink-0">
 																<div
@@ -1085,7 +1079,7 @@ watch(defTabIndex, async() =>
 														</li>
 														<li class="flex items-center justify-start py-4 pl-0 pr-5 text-sm leading-1">
 															<div class="flex items-center">
-																<div class="truncate font-medium">UfPage</div>
+																<ProseP>UfPage</ProseP>
 															</div>
 															<div class="ml-4 flex-shrink-0">
 																{{b24Helper?.b24SpecificUrl.UfPage}}
@@ -1100,8 +1094,8 @@ watch(defTabIndex, async() =>
 										<button
 											type="button"
 											class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-											@click="makeOpenFeedBack"
 											:disabled="status.isProcess"
+											@click="makeOpenFeedBack"
 										>
 											<div class="rounded-full text-base-900 bg-base-100 p-1">
 												<FeedbackIcon class="size-5"/>
@@ -1169,19 +1163,17 @@ watch(defTabIndex, async() =>
 													>
 														<PlusIcon class="size-6"/>
 													</button>
-													
+
 													<div class="flex-1">Symbolic Identifier of the Base Currency</div>
 												</dt>
 												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
 													<div
 														class="text-sm font-medium flex flex-row gap-2 items-center justify-start">
 														<div>
-															<input
-																type="number"
+															<B24InputNumber
 																v-model.number="valueForCurrency"
-																class="border border-base-300 text-base-900 rounded block w-full p-2.5"
 																step="101.023"
-															>
+															/>
 														</div>
 														<div class="flex-1">{{b24Helper?.currency.baseCurrency}}
 														</div>
@@ -1190,8 +1182,8 @@ watch(defTabIndex, async() =>
 											</div>
 											<div
 												v-for="(currencyCode) in b24Helper?.currency.currencyList"
-												class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
 												:key="currencyCode"
+												class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
 											>
 												<dt class="text-sm font-medium leading-6 flex flex-row gap-2 items-start justify-start">
 													<button
@@ -1201,14 +1193,12 @@ watch(defTabIndex, async() =>
 														<EditIcon class="size-6"/>
 													</button>
 													<div class="flex-1">{{currencyCode}}
-														• <span
-														v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, b24CurrentLang)"></span>
-														• <span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)"></span>
+														• <span v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, b24CurrentLang)"/>
+														• <span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)"/>
 													</div>
 												</dt>
 												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-													<span
-														v-html="b24Helper?.currency.format(valueForCurrency, currencyCode, b24CurrentLang)"></span>
+													<span v-html="b24Helper?.currency.format(valueForCurrency, currencyCode, b24CurrentLang)"/>
 												</dd>
 											</div>
 										</dl>
@@ -1219,8 +1209,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeSelectUsers"
 													:disabled="status.isProcess"
+													@click="makeSelectUsers"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<UserGroupIcon class="size-5"/>
@@ -1230,8 +1220,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeReloadWindow"
 													:disabled="status.isProcess"
+													@click="makeReloadWindow"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<Refresh7Icon class="size-5"/>
@@ -1241,8 +1231,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeImCallTo(true)"
 													:disabled="status.isProcess"
+													@click="makeImCallTo(true)"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<VideoAndChatIcon class="size-5"/>
@@ -1252,8 +1242,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeImCallTo(false)"
 													:disabled="status.isProcess"
+													@click="makeImCallTo(false)"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<CallChatIcon class="size-5"/>
@@ -1263,8 +1253,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeImOpenMessenger"
 													:disabled="status.isProcess"
+													@click="makeImOpenMessenger"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<MessengerIcon class="size-5"/>
@@ -1274,8 +1264,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeImOpenHistory"
 													:disabled="status.isProcess"
+													@click="makeImOpenHistory"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<DialogueIcon class="size-5"/>
@@ -1285,8 +1275,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeImPhoneTo"
 													:disabled="status.isProcess"
+													@click="makeImPhoneTo"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<TelephonyHandset6Icon class="size-5"/>
@@ -1296,8 +1286,8 @@ watch(defTabIndex, async() =>
 												<button
 													type="button"
 													class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-													@click="makeSendPullCommand('test', {data: Date.now()})"
 													:disabled="status.isProcess"
+													@click="makeSendPullCommand('test', {data: Date.now()})"
 												>
 													<div class="rounded-full text-base-900 bg-base-100 p-1">
 														<PulseIcon class="size-5"/>
@@ -1319,13 +1309,13 @@ watch(defTabIndex, async() =>
 																<div class="text-nowrap truncate">Clear console</div>
 															</button>
 														</div>
-														<div class="mt-2" v-show="status.messages.length > 0">
-															<p class="max-w-2xl text-sm text-base-500" v-for="(message, index) in status.messages" :key="index">{{message}}</p>
+														<div v-show="status.messages.length > 0" class="mt-2">
+															<p v-for="(message, index) in status.messages" :key="index" class="max-w-2xl text-sm text-base-500">{{message}}</p>
 														</div>
 													</div>
 													<div class="text-md text-base-900">
 														<dl class="divide-y divide-base-100">
-															<div class="mt-4 px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0" v-show="null !== status.time.start">
+															<div v-show="null !== status.time.start" class="mt-4 px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 																<dt class="text-sm font-medium leading-6">
 																	start:
 																</dt>
@@ -1333,7 +1323,7 @@ watch(defTabIndex, async() =>
 																	{{ (status.time?.start || DateTime.now()).setLocale(b24CurrentLang).toLocaleString(DateTime.TIME_24_WITH_SECONDS) }}
 																</dd>
 															</div>
-															<div class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0" v-show="null !== status.time.stop">
+															<div v-show="null !== status.time.stop" class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 																<dt class="text-sm font-medium leading-6">
 																	stop:
 																</dt>
@@ -1341,7 +1331,7 @@ watch(defTabIndex, async() =>
 																	{{ (status.time?.stop || DateTime.now()).setLocale(b24CurrentLang).toLocaleString(DateTime.TIME_24_WITH_SECONDS) }}
 																</dd>
 															</div>
-															<div class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0" v-show="null !== status.time.interval">
+															<div v-show="null !== status.time.interval" class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 																<dt class="text-sm font-medium leading-6">
 																	interval:
 																</dt>
@@ -1349,7 +1339,7 @@ watch(defTabIndex, async() =>
 																	{{ formatterNumber.format((status.time?.interval?.length() || 0) / 1_000) }} sec
 																</dd>
 															</div>
-															<div class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0" v-show="null !== status.resultInfo">
+															<div v-show="null !== status.resultInfo" class="px-2 py-1 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 																<dt class="text-sm font-medium leading-6">
 																	&nbsp;
 																</dt>
@@ -1359,34 +1349,30 @@ watch(defTabIndex, async() =>
 															</div>
 														</dl>
 													</div>
-													<div class="mt-4" v-show="status.isProcess">
-														<div class="mb-2 text-4xs text-blue-500" v-show="status.processInfo">{{ status.processInfo }}</div>
-														<ProgressBar
-															:animation="status.progress.animation"
-															:indicator="status.progress.indicator"
-															:value="status.progress?.value || undefined"
-															:max="status.progress?.max || 0"
+													<div v-show="status.isProcess" class="mt-4">
+														<div v-show="status.processInfo" class="mb-2 text-4xs text-blue-500">{{ status.processInfo }}</div>
+														<B24Progress
+															:animation="status.progress.animation ? 'swing' : undefined"
+															:v-model="status.progress.value"
+                              :status="true"
 														>
-															<template
-																v-if="status.progress.indicator"
-																#indicator
-															>
+															<template #status>
 																<div class="text-right min-w-[60px] text-xs w-full">
 																	<span class="text-blue-500">{{ status.progress.value }} / {{ status.progress.max }}</span>
 																</div>
 															</template>
-														</ProgressBar>
+														</B24Progress>
 													</div>
 												</div>
 												<div
-													class="mt-6 text-alert-text px-lg2 py-sm2 border border-base-30 rounded-md shadow-sm hover:shadow-md sm:rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white"
 													v-if="!result.isSuccess"
+													class="mt-6 text-alert-text px-lg2 py-sm2 border border-base-30 rounded-md shadow-sm hover:shadow-md sm:rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white"
 												>
 													<div>
 														<div class="mb-2 w-full flex items-center justify-between">
 															<h1 class="text-h1 font-semibold leading-7 text-base-900">Error</h1>
 														</div>
-														<p class="max-w-2xl text-txt-md" v-for="(problem, indexProblem) in problemMessageList(result)" :key="indexProblem">{{problem}}</p>
+														<p v-for="(problem, indexProblem) in problemMessageList(result)" :key="indexProblem" class="max-w-2xl text-txt-md">{{problem}}</p>
 													</div>
 												</div>
 												<div class="overflow-hidden mt-4 px-lg2 py-sm2 border border-base-30 rounded-md shadow-sm hover:shadow-md sm:rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white">
@@ -1395,16 +1381,16 @@ watch(defTabIndex, async() =>
 														<button
 															type="button"
 															class="flex relative flex-row flex-nowrap gap-1.5 justify-center items-center uppercase rounded pl-1 pr-3 py-1.5 leading-none text-3xs font-medium text-base-700 hover:text-base-900 hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:text-base-900 disabled:opacity-75"
-															@click="makeOpenAppOptions()"
 															:disabled="status.isProcess"
+															@click="makeOpenAppOptions()"
 														>
 															<Settings2Icon class="size-4"/>
 															<div class="text-nowrap truncate">App Options</div>
 														</button>
 													</div>
-													<pre class="mb-4">{{
+													<ProsePre>{{
 														b24Helper?.appOptions.data
-													}}</pre>
+													}}</ProsePre>
 												</div>
 												<div class="overflow-hidden  mt-4 px-lg2 py-sm2 border border-base-30 rounded-md shadow-sm hover:shadow-md sm:rounded-md col-auto md:col-span-2 lg:col-span-1 bg-white">
 													<div class="w-full flex items-center justify-between mb-4">
@@ -1412,8 +1398,8 @@ watch(defTabIndex, async() =>
 														<button
 															type="button"
 															class="flex relative flex-row flex-nowrap gap-1.5 justify-center items-center uppercase rounded pl-1 pr-3 py-1.5 leading-none text-3xs font-medium text-base-700 hover:text-base-900 hover:bg-base-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:text-base-900 disabled:opacity-75"
-															@click="makeOpenUserOptions()"
 															:disabled="status.isProcess"
+															@click="makeOpenUserOptions()"
 														>
 															<Settings2Icon class="size-4"/>
 															<div class="text-nowrap truncate">User Options</div>
@@ -1430,10 +1416,9 @@ watch(defTabIndex, async() =>
 								</div>
 							</div>
 						</template>
-					</Tabs>
+					</B24Tabs>
 				</div>
 			</div>
 		</div>
 		</div>
-	</ClientOnly>
 </template>

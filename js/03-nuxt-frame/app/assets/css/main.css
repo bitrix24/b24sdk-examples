@@ -1,0 +1,48 @@
+@import "tailwindcss";
+@import "@bitrix24/b24ui-nuxt";
+
+/** region bg-grid-example */
+.bg-grid-example {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(130 139 149 / 0.25)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.dark\:bg-grid-example:is(.dark *) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(130 139 149 / 0.25)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+/** endregion */
+
+/*
+ * Custom bg
+ */
+@layer base {
+  /*
+    .light,
+    :root {
+      --air-theme-bg-color: #eef2f4;
+    }
+
+    .dark {
+      --air-theme-bg-color: #000000;
+    }
+  */
+  .edge-light {
+    --air-theme-bg-image: url(../bg/edge-light-v1.svg);
+    --air-theme-bg-image-blurred: url(../bg/edge-light-v1-blurred.webp);
+    --air-theme-bg-position: 0 0;
+    /*--air-theme-bg-size: auto;*/
+    --air-theme-bg-size: 240px 240px;
+    --air-theme-bg-repeat: repeat;
+    --air-theme-bg-attachment: fixed;
+    --air-theme-bg-color: #f1dbdb87;
+  }
+
+  .edge-dark {
+    --air-theme-bg-image: url(../bg/edge-dark-v1.jpg);
+    --air-theme-bg-image-blurred: url(../bg/edge-dark-v1-blurred.webp);
+    --air-theme-bg-position: 0 0;
+    --air-theme-bg-size: cover;
+    --air-theme-bg-repeat: no-repeat;
+    --air-theme-bg-attachment: fixed;
+    --air-theme-bg-color: #162345;
+  }
+}

@@ -1,6 +1,10 @@
 # @bitrix24/b24jssdk-playground
 
-A playground for testing the library
+A playground for testing the library.
+
+## Core Components
+
+- **Required scopes**: `crm,user_brief`
 
 ## Setting Up the Environment
 
@@ -15,31 +19,31 @@ Make sure you have all the necessary dependencies installed. You can do this wit
 npm install
 ```
 
-2. **Create a `.env.local` File**:
+2. **Create a `.env` File**:
 
-In the root of the project, create a file named `.env.local`. This file will hold sensitive information like URLs, user IDs, and secret keys.
+In the root of the project, create a file named `.env`. This file will hold sensitive information like URLs, user IDs, and secret keys.
 
-3. **Use the Template to Fill `.env.local`**:
+3. **Use the Template to Fill `.env`**:
 
-Open the `.env.local.example` file, which has an example of environment variable settings. Copy its contents into your `.env.local` file and replace the placeholders with your own values:
+Open the `.env.example` file, which has an example of environment variable settings. Copy its contents into your `.env` file and replace the placeholders with your own values:
 
 ```plaintext
 ## For example: 35
-VITE_B24_FORM_ID="0"
+NUXT_PUBLIC_B24_FORM_ID="0"
 
 ## For example: c9qk4k
-VITE_B24_FORM_SECRET="insert_secret"
+NUXT_PUBLIC_B24_FORM_SECRET="insert_secret"
 
 ## For example: https://cdn-ru.bitrix24.com/b80599/crm/form/loader_34.js
-VITE_B24_FORM_LOADER_SCRIPT="insert_loaderScript"
+NUXT_PUBLIC_B24_FORM_LOADER_SCRIPT="insert_loaderScript"
 ```
 
-4. **Make Sure `.env.local` is in `.gitignore`**:
+4. **Make Sure `.env` is in `.gitignore`**:
 
-Check that the `.env.local` file is listed in `.gitignore` so it doesn't get pushed to the repository:
+Check that the `.env` file is listed in `.gitignore` so it doesn't get pushed to the repository:
 
 ```plaintext
-.env.local
+.env
 ```
 
 5. **Run the Project**:
