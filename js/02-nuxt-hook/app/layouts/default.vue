@@ -7,8 +7,13 @@ import MoonIcon from '@bitrix24/b24icons-vue/main/MoonIcon'
 import MoonIconAir from '@bitrix24/b24icons-vue/outline/MoonIcon'
 import { useAppInit } from '~/composables/useAppInit'
 
-type colorMode = 'dark' | 'light' | 'edgeDark' | 'edgeLight'
+type colorMode = 'dark' | 'light' | 'edge-dark' | 'edge-light'
+
 const colorMode = useColorMode()
+if (colorMode.value === 'system') {
+  colorMode.preference = 'edge-dark'
+}
+
 const mode = ref<colorMode>(colorMode.value as colorMode)
 
 const route = useRoute()
@@ -33,12 +38,12 @@ const itemsForColorMode = computed(() => {
     },
     {
       label: 'edge-dark',
-      code: 'edgeDark',
+      code: 'edge-dark',
       icon: MoonIconAir
     },
     {
       label: 'edge-light',
-      code: 'edgeLight',
+      code: 'edge-light',
       icon: SunIconAir
     }
   ]
@@ -51,14 +56,14 @@ function toggleMode() {
       colorMode.preference = 'light'
       break
     case 'light':
-      mode.value = 'edgeDark'
+      mode.value = 'edge-dark'
       colorMode.preference = 'edge-dark'
       break
-    case 'edgeDark':
-      mode.value = 'edgeLight'
+    case 'edge-dark':
+      mode.value = 'edge-light'
       colorMode.preference = 'edge-light'
       break
-    case 'edgeLight':
+    case 'edge-light':
     default:
       mode.value = 'dark'
       colorMode.preference = 'dark'
@@ -161,9 +166,6 @@ onMounted(() => {
   <B24SidebarLayout
     ref="currentSidebarRef"
     :use-light-content="!(['/', '/core/use-result', '/tools/use-logger', '/hook/testing-rest-api-calls'].includes(route.path))"
-    :b24ui="{
-      containerWrapper: !(['/', '/core/use-result', '/tools/use-logger', '/hook/testing-rest-api-calls'].includes(route.path)) ? 'light' : ''
-    }"
   >
     <template #sidebar>
       <B24SidebarHeader>
@@ -181,13 +183,15 @@ onMounted(() => {
           orientation="vertical"
         />
         <B24SidebarSpacer />
-        <B24NavigationMenu
-          :items="helpItems"
-          orientation="vertical"
-          :b24ui="{
-            linkLeadingBadge: '-top-[10px] left-[34px]'
-          }"
-        />
+        <ClientOnly>
+          <B24NavigationMenu
+            :items="helpItems"
+            orientation="vertical"
+            :b24ui="{
+              linkLeadingBadge: '-top-[10px] left-[34px]'
+            }"
+          />
+        </ClientOnly>
       </B24SidebarBody>
     </template>
     <!-- / <template #navbar /> / -->

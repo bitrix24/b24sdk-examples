@@ -84,11 +84,6 @@ const actionCompanyAdd = async (needAdd = 10) => {
     getRootSideBarApi()?.setLoading(false)
   }
 }
-
-// Initial data loading
-onMounted(() => {
-  actionCompanyList()
-})
 </script>
 
 <template>
