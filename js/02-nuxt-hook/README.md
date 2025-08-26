@@ -1,6 +1,11 @@
 # @bitrix24/b24jssdk-playground
 
-A playground for testing the library
+A playground for testing the library.
+
+## Core Components
+
+- **Required scopes**: `crm,user_brief`
+
 
 ## Setting Up the Environment
 
