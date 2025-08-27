@@ -1,4 +1,19 @@
 {
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Тестирование приложения"
+      },
+      "menu": {
+        "main": "Главная страница"
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "Главная страница"
+      }
+    }
+  },
 	"message1": "The early bird catches the worm",
 	"message2": "A picture is worth a thousand words"
 }

@@ -1,4 +1,101 @@
 {
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Тестирование приложения"
+      },
+      "menu": {
+        "main": "Открыть"
+      },
+      "message": {
+        "title": "Привет!",
+        "line1": "Давайте протестируем работу приложения в Bitrix24. Откройте приложение в слайдере."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] Тестирование приложения"
+      },
+      "message": {
+        "line1": "Откройте каждую страницу в левом меню и изучите, как на ней все работает.",
+        "line2": "Не забудьте поиграться с цветовым режимом.",
+        "scopes": "Требуемы права (scopes):"
+      }
+    },
+    "base_app-info": {
+      "nav": "Приложение",
+      "seo": {
+        "title": "Приложение",
+        "description": "Информация о приложении."
+      },
+      "message": {
+        "id": "идентификатор",
+        "code": "код",
+        "version": "версия",
+        "status": "статус",
+        "isInstalled": "статус установки"
+      }
+    },
+    "base_license-info": {
+      "nav": "Лицензия и оплата",
+      "seo": {
+        "title": "Лицензия и оплата",
+        "description": "Обозначение тарифного плана с указанием региона в качестве префикса."
+      },
+      "message": {
+        "languageId": "кода языка",
+        "license": "обозначение тарифа с указанием региона в качестве префикса",
+        "licenseType": "внутреннее тарифное обозначение без указания региона",
+        "licensePrevious": "прошлая лицензия",
+        "licenseFamily": "обозначение тарифа без указания региона",
+        "isSelfHosted": "флаг, указывающий, является ли это коробкой или облаком",
+        "isExpired": "флаг, указывающий, истек ли оплаченный или пробный период",
+        "days": "количество дней, оставшихся до конца оплаченного периода или пробного периода"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Specific methods",
+      "seo": {
+        "title": "Specific methods",
+        "description": "Testing specific method."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Specific parameters",
+      "seo": {
+        "title": "Specific parameters",
+        "description": "List of specific parameters for box and cloud."
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Demonstrates the output of language messages depending on the locale of Bitrix24."
+      }
+    },
+    "base_feedback": {
+      "nav": "Feedback form",
+      "seo": {
+        "title": "Feedback form",
+        "description": "Examples of fields for the feedback form."
+      }
+    },
+    "base_currency": {
+      "nav": "Currency",
+      "seo": {
+        "title": "Currency",
+        "description": "List of currencies created in Bitrix24."
+      }
+    }
+  },
 	"message1": "Кто рано встает, тому Бог подает",
 	"message2": "Лучше один раз увидеть, чем сто раз услышать"
 }

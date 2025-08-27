@@ -9,7 +9,8 @@ export default defineNuxtConfig({
     '@bitrix24/b24ui-nuxt',
     '@bitrix24/b24jssdk-nuxt',
     '@nuxt/eslint',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@pinia/nuxt'
   ],
   devtools: { enabled: false },
 

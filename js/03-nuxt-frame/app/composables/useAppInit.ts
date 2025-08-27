@@ -1,6 +1,7 @@
-import { LoggerBrowser, AjaxError } from '@bitrix24/b24jssdk'
+import { LoggerBrowser, AjaxError, LoadDataType, useB24Helper } from '@bitrix24/b24jssdk'
 import type { B24Frame } from '@bitrix24/b24jssdk'
-import { Salt } from '~/services/salt'
+import type { SidebarLayoutInstance } from '@bitrix24/b24ui-nuxt'
+import {computed, ref} from "vue";
 
 export interface ProcessErrorData {
   description?: string
@@ -12,7 +13,11 @@ export interface ProcessErrorData {
   homePageTitle?: string
 }
 
-// const { clearSalt } = Salt()
+let sidebarLayoutInstance: null | SidebarLayoutInstance['api'] = null
+
+const { initB24Helper, getB24Helper } = useB24Helper()
+const isInitB24Helper = ref(false)
+
 /**
  * Composable handling application initialization
  * Coordinates data loading via batch request
@@ -23,23 +28,30 @@ export const useAppInit = (loggerTitle?: string) => {
     import.meta.dev
   )
 
-  // // Stores
-  // const appSettings = useAppSettingsStore()
-  // const userSettings = useUserSettingsStore()
-  // const user = useUserStore()
+  // Stores
+  const appSettings = useAppSettingsStore()
+  const userSettings = useUserSettingsStore()
+  const user = useUserStore()
 
   /**
    * Initialize application data
    * Performs batch request and updates all stores
    */
-  const initApp = async ($b24: B24Frame) => {
+  async function initApp($b24: B24Frame) {
+    await initB24Helper(
+      $b24,
+      [
+        LoadDataType.App,
+        LoadDataType.Currency
+      ]
+    )
+    isInitB24Helper.value = true
+
     const commands = {
       appInfo: { method: 'app.info' },
       appSettings: { method: 'app.option.get' },
       userSettings: { method: 'user.option.get' },
-      profileData: { method: 'profile' },
-      activityList: { method: 'bizproc.activity.list' },
-      robotList: { method: 'bizproc.robot.list' }
+      profileData: { method: 'profile' }
     }
 
     const response = await $b24.callBatch(commands)
@@ -47,32 +59,35 @@ export const useAppInit = (loggerTitle?: string) => {
     const data = response.getData()
     $logger.log('Init data >>', data)
 
-    // // Update stores with received data
-    // user.initFromBatch({
-    //   NAME: data.profileData?.NAME,
-    //   LAST_NAME: data.profileData?.LAST_NAME,
-    //   ADMIN: data.profileData?.ADMIN === true
-    // })
-    //
-    // appSettings.setB24($b24)
-    // appSettings.initFromBatchByActivityInstalled([
-    //   ...(data.activityList || []),
-    //   ...(data.robotList || [])
-    // ].map(row => clearSalt(row)))
-    //
-    // appSettings.initFromBatch({
-    //   version: data.appInfo?.VERSION || '0.0.1',
-    //   isTrial: data.appInfo?.STATUS === 'T',
-    //   integrator: data.appSettings?.integrator || {},
-    //   configSettings: data.appSettings?.configSettings || {}
-    // })
-    //
-    // userSettings.setB24($b24)
-    // userSettings.initFromBatch({
-    //   searchQuery: data.userSettings?.searchQuery || '',
-    //   filterParams: data.userSettings?.filterParams
-    // })
+    // Update stores with received data
+    user.initFromBatch({
+      NAME: data.profileData?.NAME,
+      LAST_NAME: data.profileData?.LAST_NAME,
+      ADMIN: data.profileData?.ADMIN === true
+    })
+
+    appSettings.setB24($b24)
+    appSettings.initFromBatch({
+      version: data.appInfo?.VERSION || '0.0.1',
+      isTrial: data.appInfo?.STATUS === 'T',
+      integrator: data.appSettings?.integrator || {},
+      configSettings: data.appSettings?.configSettings || {}
+    })
+
+    userSettings.setB24($b24)
+    userSettings.initFromBatch({
+      configSettings: data.userSettings?.configSettings || {}
+    })
   }
+
+  const b24Helper = computed(() => {
+    $logger.warn( isInitB24Helper.value )
+    if (isInitB24Helper.value) {
+      return getB24Helper()
+    }
+
+    return null
+  })
 
   function processErrorGlobal(
     error: unknown | string | Error,
@@ -99,16 +114,31 @@ export const useAppInit = (loggerTitle?: string) => {
         description: description,
         homePageIsHide: true,
         isShowClearError: true,
-        clearErrorHref: '/'
+        clearErrorHref: '/main'
       }, (pocessErrorData || {})),
       cause: error,
       fatal: true
     })
   }
 
+  function setRootSideBarApi(instance: SidebarLayoutInstance['api']) {
+    sidebarLayoutInstance = instance
+  }
+
+  const getRootSideBarApi = (): null | SidebarLayoutInstance['api'] => {
+    if (!sidebarLayoutInstance) {
+      return null
+    }
+
+    return sidebarLayoutInstance as unknown as SidebarLayoutInstance['api']
+  }
+
   return {
     $logger,
     initApp,
+    b24Helper,
+    setRootSideBarApi,
+    getRootSideBarApi,
     processErrorGlobal
   }
 }
