@@ -153,7 +153,6 @@ defineShortcuts(extractShortcuts(helpItems.value))
 const { setRootSideBarApi } = useAppInit()
 
 const currentSidebarRef = ref<SidebarLayoutInstance | null>(null)
-console.log(currentSidebarRef.value)
 
 onMounted(() => {
   if (currentSidebarRef.value) {
