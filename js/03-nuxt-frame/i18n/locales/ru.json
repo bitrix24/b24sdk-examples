@@ -29,6 +29,12 @@
         "scopes": "Требуемы права (scopes):"
       }
     },
+    "feedback": {
+      "seo": {
+        "title": "Форма обратной связи",
+        "description": "Примеры формы обратной связи."
+      }
+    },
     "base_app-info": {
       "nav": "Приложение",
       "seo": {
@@ -78,21 +84,45 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Demonstrates the output of language messages depending on the locale of Bitrix24."
+        "description": "Демонстрирует вывод языковых сообщений в зависимости от локали Битрикс24."
+      },
+      "message": {
+        "message1": "первое сообщение",
+        "message2": "второе сообщение",
+        "line1": "Попробуйте изменить язык Битрикс24."
       }
     },
     "base_feedback": {
-      "nav": "Feedback form",
+      "nav": "Форма обратной связи",
       "seo": {
-        "title": "Feedback form",
-        "description": "Examples of fields for the feedback form."
+        "title": "Форма обратной связи",
+        "description": "Примеры полей для формы обратной связи."
+      },
+      "actions": {
+        "open": "Открыть"
+      },
+      "message": {
+        "id": "идентификатор",
+        "code": "код",
+        "version": "версия",
+        "status": "статус",
+        "isInstalled": "статус установки"
       }
     },
     "base_currency": {
       "nav": "Валюты",
       "seo": {
         "title": "Валюты",
-        "description": "Список валют, созданных в Битрикс24."
+        "description": "Список валют Битрикс24."
+      },
+      "actions": {
+        "create": "Создать"
+      },
+      "list": {
+        "code": "Код",
+        "title": "Название",
+        "literal": "Знак",
+        "baseCurrency": "Символический идентификатор базовой валюты"
       }
     }
   },

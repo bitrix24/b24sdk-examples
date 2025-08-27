@@ -11,6 +11,8 @@ type colorMode = 'dark' | 'light' | 'edge-dark' | 'edge-light'
 
 const { t } = useI18n()
 
+const slots = defineSlots()
+
 const colorMode = useColorMode()
 if (colorMode.value === 'system') {
   colorMode.preference = 'edge-dark'
@@ -201,18 +203,23 @@ const isUseHeader = computed(() => !['/main'].includes(route.path))
 
     <!-- Header -->
     <template v-if="isUseHeader" #content-top>
-      <div class="w-full flex flex-col gap-[20px]">
+      <div class="w-full flex flex-col gap-[6px]">
         <div class="flex items-center gap-[12px]">
-          <div class="w-full flex flex-col items-start justify-between gap-[5px]">
+          <div class="w-full flex items-center gap-[20px]">
             <ProseH2 class="font-semibold mb-0">
               {{ pageTitle }}
             </ProseH2>
-            <ProseP v-if="pageDescription.length > 0" small accent="less">
-              {{ pageDescription }}
-            </ProseP>
+            <slot name="top-actions" />
           </div>
         </div>
+        <ProseP v-if="pageDescription.length > 0" accent="less" class="mb-0">
+          {{ pageDescription }}
+        </ProseP>
       </div>
+    </template>
+
+    <template v-if="!!slots['header-actions'] && isUseHeader" #content-actions>
+      <slot name="header-actions" />
     </template>
 
     <!-- Content -->

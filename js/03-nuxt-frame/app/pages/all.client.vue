@@ -860,32 +860,6 @@ watch(defTabIndex, async() =>
 							<div class="p-4">
 								<div class="mt-3 text-md text-base-900">
 									<div v-if="item.key === 'lang'">
-										<dl class="divide-y divide-base-100">
-											<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-												<dt class="text-sm font-medium leading-6">message 1</dt>
-												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-													{{t('message1')}}
-												</dd>
-											</div>
-											<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-												<dt class="text-sm font-medium leading-6">message 2</dt>
-												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-													{{t('message2')}}
-												</dd>
-											</div>
-										</dl>
-										<div
-											v-if="!isSliderMode"
-											class="pt-6"
-										>
-											<B24Alert>Try changing the language at the bottom of the page</B24Alert>
-										</div>
-										<div
-											v-else
-											class="pt-6"
-										>
-											<B24Alert>The application is opened in slider mode</B24Alert>
-										</div>
 									</div>
 									<div v-else-if="item.key === 'specific'" class="space-y-3">
 										<dl class="divide-y divide-base-100">
@@ -949,17 +923,7 @@ watch(defTabIndex, async() =>
 										</dl>
 									</div>
 									<div v-else-if="item.key === 'forB24Form'" class="space-y-3">
-										<button
-											type="button"
-											class="flex relative flex-row flex-nowrap gap-1.5 justify-start items-center rounded-lg border border-base-100 bg-base-20 pl-2 pr-3 py-2 text-sm font-medium text-base-900 hover:shadow-md hover:-translate-y-px focus:outline-none focus-visible:ring-2 focus-visible:ring-base-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:bg-base-200 disabled:shadow-none disabled:translate-y-0 disabled:text-base-900 disabled:opacity-75"
-											:disabled="status.isProcess"
-											@click="makeOpenFeedBack"
-										>
-											<div class="rounded-full text-base-900 bg-base-100 p-1">
-												<FeedbackIcon class="size-5"/>
-											</div>
-											<div class="text-nowrap truncate">Feedback</div>
-										</button>
+
 										<dl class="divide-y divide-base-100">
 											<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
 												<dt class="text-sm font-medium leading-6">app_code</dt>
@@ -1010,9 +974,6 @@ watch(defTabIndex, async() =>
 												</dd>
 											</div>
 										</dl>
-									</div>
-									<div v-else-if="item.key === 'currency'" class="space-y-3">
-
 									</div>
 									<div v-else-if="item.key === 'test'" class="space-y-3">
 										<div class="mt-6 flex flex-col sm:flex-row gap-10">

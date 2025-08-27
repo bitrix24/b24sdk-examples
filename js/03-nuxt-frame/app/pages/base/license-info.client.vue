@@ -57,7 +57,7 @@ const infoItems = computed(() => [
 </script>
 
 <template>
-  <ContainerWrapper>
+  <ContainerWrapper class="px-[22px] py-[5px]">
     <B24DescriptionList
       :b24ui="{ container: 'mt-0' }"
       :items="infoItems"

@@ -16,23 +16,23 @@ const infoItems = computed(() => [
   {
     label: t('page.base_app-info.message.id'),
     code: 'id',
-    description: (b24Helper.value?.appInfo.data.id || '').toString()
+    description: (b24Helper.value?.appInfo.data.id ?? '').toString()
   },
   {
     label: t('page.base_app-info.message.code'),
     code: 'code',
-    description: (b24Helper.value?.appInfo.data.code || '').toString()
+    description: (b24Helper.value?.appInfo.data.code ?? '').toString()
   },
   {
     label: t('page.base_app-info.message.version'),
     code: 'version',
-    description: (b24Helper.value?.appInfo.data.version || '').toString()
+    description: (b24Helper.value?.appInfo.data.version ?? '').toString()
   },
   {
     label: t('page.base_app-info.message.status'),
     code: 'status',
-    statusCode: (b24Helper.value?.appInfo.statusCode || '').toString(),
-    statusValue: (b24Helper.value?.appInfo.data.status || '').toString(),
+    statusCode: (b24Helper.value?.appInfo.statusCode ?? '').toString(),
+    statusValue: (b24Helper.value?.appInfo.data.status ?? '').toString(),
     description: '?'
   },
   {
@@ -44,7 +44,7 @@ const infoItems = computed(() => [
 </script>
 
 <template>
-  <ContainerWrapper>
+  <ContainerWrapper class="px-[22px] py-[5px]">
     <B24DescriptionList
       :b24ui="{ container: 'mt-0' }"
       :items="infoItems"

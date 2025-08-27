@@ -38,11 +38,15 @@ export const useAppInit = (loggerTitle?: string) => {
    * Performs batch request and updates all stores
    */
   async function initApp($b24: B24Frame) {
+    /**
+     * @todo init data from helper
+     */
     await initB24Helper(
       $b24,
       [
         LoadDataType.App,
-        LoadDataType.Currency
+        LoadDataType.Currency,
+        LoadDataType.Profile
       ]
     )
     isInitB24Helper.value = true
@@ -88,12 +92,12 @@ export const useAppInit = (loggerTitle?: string) => {
   async function reloadData() {
     await b24Helper.value?.loadData([
       LoadDataType.App,
-      LoadDataType.Currency
+      LoadDataType.Currency,
+      LoadDataType.Profile
     ])
   }
 
   const b24Helper = computed(() => {
-    $logger.warn( isInitB24Helper.value )
     if (isInitB24Helper.value) {
       return getB24Helper()
     }

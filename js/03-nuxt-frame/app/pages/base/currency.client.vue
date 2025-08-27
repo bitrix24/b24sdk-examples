@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import EditIcon from '@bitrix24/b24icons-vue/button/EditIcon'
-import PlusIcon from '@bitrix24/b24icons-vue/button/PlusIcon'
-import type {B24Frame, StatusClose} from "@bitrix24/b24jssdk";
+import PlusMIcon from '@bitrix24/b24icons-vue/outline/PlusMIcon'
+import type { B24Frame } from '@bitrix24/b24jssdk'
+
+definePageMeta({
+  layout: false
+})
 
 const { t, locale } = useI18n()
 const route = useRoute()
@@ -49,7 +52,7 @@ const makeOpenSliderAddCurrency = async() => {
   }
 }
 
-const makeOpenSliderEditCurrency = async(currencyCode: string) => {
+const makeOpenSliderEditCurrency = async (currencyCode: string) => {
   try {
     const response = await $b24.slider.openPath(
       $b24.slider.getUrl(`/crm/configs/currency/edit/${currencyCode}/`),
@@ -61,8 +64,9 @@ const makeOpenSliderEditCurrency = async(currencyCode: string) => {
       && response.isClose
     )
     {
-      $logger.info("Slider is closed! Reinit the application")
-      return reloadData()
+      $logger.info('Slider is closed! Reinit the application')
+      getRootSideBarApi()?.setLoading(true)
+      await reloadData()
     }
   } catch (error) {
     processErrorGlobal(error, {
@@ -73,55 +77,63 @@ const makeOpenSliderEditCurrency = async(currencyCode: string) => {
   } finally {
     getRootSideBarApi()?.setLoading(false)
   }
-})
+}
 // endregion ////
 </script>
 
 <template>
-  <dl class="divide-y divide-base-100">
-    <div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-      <dt class="pt-2 text-sm font-medium leading-6 flex flex-row gap-2 items-start justify-start">
-        <B24Button
-          :icon="PlusIcon"
-          @click.stop="makeOpenSliderAddCurrency()"
-        />
-
-        <div class="flex-1">Symbolic Identifier of the Base Currency</div>
-      </dt>
-      <dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-        <div
-          class="text-sm font-medium flex flex-row gap-2 items-center justify-start">
-          <div>
-            <B24InputNumber
-              v-model.number="value"
-              :step="101.023"
-            />
-          </div>
-          <div class="flex-1">{{b24Helper?.currency.baseCurrency}}
-          </div>
-        </div>
-      </dd>
-    </div>
-    <div
-      v-for="(currencyCode) in b24Helper?.currency.currencyList"
-      :key="currencyCode"
-      class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
-    >
-      <dt class="text-sm font-medium leading-6 flex flex-row gap-2 items-start justify-start">
-        <button
-          class="text-base-400 hover:text-base-master hover:bg-base-100 rounded"
-          @click.stop="makeOpenSliderEditCurrency(currencyCode)"
-        >
-          <EditIcon class="size-6"/>
-        </button>
-        <div class="flex-1">{{currencyCode}}
-          • <span v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, locale)"/>
-          • <span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)"/>
-        </div>
-      </dt>
-      <dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-        <span v-html="b24Helper?.currency.format(value, currencyCode, locale)"/>
-      </dd>
-    </div>
-  </dl>
+  <NuxtLayout name="default">
+    <template #top-actions>
+      <B24Button
+        color="air-primary-success"
+        :icon="PlusMIcon"
+        :label="$t('page.base_currency.actions.create')"
+        @click.stop="makeOpenSliderAddCurrency()"
+      />
+    </template>
+    <ContainerWrapper>
+      <B24TableWrapper
+        row-hover
+        class="overflow-x-auto w-full"
+      >
+        <table>
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>{{ $t('page.base_currency.list.code') }}</th>
+              <th>{{ $t('page.base_currency.list.title') }}</th>
+              <th>{{ $t('page.base_currency.list.literal') }}</th>
+              <th>
+                <B24ButtonGroup size="sm" no-split>
+                  <B24InputNumber
+                    v-model.number="value"
+                    :step="101.023"
+                    class="w-[180px]"
+                  />
+                  <B24Tooltip
+                    :text="$t('page.base_currency.list.baseCurrency')"
+                    :content="{ side: 'top' }"
+                    :delay-duration="0"
+                  >
+                    <B24Button color="air-secondary-no-accent" :label="b24Helper?.currency.baseCurrency" />
+                  </B24Tooltip>
+                </B24ButtonGroup>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(currencyCode) in b24Helper?.currency.currencyList"
+              :key="currencyCode"
+            >
+              <th>{{ currencyCode }}</th>
+              <td><B24Link @click.stop="makeOpenSliderEditCurrency(currencyCode)"><span v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, locale)" /></B24Link></td>
+              <td><span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)" /></td>
+              <td><span class="ms-[56px]" v-html="b24Helper?.currency.format(value, currencyCode, locale)" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </B24TableWrapper>
+    </ContainerWrapper>
+  </NuxtLayout>
 </template>
