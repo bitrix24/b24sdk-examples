@@ -80,6 +80,18 @@ export const useAppInit = (loggerTitle?: string) => {
     })
   }
 
+  /**
+   * Reloads data
+   *
+   * @todo reinit all data at Store
+   */
+  async function reloadData() {
+    await b24Helper.value?.loadData([
+      LoadDataType.App,
+      LoadDataType.Currency
+    ])
+  }
+
   const b24Helper = computed(() => {
     $logger.warn( isInitB24Helper.value )
     if (isInitB24Helper.value) {
@@ -136,6 +148,7 @@ export const useAppInit = (loggerTitle?: string) => {
   return {
     $logger,
     initApp,
+    reloadData,
     b24Helper,
     setRootSideBarApi,
     getRootSideBarApi,

@@ -89,10 +89,10 @@
       }
     },
     "base_currency": {
-      "nav": "Currency",
+      "nav": "Валюты",
       "seo": {
-        "title": "Currency",
-        "description": "List of currencies created in Bitrix24."
+        "title": "Валюты",
+        "description": "Список валют, созданных в Битрикс24."
       }
     }
   },

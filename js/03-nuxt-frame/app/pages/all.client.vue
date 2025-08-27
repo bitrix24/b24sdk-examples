@@ -6,8 +6,7 @@ import type { IResult, SelectedUser, TypePullMessage, StatusClose, B24Frame } fr
 import SpinnerIcon from '@bitrix24/b24icons-vue/specialized/SpinnerIcon'
 import Settings2Icon from '@bitrix24/b24icons-vue/actions/Settings2Icon'
 import UserGroupIcon from '@bitrix24/b24icons-vue/common-b24/UserGroupIcon'
-import EditIcon from '@bitrix24/b24icons-vue/button/EditIcon'
-import PlusIcon from '@bitrix24/b24icons-vue/button/PlusIcon'
+
 import FeedbackIcon from '@bitrix24/b24icons-vue/main/FeedbackIcon'
 import TrashBinIcon from "@bitrix24/b24icons-vue/main/TrashBinIcon"
 import Refresh7Icon from '@bitrix24/b24icons-vue/actions/Refresh7Icon'
@@ -1013,54 +1012,7 @@ watch(defTabIndex, async() =>
 										</dl>
 									</div>
 									<div v-else-if="item.key === 'currency'" class="space-y-3">
-										<dl class="divide-y divide-base-100">
-											<div class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-												<dt class="pt-2 text-sm font-medium leading-6 flex flex-row gap-2 items-start justify-start">
-													<button
-														class="text-base-400 hover:text-base-master hover:bg-base-100 rounded"
-														@click.stop="makeOpenSliderAddCurrency()"
-													>
-														<PlusIcon class="size-6"/>
-													</button>
 
-													<div class="flex-1">Symbolic Identifier of the Base Currency</div>
-												</dt>
-												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-													<div
-														class="text-sm font-medium flex flex-row gap-2 items-center justify-start">
-														<div>
-															<B24InputNumber
-																v-model.number="valueForCurrency"
-																step="101.023"
-															/>
-														</div>
-														<div class="flex-1">{{b24Helper?.currency.baseCurrency}}
-														</div>
-													</div>
-												</dd>
-											</div>
-											<div
-												v-for="(currencyCode) in b24Helper?.currency.currencyList"
-												:key="currencyCode"
-												class="px-2 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
-											>
-												<dt class="text-sm font-medium leading-6 flex flex-row gap-2 items-start justify-start">
-													<button
-														class="text-base-400 hover:text-base-master hover:bg-base-100 rounded"
-														@click.stop="makeOpenSliderEditCurrency(currencyCode)"
-													>
-														<EditIcon class="size-6"/>
-													</button>
-													<div class="flex-1">{{currencyCode}}
-														• <span v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, b24CurrentLang)"/>
-														• <span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)"/>
-													</div>
-												</dt>
-												<dd class="mt-1 text-sm leading-6 text-base-700 sm:col-span-2 sm:mt-0">
-													<span v-html="b24Helper?.currency.format(valueForCurrency, currencyCode, b24CurrentLang)"/>
-												</dd>
-											</div>
-										</dl>
 									</div>
 									<div v-else-if="item.key === 'test'" class="space-y-3">
 										<div class="mt-6 flex flex-col sm:flex-row gap-10">
