@@ -45,7 +45,8 @@ export default defineNuxtConfig({
       // allow incoming requests from this host
       allowedHosts: [
         '******.ngrok-free.app',
-        'seasonally-punctual-agama.cloudpub.ru'
+        'seasonally-punctual-agama.cloudpub.ru',
+        'lazily-volcanic-moose.cloudpub.ru'
       ],
       // and don't forget CORS, if needed:
       cors: true
