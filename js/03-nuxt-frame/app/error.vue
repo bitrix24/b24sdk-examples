@@ -3,9 +3,7 @@ import { ref } from 'vue'
 import type { NuxtError } from '#app'
 
 useHead({
-  bodyAttrs: {
-    class: 'edge-dark'
-  }
+  bodyAttrs: { class: 'edge-dark' }
 })
 
 const $props = defineProps({
@@ -16,15 +14,15 @@ const errorBase = useError()
 console.error(errorBase.value)
 
 const errorData = ref({
-  code: $props.error?.statusCode || 400,
-  title: $props.error?.statusMessage || 'Error',
+  code: $props.error?.statusCode ?? 400,
+  title: $props.error?.statusMessage ?? 'Error',
   description: ($props.error?.data as any)?.description || errorBase?.value?.message || '',
   clearErrorIsShow: ($props.error?.data as any)?.isShowClearError === true,
-  clearErrorHref: ($props.error?.data as any)?.clearErrorHref || '/',
-  clearErrorTitle: ($props.error?.data as any)?.clearErrorTitle || 'Clear errors',
+  clearErrorHref: ($props.error?.data as any)?.clearErrorHref ?? '/',
+  clearErrorTitle: ($props.error?.data as any)?.clearErrorTitle ?? 'Clear errors',
   homePageIsHide: ($props.error?.data as any)?.homePageIsHide === true,
-  homePageHref: ($props.error?.data as any)?.homePageHref || '/',
-  homePageTitle: ($props.error?.data as any)?.homePageTitle || 'Go back home'
+  homePageHref: ($props.error?.data as any)?.homePageHref ?? '/',
+  homePageTitle: ($props.error?.data as any)?.homePageTitle ?? 'Go back home'
 })
 
 const handleError = () => clearError({ redirect: errorData.value.clearErrorHref })
@@ -47,13 +45,13 @@ const handleError = () => clearError({ redirect: errorData.value.clearErrorHref 
       </ProseP>
       <div class="my-4 flex flex-col sm:flex-row items-center justify-center gap-[10px] ">
         <B24Button
-          v-show="!errorData.homePageIsHide"
+          v-if="!errorData.homePageIsHide"
           color="air-primary"
           :to="errorData.homePageHref"
           :label="errorData.homePageTitle"
         />
         <B24Button
-          v-show="errorData.clearErrorIsShow"
+          v-if="errorData.clearErrorIsShow"
           color="air-secondary"
           :label="errorData.clearErrorTitle"
           @click="handleError"

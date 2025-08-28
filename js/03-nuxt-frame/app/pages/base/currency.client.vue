@@ -45,7 +45,7 @@ const makeOpenSliderAddCurrency = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/main'
+      clearErrorHref: '/base/currency'
     })
   } finally {
     getRootSideBarApi()?.setLoading(false)
@@ -72,7 +72,7 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/main'
+      clearErrorHref: '/base/currency'
     })
   } finally {
     getRootSideBarApi()?.setLoading(false)

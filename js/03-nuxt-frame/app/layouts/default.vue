@@ -118,16 +118,16 @@ const pages = computed<NavigationMenuItem[]>(() => {
       to: '/base/specific-parameters'
     },
     {
+      label: t('page.base_currency.nav'),
+      to: '/base/currency'
+    },
+    {
       label: t('page.base_lang.nav'),
       to: '/base/lang'
     },
     {
       label: t('page.base_feedback.nav'),
       to: '/base/feedback'
-    },
-    {
-      label: t('page.base_currency.nav'),
-      to: '/base/currency'
     }
   ]
 })
@@ -209,7 +209,13 @@ const isUseHeader = computed(() => !['/main'].includes(route.path))
             <ProseH2 class="font-semibold mb-0">
               {{ pageTitle }}
             </ProseH2>
-            <slot name="top-actions" />
+            <slot name="top-actions-start" />
+          </div>
+          <div
+            v-if="!!slots['top-actions-end']"
+            class="flex-1 hidden sm:flex flex-row items-center justify-end gap-[12px]"
+          >
+            <slot name="top-actions-end" />
           </div>
         </div>
         <ProseP v-if="pageDescription.length > 0" accent="less" class="mb-0">

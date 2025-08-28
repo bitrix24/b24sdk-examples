@@ -82,6 +82,8 @@ export const useAppInit = (loggerTitle?: string) => {
     userSettings.initFromBatch({
       configSettings: data.userSettings?.configSettings || {}
     })
+
+    $logger.info('stop')
   }
 
   /**
@@ -107,7 +109,7 @@ export const useAppInit = (loggerTitle?: string) => {
 
   function processErrorGlobal(
     error: unknown | string | Error,
-    pocessErrorData?: ProcessErrorData
+    processErrorData?: ProcessErrorData
   ) {
     $logger.error(error)
 
@@ -131,7 +133,7 @@ export const useAppInit = (loggerTitle?: string) => {
         homePageIsHide: true,
         isShowClearError: true,
         clearErrorHref: '/main'
-      }, (pocessErrorData || {})),
+      }, (processErrorData ?? {})),
       cause: error,
       fatal: true
     })

@@ -51,14 +51,15 @@ const infoItems = computed(() => [
     >
       <template #description="{ item }">
         <template v-if="item.code === 'status'">
-          <B24Badge color="air-primary-success" inverted :label="item.statusCode" /> <ProseCode>{{ item.statusValue }}</ProseCode>
+          <B24Badge color="air-secondary-accent-2" :label="item.statusCode" />
+          <B24Badge color="air-tertiary" class="ms-[6px]" :label="item.statusValue" />
         </template>
         <template v-else-if="item.code === 'isInstalled'">
           <B24Badge v-if="item.description === 'Y'" color="air-primary-success" label="installed" />
           <B24Badge v-if="item.description === 'N'" color="air-primary-alert" label="not installed" />
         </template>
         <template v-else>
-          <B24Badge color="air-secondary-accent-2" :label="item.description" />
+          <B24Badge color="air-tertiary" :label="item.description" />
         </template>
       </template>
     </B24DescriptionList>

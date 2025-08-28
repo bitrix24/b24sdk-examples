@@ -64,15 +64,15 @@ const infoItems = computed(() => [
     >
       <template #description="{ item }">
         <template v-if="item.code === 'isSelfHosted'">
-          <B24Badge v-if="item.description === 'Y'" color="air-primary" label="Self Hosted" />
-          <B24Badge v-if="item.description === 'N'" color="air-primary" inverted label="Cloud" />
+          <B24Badge v-if="item.description === 'Y'" color="air-secondary-accent" label="Self Hosted" />
+          <B24Badge v-if="item.description === 'N'" color="air-primary" label="Cloud" />
         </template>
         <template v-else-if="item.code === 'isExpired'">
           <B24Badge v-if="item.description === 'N'" color="air-primary-success" label="not expired" />
           <B24Badge v-if="item.description === 'Y'" color="air-primary-alert" label="expired" />
         </template>
         <template v-else>
-          <B24Badge color="air-secondary-accent-2" :label="item.description" />
+          <B24Badge color="air-tertiary" :label="item.description" />
         </template>
       </template>
     </B24DescriptionList>
