@@ -16,7 +16,8 @@ $logger.info('Hi from feedback')
 
 let iframe: null | HTMLIFrameElement = null
 const frameContainer = ref()
-// endregion ////
+
+const isFrameInit = ref(false)
 
 watch(b24Helper, (newValue) => {
   if (newValue) {
@@ -26,6 +27,12 @@ watch(b24Helper, (newValue) => {
 })
 
 function initFrame() {
+  if (isFrameInit.value) {
+    return
+  }
+
+  isFrameInit.value = true
+
   iframe = document.getElementById('iframe-b24-form') as HTMLIFrameElement
   const propertiesForB24Form = b24Helper.value?.forB24Form
 
@@ -89,6 +96,7 @@ function initFrame() {
 
   frameContainer.value?.appendChild(iframe)
 }
+// endregion ////
 
 onMounted(async () => {
   try {

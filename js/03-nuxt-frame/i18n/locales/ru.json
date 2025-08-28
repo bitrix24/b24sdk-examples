@@ -72,11 +72,40 @@
       "nav": "Специальные методы",
       "seo": {
         "title": "Специальные методы",
-        "description": "Тестирование специальных методов.",
-        "message": {
-          "line1": "xxx.",
-          "isSelfHosted": "xxx"
-        }
+        "description": "Тестирование специальных методов."
+      },
+      "message": {
+        "line1": "Тут показана работа методов доступных в приложения встроенном через Frame.",
+        "selectUsers": "Выбор пользователя",
+        "selectUsersDescription": "используйте `$b24.dialog.selectUsers` для выбора пользователя",
+        "makeImCallToVideo": "Внутренний видео звонок",
+        "makeImCallToVideoDescription": "используйте `$b24.parent.imCallTo(xxx, true)` для инициирования вызова",
+        "makeImCallToVoice": "Внутренний голосовый звонок",
+        "makeImCallToVoiceDescription": "используйте `$b24.parent.imCallTo(xxx, false)` для инициирования вызова",
+        "makeImOpenMessenger": "Чат",
+        "makeImOpenMessengerDescription": "используйте `$b24.parent.imOpenMessenger`, чтобы открыть окно чата",
+        "makeImOpenHistory": "История чата",
+        "makeImOpenHistoryDescription": "используйте `$b24.parent.imOpenHistory`, чтобы открыть историю чата",
+        "makeImPhoneTo": "Звонок через телефонию",
+        "makeImPhoneToDescription": "используйте `$b24.parent.imPhoneTo`, чтобы позвонить",
+        "makeSendPullCommand": "Pull сообщенте",
+        "makeSendPullCommandDescription": "используйте `pull.application.event.add`, чтобы отправить сообщение"
+      },
+      "actions": {
+        "clear": "Очистить лог",
+        "reload": "Перезагрузить",
+        "select": "Выбрать",
+        "videoCall": "Видео звонок",
+        "voiceCall": "Голосовой звонок",
+        "imOpenMessenger": "Чат",
+        "imOpenMessengerHistory": "История чата",
+        "makeImPhoneTo": "Позвонить",
+        "makeSendPullCommand": "Отправить"
+      },
+      "error": {
+        "notSelect": "Пользователь не выбран.",
+        "tryCallToSelf": "Вы не можете позвонить самому себе.",
+        "emptyNumber": "Не указан телефон для звонка."
       }
     },
     "base_specific-parameters": {

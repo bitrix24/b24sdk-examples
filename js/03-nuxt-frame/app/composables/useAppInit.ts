@@ -15,7 +15,7 @@ export interface ProcessErrorData {
 
 let sidebarLayoutInstance: null | SidebarLayoutInstance['api'] = null
 
-const { initB24Helper, getB24Helper } = useB24Helper()
+const { initB24Helper, getB24Helper, usePullClient, useSubscribePullClient, startPullClient } = useB24Helper()
 const isInitB24Helper = ref(false)
 
 /**
@@ -156,6 +156,9 @@ export const useAppInit = (loggerTitle?: string) => {
     initApp,
     reloadData,
     b24Helper,
+    usePullClient,
+    useSubscribePullClient,
+    startPullClient,
     setRootSideBarApi,
     getRootSideBarApi,
     processErrorGlobal
