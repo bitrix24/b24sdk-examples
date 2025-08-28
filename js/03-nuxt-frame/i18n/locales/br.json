@@ -1,4 +1,183 @@
 {
-	"message1": "Deus ajuda a quem cedo madruga",
-	"message2": "Uma imagem vale mais que mil palavras"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Teste do aplicativo"
+      },
+      "menu": {
+        "main": "Abrir"
+      },
+      "message": {
+        "title": "Olá!",
+        "line1": "Vamos testar o funcionamento do aplicativo no Bitrix24. Abra o aplicativo no slider."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] Teste do aplicativo"
+      },
+      "message": {
+        "line1": "Abra cada página no menu à esquerda e estude como tudo funciona nela.",
+        "line2": "Não se esqueça de brincar com o modo de cor.",
+        "scopes": "Permissões necessárias (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "Formulário de feedback",
+        "description": "Exemplos de formulário de feedback."
+      }
+    },
+    "base_app-info": {
+      "nav": "Aplicativo",
+      "seo": {
+        "title": "Aplicativo",
+        "description": "Informações sobre o aplicativo."
+      },
+      "message": {
+        "line1": "Estas são as principais marcas para identificação, controle e diagnóstico do aplicativo.",
+        "id": "identificador",
+        "code": "código",
+        "version": "versão",
+        "status": "status",
+        "isInstalled": "status de instalação"
+      }
+    },
+    "base_license-info": {
+      "nav": "Licença e pagamento",
+      "seo": {
+        "title": "Licença e pagamento",
+        "description": "Designação do plano tarifário com indicação da região como prefixo."
+      },
+      "message": {
+        "line1": "Você pode avisar o usuário com antecedência sobre a data de renovação.",
+        "languageId": "código do idioma",
+        "license": "designação do plano com indicação da região como prefixo",
+        "licenseType": "designação tarifária interna sem indicação da região",
+        "licensePrevious": "licença anterior",
+        "licenseFamily": "designação do plano sem indicação da região",
+        "isSelfHosted": "flag, indicando se o Bitrix24 é a versão self-hosted ou na nuvem",
+        "isExpired": "flag, indicando se o período pago ou de teste expirou",
+        "days": "número de dias restantes até o final do período pago ou de teste"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Métodos especiais",
+      "seo": {
+        "title": "Métodos especiais",
+        "description": "Teste de métodos especiais."
+      },
+      "message": {
+        "line1": "Aqui é mostrado o funcionamento dos métodos disponíveis no aplicativo incorporado via Frame.",
+        "selectUsers": "Seleção de usuário",
+        "selectUsersDescription": "use `$b24.dialog.selectUsers` para selecionar um usuário",
+        "makeImCallToVideo": "Chamada de vídeo interna",
+        "makeImCallToVideoDescription": "use `$b24.parent.imCallTo(xxx, true)` para iniciar uma chamada",
+        "makeImCallToVoice": "Chamada de voz interna",
+        "makeImCallToVoiceDescription": "use `$b24.parent.imCallTo(xxx, false)` para iniciar uma chamada",
+        "makeImOpenMessenger": "Chat",
+        "makeImOpenMessengerDescription": "use `$b24.parent.imOpenMessenger` para abrir a janela de chat",
+        "makeImOpenHistory": "Histórico de chat",
+        "makeImOpenHistoryDescription": "use `$b24.parent.imOpenHistory` para abrir o histórico de chat",
+        "makeImPhoneTo": "Chamada via telefonia",
+        "makeImPhoneToDescription": "use `$b24.parent.imPhoneTo` para ligar",
+        "makeSendPullCommand": "Mensagem Pull",
+        "makeSendPullCommandDescription": "use `pull.application.event.add` para enviar uma mensagem"
+      },
+      "actions": {
+        "clear": "Limpar log",
+        "reload": "Recarregar",
+        "select": "Selecionar",
+        "videoCall": "Chamada de vídeo",
+        "voiceCall": "Chamada de voz",
+        "imOpenMessenger": "Chat",
+        "imOpenMessengerHistory": "Histórico de chat",
+        "makeImPhoneTo": "Ligar",
+        "makeSendPullCommand": "Enviar"
+      },
+      "error": {
+        "notSelect": "Usuário não selecionado.",
+        "tryCallToSelf": "Você não pode ligar para si mesmo.",
+        "emptyNumber": "Telefone para ligação não especificado."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Parâmetros especiais",
+      "seo": {
+        "title": "Parâmetros especiais",
+        "description": "Lista de parâmetros especiais para a versão self-hosted e na nuvem."
+      },
+      "message": {
+        "line1": "Existem algumas diferenças entre as versões self-hosted e na nuvem do Bitrix24.",
+        "isSelfHosted": "flag, indicando se o Bitrix24 é a versão self-hosted ou na nuvem",
+        "primaryKeyIncrementValue": "incremento para campos do tipo ID",
+        "mainSettings": "link para configurações",
+        "ufList": "link para a lista Uf",
+        "ufPage": "link para Uf"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Demonstra a saída de mensagens de idioma dependendo da localidade do Bitrix24."
+      },
+      "message": {
+        "message1": "primeira mensagem",
+        "message2": "segunda mensagem",
+        "line1": "Tente alterar o idioma do Bitrix24."
+      }
+    },
+    "base_feedback": {
+      "nav": "Formulário de feedback",
+      "seo": {
+        "title": "Formulário de feedback",
+        "description": "Exemplos de campos para o formulário de feedback."
+      },
+      "actions": {
+        "open": "Feedback"
+      },
+      "message": {
+        "line1": "Você pode incorporar um formulário de CRM do seu Bitrix24 no aplicativo e passar campos especiais para ele.",
+        "line2": "Quando o usuário preencher o formulário, os dados sobre o aplicativo, plano tarifário, etc., estarão disponíveis no seu Bitrix24.",
+        "app_code": "código",
+        "app_status": "status",
+        "payment_expired": "flag, indicando se o período pago ou de teste expirou",
+        "days": "número de dias restantes até o final do período pago ou de teste",
+        "b24_plan": "designação do plano com indicação da região como prefixo",
+        "c_name": "nome do usuário",
+        "c_last_name": "sobrenome do usuário",
+        "hostname": "endereço do Bitrix24"
+      }
+    },
+    "base_currency": {
+      "nav": "Moedas",
+      "seo": {
+        "title": "Moedas",
+        "description": "Lista de moedas do Bitrix24."
+      },
+      "actions": {
+        "create": "Criar"
+      },
+      "message": {
+        "line1": "Mostrar o valor formatado é muito fácil."
+      },
+      "list": {
+        "code": "Código",
+        "title": "Nome",
+        "literal": "Símbolo",
+        "value": "Formatação",
+        "baseCurrency": "Código da moeda base"
+      }
+    }
+  },
+  "message1": "Deus ajuda quem cedo madruga",
+  "message2": "Antes ver uma vez do que ouvir cem vezes"
 }

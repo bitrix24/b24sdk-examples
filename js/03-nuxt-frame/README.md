@@ -53,3 +53,10 @@ Once the environment variables are set, you can start the project with:
 ```bash
 npm run dev
 ```
+
+## 🛠 Development Tools
+AI-powered translation via DeepSeek (scripts in `frontend/tools`):
+```shell
+# Translate UI phrases
+pnpm run translate-ui
+```

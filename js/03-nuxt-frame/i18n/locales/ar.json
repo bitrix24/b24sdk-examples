@@ -1,4 +1,183 @@
 {
-	"message1": "الطائر الباكر يصطاد الدودة",
-	"message2": "الصورة بألف كلمة"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] اختبار التطبيق"
+      },
+      "menu": {
+        "main": "فتح"
+      },
+      "message": {
+        "title": "مرحبًا!",
+        "line1": "دعنا نختبر عمل التطبيق في Bitrix24. افتح التطبيق في المنزلق."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] اختبار التطبيق"
+      },
+      "message": {
+        "line1": "افتح كل صفحة في القائمة اليسرى وادرس كيفية عمل كل شيء فيها.",
+        "line2": "لا تنسَ اللعب بوضع الألوان.",
+        "scopes": "الصلاحيات المطلوبة (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "نموذج الملاحظات",
+        "description": "أمثلة لنموذج الملاحظات."
+      }
+    },
+    "base_app-info": {
+      "nav": "التطبيق",
+      "seo": {
+        "title": "التطبيق",
+        "description": "معلومات عن التطبيق."
+      },
+      "message": {
+        "line1": "هذه العلامات الرئيسية لتحديد هوية التطبيق والتحكم فيه وتشخيصه.",
+        "id": "المعرف",
+        "code": "الكود",
+        "version": "الإصدار",
+        "status": "الحالة",
+        "isInstalled": "حالة التثبيت"
+      }
+    },
+    "base_license-info": {
+      "nav": "الترخيص والدفع",
+      "seo": {
+        "title": "الترخيص والدفع",
+        "description": "تعيين خطة التعريفة مع الإشارة إلى المنطقة كبادئة."
+      },
+      "message": {
+        "line1": "يمكنك تحذير المستخدم مسبقًا من موعد تجديد الاشتراك.",
+        "languageId": "كود اللغة",
+        "license": "تعيين الخطة مع الإشارة إلى المنطقة كبادئة",
+        "licenseType": "تعيين الخطة الداخلي دون الإشارة إلى المنطقة",
+        "licensePrevious": "الترخيص السابق",
+        "licenseFamily": "تعيين الخطة دون الإشارة إلى المنطقة",
+        "isSelfHosted": "علامة تشير إلى ما إذا كانت Bitrix24 هي الإصدار المحلي أو السحابي",
+        "isExpired": "علامة تشير إلى ما إذا كانت الفترة المدفوعة أو التجارية قد انتهت",
+        "days": "عدد الأيام المتبقية حتى نهاية الفترة المدفوعة أو التجريبية"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "طرق خاصة",
+      "seo": {
+        "title": "طرق خاصة",
+        "description": "اختبار الطرق الخاصة."
+      },
+      "message": {
+        "line1": "يُظهر هنا عمل الطرق المتاحة في التطبيق المضمن عبر Frame.",
+        "selectUsers": "اختيار مستخدم",
+        "selectUsersDescription": "استخدم `$b24.dialog.selectUsers` لاختيار مستخدم",
+        "makeImCallToVideo": "مكالمة فيديو داخلية",
+        "makeImCallToVideoDescription": "استخدم `$b24.parent.imCallTo(xxx, true)` لبدء المكالمة",
+        "makeImCallToVoice": "مكالمة صوتية داخلية",
+        "makeImCallToVoiceDescription": "استخدم `$b24.parent.imCallTo(xxx, false)` لبدء المكالمة",
+        "makeImOpenMessenger": "دردشة",
+        "makeImOpenMessengerDescription": "استخدم `$b24.parent.imOpenMessenger` لفتح نافذة الدردشة",
+        "makeImOpenHistory": "سجل الدردشة",
+        "makeImOpenHistoryDescription": "استخدم `$b24.parent.imOpenHistory` لفتح سجل الدردشة",
+        "makeImPhoneTo": "مكالمة عبر الهاتف",
+        "makeImPhoneToDescription": "استخدم `$b24.parent.imPhoneTo` للاتصال",
+        "makeSendPullCommand": "رسالة Pull",
+        "makeSendPullCommandDescription": "استخدم `pull.application.event.add` لإرسال رسالة"
+      },
+      "actions": {
+        "clear": "مسح السجل",
+        "reload": "إعادة تحميل",
+        "select": "اختيار",
+        "videoCall": "مكالمة فيديو",
+        "voiceCall": "مكالمة صوتية",
+        "imOpenMessenger": "دردشة",
+        "imOpenMessengerHistory": "سجل الدردشة",
+        "makeImPhoneTo": "اتصال",
+        "makeSendPullCommand": "إرسال"
+      },
+      "error": {
+        "notSelect": "لم يتم اختيار مستخدم.",
+        "tryCallToSelf": "لا يمكنك الاتصال بنفسك.",
+        "emptyNumber": "لم يتم تحديد رقم الهاتف للاتصال."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "معلمات خاصة",
+      "seo": {
+        "title": "معلمات خاصة",
+        "description": "قائمة المعلمات الخاصة للإصدار المحلي والسحابي."
+      },
+      "message": {
+        "line1": "هناك عدة اختلافات بين الإصدار المحلي والسحابي من Bitrix24.",
+        "isSelfHosted": "علامة تشير إلى ما إذا كانت Bitrix24 هي الإصدار المحلي أو السحابي",
+        "primaryKeyIncrementValue": "قيمة الزيادة لحقول النوع ID",
+        "mainSettings": "رابط الإعدادات",
+        "ufList": "رابط قائمة Uf",
+        "ufPage": "رابط Uf"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "يوضح إخراج رسائل اللغة حسب لغة Bitrix24."
+      },
+      "message": {
+        "message1": "الرسالة الأولى",
+        "message2": "الرسالة الثانية",
+        "line1": "حاول تغيير لغة Bitrix24."
+      }
+    },
+    "base_feedback": {
+      "nav": "نموذج الملاحظات",
+      "seo": {
+        "title": "نموذج الملاحظات",
+        "description": "أمثلة على الحقول لنموذج الملاحظات."
+      },
+      "actions": {
+        "open": "ملاحظات"
+      },
+      "message": {
+        "line1": "يمكنك تضمين نموذج CRM من Bitrix24 الخاص بك في التطبيق وتمرير حقول خاصة إليه.",
+        "line2": "عندما يملأ المستخدم النموذج، ستكون بيانات التطبيق والخطة وما إلى ذلك متاحة في Bitrix24 الخاص بك.",
+        "app_code": "الكود",
+        "app_status": "الحالة",
+        "payment_expired": "علامة تشير إلى ما إذا كانت الفترة المدفوعة أو التجريبية قد انتهت",
+        "days": "عدد الأيام المتبقية حتى نهاية الفترة المدفوعة أو التجريبية",
+        "b24_plan": "تعيين الخطة مع الإشارة إلى المنطقة كبادئة",
+        "c_name": "اسم المستخدم",
+        "c_last_name": "اسم عائلة المستخدم",
+        "hostname": "عنوان Bitrix24"
+      }
+    },
+    "base_currency": {
+      "nav": "العملات",
+      "seo": {
+        "title": "العملات",
+        "description": "قائمة عملات Bitrix24."
+      },
+      "actions": {
+        "create": "إنشاء"
+      },
+      "message": {
+        "line1": "عرض المبلغ المنسق سهل للغاية."
+      },
+      "list": {
+        "code": "الكود",
+        "title": "الاسم",
+        "literal": "الرمز",
+        "value": "التنسيق",
+        "baseCurrency": "كود العملة الأساسية"
+      }
+    }
+  },
+  "message1": "من بكر في الخير بارك الله له في يومه",
+  "message2": "رؤية العين خير من ألف خبر"
 }
