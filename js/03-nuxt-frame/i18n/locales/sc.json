@@ -1,4 +1,183 @@
 {
-	"message1": "早起的鸟儿有虫吃",
-	"message2": "一图胜千言"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] 应用测试"
+      },
+      "menu": {
+        "main": "打开"
+      },
+      "message": {
+        "title": "你好！",
+        "line1": "让我们在 Bitrix24 中测试应用程序的运行。请在滑块中打开应用程序。"
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] 应用测试"
+      },
+      "message": {
+        "line1": "打开左侧菜单中的每个页面，了解其上的所有功能。",
+        "line2": "别忘了试试色彩模式。",
+        "scopes": "所需权限 (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "反馈表单",
+        "description": "反馈表单示例。"
+      }
+    },
+    "base_app-info": {
+      "nav": "应用程序",
+      "seo": {
+        "title": "应用程序",
+        "description": "应用程序信息。"
+      },
+      "message": {
+        "line1": "这些是用于识别、控制和诊断应用程序的关键标记。",
+        "id": "标识符",
+        "code": "代码",
+        "version": "版本",
+        "status": "状态",
+        "isInstalled": "安装状态"
+      }
+    },
+    "base_license-info": {
+      "nav": "许可证和支付",
+      "seo": {
+        "title": "许可证和支付",
+        "description": "以地区为前缀的资费计划标识。"
+      },
+      "message": {
+        "line1": "可以提前通知用户续费日期。",
+        "languageId": "语言代码",
+        "license": "以地区为前缀的资费标识",
+        "licenseType": "不带地区标识的内部资费标识",
+        "licensePrevious": "过往许可证",
+        "licenseFamily": "不带地区标识的资费标识",
+        "isSelfHosted": "指示 Bitrix24 是自托管（盒装版）还是云版本的标志",
+        "isExpired": "指示付费或试用期是否已过的标志",
+        "days": "付费期或试用期剩余天数"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "特殊方法",
+      "seo": {
+        "title": "特殊方法",
+        "description": "测试特殊方法。"
+      },
+      "message": {
+        "line1": "这里展示了通过 Frame 内置在应用程序中可用的方法。",
+        "selectUsers": "选择用户",
+        "selectUsersDescription": "使用 `$b24.dialog.selectUsers` 选择用户",
+        "makeImCallToVideo": "内部视频通话",
+        "makeImCallToVideoDescription": "使用 `$b24.parent.imCallTo(xxx, true)` 发起呼叫",
+        "makeImCallToVoice": "内部语音通话",
+        "makeImCallToVoiceDescription": "使用 `$b24.parent.imCallTo(xxx, false)` 发起呼叫",
+        "makeImOpenMessenger": "聊天",
+        "makeImOpenMessengerDescription": "使用 `$b24.parent.imOpenMessenger` 打开聊天窗口",
+        "makeImOpenHistory": "聊天历史",
+        "makeImOpenHistoryDescription": "使用 `$b24.parent.imOpenHistory` 打开聊天历史",
+        "makeImPhoneTo": "通过电话系统呼叫",
+        "makeImPhoneToDescription": "使用 `$b24.parent.imPhoneTo` 拨打电话",
+        "makeSendPullCommand": "Pull 消息",
+        "makeSendPullCommandDescription": "使用 `pull.application.event.add` 发送消息"
+      },
+      "actions": {
+        "clear": "清除日志",
+        "reload": "重新加载",
+        "select": "选择",
+        "videoCall": "视频通话",
+        "voiceCall": "语音通话",
+        "imOpenMessenger": "聊天",
+        "imOpenMessengerHistory": "聊天历史",
+        "makeImPhoneTo": "拨打电话",
+        "makeSendPullCommand": "发送"
+      },
+      "error": {
+        "notSelect": "未选择用户。",
+        "tryCallToSelf": "您不能呼叫自己。",
+        "emptyNumber": "未指定呼叫的电话号码。"
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "特殊参数",
+      "seo": {
+        "title": "特殊参数",
+        "description": "适用于盒装版和云版本的特殊参数列表。"
+      },
+      "message": {
+        "line1": "Bitrix24 的盒装版和云版本之间存在一些差异。",
+        "isSelfHosted": "指示 Bitrix24 是自托管（盒装版）还是云版本的标志",
+        "primaryKeyIncrementValue": "ID 类型字段的增量步长",
+        "mainSettings": "设置链接",
+        "ufList": "Uf 列表链接",
+        "ufPage": "Uf 页面链接"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "根据 Bitrix24 的区域设置演示语言消息的输出。"
+      },
+      "message": {
+        "message1": "第一条消息",
+        "message2": "第二条消息",
+        "line1": "尝试更改 Bitrix24 的语言。"
+      }
+    },
+    "base_feedback": {
+      "nav": "反馈表单",
+      "seo": {
+        "title": "反馈表单",
+        "description": "反馈表单字段示例。"
+      },
+      "actions": {
+        "open": "反馈"
+      },
+      "message": {
+        "line1": "您可以将来自 Bitrix24 的 CRM 表单嵌入到您的应用程序中，并向其传递特殊字段。",
+        "line2": "当用户填写表单后，您的 Bitrix24 中将提供有关应用程序、资费计划等数据。",
+        "app_code": "代码",
+        "app_status": "状态",
+        "payment_expired": "指示付费或试用期是否已过的标志",
+        "days": "付费期或试用期剩余天数",
+        "b24_plan": "以地区为前缀的资费标识",
+        "c_name": "用户名",
+        "c_last_name": "用户姓氏",
+        "hostname": "Bitrix24 地址"
+      }
+    },
+    "base_currency": {
+      "nav": "货币",
+      "seo": {
+        "title": "货币",
+        "description": "Bitrix24 货币列表。"
+      },
+      "actions": {
+        "create": "创建"
+      },
+      "message": {
+        "line1": "显示格式化金额非常容易。"
+      },
+      "list": {
+        "code": "代码",
+        "title": "名称",
+        "literal": "符号",
+        "value": "格式化",
+        "baseCurrency": "基础货币代码"
+      }
+    }
+  },
+  "message1": "早起的鸟儿有虫吃",
+  "message2": "百闻不如一见"
 }

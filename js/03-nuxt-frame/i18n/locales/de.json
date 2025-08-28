@@ -1,4 +1,183 @@
 {
-	"message1": "Der frühe Vogel fängt den Wurm",
-	"message2": "Ein Bild sagt mehr als tausend Worte"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] App-Test"
+      },
+      "menu": {
+        "main": "Öffnen"
+      },
+      "message": {
+        "title": "Hallo!",
+        "line1": "Lassen Sie uns die Funktionsweise der App in Bitrix24 testen. Öffnen Sie die App im Slider."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] App-Test"
+      },
+      "message": {
+        "line1": "Öffnen Sie jede Seite im linken Menü und sehen Sie sich an, wie alles funktioniert.",
+        "line2": "Vergessen Sie nicht, mit dem Farbmodus zu spielen.",
+        "scopes": "Erforderliche Berechtigungen (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "Feedback-Formular",
+        "description": "Beispiele für ein Feedback-Formular."
+      }
+    },
+    "base_app-info": {
+      "nav": "Applikation",
+      "seo": {
+        "title": "Applikation",
+        "description": "Informationen zur Applikation."
+      },
+      "message": {
+        "line1": "Dies sind die wichtigsten Metadaten zur Identifikation, Kontrolle und Diagnose der Applikation.",
+        "id": "Identifikator",
+        "code": "Code",
+        "version": "Version",
+        "status": "Status",
+        "isInstalled": "Installationsstatus"
+      }
+    },
+    "base_license-info": {
+      "nav": "Lizenz und Bezahlung",
+      "seo": {
+        "title": "Lizenz und Bezahlung",
+        "description": "Bezeichnung des Tarifplans mit Regionsangabe als Präfix."
+      },
+      "message": {
+        "line1": "Sie können den Benutzer im Voraus über den anstehenden Verlängerungstermin informieren.",
+        "languageId": "Sprachcode",
+        "license": "Tarifbezeichnung mit Regionsangabe als Präfix",
+        "licenseType": "interne Tarifbezeichnung ohne Regionsangabe",
+        "licensePrevious": "vorherige Lizenz",
+        "licenseFamily": "Tarifbezeichnung ohne Regionsangabe",
+        "isSelfHosted": "Flag, das angibt, ob es sich um eine On-Premise- oder Cloud-Version von Bitrix24 handelt",
+        "isExpired": "Flag, das angibt, ob die bezahlte oder Testperiode abgelaufen ist",
+        "days": "Anzahl der Tage bis zum Ende der bezahlten Periode oder Testperiode"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Spezielle Methoden",
+      "seo": {
+        "title": "Spezielle Methoden",
+        "description": "Test spezieller Methoden."
+      },
+      "message": {
+        "line1": "Hier wird die Funktionsweise der Methoden gezeigt, die in der eingebetteten App über Frame verfügbar sind.",
+        "selectUsers": "Benutzerauswahl",
+        "selectUsersDescription": "verwenden Sie `$b24.dialog.selectUsers` für die Benutzerauswahl",
+        "makeImCallToVideo": "Interner Videoanruf",
+        "makeImCallToVideoDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, true)` zum Initiieren eines Anrufs",
+        "makeImCallToVoice": "Interner Sprachanruf",
+        "makeImCallToVoiceDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, false)` zum Initiieren eines Anrufs",
+        "makeImOpenMessenger": "Chat",
+        "makeImOpenMessengerDescription": "verwenden Sie `$b24.parent.imOpenMessenger`, um ein Chat-Fenster zu öffnen",
+        "makeImOpenHistory": "Chat-Verlauf",
+        "makeImOpenHistoryDescription": "verwenden Sie `$b24.parent.imOpenHistory`, um den Chat-Verlauf zu öffnen",
+        "makeImPhoneTo": "Anruf über Telefonie",
+        "makeImPhoneToDescription": "verwenden Sie `$b24.parent.imPhoneTo`, um anzurufen",
+        "makeSendPullCommand": "Pull-Nachricht",
+        "makeSendPullCommandDescription": "verwenden Sie `pull.application.event.add`, um eine Nachricht zu senden"
+      },
+      "actions": {
+        "clear": "Log leeren",
+        "reload": "Neu laden",
+        "select": "Auswählen",
+        "videoCall": "Videoanruf",
+        "voiceCall": "Sprachanruf",
+        "imOpenMessenger": "Chat",
+        "imOpenMessengerHistory": "Chat-Verlauf",
+        "makeImPhoneTo": "Anrufen",
+        "makeSendPullCommand": "Senden"
+      },
+      "error": {
+        "notSelect": "Benutzer nicht ausgewählt.",
+        "tryCallToSelf": "Sie können sich nicht selbst anrufen.",
+        "emptyNumber": "Keine Telefonnummer für den Anruf angegeben."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Spezielle Parameter",
+      "seo": {
+        "title": "Spezielle Parameter",
+        "description": "Liste spezieller Parameter für On-Premise- und Cloud-Versionen."
+      },
+      "message": {
+        "line1": "Es gibt einige Unterschiede zwischen On-Premise- und Cloud-Versionen von Bitrix24.",
+        "isSelfHosted": "Flag, das angibt, ob es sich um eine On-Premise- oder Cloud-Version von Bitrix24 handelt",
+        "primaryKeyIncrementValue": "Inkrementschritt für Felder vom Typ ID",
+        "mainSettings": "Link zu den Einstellungen",
+        "ufList": "Link zur Uf-Liste",
+        "ufPage": "Link zu Uf"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Demonstriert die Ausgabe von Sprachmeldungen in Abhängigkeit von der Bitrix24-Lokalisierung."
+      },
+      "message": {
+        "message1": "erste Nachricht",
+        "message2": "zweite Nachricht",
+        "line1": "Versuchen Sie, die Sprache von Bitrix24 zu ändern."
+      }
+    },
+    "base_feedback": {
+      "nav": "Feedback-Formular",
+      "seo": {
+        "title": "Feedback-Formular",
+        "description": "Beispiele für Felder eines Feedback-Formulars."
+      },
+      "actions": {
+        "open": "Feedback"
+      },
+      "message": {
+        "line1": "Sie können ein CRM-Formular aus Ihrem Bitrix24 in die App einbetten und spezielle Felder übergeben.",
+        "line2": "Wenn der Benutzer das Formular ausfüllt, sind in Ihrem Bitrix24 Daten zur App, zum Tarif usw. verfügbar.",
+        "app_code": "Code",
+        "app_status": "Status",
+        "payment_expired": "Flag, das angibt, ob die bezahlte oder Testperiode abgelaufen ist",
+        "days": "Anzahl der Tage bis zum Ende der bezahlten Periode oder Testperiode",
+        "b24_plan": "Tarifbezeichnung mit Regionsangabe als Präfix",
+        "c_name": "Benutzername",
+        "c_last_name": "Benutzernachname",
+        "hostname": "Bitrix24-Adresse"
+      }
+    },
+    "base_currency": {
+      "nav": "Währungen",
+      "seo": {
+        "title": "Währungen",
+        "description": "Liste der Bitrix24-Währungen."
+      },
+      "actions": {
+        "create": "Erstellen"
+      },
+      "message": {
+        "line1": "Das Anzeigen eines formatierten Betrags ist sehr einfach."
+      },
+      "list": {
+        "code": "Code",
+        "title": "Name",
+        "literal": "Symbol",
+        "value": "Formatierung",
+        "baseCurrency": "Code der Basiswährung"
+      }
+    }
+  },
+  "message1": "Morgenstund hat Gold im Mund",
+  "message2": "Ein Bild sagt mehr als tausend Worte"
 }

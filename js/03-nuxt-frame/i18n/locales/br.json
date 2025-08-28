@@ -25,7 +25,7 @@
       },
       "message": {
         "line1": "Abra cada página no menu à esquerda e estude como tudo funciona nela.",
-        "line2": "Não se esqueça de brincar com o modo de cor.",
+        "line2": "Não se esqueça de brincar com o modo de cores.",
         "scopes": "Permissões necessárias (scopes):"
       }
     },
@@ -42,12 +42,12 @@
         "description": "Informações sobre o aplicativo."
       },
       "message": {
-        "line1": "Estas são as principais marcas para identificação, controle e diagnóstico do aplicativo.",
+        "line1": "Estas são as marcas-chave para identificação, controle e diagnóstico do aplicativo.",
         "id": "identificador",
         "code": "código",
         "version": "versão",
         "status": "status",
-        "isInstalled": "status de instalação"
+        "isInstalled": "status da instalação"
       }
     },
     "base_license-info": {
@@ -57,22 +57,22 @@
         "description": "Designação do plano tarifário com indicação da região como prefixo."
       },
       "message": {
-        "line1": "Você pode avisar o usuário com antecedência sobre a data de renovação.",
+        "line1": "Você pode avisar o usuário com antecedência sobre a chegada da data de renovação.",
         "languageId": "código do idioma",
-        "license": "designação do plano com indicação da região como prefixo",
+        "license": "designação da tarifa com indicação da região como prefixo",
         "licenseType": "designação tarifária interna sem indicação da região",
         "licensePrevious": "licença anterior",
-        "licenseFamily": "designação do plano sem indicação da região",
+        "licenseFamily": "designação da tarifa sem indicação da região",
         "isSelfHosted": "flag, indicando se o Bitrix24 é a versão self-hosted ou na nuvem",
         "isExpired": "flag, indicando se o período pago ou de teste expirou",
-        "days": "número de dias restantes até o final do período pago ou de teste"
+        "days": "número de dias restantes até o final do período pago ou do período de teste"
       }
     },
     "base_specific-methods": {
-      "nav": "Métodos especiais",
+      "nav": "Métodos específicos",
       "seo": {
-        "title": "Métodos especiais",
-        "description": "Teste de métodos especiais."
+        "title": "Métodos específicos",
+        "description": "Teste de métodos específicos."
       },
       "message": {
         "line1": "Aqui é mostrado o funcionamento dos métodos disponíveis no aplicativo incorporado via Frame.",
@@ -84,10 +84,10 @@
         "makeImCallToVoiceDescription": "use `$b24.parent.imCallTo(xxx, false)` para iniciar uma chamada",
         "makeImOpenMessenger": "Chat",
         "makeImOpenMessengerDescription": "use `$b24.parent.imOpenMessenger` para abrir a janela de chat",
-        "makeImOpenHistory": "Histórico de chat",
-        "makeImOpenHistoryDescription": "use `$b24.parent.imOpenHistory` para abrir o histórico de chat",
+        "makeImOpenHistory": "Histórico do chat",
+        "makeImOpenHistoryDescription": "use `$b24.parent.imOpenHistory` para abrir o histórico do chat",
         "makeImPhoneTo": "Chamada via telefonia",
-        "makeImPhoneToDescription": "use `$b24.parent.imPhoneTo` para ligar",
+        "makeImPhoneToDescription": "use `$b24.parent.imPhoneTo` para fazer uma chamada",
         "makeSendPullCommand": "Mensagem Pull",
         "makeSendPullCommandDescription": "use `pull.application.event.add` para enviar uma mensagem"
       },
@@ -98,21 +98,21 @@
         "videoCall": "Chamada de vídeo",
         "voiceCall": "Chamada de voz",
         "imOpenMessenger": "Chat",
-        "imOpenMessengerHistory": "Histórico de chat",
+        "imOpenMessengerHistory": "Histórico do chat",
         "makeImPhoneTo": "Ligar",
         "makeSendPullCommand": "Enviar"
       },
       "error": {
         "notSelect": "Usuário não selecionado.",
         "tryCallToSelf": "Você não pode ligar para si mesmo.",
-        "emptyNumber": "Telefone para ligação não especificado."
+        "emptyNumber": "Telefone para chamada não especificado."
       }
     },
     "base_specific-parameters": {
-      "nav": "Parâmetros especiais",
+      "nav": "Parâmetros específicos",
       "seo": {
-        "title": "Parâmetros especiais",
-        "description": "Lista de parâmetros especiais para a versão self-hosted e na nuvem."
+        "title": "Parâmetros específicos",
+        "description": "Lista de parâmetros específicos para a versão self-hosted e na nuvem."
       },
       "message": {
         "line1": "Existem algumas diferenças entre as versões self-hosted e na nuvem do Bitrix24.",
@@ -145,13 +145,13 @@
         "open": "Feedback"
       },
       "message": {
-        "line1": "Você pode incorporar um formulário de CRM do seu Bitrix24 no aplicativo e passar campos especiais para ele.",
-        "line2": "Quando o usuário preencher o formulário, os dados sobre o aplicativo, plano tarifário, etc., estarão disponíveis no seu Bitrix24.",
+        "line1": "Você pode incorporar um formulário de CRM do seu Bitrix24 no aplicativo e passar campos específicos para ele.",
+        "line2": "Quando o usuário preencher o formulário, os dados sobre o aplicativo, tarifa, etc. estarão disponíveis no seu Bitrix24.",
         "app_code": "código",
         "app_status": "status",
         "payment_expired": "flag, indicando se o período pago ou de teste expirou",
-        "days": "número de dias restantes até o final do período pago ou de teste",
-        "b24_plan": "designação do plano com indicação da região como prefixo",
+        "days": "número de dias restantes até o final do período pago ou do período de teste",
+        "b24_plan": "designação da tarifa com indicação da região como prefixo",
         "c_name": "nome do usuário",
         "c_last_name": "sobrenome do usuário",
         "hostname": "endereço do Bitrix24"

@@ -1,4 +1,183 @@
 {
-	"message1": "早起きは三文の徳",
-	"message2": "百聞は一見に如かず"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] アプリテスト"
+      },
+      "menu": {
+        "main": "開く"
+      },
+      "message": {
+        "title": "こんにちは！",
+        "line1": "Bitrix24内でのアプリケーションの動作をテストしましょう。スライダーでアプリを開いてください。"
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] アプリテスト"
+      },
+      "message": {
+        "line1": "左メニューの各ページを開き、その機能を確認してください。",
+        "line2": "カラーモードもお試しください。",
+        "scopes": "必要な権限 (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "フィードバックフォーム",
+        "description": "フィードバックフォームの例。"
+      }
+    },
+    "base_app-info": {
+      "nav": "アプリケーション",
+      "seo": {
+        "title": "アプリケーション",
+        "description": "アプリケーション情報。"
+      },
+      "message": {
+        "line1": "これは、アプリケーションの識別、制御、診断のための主要なメタデータです。",
+        "id": "識別子",
+        "code": "コード",
+        "version": "バージョン",
+        "status": "ステータス",
+        "isInstalled": "インストールステータス"
+      }
+    },
+    "base_license-info": {
+      "nav": "ライセンスとお支払い",
+      "seo": {
+        "title": "ライセンスとお支払い",
+        "description": "地域をプレフィックスとして指定した tariff plan の指定。"
+      },
+      "message": {
+        "line1": "更新期限の到来を事前にユーザーに通知できます。",
+        "languageId": "言語コード",
+        "license": "地域をプレフィックスとして指定した tariff の指定",
+        "licenseType": "地域指定なしの内部 tariff 指定",
+        "licensePrevious": "以前のライセンス",
+        "licenseFamily": "地域指定なしの tariff 指定",
+        "isSelfHosted": "Bitrix24がオンプレミス版かクラウド版かを示すフラグ",
+        "isExpired": "有償期間または試用期間が終了したかどうかを示すフラグ",
+        "days": "有償期間または試用期間の終了までの残り日数"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "特殊メソッド",
+      "seo": {
+        "title": "特殊メソッド",
+        "description": "特殊メソッドのテスト。"
+      },
+      "message": {
+        "line1": "ここでは、Frameを介してアプリケーション内で利用可能なメソッドの動作を示します。",
+        "selectUsers": "ユーザーの選択",
+        "selectUsersDescription": "ユーザー選択には `$b24.dialog.selectUsers` を使用してください",
+        "makeImCallToVideo": "内部ビデオ通話",
+        "makeImCallToVideoDescription": "通話開始には `$b24.parent.imCallTo(xxx, true)` を使用してください",
+        "makeImCallToVoice": "内部音声通話",
+        "makeImCallToVoiceDescription": "通話開始には `$b24.parent.imCallTo(xxx, false)` を使用してください",
+        "makeImOpenMessenger": "チャット",
+        "makeImOpenMessengerDescription": "チャットウィンドウを開くには `$b24.parent.imOpenMessenger` を使用してください",
+        "makeImOpenHistory": "チャット履歴",
+        "makeImOpenHistoryDescription": "チャット履歴を開くには `$b24.parent.imOpenHistory` を使用してください",
+        "makeImPhoneTo": "テレフォニー通話",
+        "makeImPhoneToDescription": "通話するには `$b24.parent.imPhoneTo` を使用してください",
+        "makeSendPullCommand": "Pullメッセージ",
+        "makeSendPullCommandDescription": "メッセージ送信には `pull.application.event.add` を使用してください"
+      },
+      "actions": {
+        "clear": "ログをクリア",
+        "reload": "再読み込み",
+        "select": "選択",
+        "videoCall": "ビデオ通話",
+        "voiceCall": "音声通話",
+        "imOpenMessenger": "チャット",
+        "imOpenMessengerHistory": "チャット履歴",
+        "makeImPhoneTo": "電話をかける",
+        "makeSendPullCommand": "送信"
+      },
+      "error": {
+        "notSelect": "ユーザーが選択されていません。",
+        "tryCallToSelf": "自分自身には電話できません。",
+        "emptyNumber": "通話先の電話番号が指定されていません。"
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "特殊パラメータ",
+      "seo": {
+        "title": "特殊パラメータ",
+        "description": "オンプレミス版とクラウド版のための特殊パラメータのリスト。"
+      },
+      "message": {
+        "line1": "Bitrix24のオンプレミス版とクラウド版にはいくつかの違いがあります。",
+        "isSelfHosted": "Bitrix24がオンプレミス版かクラウド版かを示すフラグ",
+        "primaryKeyIncrementValue": "ID型フィールドの増分ステップ",
+        "mainSettings": "設定へのリンク",
+        "ufList": "Ufリストへのリンク",
+        "ufPage": "Ufへのリンク"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Bitrix24のロケールに応じた言語メッセージの出力をデモンストレーションします。"
+      },
+      "message": {
+        "message1": "最初のメッセージ",
+        "message2": "二番目のメッセージ",
+        "line1": "Bitrix24の言語を変更してみてください。"
+      }
+    },
+    "base_feedback": {
+      "nav": "フィードバックフォーム",
+      "seo": {
+        "title": "フィードバックフォーム",
+        "description": "フィードバックフォーム用のフィールド例。"
+      },
+      "actions": {
+        "open": "フィードバック"
+      },
+      "message": {
+        "line1": "あなたのBitrix24からCRMフォームをアプリケーションに組み込み、特別なフィールドを渡すことができます。",
+        "line2": "ユーザーがフォームを記入すると、あなたのBitrix24でアプリ、tariffなどのデータが利用可能になります。",
+        "app_code": "コード",
+        "app_status": "ステータス",
+        "payment_expired": "有償期間または試用期間が終了したかどうかを示すフラグ",
+        "days": "有償期間または試用期間の終了までの残り日数",
+        "b24_plan": "地域をプレフィックスとして指定した tariff の指定",
+        "c_name": "ユーザー名",
+        "c_last_name": "ユーザーの姓",
+        "hostname": "Bitrix24アドレス"
+      }
+    },
+    "base_currency": {
+      "nav": "通貨",
+      "seo": {
+        "title": "通貨",
+        "description": "Bitrix24の通貨リスト。"
+      },
+      "actions": {
+        "create": "作成"
+      },
+      "message": {
+        "line1": "フォーマットされた金額の表示はとても簡単です。"
+      },
+      "list": {
+        "code": "コード",
+        "title": "名称",
+        "literal": "記号",
+        "value": "フォーマット",
+        "baseCurrency": "基本通貨コード"
+      }
+    }
+  },
+  "message1": "早起きは三文の得",
+  "message2": "百聞は一見に如かず"
 }

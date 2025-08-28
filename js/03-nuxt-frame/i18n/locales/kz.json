@@ -1,4 +1,183 @@
 {
-	"message1": "Al que madruga, Dios le ayuda",
-	"message2": "Una imagen vale más que mil palabras"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Қолданбаны тестілеу"
+      },
+      "menu": {
+        "main": "Ашу"
+      },
+      "message": {
+        "title": "Сәлем!",
+        "line1": "Bitrix24-те қолданбаның жұмысын тестілейік. Қолданбаны слайдерде ашыңыз."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] Қолданбаны тестілеу"
+      },
+      "message": {
+        "line1": "Сол жақтағы мәзірдегі әрбір парақшаны ашып, онда бәрінің қалай жұмыс істейтінін зерттеңіз.",
+        "line2": "Түс режимімен ойнауды ұмытпаңыз.",
+        "scopes": "Талап етілетін рұқсаттар (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "Кері байланыс формасы",
+        "description": "Кері байланыс формасының мысалдары."
+      }
+    },
+    "base_app-info": {
+      "nav": "Қолданба",
+      "seo": {
+        "title": "Қолданба",
+        "description": "Қолданба туралы ақпарат."
+      },
+      "message": {
+        "line1": "Бұл қолданбаны анықтау, бақылау және диагностикалау үшін негізгі белгілер.",
+        "id": "идентификатор",
+        "code": "код",
+        "version": "нұсқа",
+        "status": "мәртебе",
+        "isInstalled": "орнату мәртебесі"
+      }
+    },
+    "base_license-info": {
+      "nav": "Лицензия және төлем",
+      "seo": {
+        "title": "Лицензия және төлем",
+        "description": "Аймақты префикс ретінде көрсететін тарифтік жоспардың белгіленуі."
+      },
+      "message": {
+        "line1": "Пайдаланушыны мерзімді ұзарту туралы алдын ала хабардар етуге болады.",
+        "languageId": "тіл коды",
+        "license": "аймақты префикс ретінде көрсететін тариф белгісі",
+        "licenseType": "аймақ көрсетілмеген ішкі тарифтік белгі",
+        "licensePrevious": "алдыңғы лицензия",
+        "licenseFamily": "аймақ көрсетілмеген тариф белгісі",
+        "isSelfHosted": "Bitrix24-тің жәшік нұсқасы немесе бұлтты нұсқасы екенін көрсететін флаг",
+        "isExpired": "ақылы немесе сынақ кезеңінің мерзімі өтіп кеткенін көрсететін флаг",
+        "days": "ақылы немесе сынақ кезеңінің соңына дейін қалған күн саны"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Арнайы әдістер",
+      "seo": {
+        "title": "Арнайы әдістер",
+        "description": "Арнайы әдістерді тестілеу."
+      },
+      "message": {
+        "line1": "Мұнда Frame арқылы кірістірілген қолданбада қолжетімді әдістердің жұмысы көрсетілген.",
+        "selectUsers": "Пайдаланушыны таңдау",
+        "selectUsersDescription": "пайдаланушыны таңдау үшін `$b24.dialog.selectUsers` қолданыңыз",
+        "makeImCallToVideo": "Ішкі бейне шақыру",
+        "makeImCallToVideoDescription": "шақыруды бастау үшін `$b24.parent.imCallTo(xxx, true)` қолданыңыз",
+        "makeImCallToVoice": "Ішкі дауыстық шақыру",
+        "makeImCallToVoiceDescription": "шақыруды бастау үшін `$b24.parent.imCallTo(xxx, false)` қолданыңыз",
+        "makeImOpenMessenger": "Чат",
+        "makeImOpenMessengerDescription": "чат терезесін ашу үшін `$b24.parent.imOpenMessenger` қолданыңыз",
+        "makeImOpenHistory": "Чат тарихы",
+        "makeImOpenHistoryDescription": "чат тарихын ашу үшін `$b24.parent.imOpenHistory` қолданыңыз",
+        "makeImPhoneTo": "Телефония арқылы қоңырау шалу",
+        "makeImPhoneToDescription": "телефон шерту үшін `$b24.parent.imPhoneTo` қолданыңыз",
+        "makeSendPullCommand": "Pull хабар",
+        "makeSendPullCommandDescription": "хабарлама жіберу үшін `pull.application.event.add` қолданыңыз"
+      },
+      "actions": {
+        "clear": "Журналды тазарту",
+        "reload": "Қайта жүктеу",
+        "select": "Таңдау",
+        "videoCall": "Бейне қоңырау",
+        "voiceCall": "Дауыстық қоңырау",
+        "imOpenMessenger": "Чат",
+        "imOpenMessengerHistory": "Чат тарихы",
+        "makeImPhoneTo": "Қоңырау шалу",
+        "makeSendPullCommand": "Жіберу"
+      },
+      "error": {
+        "notSelect": "Пайдаланушы таңдалмаған.",
+        "tryCallToSelf": "Өзіңізге қоңырау шалу мүмкін емес.",
+        "emptyNumber": "Қоңырау шалу үшін телефон нөмірі көрсетілмеген."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Арнайы параметрлер",
+      "seo": {
+        "title": "Арнайы параметрлер",
+        "description": "Жәшік және бұлтты нұсқалар үшін арнайы параметрлер тізімі."
+      },
+      "message": {
+        "line1": "Bitrix24-тің жәшік және бұлтты нұсқалары арасында бірнеше айырмашылық бар.",
+        "isSelfHosted": "Bitrix24-тің жәшік нұсқасы немесе бұлтты нұсқасы екенін көрсететін флаг",
+        "primaryKeyIncrementValue": "ID түріндегі өрістер үшін өсу қадамы",
+        "mainSettings": "баптауларға сілтеме",
+        "ufList": "Uf тізіміне сілтеме",
+        "ufPage": "Uf-ке сілтеме"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Bitrix24-тің локаліне байланысты тілдік хабарламаларды шығаруды көрсетеді."
+      },
+      "message": {
+        "message1": "бірінші хабар",
+        "message2": "екінші хабар",
+        "line1": "Bitrix24 тілін өзгертуді көріңіз."
+      }
+    },
+    "base_feedback": {
+      "nav": "Кері байланыс формасы",
+      "seo": {
+        "title": "Кері байланыс формасы",
+        "description": "Кері байланыс формасы үшін өріс мысалдары."
+      },
+      "actions": {
+        "open": "Кері байланыс"
+      },
+      "message": {
+        "line1": "Қолданбаға өз Bitrix24-іңізден CRM-пішінді кірістіріп, оған арнайы өрістерді бере аласыз.",
+        "line2": "Пайдаланушы пішінді толтырған кезде, сіздің Bitrix24-те қолданба, тариф және т.б. туралы деректер қолжетімді болады.",
+        "app_code": "код",
+        "app_status": "мәртебе",
+        "payment_expired": "ақылы немесе сынақ кезеңінің мерзімі өтіп кеткенін көрсететін флаг",
+        "days": "ақылы немесе сынақ кезеңінің соңына дейін қалған күн саны",
+        "b24_plan": "аймақты префикс ретінде көрсететін тариф белгісі",
+        "c_name": "пайдаланушы аты",
+        "c_last_name": "пайдаланушы тегі",
+        "hostname": "Bitrix24 мекенжайы"
+      }
+    },
+    "base_currency": {
+      "nav": "Валюталар",
+      "seo": {
+        "title": "Валюталар",
+        "description": "Bitrix24 валюталарының тізімі."
+      },
+      "actions": {
+        "create": "Құру"
+      },
+      "message": {
+        "line1": "Пішімделген соманы көрсету өте оңай."
+      },
+      "list": {
+        "code": "Код",
+        "title": "Атауы",
+        "literal": "Таңба",
+        "value": "Пішімдеу",
+        "baseCurrency": "Негізгі валюта коды"
+      }
+    }
+  },
+  "message1": "Ерте тұрғанның күні мол болады",
+  "message2": "Бір рет көрген мың рет естігеннен артық"
 }

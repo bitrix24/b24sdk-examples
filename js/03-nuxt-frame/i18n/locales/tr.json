@@ -1,4 +1,183 @@
 {
-	"message1": "Erken kalkan yol alır",
-	"message2": "Bir resim bin kelimeye bedeldir"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Uygulama Testi"
+      },
+      "menu": {
+        "main": "Aç"
+      },
+      "message": {
+        "title": "Merhaba!",
+        "line1": "Bitrix24'te uygulamanın çalışmasını test edelim. Uygulamayı slaytırda açın."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] Uygulama Testi"
+      },
+      "message": {
+        "line1": "Sol menüdeki her sayfayı açın ve nasıl çalıştığını inceleyin.",
+        "line2": "Renk modu ile oynamayı unutmayın.",
+        "scopes": "Gerekli izinler (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "Geri Bildirim Formu",
+        "description": "Geri bildirim formu örnekleri."
+      }
+    },
+    "base_app-info": {
+      "nav": "Uygulama",
+      "seo": {
+        "title": "Uygulama",
+        "description": "Uygulama hakkında bilgi."
+      },
+      "message": {
+        "line1": "Bunlar, uygulamayı tanımlamak, kontrol etmek ve teşhis etmek için temel etiketlerdir.",
+        "id": "kimlik",
+        "code": "kod",
+        "version": "versiyon",
+        "status": "durum",
+        "isInstalled": "kurulum durumu"
+      }
+    },
+    "base_license-info": {
+      "nav": "Lisans ve Ödeme",
+      "seo": {
+        "title": "Lisans ve Ödeme",
+        "description": "Bölgeyi önek olarak belirten tarife planı tanımı."
+      },
+      "message": {
+        "line1": "Kullanıcıyı yenileme süresinin gelişi hakkında önceden uyarabilirsiniz.",
+        "languageId": "dil kodu",
+        "license": "bölgeyi önek olarak belirten tarife tanımı",
+        "licenseType": "bölge belirtmeden iç tarife tanımı",
+        "licensePrevious": "önceki lisans",
+        "licenseFamily": "bölge belirtmeden tarife tanımı",
+        "isSelfHosted": "Bitrix24'ün kutu veya bulut sürümü olup olmadığını belirten bayrak",
+        "isExpired": "ücretli veya deneme süresinin dolup dolmadığını belirten bayrak",
+        "days": "ücretli veya deneme süresinin bitimine kalan gün sayısı"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Özel Metodlar",
+      "seo": {
+        "title": "Özel Metodlar",
+        "description": "Özel metodların test edilmesi."
+      },
+      "message": {
+        "line1": "Burada, Frame üzerinden gömülü uygulamada bulunan metodların çalışması gösterilmektedir.",
+        "selectUsers": "Kullanıcı seçimi",
+        "selectUsersDescription": "kullanıcı seçmek için `$b24.dialog.selectUsers` kullanın",
+        "makeImCallToVideo": "Dahili video araması",
+        "makeImCallToVideoDescription": "aramayı başlatmak için `$b24.parent.imCallTo(xxx, true)` kullanın",
+        "makeImCallToVoice": "Dahili sesli arama",
+        "makeImCallToVoiceDescription": "aramayı başlatmak için `$b24.parent.imCallTo(xxx, false)` kullanın",
+        "makeImOpenMessenger": "Sohbet",
+        "makeImOpenMessengerDescription": "sohbet penceresini açmak için `$b24.parent.imOpenMessenger` kullanın",
+        "makeImOpenHistory": "Sohbet geçmişi",
+        "makeImOpenHistoryDescription": "sohbet geçmişini açmak için `$b24.parent.imOpenHistory` kullanın",
+        "makeImPhoneTo": "Telefoni üzerinden arama",
+        "makeImPhoneToDescription": "aramak için `$b24.parent.imPhoneTo` kullanın",
+        "makeSendPullCommand": "Pull mesajı",
+        "makeSendPullCommandDescription": "mesaj göndermek için `pull.application.event.add` kullanın"
+      },
+      "actions": {
+        "clear": "Logu temizle",
+        "reload": "Yeniden yükle",
+        "select": "Seç",
+        "videoCall": "Video araması",
+        "voiceCall": "Sesli arama",
+        "imOpenMessenger": "Sohbet",
+        "imOpenMessengerHistory": "Sohbet geçmişi",
+        "makeImPhoneTo": "Ara",
+        "makeSendPullCommand": "Gönder"
+      },
+      "error": {
+        "notSelect": "Kullanıcı seçilmedi.",
+        "tryCallToSelf": "Kendinizi arayamazsınız.",
+        "emptyNumber": "Arama için telefon numarası belirtilmedi."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Özel Parametreler",
+      "seo": {
+        "title": "Özel Parametreler",
+        "description": "Kutu ve bulut sürümleri için özel parametreler listesi."
+      },
+      "message": {
+        "line1": "Bitrix24'ün kutu ve bulut sürümleri arasında birkaç fark vardır.",
+        "isSelfHosted": "Bitrix24'ün kutu veya bulut sürümü olup olmadığını belirten bayrak",
+        "primaryKeyIncrementValue": "ID tipindeki alanlar için artış değeri",
+        "mainSettings": "ayarlara bağlantı",
+        "ufList": "Uf listesine bağlantı",
+        "ufPage": "Uf sayfasına bağlantı"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Bitrix24 yerel ayarına bağlı olarak dil mesajlarının çıktısını gösterir."
+      },
+      "message": {
+        "message1": "ilk mesaj",
+        "message2": "ikinci mesaj",
+        "line1": "Bitrix24 dilini değiştirmeyi deneyin."
+      }
+    },
+    "base_feedback": {
+      "nav": "Geri Bildirim Formu",
+      "seo": {
+        "title": "Geri Bildirim Formu",
+        "description": "Geri bildirim formu için alan örnekleri."
+      },
+      "actions": {
+        "open": "Geri bildirim"
+      },
+      "message": {
+        "line1": "Uygulamanıza Bitrix24'ünüzden bir CRM formu yerleştirebilir ve ona özel alanlar iletebilirsiniz.",
+        "line2": "Kullanıcı formu doldurduğunda, Bitrix24'ünüzde uygulama, tarife vb. veriler erişilebilir olacaktır.",
+        "app_code": "kod",
+        "app_status": "durum",
+        "payment_expired": "ücretli veya deneme süresinin dolup dolmadığını belirten bayrak",
+        "days": "ücretli veya deneme süresinin bitimine kalan gün sayısı",
+        "b24_plan": "bölgeyi önek olarak belirten tarife tanımı",
+        "c_name": "kullanıcı adı",
+        "c_last_name": "kullanıcı soyadı",
+        "hostname": "Bitrix24 adresi"
+      }
+    },
+    "base_currency": {
+      "nav": "Para Birimleri",
+      "seo": {
+        "title": "Para Birimleri",
+        "description": "Bitrix24 para birimleri listesi."
+      },
+      "actions": {
+        "create": "Oluştur"
+      },
+      "message": {
+        "line1": "Biçimlendirilmiş bir tutarı göstermek çok kolaydır."
+      },
+      "list": {
+        "code": "Kod",
+        "title": "İsim",
+        "literal": "Sembol",
+        "value": "Biçimlendirme",
+        "baseCurrency": "Temel para birimi kodu"
+      }
+    }
+  },
+  "message1": "Erken kalkan yol alır",
+  "message2": "Bin dinle, bir gör"
 }

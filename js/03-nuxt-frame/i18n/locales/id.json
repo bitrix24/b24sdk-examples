@@ -1,4 +1,183 @@
 {
-	"message1": "Siapa cepat dia dapat",
-	"message2": "Sebuah gambar bernilai ribuan kata"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Pengujian Aplikasi"
+      },
+      "menu": {
+        "main": "Buka"
+      },
+      "message": {
+        "title": "Halo!",
+        "line1": "Mari kita uji cara kerja aplikasi di Bitrix24. Buka aplikasi di slider."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] Pengujian Aplikasi"
+      },
+      "message": {
+        "line1": "Buka setiap halaman di menu sebelah kiri dan pelajari cara kerjanya.",
+        "line2": "Jangan lupa untuk mencoba mode warna.",
+        "scopes": "Izin yang diperlukan (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "Formulir Umpan Balik",
+        "description": "Contoh formulir umpan balik."
+      }
+    },
+    "base_app-info": {
+      "nav": "Aplikasi",
+      "seo": {
+        "title": "Aplikasi",
+        "description": "Informasi tentang aplikasi."
+      },
+      "message": {
+        "line1": "Ini adalah label kunci untuk identifikasi, kontrol, dan diagnostik aplikasi.",
+        "id": "identifikasi",
+        "code": "kode",
+        "version": "versi",
+        "status": "status",
+        "isInstalled": "status pemasangan"
+      }
+    },
+    "base_license-info": {
+      "nav": "Lisensi dan Pembayaran",
+      "seo": {
+        "title": "Lisensi dan Pembayaran",
+        "description": "Penunjukan paket tarif dengan menunjukkan region sebagai awalan."
+      },
+      "message": {
+        "line1": "Anda dapat memberi tahu pengguna sebelumnya tentang tanggal perpanjangan.",
+        "languageId": "kode bahasa",
+        "license": "penunjukan paket tarif dengan menunjukkan region sebagai awalan",
+        "licenseType": "penunjukan tarif internal tanpa menunjukkan region",
+        "licensePrevious": "lisensi sebelumnya",
+        "licenseFamily": "penunjukan paket tarif tanpa menunjukkan region",
+        "isSelfHosted": "bendera, menunjukkan apakah Bitrix24 adalah versi box atau cloud",
+        "isExpired": "bendera, menunjukkan apakah periode berbayar atau percobaan telah kedaluwarsa",
+        "days": "jumlah hari tersisa hingga akhir periode berbayar atau periode percobaan"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Metode Khusus",
+      "seo": {
+        "title": "Metode Khusus",
+        "description": "Pengujian metode khusus."
+      },
+      "message": {
+        "line1": "Di sini ditunjukkan cara kerja metode yang tersedia di aplikasi yang disematkan melalui Frame.",
+        "selectUsers": "Pemilihan pengguna",
+        "selectUsersDescription": "gunakan `$b24.dialog.selectUsers` untuk memilih pengguna",
+        "makeImCallToVideo": "Panggilan video internal",
+        "makeImCallToVideoDescription": "gunakan `$b24.parent.imCallTo(xxx, true)` untuk memulai panggilan",
+        "makeImCallToVoice": "Panggilan suara internal",
+        "makeImCallToVoiceDescription": "gunakan `$b24.parent.imCallTo(xxx, false)` untuk memulai panggilan",
+        "makeImOpenMessenger": "Obrolan",
+        "makeImOpenMessengerDescription": "gunakan `$b24.parent.imOpenMessenger` untuk membuka jendela obrolan",
+        "makeImOpenHistory": "Riwayat obrolan",
+        "makeImOpenHistoryDescription": "gunakan `$b24.parent.imOpenHistory` untuk membuka riwayat obrolan",
+        "makeImPhoneTo": "Panggilan melalui teleponi",
+        "makeImPhoneToDescription": "gunakan `$b24.parent.imPhoneTo` untuk menelepon",
+        "makeSendPullCommand": "Pesan Pull",
+        "makeSendPullCommandDescription": "gunakan `pull.application.event.add` untuk mengirim pesan"
+      },
+      "actions": {
+        "clear": "Bersihkan log",
+        "reload": "Muat ulang",
+        "select": "Pilih",
+        "videoCall": "Panggilan Video",
+        "voiceCall": "Panggilan Suara",
+        "imOpenMessenger": "Obrolan",
+        "imOpenMessengerHistory": "Riwayat Obrolan",
+        "makeImPhoneTo": "Telepon",
+        "makeSendPullCommand": "Kirim"
+      },
+      "error": {
+        "notSelect": "Pengguna tidak dipilih.",
+        "tryCallToSelf": "Anda tidak dapat menelepon diri sendiri.",
+        "emptyNumber": "Nomor telepon untuk panggilan tidak ditentukan."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Parameter Khusus",
+      "seo": {
+        "title": "Parameter Khusus",
+        "description": "Daftar parameter khusus untuk versi box dan cloud."
+      },
+      "message": {
+        "line1": "Ada beberapa perbedaan antara versi box dan cloud Bitrix24.",
+        "isSelfHosted": "bendera, menunjukkan apakah Bitrix24 adalah versi box atau cloud",
+        "primaryKeyIncrementValue": "langkah kenaikan untuk bidang bertipe ID",
+        "mainSettings": "tautan ke pengaturan",
+        "ufList": "tautan ke daftar Uf",
+        "ufPage": "tautan ke Uf"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Mendemonstrasikan keluaran pesan bahasa tergantung pada lokal Bitrix24."
+      },
+      "message": {
+        "message1": "pesan pertama",
+        "message2": "pesan kedua",
+        "line1": "Coba ubah bahasa Bitrix24."
+      }
+    },
+    "base_feedback": {
+      "nav": "Formulir Umpan Balik",
+      "seo": {
+        "title": "Formulir Umpan Balik",
+        "description": "Contoh bidang untuk formulir umpan balik."
+      },
+      "actions": {
+        "open": "Umpan Balik"
+      },
+      "message": {
+        "line1": "Anda dapat menyematkan formulir CRM dari Bitrix24 Anda ke dalam aplikasi dan meneruskan bidang khusus ke dalamnya.",
+        "line2": "Ketika pengguna mengisi formulir, data tentang aplikasi, paket tarif, dll. akan tersedia di Bitrix24 Anda.",
+        "app_code": "kode",
+        "app_status": "status",
+        "payment_expired": "bendera, menunjukkan apakah periode berbayar atau percobaan telah kedaluwarsa",
+        "days": "jumlah hari tersisa hingga akhir periode berbayar atau periode percobaan",
+        "b24_plan": "penunjukan paket tarif dengan menunjukkan region sebagai awalan",
+        "c_name": "nama pengguna",
+        "c_last_name": "nama belakang pengguna",
+        "hostname": "alamat Bitrix24"
+      }
+    },
+    "base_currency": {
+      "nav": "Mata Uang",
+      "seo": {
+        "title": "Mata Uang",
+        "description": "Daftar mata uang Bitrix24."
+      },
+      "actions": {
+        "create": "Buat"
+      },
+      "message": {
+        "line1": "Menampilkan jumlah yang diformat sangat mudah."
+      },
+      "list": {
+        "code": "Kode",
+        "title": "Nama",
+        "literal": "Tanda",
+        "value": "Pemformatan",
+        "baseCurrency": "Kode mata uang dasar"
+      }
+    }
+  },
+  "message1": "Siapa bangun pagi, rezeki diberi Tuhan",
+  "message2": "Lebih baik sekali melihat daripada seratus kali mendengar"
 }

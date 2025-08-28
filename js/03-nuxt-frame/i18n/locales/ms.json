@@ -1,4 +1,183 @@
 {
-	"message1": "Siapa cepat dia dapat",
-	"message2": "Sekeping gambar bernilai seribu kata"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] Ujian aplikasi"
+      },
+      "menu": {
+        "main": "Buka"
+      },
+      "message": {
+        "title": "Helo!",
+        "line1": "Mari uji cara aplikasi berfungsi dalam Bitrix24. Buka aplikasi dalam slider."
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] Ujian aplikasi"
+      },
+      "message": {
+        "line1": "Buka setiap halaman dalam menu di sebelah kiri dan kaji bagaimana semuanya berfungsi di sana.",
+        "line2": "Jangan lupa untuk mencuba mod warna.",
+        "scopes": "Kebenaran yang diperlukan (scopes):"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "Borang maklum balas",
+        "description": "Contoh borang maklum balas."
+      }
+    },
+    "base_app-info": {
+      "nav": "Aplikasi",
+      "seo": {
+        "title": "Aplikasi",
+        "description": "Maklumat tentang aplikasi."
+      },
+      "message": {
+        "line1": "Ini adalah tag utama untuk pengenalan, kawalan dan diagnosis aplikasi.",
+        "id": "pengenal",
+        "code": "kod",
+        "version": "versi",
+        "status": "status",
+        "isInstalled": "status pemasangan"
+      }
+    },
+    "base_license-info": {
+      "nav": "Lesen dan bayaran",
+      "seo": {
+        "title": "Lesen dan bayaran",
+        "description": "Penetapan pelan tarif dengan menunjukkan rantau sebagai awalan."
+      },
+      "message": {
+        "line1": "Anda boleh memberi amaran kepada pengguna terlebih dahulu tentang tarikh pembaharuan.",
+        "languageId": "kod bahasa",
+        "license": "penetapan tarif dengan menunjukkan rantau sebagai awalan",
+        "licenseType": "penetapan tarif dalaman tanpa menunjukkan rantau",
+        "licensePrevious": "lesen lepas",
+        "licenseFamily": "penetapan tarif tanpa menunjukkan rantau",
+        "isSelfHosted": "bendera yang menunjukkan sama ada Bitrix24 adalah versi kotak atau awan",
+        "isExpired": "bendera yang menunjukkan sama ada tempoh berbayar atau percubaan telah tamat",
+        "days": "bilangan hari yang tinggal sehingga akhir tempoh berbayar atau tempoh percubaan"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "Kaedah khas",
+      "seo": {
+        "title": "Kaedah khas",
+        "description": "Ujian kaedah khas."
+      },
+      "message": {
+        "line1": "Di sini ditunjukkan kerja kaedah yang tersedia dalam aplikasi terbina melalui Frame.",
+        "selectUsers": "Pemilihan pengguna",
+        "selectUsersDescription": "gunakan `$b24.dialog.selectUsers` untuk memilih pengguna",
+        "makeImCallToVideo": "Panggilan video dalaman",
+        "makeImCallToVideoDescription": "gunakan `$b24.parent.imCallTo(xxx, true)` untuk memulakan panggilan",
+        "makeImCallToVoice": "Panggilan suara dalaman",
+        "makeImCallToVoiceDescription": "gunakan `$b24.parent.imCallTo(xxx, false)` untuk memulakan panggilan",
+        "makeImOpenMessenger": "Sembang",
+        "makeImOpenMessengerDescription": "gunakan `$b24.parent.imOpenMessenger` untuk membuka tetingkap sembang",
+        "makeImOpenHistory": "Sejarah sembang",
+        "makeImOpenHistoryDescription": "gunakan `$b24.parent.imOpenHistory` untuk membuka sejarah sembang",
+        "makeImPhoneTo": "Panggilan melalui telefon",
+        "makeImPhoneToDescription": "gunakan `$b24.parent.imPhoneTo` untuk membuat panggilan",
+        "makeSendPullCommand": "Mesej Pull",
+        "makeSendPullCommandDescription": "gunakan `pull.application.event.add` untuk menghantar mesej"
+      },
+      "actions": {
+        "clear": "Kosongkan log",
+        "reload": "Muat semula",
+        "select": "Pilih",
+        "videoCall": "Panggilan video",
+        "voiceCall": "Panggilan suara",
+        "imOpenMessenger": "Sembang",
+        "imOpenMessengerHistory": "Sejarah sembang",
+        "makeImPhoneTo": "Telefon",
+        "makeSendPullCommand": "Hantar"
+      },
+      "error": {
+        "notSelect": "Pengguna tidak dipilih.",
+        "tryCallToSelf": "Anda tidak boleh memanggil diri sendiri.",
+        "emptyNumber": "Nombor telefon untuk panggilan tidak dinyatakan."
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "Parameter khas",
+      "seo": {
+        "title": "Parameter khas",
+        "description": "Senarai parameter khas untuk versi kotak dan awan."
+      },
+      "message": {
+        "line1": "Terdapat beberapa perbezaan antara versi kotak dan awan Bitrix24.",
+        "isSelfHosted": "bendera yang menunjukkan sama ada Bitrix24 adalah versi kotak atau awan",
+        "primaryKeyIncrementValue": "langkah kenaikan untuk medan jenis ID",
+        "mainSettings": "pautan kepada tetapan",
+        "ufList": "pautan kepada senarai Uf",
+        "ufPage": "pautan kepada Uf"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "Menunjukkan output mesej bahasa bergantung pada lokal Bitrix24."
+      },
+      "message": {
+        "message1": "mesej pertama",
+        "message2": "mesej kedua",
+        "line1": "Cuba ubah bahasa Bitrix24."
+      }
+    },
+    "base_feedback": {
+      "nav": "Borang maklum balas",
+      "seo": {
+        "title": "Borang maklum balas",
+        "description": "Contoh medan untuk borang maklum balas."
+      },
+      "actions": {
+        "open": "Maklum balas"
+      },
+      "message": {
+        "line1": "Anda boleh menyematkan borang CRM dari Bitrix24 anda ke dalam aplikasi dan menghantar medan khas ke dalamnya.",
+        "line2": "Apabila pengguna mengisi borang, data tentang aplikasi, tarif, dsb. akan tersedia dalam Bitrix24 anda.",
+        "app_code": "kod",
+        "app_status": "status",
+        "payment_expired": "bendera yang menunjukkan sama ada tempoh berbayar atau percubaan telah tamat",
+        "days": "bilangan hari yang tinggal sehingga akhir tempoh berbayar atau tempoh percubaan",
+        "b24_plan": "penetapan tarif dengan menunjukkan rantau sebagai awalan",
+        "c_name": "nama pengguna",
+        "c_last_name": "nama keluarga pengguna",
+        "hostname": "alamat Bitrix24"
+      }
+    },
+    "base_currency": {
+      "nav": "Mata wang",
+      "seo": {
+        "title": "Mata wang",
+        "description": "Senarai mata wang Bitrix24."
+      },
+      "actions": {
+        "create": "Buat"
+      },
+      "message": {
+        "line1": "Menunjukkan jumlah yang diformat adalah sangat mudah."
+      },
+      "list": {
+        "code": "Kod",
+        "title": "Nama",
+        "literal": "Tanda",
+        "value": "Pemformatan",
+        "baseCurrency": "Kod mata wang asas"
+      }
+    }
+  },
+  "message1": "Siapa cepat bangun, dapat rezeki",
+  "message2": "Lebih baik sekali melihat daripada seratus kali mendengar"
 }

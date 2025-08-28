@@ -1,4 +1,183 @@
 {
-	"message1": "นกที่ตื่นเช้าจะได้หนอน",
-	"message2": "ภาพหนึ่งภาพแทนคำนับพันคำ"
+  "layout": {
+    "default": {
+      "sidebarHeader": {
+        "title": "Bitrix24::Frame"
+      }
+    }
+  },
+  "page": {
+    "index": {
+      "seo": {
+        "title": "[playground] การทดสอบแอปพลิเคชัน"
+      },
+      "menu": {
+        "main": "เปิด"
+      },
+      "message": {
+        "title": "สวัสดี!",
+        "line1": "มาทดสอบการทำงานของแอปพลิเคชันใน Bitrix24 กัน เปิดแอปพลิเคชันในสไลด์เดอร์"
+      }
+    },
+    "main": {
+      "seo": {
+        "title": "[playground] การทดสอบแอปพลิเคชัน"
+      },
+      "message": {
+        "line1": "เปิดแต่ละหน้าในเมนูด้านซ้ายและศึกษาว่าทุกอย่างทำงานอย่างไร",
+        "line2": "อย่าลืมลองเล่นกับโหมดสี",
+        "scopes": "ขอบเขตสิทธิ์ (scopes) ที่ต้องการ:"
+      }
+    },
+    "feedback": {
+      "seo": {
+        "title": "แบบฟอร์มความคิดเห็น",
+        "description": "ตัวอย่างแบบฟอร์มความคิดเห็น"
+      }
+    },
+    "base_app-info": {
+      "nav": "แอปพลิเคชัน",
+      "seo": {
+        "title": "แอปพลิเคชัน",
+        "description": "ข้อมูลเกี่ยวกับแอปพลิเคชัน"
+      },
+      "message": {
+        "line1": "นี่คือแท็กหลักสำหรับการระบุตัวตน ควบคุม และวินิจฉัยแอปพลิเคชัน",
+        "id": "รหัสประจำตัว",
+        "code": "รหัส",
+        "version": "เวอร์ชัน",
+        "status": "สถานะ",
+        "isInstalled": "สถานะการติดตั้ง"
+      }
+    },
+    "base_license-info": {
+      "nav": "ใบอนุญาตและการชำระเงิน",
+      "seo": {
+        "title": "ใบอนุญาตและการชำระเงิน",
+        "description": "ระบุแผนราคาพร้อมด้วยภูมิภาคเป็นคำนำหน้า"
+      },
+      "message": {
+        "line1": "สามารถแจ้งผู้ใช้ล่วงหน้าเกี่ยวกับวันครบกำหนดการต่ออายุได้",
+        "languageId": "รหัสภาษา",
+        "license": "ระบุแผนราคาพร้อมด้วยภูมิภาคเป็นคำนำหน้า",
+        "licenseType": "การกำหนดแผนราคาภายในโดยไม่มีภูมิภาค",
+        "licensePrevious": "ใบอนุญาตก่อนหน้า",
+        "licenseFamily": "การกำหนดแผนราคาโดยไม่มีภูมิภาค",
+        "isSelfHosted": "ฟลั๊กที่ระบุว่า Bitrix24 เป็นเวอร์ชัน On-Premise หรือ Cloud",
+        "isExpired": "ฟลั๊กที่ระบุว่าช่วงเวลาชำระเงินหรือทดลองใช้หมดอายุหรือไม่",
+        "days": "จำนวนวันที่เหลือจนถึงสิ้นสุดระยะเวลาชำระเงินหรือระยะทดลองใช้"
+      }
+    },
+    "base_specific-methods": {
+      "nav": "เมธอดพิเศษ",
+      "seo": {
+        "title": "เมธอดพิเศษ",
+        "description": "การทดสอบเมธอดพิเศษ"
+      },
+      "message": {
+        "line1": "ที่นี่แสดงการทำงานของเมธอดที่ใช้ได้ในแอปพลิเคชันที่ฝังผ่าน Frame",
+        "selectUsers": "เลือกผู้ใช้",
+        "selectUsersDescription": "ใช้ `$b24.dialog.selectUsers` เพื่อเลือกผู้ใช้",
+        "makeImCallToVideo": "สายวิดีโอภายใน",
+        "makeImCallToVideoDescription": "ใช้ `$b24.parent.imCallTo(xxx, true)` เพื่อเริ่มการเรียก",
+        "makeImCallToVoice": "สายเสียงภายใน",
+        "makeImCallToVoiceDescription": "ใช้ `$b24.parent.imCallTo(xxx, false)` เพื่อเริ่มการเรียก",
+        "makeImOpenMessenger": "แชท",
+        "makeImOpenMessengerDescription": "ใช้ `$b24.parent.imOpenMessenger` เพื่อเปิดหน้าต่างแชท",
+        "makeImOpenHistory": "ประวัติแชท",
+        "makeImOpenHistoryDescription": "ใช้ `$b24.parent.imOpenHistory` เพื่อเปิดประวัติแชท",
+        "makeImPhoneTo": "โทรผ่านระบบโทรศัพท์",
+        "makeImPhoneToDescription": "ใช้ `$b24.parent.imPhoneTo` เพื่อโทร",
+        "makeSendPullCommand": "Pull ข้อความ",
+        "makeSendPullCommandDescription": "ใช้ `pull.application.event.add` เพื่อส่งข้อความ"
+      },
+      "actions": {
+        "clear": "ล้างล็อก",
+        "reload": "โหลดใหม่",
+        "select": "เลือก",
+        "videoCall": "สายวิดีโอ",
+        "voiceCall": "สายเสียง",
+        "imOpenMessenger": "แชท",
+        "imOpenMessengerHistory": "ประวัติแชท",
+        "makeImPhoneTo": "โทร",
+        "makeSendPullCommand": "ส่ง"
+      },
+      "error": {
+        "notSelect": "ไม่ได้เลือกผู้ใช้",
+        "tryCallToSelf": "คุณไม่สามารถโทรหาตัวเองได้",
+        "emptyNumber": "ไม่ได้ระบุหมายเลขโทรศัพท์สำหรับการโทร"
+      }
+    },
+    "base_specific-parameters": {
+      "nav": "พารามิเตอร์พิเศษ",
+      "seo": {
+        "title": "พารามิเตอร์พิเศษ",
+        "description": "รายการพารามิเตอร์พิเศษสำหรับเวอร์ชัน On-Premise และ Cloud"
+      },
+      "message": {
+        "line1": "มีความแตกต่างบางประการระหว่างเวอร์ชัน On-Premise และ Cloud ของ Bitrix24",
+        "isSelfHosted": "ฟลั๊กที่ระบุว่า Bitrix24 เป็นเวอร์ชัน On-Premise หรือ Cloud",
+        "primaryKeyIncrementValue": "ขั้นตอนการเพิ่มสำหรับฟิลด์ประเภท ID",
+        "mainSettings": "ลิงก์ไปยังการตั้งค่า",
+        "ufList": "ลิงก์ไปยังรายการ Uf",
+        "ufPage": "ลิงก์ไปยัง Uf"
+      }
+    },
+    "base_lang": {
+      "nav": "I18n",
+      "seo": {
+        "title": "I18n",
+        "description": "สาธิตการแสดงผลข้อความภาษาขึ้นอยู่กับ Locale ของ Bitrix24"
+      },
+      "message": {
+        "message1": "ข้อความแรก",
+        "message2": "ข้อความที่สอง",
+        "line1": "ลองเปลี่ยนภาษาของ Bitrix24"
+      }
+    },
+    "base_feedback": {
+      "nav": "แบบฟอร์มความคิดเห็น",
+      "seo": {
+        "title": "แบบฟอร์มความคิดเห็น",
+        "description": "ตัวอย่างฟิลด์สำหรับแบบฟอร์มความคิดเห็น"
+      },
+      "actions": {
+        "open": "ความคิดเห็น"
+      },
+      "message": {
+        "line1": "คุณสามารถฝัง CRM-form จาก Bitrix24 ของคุณลงในแอปพลิเคชันและส่งฟิลด์พิเศษเข้าไปได้",
+        "line2": "เมื่อผู้ใช้กรอกแบบฟอร์มแล้ว ข้อมูลเกี่ยวกับแอปพลิเคชัน แพลน ฯลฯ จะพร้อมใช้งานใน Bitrix24 ของคุณ",
+        "app_code": "รหัส",
+        "app_status": "สถานะ",
+        "payment_expired": "ฟลั๊กที่ระบุว่าช่วงเวลาชำระเงินหรือทดลองใช้หมดอายุหรือไม่",
+        "days": "จำนวนวันที่เหลือจนถึงสิ้นสุดระยะเวลาชำระเงินหรือระยะทดลองใช้",
+        "b24_plan": "ระบุแผนราคาพร้อมด้วยภูมิภาคเป็นคำนำหน้า",
+        "c_name": "ชื่อผู้ใช้",
+        "c_last_name": "นามสกุลผู้ใช้",
+        "hostname": "ที่อยู่ Bitrix24"
+      }
+    },
+    "base_currency": {
+      "nav": "สกุลเงิน",
+      "seo": {
+        "title": "สกุลเงิน",
+        "description": "รายการสกุลเงินของ Bitrix24"
+      },
+      "actions": {
+        "create": "สร้าง"
+      },
+      "message": {
+        "line1": "การแสดงผลจำนวนเงินที่จัดรูปแบบนั้นทำได้ง่ายมาก"
+      },
+      "list": {
+        "code": "รหัส",
+        "title": "ชื่อ",
+        "literal": "สัญลักษณ์",
+        "value": "การจัดรูปแบบ",
+        "baseCurrency": "รหัสสกุลเงินฐาน"
+      }
+    }
+  },
+  "message1": "นกที่ตื่นแต่เช้าย่อมหาอาหารได้ก่อน",
+  "message2": "สิบปากว่าไม่เท่าตาต้อง"
 }
