@@ -57,24 +57,35 @@ const infoItems = computed(() => [
 </script>
 
 <template>
-  <ContainerWrapper class="px-[22px] py-[5px]">
-    <B24DescriptionList
-      :b24ui="{ container: 'mt-0' }"
-      :items="infoItems"
-    >
-      <template #description="{ item }">
-        <template v-if="item.code === 'isSelfHosted'">
-          <B24Badge v-if="item.description === 'Y'" color="air-secondary-accent" label="Self Hosted" />
-          <B24Badge v-if="item.description === 'N'" color="air-primary" label="Cloud" />
+  <div>
+    <AdviceBanner>
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <ProseP>{{ $t('page.base_license-info.message.line1') }}</ProseP>
+      </B24Advice>
+    </AdviceBanner>
+    <ContainerWrapper class="px-[22px] py-[5px]">
+      <B24DescriptionList
+        :b24ui="{ container: 'mt-0' }"
+        :items="infoItems"
+      >
+        <template #description="{ item }">
+          <template v-if="item.code === 'isSelfHosted'">
+            <B24Badge v-if="item.description === 'Y'" color="air-secondary-accent" label="Self Hosted" />
+            <B24Badge v-if="item.description === 'N'" color="air-primary" label="Cloud" />
+          </template>
+          <template v-else-if="item.code === 'isExpired'">
+            <B24Badge v-if="item.description === 'N'" color="air-primary-success" label="not expired" />
+            <B24Badge v-if="item.description === 'Y'" color="air-primary-alert" label="expired" />
+          </template>
+          <template v-else>
+            <B24Badge color="air-tertiary" :label="item.description" />
+          </template>
         </template>
-        <template v-else-if="item.code === 'isExpired'">
-          <B24Badge v-if="item.description === 'N'" color="air-primary-success" label="not expired" />
-          <B24Badge v-if="item.description === 'Y'" color="air-primary-alert" label="expired" />
-        </template>
-        <template v-else>
-          <B24Badge color="air-tertiary" :label="item.description" />
-        </template>
-      </template>
-    </B24DescriptionList>
-  </ContainerWrapper>
+      </B24DescriptionList>
+    </ContainerWrapper>
+  </div>
 </template>

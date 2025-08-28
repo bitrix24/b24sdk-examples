@@ -86,39 +86,50 @@ const makeOpenDealUfList = async(url: string) => {
 </script>
 
 <template>
-  <ContainerWrapper class="px-[22px] py-[5px]">
-    <B24DescriptionList
-      :b24ui="{ container: 'mt-0' }"
-      :items="infoItems"
-    >
-      <template #description="{ item }">
-        <template v-if="item.code === 'isSelfHosted'">
-          <B24Badge v-if="item.description === 'Y'" color="air-secondary-accent" label="Self Hosted" />
-          <B24Badge v-if="item.description === 'N'" color="air-primary" label="Cloud" />
+  <div>
+    <AdviceBanner>
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <ProseP>{{ $t('page.base_specific-parameters.message.line1') }}</ProseP>
+      </B24Advice>
+    </AdviceBanner>
+    <ContainerWrapper class="px-[22px] py-[5px]">
+      <B24DescriptionList
+        :b24ui="{ container: 'mt-0' }"
+        :items="infoItems"
+      >
+        <template #description="{ item }">
+          <template v-if="item.code === 'isSelfHosted'">
+            <B24Badge v-if="item.description === 'Y'" color="air-secondary-accent" label="Self Hosted" />
+            <B24Badge v-if="item.description === 'N'" color="air-primary" label="Cloud" />
+          </template>
+          <template v-else-if="item.code === 'mainSettings'">
+            <B24Badge
+              color="air-secondary-accent-2"
+              use-link
+              :label="item.description"
+              @click.stop="makeOpenPage(item.description)"
+            />
+          </template>
+          <template v-else-if="item.code === 'ufList'">
+            <B24Badge
+              color="air-secondary-accent-2"
+              use-link
+              :label="item.description"
+              @click.stop="makeOpenDealUfList(item.description)"
+            />
+          </template>
+          <template v-else>
+            <B24Badge
+              color="air-tertiary"
+              :label="item.description"
+            />
+          </template>
         </template>
-        <template v-else-if="item.code === 'mainSettings'">
-          <B24Badge
-            color="air-secondary-accent-2"
-            use-link
-            :label="item.description"
-            @click.stop="makeOpenPage(item.description)"
-          />
-        </template>
-        <template v-else-if="item.code === 'ufList'">
-          <B24Badge
-            color="air-secondary-accent-2"
-            use-link
-            :label="item.description"
-            @click.stop="makeOpenDealUfList(item.description)"
-          />
-        </template>
-        <template v-else>
-          <B24Badge
-            color="air-tertiary"
-            :label="item.description"
-          />
-        </template>
-      </template>
-    </B24DescriptionList>
-  </ContainerWrapper>
+      </B24DescriptionList>
+    </ContainerWrapper>
+  </div>
 </template>

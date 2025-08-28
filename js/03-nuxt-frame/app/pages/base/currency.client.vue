@@ -83,7 +83,7 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
 
 <template>
   <NuxtLayout name="default">
-    <template #top-actions>
+    <template #top-actions-start>
       <B24Button
         color="air-primary-success"
         :icon="PlusMIcon"
@@ -91,18 +91,63 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
         @click.stop="makeOpenSliderAddCurrency()"
       />
     </template>
+    <AdviceBanner>
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <ProseP>{{ $t('page.base_currency.message.line1') }}</ProseP>
+      </B24Advice>
+    </AdviceBanner>
     <ContainerWrapper>
       <B24TableWrapper
         row-hover
         class="overflow-x-auto w-full"
       >
         <table>
-          <!-- head -->
+          <colgroup>
+            <col class="w-[75px]">
+            <col class="w-[275px]">
+            <col class="w-[75px]">
+            <col>
+          </colgroup>
           <thead>
             <tr>
               <th>{{ $t('page.base_currency.list.code') }}</th>
               <th>{{ $t('page.base_currency.list.title') }}</th>
               <th>{{ $t('page.base_currency.list.literal') }}</th>
+              <th>
+                <div class="ps-[56px]">
+                  {{ $t('page.base_currency.list.value') }}
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(currencyCode) in b24Helper?.currency.currencyList"
+              :key="currencyCode"
+            >
+              <th>
+                <template v-if="b24Helper?.currency.baseCurrency === currencyCode">
+                  <B24Badge :label="currencyCode" />
+                </template>
+                <template v-else>
+                  <B24Badge :label="currencyCode" color="air-tertiary" />
+                </template>
+              </th>
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <td><B24Link @click.stop="makeOpenSliderEditCurrency(currencyCode)"><span v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, locale)" /></B24Link></td>
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <td><span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)" /></td>
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <td><span class="ms-[56px]" v-html="b24Helper?.currency.format(value, currencyCode, locale)" /></td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="3">&nbsp;</th>
               <th>
                 <B24ButtonGroup size="sm" no-split>
                   <B24InputNumber
@@ -120,18 +165,7 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
                 </B24ButtonGroup>
               </th>
             </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(currencyCode) in b24Helper?.currency.currencyList"
-              :key="currencyCode"
-            >
-              <th>{{ currencyCode }}</th>
-              <td><B24Link @click.stop="makeOpenSliderEditCurrency(currencyCode)"><span v-html="b24Helper?.currency.getCurrencyFullName(currencyCode, locale)" /></B24Link></td>
-              <td><span v-html="b24Helper?.currency.getCurrencyLiteral(currencyCode)" /></td>
-              <td><span class="ms-[56px]" v-html="b24Helper?.currency.format(value, currencyCode, locale)" /></td>
-            </tr>
-          </tbody>
+          </tfoot>
         </table>
       </B24TableWrapper>
     </ContainerWrapper>

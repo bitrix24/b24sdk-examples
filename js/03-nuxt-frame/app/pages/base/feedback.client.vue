@@ -110,6 +110,16 @@ const makeOpenPage = async(url: string) => {
         @click.stop="makeOpenFeedBack()"
       />
     </template>
+    <AdviceBanner>
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <ProseP>{{ $t('page.base_feedback.message.line1') }}</ProseP>
+        <ProseP>{{ $t('page.base_feedback.message.line2') }}</ProseP>
+      </B24Advice>
+    </AdviceBanner>
     <ContainerWrapper class="px-[22px] py-[5px]">
       <B24DescriptionList
         :b24ui="{ container: 'mt-0' }"

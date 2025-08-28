@@ -44,24 +44,35 @@ const infoItems = computed(() => [
 </script>
 
 <template>
-  <ContainerWrapper class="px-[22px] py-[5px]">
-    <B24DescriptionList
-      :b24ui="{ container: 'mt-0' }"
-      :items="infoItems"
-    >
-      <template #description="{ item }">
-        <template v-if="item.code === 'status'">
-          <B24Badge color="air-secondary-accent-2" :label="item.statusCode" />
-          <B24Badge color="air-tertiary" class="ms-[6px]" :label="item.statusValue" />
+  <div>
+    <AdviceBanner>
+      <B24Advice
+        class="w-full max-w-[550px]"
+        :b24ui="{ descriptionWrapper: 'w-full' }"
+        :avatar="{ src: '/avatar/assistant.png' }"
+      >
+        <ProseP>{{ $t('page.base_app-info.message.line1') }}</ProseP>
+      </B24Advice>
+    </AdviceBanner>
+    <ContainerWrapper class="px-[22px] py-[5px]">
+      <B24DescriptionList
+        :b24ui="{ container: 'mt-0' }"
+        :items="infoItems"
+      >
+        <template #description="{ item }">
+          <template v-if="item.code === 'status'">
+            <B24Badge color="air-secondary-accent-2" :label="item.statusCode" />
+            <B24Badge color="air-tertiary" class="ms-[6px]" :label="item.statusValue" />
+          </template>
+          <template v-else-if="item.code === 'isInstalled'">
+            <B24Badge v-if="item.description === 'Y'" color="air-primary-success" label="installed" />
+            <B24Badge v-if="item.description === 'N'" color="air-primary-alert" label="not installed" />
+          </template>
+          <template v-else>
+            <B24Badge color="air-tertiary" :label="item.description" />
+          </template>
         </template>
-        <template v-else-if="item.code === 'isInstalled'">
-          <B24Badge v-if="item.description === 'Y'" color="air-primary-success" label="installed" />
-          <B24Badge v-if="item.description === 'N'" color="air-primary-alert" label="not installed" />
-        </template>
-        <template v-else>
-          <B24Badge color="air-tertiary" :label="item.description" />
-        </template>
-      </template>
-    </B24DescriptionList>
-  </ContainerWrapper>
+      </B24DescriptionList>
+    </ContainerWrapper>
+  </div>
 </template>
