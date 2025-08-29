@@ -15,7 +15,7 @@ const emit = defineEmits<{ close: [boolean] }>()
     :use-light-content="false"
     :b24ui="{
       content: 'sm:max-w-[970px] sm:top-[275px] sm:max-h-[calc(100%-275px)]',
-      sidebarLayoutRoot: [
+      ddsidebarLayoutRoot: [
         'edge-dark',
         'edge-dark:[--air-theme-bg-color:#7c235b]',
         'edge-dark:[--air-theme-bg-size:cover]',
