@@ -1,23 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { usePageStore } from '~/stores/page'
 import type { DescriptionListItem } from '@bitrix24/b24ui-nuxt'
 import type { B24Frame } from '@bitrix24/b24jssdk'
 
-definePageMeta({
-  layout: false
-})
-
-const { t } = useI18n()
-const route = useRoute()
-route.meta.pageTitle = t('page.base_feedback.seo.title')
-route.meta.pageDescription = t('page.base_feedback.seo.description')
+const { t, locales: localesI18n, setLocale } = useI18n()
+const page = usePageStore()
 
 // region Init ////
-const { $logger, b24Helper, processErrorGlobal } = useAppInit('FeedbackPage')
+const { $logger, initApp, b24Helper, destroyB24Helper, processErrorGlobal } = useAppInit('FeedbackPage')
 const { $initializeB24Frame } = useNuxtApp()
-const $b24: B24Frame = await $initializeB24Frame()
-$logger.info('Hi from base/feedback')
-// endregion ////
+let $b24: null | B24Frame = null
 
 const infoItems = computed(() => [
   {
@@ -61,31 +54,9 @@ const infoItems = computed(() => [
     description: (b24Helper.value?.forB24Form.hostname ?? '').toString()
   }
 ] satisfies DescriptionListItem[] )
+// endregion ////
 
 // region Actions ////
-const makeOpenFeedBack = async() => {
-  try {
-    await $b24.slider.openSliderAppPage(
-      {
-        place: 'feedback',
-        bx24_width: 450,
-        bx24_label: {
-          bgColor: 'green',
-          text: t('page.feedback.seo.title'),
-          color: '#ffffff',
-        },
-        bx24_title: t('page.base_feedback.seo.title'),
-      }
-    )
-  } catch (error) {
-    processErrorGlobal(error, {
-      homePageIsHide: true,
-      isShowClearError: false,
-      clearErrorHref: '/base/feedback'
-    })
-  }
-}
-
 const makeOpenPage = async(url: string) => {
   try {
     const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
@@ -99,17 +70,31 @@ const makeOpenPage = async(url: string) => {
   }
 }
 // endregion ////
+
+// region Lifecycle Hooks ////
+onMounted(async () => {
+  page.isLoading = true
+
+  $b24 = await $initializeB24Frame()
+  await initApp($b24, localesI18n, setLocale)
+
+  page.title = t('page.base_feedback.seo.title')
+  page.description = t('page.base_feedback.seo.description')
+
+  page.isLoading = false
+
+  $logger.info('Hi from base/feedback')
+})
+
+onUnmounted(() => {
+  destroyB24Helper()
+})
+// endregion ////
+
 </script>
 
 <template>
-  <NuxtLayout name="default">
-    <template #top-actions-end>
-      <B24Button
-        color="air-secondary-accent"
-        :label="$t('page.base_feedback.actions.open')"
-        @click.stop="makeOpenFeedBack()"
-      />
-    </template>
+  <div>
     <AdviceBanner>
       <B24Advice
         class="w-full max-w-[550px]"
@@ -144,5 +129,5 @@ const makeOpenPage = async(url: string) => {
         </template>
       </B24DescriptionList>
     </ContainerWrapper>
-  </NuxtLayout>
+  </div>
 </template>

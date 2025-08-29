@@ -1,38 +1,26 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { usePageStore } from '~/stores/page'
 import B24FormConfig from '~/config.b24form'
 import { Type } from '@bitrix24/b24jssdk'
-import type { B24Frame } from '@bitrix24/b24jssdk';
+import type { B24Frame } from '@bitrix24/b24jssdk'
+
+const { locales: localesI18n, setLocale } = useI18n()
+const page = usePageStore()
 
 definePageMeta({
-  layout: "slider-feedback",
+  layout: 'slider-feedback'
 })
 
 // region Init ////
-const { $logger, b24Helper, processErrorGlobal } = useAppInit('FeedbackSlider')
+const { $logger, initApp, b24Helper, destroyB24Helper, processErrorGlobal } = useAppInit('FeedbackSlider')
 const { $initializeB24Frame } = useNuxtApp()
-const $b24: B24Frame = await $initializeB24Frame()
-$logger.info('Hi from feedback')
+let $b24: null | B24Frame = null
 
 let iframe: null | HTMLIFrameElement = null
 const frameContainer = ref()
 
-const isFrameInit = ref(false)
-
-watch(b24Helper, (newValue) => {
-  if (newValue) {
-    $logger.info('b24Helper ready')
-    initFrame()
-  }
-})
-
 function initFrame() {
-  if (isFrameInit.value) {
-    return
-  }
-
-  isFrameInit.value = true
-
   iframe = document.getElementById('iframe-b24-form') as HTMLIFrameElement
   const propertiesForB24Form = b24Helper.value?.forB24Form
 
@@ -98,8 +86,11 @@ function initFrame() {
 }
 // endregion ////
 
+// region Lifecycle Hooks ////
 onMounted(async () => {
   try {
+    page.isLoading = true
+
     if (
       !Type.isNumber(B24FormConfig.formId)
       || B24FormConfig.formId < 1
@@ -108,23 +99,33 @@ onMounted(async () => {
     ) {
       throw new Error('You need to specify the parameters of your form')
     }
+
+    $b24 = await $initializeB24Frame()
+    await initApp($b24, localesI18n, setLocale)
+
+    initFrame()
+
+    $logger.info('Hi from feedback')
   } catch (error: any) {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/feedback'
+      clearErrorHref: '/slider/feedback'
     })
+  } finally {
+    page.isLoading = false
   }
 })
 
 onUnmounted(() => {
-  $b24?.destroy()
+  destroyB24Helper()
 
   if (iframe) {
     frameContainer.value?.removeChild(iframe)
     iframe = null
   }
 })
+// endregion ////
 </script>
 
 <template>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import {onMounted, onUnmounted} from 'vue'
 import type { B24Frame } from '@bitrix24/b24jssdk'
 
-const { t } = useI18n()
+const { t, locales: localesI18n, setLocale } = useI18n()
 
 definePageMeta({
   layout: 'index-page'
@@ -12,9 +12,10 @@ useHead({
 })
 
 // region Init ////
-const { $logger, processErrorGlobal } = useAppInit('IndexPage')
+const { $logger, initApp, destroyB24Helper, processErrorGlobal } = useAppInit('IndexPage')
 const { $initializeB24Frame } = useNuxtApp()
 const $b24: B24Frame = await $initializeB24Frame()
+await initApp($b24, localesI18n, setLocale)
 
 const isAutoOpenActivityList = ref(true)
 const isHmrUpdate = import.meta.hot?.data?.isHmrUpdate || false
@@ -49,6 +50,11 @@ onMounted(async () => {
       clearErrorHref: '/'
     })
   }
+})
+
+onUnmounted(() => {
+  $b24?.destroy()
+  destroyB24Helper()
 })
 // endregion ////
 

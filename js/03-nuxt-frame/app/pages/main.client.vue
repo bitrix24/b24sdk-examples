@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import { useI18n } from '#imports'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
-const { t } = useI18n()
+const { t, locales: localesI18n, setLocale } = useI18n()
 
 useHead({
   title: t('page.index.seo.title')
 })
 
 // region Init ////
-const { $logger } = useAppInit('MainPage')
+const { $logger, initApp } = useAppInit('MainPage')
+const { $initializeB24Frame } = useNuxtApp()
+const $b24: B24Frame = await $initializeB24Frame()
+await initApp($b24, localesI18n, setLocale)
+
 $logger.info('Hi from main page')
 // endregion ////
 </script>

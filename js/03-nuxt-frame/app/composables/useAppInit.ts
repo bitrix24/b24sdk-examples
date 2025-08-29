@@ -1,7 +1,8 @@
+import {computed, type ComputedRef, ref} from "vue";
 import { LoggerBrowser, AjaxError, LoadDataType, useB24Helper } from '@bitrix24/b24jssdk'
 import type { B24Frame } from '@bitrix24/b24jssdk'
-import type { SidebarLayoutInstance } from '@bitrix24/b24ui-nuxt'
-import {computed, ref} from "vue";
+import type { Locale } from 'vue-i18n'
+import type { LocaleObject } from '@nuxtjs/i18n'
 
 export interface ProcessErrorData {
   description?: string
@@ -13,9 +14,7 @@ export interface ProcessErrorData {
   homePageTitle?: string
 }
 
-let sidebarLayoutInstance: null | SidebarLayoutInstance['api'] = null
-
-const { initB24Helper, getB24Helper, usePullClient, useSubscribePullClient, startPullClient } = useB24Helper()
+const { initB24Helper, getB24Helper, destroyB24Helper: destroyB24HelperOry, usePullClient, useSubscribePullClient, startPullClient } = useB24Helper()
 const isInitB24Helper = ref(false)
 
 /**
@@ -37,7 +36,14 @@ export const useAppInit = (loggerTitle?: string) => {
    * Initialize application data
    * Performs batch request and updates all stores
    */
-  async function initApp($b24: B24Frame) {
+  async function initApp(
+    $b24: B24Frame,
+    localesI18n: ComputedRef<LocaleObject[]>,
+    setLocale: (locale: Locale) => Promise<void>
+  ) {
+    $logger.info('InitApp start')
+    await initLang($b24, localesI18n, setLocale)
+
     /**
      * @todo init data from helper
      */
@@ -83,7 +89,21 @@ export const useAppInit = (loggerTitle?: string) => {
       configSettings: data.userSettings?.configSettings || {}
     })
 
-    $logger.info('stop')
+    $logger.info('InitApp stop')
+  }
+
+  async function initLang(
+    $b24: B24Frame,
+    localesI18n: ComputedRef<LocaleObject[]>,
+    setLocale: (locale: Locale) => Promise<void>
+  ) {
+    const b24CurrentLang = $b24.getLang()
+    if (localesI18n.value.filter(i => i.code === b24CurrentLang).length > 0) {
+      await setLocale(b24CurrentLang)
+      $logger.log('setLocale >>>', b24CurrentLang)
+    } else {
+      $logger.warn('not support locale >>>', b24CurrentLang)
+    }
   }
 
   /**
@@ -106,6 +126,11 @@ export const useAppInit = (loggerTitle?: string) => {
 
     return null
   })
+
+  const destroyB24Helper = () => {
+    isInitB24Helper.value = false
+    destroyB24HelperOry()
+  }
 
   function processErrorGlobal(
     error: unknown | string | Error,
@@ -139,18 +164,6 @@ export const useAppInit = (loggerTitle?: string) => {
     })
   }
 
-  function setRootSideBarApi(instance: SidebarLayoutInstance['api']) {
-    sidebarLayoutInstance = instance
-  }
-
-  const getRootSideBarApi = (): null | SidebarLayoutInstance['api'] => {
-    if (!sidebarLayoutInstance) {
-      return null
-    }
-
-    return sidebarLayoutInstance as unknown as SidebarLayoutInstance['api']
-  }
-
   return {
     $logger,
     initApp,
@@ -159,8 +172,7 @@ export const useAppInit = (loggerTitle?: string) => {
     usePullClient,
     useSubscribePullClient,
     startPullClient,
-    setRootSideBarApi,
-    getRootSideBarApi,
+    destroyB24Helper,
     processErrorGlobal
   }
 }

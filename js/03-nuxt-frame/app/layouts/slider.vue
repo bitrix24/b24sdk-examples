@@ -6,7 +6,7 @@ import BtnSpinnerIcon from '@bitrix24/b24icons-vue/button-specialized/BtnSpinner
 useHead({
   bodyAttrs: {
     // 'dark' | 'light' | 'edge-dark' | 'edge-light'
-    class: `light light:[--air-theme-bg-color:#ffffff]`
+    class: `light`
   }
 })
 
@@ -24,8 +24,8 @@ useSeoMeta({
   <B24SidebarLayout
     :use-light-content="false"
     :b24ui="{
-      root: 'overflow-y-hidden',
-      container: 'p-0 mt-0'
+      root: '',
+      container: 'mt-[20px]'
     }"
   >
     <div v-if="page.isLoading">
@@ -36,6 +36,30 @@ useSeoMeta({
         />
       </div>
     </div>
+
+    <!-- Header -->
+    <template v-if="!page.isLoading" #content-top>
+      <div class="w-full flex flex-col gap-[6px]">
+        <div class="flex items-center gap-[12px]">
+          <div class="w-full flex items-center gap-[20px]">
+            <ProseH2 class="font-semibold mb-0">
+              {{ page.title }}
+            </ProseH2>
+            <slot name="top-actions-start" />
+          </div>
+          <div
+            v-if="!!slots['top-actions-end']"
+            class="flex-1 hidden sm:flex flex-row items-center justify-end gap-[12px]"
+          >
+            <slot name="top-actions-end" />
+          </div>
+        </div>
+        <ProseP v-if="page.description.length > 0" accent="less" class="mb-0">
+          {{ page.description }}
+        </ProseP>
+      </div>
+    </template>
+
     <!-- Content -->
     <div v-show="!page.isLoading">
       <slot />
@@ -46,9 +70,3 @@ useSeoMeta({
     </template>
   </B24SidebarLayout>
 </template>
-
-<style scoped>
-  .--app {
-    scrollbar-gutter: auto;
-  }
-</style>

@@ -1,19 +1,17 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { EnumCrmEntityType } from '@bitrix24/b24jssdk'
 import type { DescriptionListItem } from '@bitrix24/b24ui-nuxt'
 import type { B24Frame } from '@bitrix24/b24jssdk'
+import { usePageStore } from '~/stores/page'
 
-const { t } = useI18n()
-const route = useRoute()
-route.meta.pageTitle = t('page.base_specific-parameters.seo.title')
-route.meta.pageDescription = t('page.base_specific-parameters.seo.description')
+const { t, locales: localesI18n, setLocale } = useI18n()
+const page = usePageStore()
 
 // region Init ////
-const { $logger, b24Helper, processErrorGlobal } = useAppInit('SpecificParametersPage')
+const { $logger, initApp, b24Helper, destroyB24Helper, processErrorGlobal } = useAppInit('SpecificParametersPage')
 const { $initializeB24Frame } = useNuxtApp()
-const $b24: B24Frame = await $initializeB24Frame()
-$logger.info('Hi from base/specific-parameters')
-// endregion ////
+let $b24: null | B24Frame = null
 
 const infoItems = computed(() => [
   {
@@ -43,10 +41,15 @@ const infoItems = computed(() => [
     description: (b24Helper.value?.b24SpecificUrl.UfPage || '').toString()
   }
 ] satisfies DescriptionListItem[] )
+// endregion ////
 
 // region Actions ////
 const makeOpenPage = async(url: string) => {
   try {
+    if (!$b24) {
+      return
+    }
+
     const response = await $b24.slider.openPath(
       $b24.slider.getUrl(`${url}`),
       950
@@ -64,11 +67,14 @@ const makeOpenPage = async(url: string) => {
 
 const makeOpenDealUfList = async(url: string) => {
   try {
+    if (!$b24) {
+      return
+    }
     const path = $b24.slider.getUrl(url)
-    path.searchParams.set('moduleId', 'crm')
-    path.searchParams.set('entityId', 'CRM_DEAL')
+    path?.searchParams.set('moduleId', 'crm')
+    path?.searchParams.set('entityId', EnumCrmEntityType.deal)
 
-    const response = await $b24.slider.openPath(
+    const response = await $b24?.slider.openPath(
       path,
       950
     )
@@ -82,6 +88,26 @@ const makeOpenDealUfList = async(url: string) => {
     })
   }
 }
+// endregion ////
+
+// region Lifecycle Hooks ////
+onMounted(async () => {
+ page.isLoading = true
+
+  $b24 = await $initializeB24Frame()
+  await initApp($b24, localesI18n, setLocale)
+
+  page.title = t('page.base_specific-parameters.seo.title')
+  page.description = t('page.base_specific-parameters.seo.description')
+
+  page.isLoading = false
+
+  $logger.info('Hi from base/specific-parameters')
+})
+
+onUnmounted(() => {
+  destroyB24Helper()
+})
 // endregion ////
 </script>
 

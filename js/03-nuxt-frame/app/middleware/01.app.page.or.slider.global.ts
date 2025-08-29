@@ -15,11 +15,22 @@ function isSkipB24(toPath: string): boolean {
     || toPath.includes(`${baseDir}render`)
 }
 
+/**
+ * This demonstrates how to use `useState('isUseB24Frame')` in an application.
+ * ```ts
+ *  const isUseB24Frame = useState('isUseB24Frame')
+ *  if (import.meta.server || !isUseB24Frame.value) {
+ *   // ...
+ *  }
+ * ```
+ */
+
 export default defineNuxtRouteMiddleware(async (
   to: RouteLocationNormalized,
   from: RouteLocationNormalized
 ) => {
   const isUseB24Frame = useState('isUseB24Frame', () => true)
+
   /**
    * @memo skip middleware on server
    */
@@ -48,11 +59,11 @@ export default defineNuxtRouteMiddleware(async (
       let goTo: null | string = null
 
       if (optionsPlace === 'app-options') {
-        goTo = `${baseDir}app-options`
-      } else if (optionsPlace === 'user-options') {
-        goTo = `${baseDir}user-options`
+        goTo = `${baseDir}slider/app-options`
+      // } else if (optionsPlace === 'user-options') {
+      //   goTo = `${baseDir}slider/user-options`
       } else if (optionsPlace === 'feedback') {
-        goTo = `${baseDir}feedback`
+        goTo = `${baseDir}slider/feedback`
       } else if (optionsPlace === 'main' && ['/', '/main'].includes(to.path)) {
         goTo = `${baseDir}main`
       }
@@ -73,7 +84,8 @@ export default defineNuxtRouteMiddleware(async (
       statusMessage: error?.message || error,
       data: {
         description: 'Problem in middleware',
-        homePageIsHide: false
+        homePageIsHide: true,
+        isShowClearError: false
       },
       cause: error,
       fatal: true

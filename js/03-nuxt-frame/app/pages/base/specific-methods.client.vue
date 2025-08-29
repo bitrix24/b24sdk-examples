@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref,  onMounted, onUnmounted } from 'vue'
+import { usePageStore } from '~/stores/page'
 import type { AccordionItem } from '@bitrix24/b24ui-nuxt'
 import type { B24Frame, SelectedUser, TypePullMessage} from '@bitrix24/b24jssdk'
 import TrashBinIcon from "@bitrix24/b24icons-vue/main/TrashBinIcon"
@@ -16,45 +17,15 @@ definePageMeta({
   layout: false
 })
 
-const { t } = useI18n()
-const route = useRoute()
-route.meta.pageTitle = t('page.base_specific-methods.seo.title')
-route.meta.pageDescription = t('page.base_specific-methods.seo.description')
+const { t, locales: localesI18n, setLocale } = useI18n()
+const page = usePageStore()
 
 // region Init ////
-const { $logger, processErrorGlobal, reloadData, b24Helper, getRootSideBarApi, usePullClient, useSubscribePullClient, startPullClient } = useAppInit('SpecificMethodsPage')
+const { $logger, processErrorGlobal, initApp, reloadData, b24Helper, destroyB24Helper, usePullClient, useSubscribePullClient, startPullClient } = useAppInit('SpecificMethodsPage')
 const { $initializeB24Frame } = useNuxtApp()
-const $b24: B24Frame = await $initializeB24Frame()
-$logger.info('Hi from base/specific-methods')
+let $b24: null | B24Frame = null
 
 const result = ref<Record<string, any>>({})
-
-const isPullClientInit = ref(false)
-
-watch(b24Helper, (newValue) => {
-  if (newValue) {
-    $logger.info('b24Helper ready')
-    initPullClient()
-  }
-})
-
-function initPullClient() {
-  if (isPullClientInit.value) {
-    return
-  }
-
-  isPullClientInit.value = true
-  usePullClient()
-  useSubscribePullClient(
-    // @ts-expect-error Everything is fine
-    makeSendPullCommandHandler.bind( this ),
-    'main'
-  )
-  startPullClient()
-}
-// endregion ////
-
-// const active = ref('0')
 
 const infoItems = computed(() => [
   {
@@ -100,6 +71,7 @@ const infoItems = computed(() => [
     description: t('page.base_specific-methods.message.makeSendPullCommandDescription')
   }
 ] satisfies AccordionItem[] )
+// endregion ////
 
 // region Actions ////
 const makeReloadWindow = async() => {
@@ -108,7 +80,7 @@ const makeReloadWindow = async() => {
       message: 'start reload'
     }
 
-    await $b24.parent.reloadWindow()
+    await $b24?.parent.reloadWindow()
 
     $logger.info(result.value)
   } catch (error) {
@@ -124,7 +96,7 @@ const makeSelectUsers = async() => {
   try {
     result.value = {}
 
-    result.value.selectedUsers = await $b24.dialog.selectUsers()
+    result.value.selectedUsers = await $b24?.dialog.selectUsers()
 
     result.value.list = result.value.selectedUsers.map((row: SelectedUser): string =>
     {
@@ -154,7 +126,7 @@ const makeImCallTo = async(isVideo: boolean = true) => {
   try {
     result.value = {}
 
-    result.value.selectedUser = await $b24.dialog.selectUser()
+    result.value.selectedUser = await $b24?.dialog.selectUser()
 
     if (!result.value.selectedUser) {
       result.value.error = new Error(t('page.base_specific-methods.error.notSelect'))
@@ -167,7 +139,7 @@ const makeImCallTo = async(isVideo: boolean = true) => {
       return
     }
 
-    await $b24.parent.imCallTo(
+    await $b24?.parent.imCallTo(
       Number(result.value.selectedUser.id),
       isVideo
     )
@@ -206,7 +178,7 @@ const makeImOpenMessenger = async() => {
       result.value.dialogId = Number(result.value.dialogId)
     }
 
-    await $b24.parent.imOpenMessenger( result.value.dialogId )
+    await $b24?.parent.imOpenMessenger( result.value.dialogId )
 
     $logger.info(result.value)
   } catch (error) {
@@ -239,7 +211,7 @@ const makeImOpenHistory = async() => {
       result.value.dialogId = Number(result.value.dialogId)
     }
 
-    await $b24.parent.imOpenHistory( result.value.dialogId )
+    await $b24?.parent.imOpenHistory( result.value.dialogId )
 
     $logger.info(result.value)
   } catch (error) {
@@ -271,7 +243,7 @@ const makeImPhoneTo = async() => {
       return
     }
 
-    await $b24.parent.imPhoneTo( result.value.phone )
+    await $b24?.parent.imPhoneTo( result.value.phone )
 
     $logger.info(result.value)
   } catch (error) {
@@ -287,9 +259,9 @@ const makeSendPullCommand = async(command: string, params: Record<string, any> =
   try {
     result.value = {}
 
-    getRootSideBarApi()?.setLoading(true)
+    page.isLoading = true
 
-    result.value.selectedUsers = await $b24.dialog.selectUsers()
+    result.value.selectedUsers = await $b24?.dialog.selectUsers()
     result.value.list = result.value.selectedUsers.map((row: SelectedUser): string => {
       return [
         `[id: ${row.id}]`,
@@ -309,9 +281,7 @@ const makeSendPullCommand = async(command: string, params: Record<string, any> =
       params
     }
 
-    $logger.warn('>> pull.send >>>', params)
-
-    await $b24.callMethod(
+    await $b24?.callMethod(
       'pull.application.event.add',
       {
         COMMAND: command,
@@ -320,7 +290,7 @@ const makeSendPullCommand = async(command: string, params: Record<string, any> =
       }
     )
 
-    $logger.info(result.value)
+    $logger.warn('>> pull.send >>>', params)
   } catch (error) {
     processErrorGlobal(error, {
       homePageIsHide: true,
@@ -344,15 +314,36 @@ const makeSendPullCommandHandler = (message: TypePullMessage): void => {
     params: message.params
   }
 
-  getRootSideBarApi()?.setLoading(false)
+  page.isLoading = false
 }
 // endregion ////
 
+// region Lifecycle Hooks ////
 onMounted(async () => {
-  if (b24Helper.value) {
-    initPullClient()
-  }
+  page.isLoading = true
+
+  $b24 = await $initializeB24Frame()
+  await initApp($b24, localesI18n, setLocale)
+
+  page.title = t('page.base_specific-methods.seo.title')
+  page.description = t('page.base_specific-methods.seo.description')
+
+  usePullClient()
+  useSubscribePullClient(
+    makeSendPullCommandHandler.bind( this ),
+    'main'
+  )
+  startPullClient()
+
+  page.isLoading = false
+
+  $logger.info('Hi from base/specific-methods')
 })
+
+onUnmounted(() => {
+  destroyB24Helper()
+})
+// endregion ////
 </script>
 
 <template>
@@ -362,6 +353,7 @@ onMounted(async () => {
         <B24Button
           color="air-secondary-no-accent"
           size="xs"
+          rounded
           :label="$t('page.base_specific-methods.actions.reload')"
           :icon="Refresh7Icon"
           @click.stop="makeReloadWindow"
@@ -369,6 +361,7 @@ onMounted(async () => {
         <B24Button
           color="air-secondary-no-accent"
           size="xs"
+          rounded
           :label="$t('page.base_specific-methods.actions.clear')"
           :icon="TrashBinIcon"
           @click.stop="result = {}; console.clear()"
@@ -467,7 +460,6 @@ onMounted(async () => {
                 color="air-secondary-accent-2"
                 size="xs"
                 loading-auto
-                :disabled="!isPullClientInit"
                 @click="makeSendPullCommand('test', {data: Date.now()})"
               />
             </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center justify-center gap-16 h-[calc(100vh-60px)]">
+  <div class="flex flex-col items-center justify-center gap-16 h-[calc(100vh-200px)]">
     <div
       :class="[
         'edge-dark',

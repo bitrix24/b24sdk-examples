@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { usePageStore } from '~/stores/page'
 import type { DescriptionListItem } from '@bitrix24/b24ui-nuxt'
+import type { B24Frame } from '@bitrix24/b24jssdk'
 
-const { t } = useI18n()
-const route = useRoute()
-route.meta.pageTitle = t('page.base_app-info.seo.title')
-route.meta.pageDescription = t('page.base_app-info.seo.description')
+const { t, locales: localesI18n, setLocale } = useI18n()
+const page = usePageStore()
 
 // region Init ////
-const { $logger, b24Helper } = useAppInit('AppInfoPage')
-$logger.info('Hi from base/app-info')
-// endregion ////
+const { $logger, initApp, b24Helper, destroyB24Helper } = useAppInit('AppInfoPage')
+const { $initializeB24Frame } = useNuxtApp()
+let $b24: null | B24Frame = null
 
 const infoItems = computed(() => [
   {
@@ -41,6 +41,27 @@ const infoItems = computed(() => [
     description: b24Helper.value?.appInfo.data.isInstalled ? 'Y' : 'N'
   }
 ] satisfies DescriptionListItem[] )
+// endregion ////
+
+// region Lifecycle Hooks ////
+onMounted(async () => {
+  page.isLoading = true
+
+  $b24 = await $initializeB24Frame()
+  await initApp($b24, localesI18n, setLocale)
+
+  page.title = t('page.base_app-info.seo.title')
+  page.description = t('page.base_app-info.seo.description')
+
+  page.isLoading = false
+
+  $logger.info('Hi from base/app-info')
+})
+
+onUnmounted(() => {
+  destroyB24Helper()
+})
+// endregion ////
 </script>
 
 <template>

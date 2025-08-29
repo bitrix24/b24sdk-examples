@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import PlusMIcon from '@bitrix24/b24icons-vue/outline/PlusMIcon'
+import { usePageStore } from '~/stores/page'
 import type { B24Frame } from '@bitrix24/b24jssdk'
+import PlusMIcon from '@bitrix24/b24icons-vue/outline/PlusMIcon'
 
 definePageMeta({
   layout: false
 })
 
-const { t, locale } = useI18n()
-const route = useRoute()
-route.meta.pageTitle = t('page.base_currency.seo.title')
-route.meta.pageDescription = t('page.base_currency.seo.description')
+const { t, locale, locales: localesI18n, setLocale } = useI18n()
+const page = usePageStore()
 
 // region Init ////
-const { $logger, b24Helper, processErrorGlobal, reloadData, getRootSideBarApi } = useAppInit('CurrencyPage')
+const { $logger, b24Helper, initApp, destroyB24Helper, processErrorGlobal, reloadData } = useAppInit('CurrencyPage')
 const { $initializeB24Frame } = useNuxtApp()
-
-$logger.info('Hi from base/currency')
-const $b24: B24Frame = await $initializeB24Frame()
+let $b24: null | B24Frame = null
 
 const value = ref(123456.789)
 // endregion ////
@@ -25,6 +22,9 @@ const value = ref(123456.789)
 // region Actions ////
 const makeOpenSliderAddCurrency = async() => {
   try {
+    if (!$b24) {
+      return
+    }
     const response = await $b24.slider.openPath(
       $b24.slider.getUrl(`/crm/configs/currency/add/`),
       950
@@ -38,7 +38,7 @@ const makeOpenSliderAddCurrency = async() => {
     )
     {
       $logger.info('Slider is closed! Reinit the application')
-      getRootSideBarApi()?.setLoading(true)
+      page.isLoading = true
       await reloadData()
     }
   } catch (error) {
@@ -48,12 +48,15 @@ const makeOpenSliderAddCurrency = async() => {
       clearErrorHref: '/base/currency'
     })
   } finally {
-    getRootSideBarApi()?.setLoading(false)
+    page.isLoading = false
   }
 }
 
 const makeOpenSliderEditCurrency = async (currencyCode: string) => {
   try {
+    if (!$b24) {
+      return
+    }
     const response = await $b24.slider.openPath(
       $b24.slider.getUrl(`/crm/configs/currency/edit/${currencyCode}/`),
       950
@@ -65,7 +68,7 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
     )
     {
       $logger.info('Slider is closed! Reinit the application')
-      getRootSideBarApi()?.setLoading(true)
+      page.isLoading = true
       await reloadData()
     }
   } catch (error) {
@@ -75,9 +78,29 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
       clearErrorHref: '/base/currency'
     })
   } finally {
-    getRootSideBarApi()?.setLoading(false)
+    page.isLoading = false
   }
 }
+// endregion ////
+
+// region Lifecycle Hooks ////
+onMounted(async () => {
+  page.isLoading = true
+
+  $b24 = await $initializeB24Frame()
+  await initApp($b24, localesI18n, setLocale)
+
+  page.title = t('page.base_currency.seo.title')
+  page.description = t('page.base_currency.seo.description')
+
+  page.isLoading = false
+
+  $logger.info('Hi from base/currency')
+})
+
+onUnmounted(() => {
+  destroyB24Helper()
+})
 // endregion ////
 </script>
 
