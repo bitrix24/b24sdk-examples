@@ -3,6 +3,11 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "Uygulama Ayarları",
+        "optionUser": "Kullanıcı Ayarları",
+        "feedback": "Geri Bildirim"
       }
     }
   },
@@ -16,7 +21,7 @@
       },
       "message": {
         "title": "Merhaba!",
-        "line1": "Bitrix24'te uygulamanın çalışmasını test edelim. Uygulamayı slaytırda açın."
+        "line1": "Bitrix24'te uygulamanın çalışmasını test edelim. Uygulamayı slaytçıda açın."
       }
     },
     "main": {
@@ -24,7 +29,7 @@
         "title": "[playground] Uygulama Testi"
       },
       "message": {
-        "line1": "Sol menüdeki her sayfayı açın ve nasıl çalıştığını inceleyin.",
+        "line1": "Sol menüdeki her sayfayı açın ve üzerinde her şeyin nasıl çalıştığını inceleyin.",
         "line2": "Renk modu ile oynamayı unutmayın.",
         "scopes": "Gerekli izinler (scopes):"
       }
@@ -32,7 +37,27 @@
     "feedback": {
       "seo": {
         "title": "Geri Bildirim Formu",
-        "description": "Geri bildirim formu örnekleri."
+        "description": "Geri bildirim formu örneği."
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "Uygulama Ayarları",
+        "description": "Uygulama ayarlarıyla çalışma örneği."
+      },
+      "actions": {
+        "save": "Kaydet",
+        "close": "Kapat"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "Kullanıcı Ayarları",
+        "description": "Uygulamanın kullanıcı ayarlarıyla çalışma örneği."
+      },
+      "actions": {
+        "save": "Kaydet",
+        "close": "Kapat"
       }
     },
     "base_app-info": {
@@ -42,7 +67,7 @@
         "description": "Uygulama hakkında bilgi."
       },
       "message": {
-        "line1": "Bunlar, uygulamayı tanımlamak, kontrol etmek ve teşhis etmek için temel etiketlerdir.",
+        "line1": "Bunlar, uygulamayı tanımlamak, kontrol etmek ve teşhis etmek için temel işaretlerdir.",
         "id": "kimlik",
         "code": "kod",
         "version": "versiyon",
@@ -57,7 +82,7 @@
         "description": "Bölgeyi önek olarak belirten tarife planı tanımı."
       },
       "message": {
-        "line1": "Kullanıcıyı yenileme süresinin gelişi hakkında önceden uyarabilirsiniz.",
+        "line1": "Kullanıcıyı yenileme süresinin gelmesi konusunda önceden uyarabilirsiniz.",
         "languageId": "dil kodu",
         "license": "bölgeyi önek olarak belirten tarife tanımı",
         "licenseType": "bölge belirtmeden iç tarife tanımı",
@@ -65,7 +90,7 @@
         "licenseFamily": "bölge belirtmeden tarife tanımı",
         "isSelfHosted": "Bitrix24'ün kutu veya bulut sürümü olup olmadığını belirten bayrak",
         "isExpired": "ücretli veya deneme süresinin dolup dolmadığını belirten bayrak",
-        "days": "ücretli veya deneme süresinin bitimine kalan gün sayısı"
+        "days": "ücretli dönemin veya deneme döneminin sonuna kalan gün sayısı"
       }
     },
     "base_specific-methods": {
@@ -75,13 +100,13 @@
         "description": "Özel metodların test edilmesi."
       },
       "message": {
-        "line1": "Burada, Frame üzerinden gömülü uygulamada bulunan metodların çalışması gösterilmektedir.",
+        "line1": "Burada, Frame üzerinden gömülü uygulamalarda bulunan metodların çalışması gösterilmektedir.",
         "selectUsers": "Kullanıcı seçimi",
         "selectUsersDescription": "kullanıcı seçmek için `$b24.dialog.selectUsers` kullanın",
-        "makeImCallToVideo": "Dahili video araması",
-        "makeImCallToVideoDescription": "aramayı başlatmak için `$b24.parent.imCallTo(xxx, true)` kullanın",
-        "makeImCallToVoice": "Dahili sesli arama",
-        "makeImCallToVoiceDescription": "aramayı başlatmak için `$b24.parent.imCallTo(xxx, false)` kullanın",
+        "makeImCallToVideo": "Dahili video görüşme",
+        "makeImCallToVideoDescription": "çağrı başlatmak için `$b24.parent.imCallTo(xxx, true)` kullanın",
+        "makeImCallToVoice": "Dahili sesli görüşme",
+        "makeImCallToVoiceDescription": "çağrı başlatmak için `$b24.parent.imCallTo(xxx, false)` kullanın",
         "makeImOpenMessenger": "Sohbet",
         "makeImOpenMessengerDescription": "sohbet penceresini açmak için `$b24.parent.imOpenMessenger` kullanın",
         "makeImOpenHistory": "Sohbet geçmişi",
@@ -95,8 +120,8 @@
         "clear": "Logu temizle",
         "reload": "Yeniden yükle",
         "select": "Seç",
-        "videoCall": "Video araması",
-        "voiceCall": "Sesli arama",
+        "videoCall": "Video görüşme",
+        "voiceCall": "Sesli görüşme",
         "imOpenMessenger": "Sohbet",
         "imOpenMessengerHistory": "Sohbet geçmişi",
         "makeImPhoneTo": "Ara",
@@ -105,14 +130,14 @@
       "error": {
         "notSelect": "Kullanıcı seçilmedi.",
         "tryCallToSelf": "Kendinizi arayamazsınız.",
-        "emptyNumber": "Arama için telefon numarası belirtilmedi."
+        "emptyNumber": "Arama için telefon belirtilmedi."
       }
     },
     "base_specific-parameters": {
       "nav": "Özel Parametreler",
       "seo": {
         "title": "Özel Parametreler",
-        "description": "Kutu ve bulut sürümleri için özel parametreler listesi."
+        "description": "Kutu ve bulut sürümü için özel parametreler listesi."
       },
       "message": {
         "line1": "Bitrix24'ün kutu ve bulut sürümleri arasında birkaç fark vardır.",
@@ -120,7 +145,7 @@
         "primaryKeyIncrementValue": "ID tipindeki alanlar için artış değeri",
         "mainSettings": "ayarlara bağlantı",
         "ufList": "Uf listesine bağlantı",
-        "ufPage": "Uf sayfasına bağlantı"
+        "ufPage": "Uf'a bağlantı"
       }
     },
     "base_lang": {
@@ -130,9 +155,9 @@
         "description": "Bitrix24 yerel ayarına bağlı olarak dil mesajlarının çıktısını gösterir."
       },
       "message": {
+        "line1": "Bitrix24 dilini değiştirmeyi deneyin.",
         "message1": "ilk mesaj",
-        "message2": "ikinci mesaj",
-        "line1": "Bitrix24 dilini değiştirmeyi deneyin."
+        "message2": "ikinci mesaj"
       }
     },
     "base_feedback": {
@@ -141,16 +166,13 @@
         "title": "Geri Bildirim Formu",
         "description": "Geri bildirim formu için alan örnekleri."
       },
-      "actions": {
-        "open": "Geri bildirim"
-      },
       "message": {
-        "line1": "Uygulamanıza Bitrix24'ünüzden bir CRM formu yerleştirebilir ve ona özel alanlar iletebilirsiniz.",
-        "line2": "Kullanıcı formu doldurduğunda, Bitrix24'ünüzde uygulama, tarife vb. veriler erişilebilir olacaktır.",
+        "line1": "Uygulamanıza Bitrix24'inizden bir CRM formu gömebilir ve ona özel alanlar iletebilirsiniz.",
+        "line2": "Kullanıcı formu doldurduğunda, Bitrix24'inizde uygulama, tarife vb. hakkında veriler erişilebilir olacaktır.",
         "app_code": "kod",
         "app_status": "durum",
         "payment_expired": "ücretli veya deneme süresinin dolup dolmadığını belirten bayrak",
-        "days": "ücretli veya deneme süresinin bitimine kalan gün sayısı",
+        "days": "ücretli dönemin veya deneme döneminin sonuna kalan gün sayısı",
         "b24_plan": "bölgeyi önek olarak belirten tarife tanımı",
         "c_name": "kullanıcı adı",
         "c_last_name": "kullanıcı soyadı",

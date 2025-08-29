@@ -3,6 +3,11 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "應用程式設定",
+        "optionUser": "使用者設定",
+        "feedback": "意見回饋"
       }
     }
   },
@@ -24,7 +29,7 @@
         "title": "[playground] 應用程式測試"
       },
       "message": {
-        "line1": "開啟左側選單中的每個頁面，並研究其運作方式。",
+        "line1": "開啟左側選單中的每個頁面，並瞭解其運作方式。",
         "line2": "別忘了試試色彩模式。",
         "scopes": "所需權限 (scopes):"
       }
@@ -33,6 +38,26 @@
       "seo": {
         "title": "意見回饋表單",
         "description": "意見回饋表單範例。"
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "應用程式設定",
+        "description": "應用程式設定運作範例。"
+      },
+      "actions": {
+        "save": "儲存",
+        "close": "關閉"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "使用者設定",
+        "description": "應用程式使用者設定運作範例。"
+      },
+      "actions": {
+        "save": "儲存",
+        "close": "關閉"
       }
     },
     "base_app-info": {
@@ -54,16 +79,16 @@
       "nav": "授權與付款",
       "seo": {
         "title": "授權與付款",
-        "description": "以地區作為前綴的費率方案標示。"
+        "description": "以地區為前綴的費率方案標示。"
       },
       "message": {
-        "line1": "可以預先通知用戶續約期限即將到來。",
+        "line1": "可以預先提醒使用者續約期限即將到來。",
         "languageId": "語言代碼",
-        "license": "以地區作為前綴的費率標示",
-        "licenseType": "未標示地區的內部費率標示",
-        "licensePrevious": "先前授權",
-        "licenseFamily": "未標示地區的費率標示",
-        "isSelfHosted": "標記，指示 Bitrix24 是自建版或雲端版",
+        "license": "以地區為前綴的費率標示",
+        "licenseType": "不含地區的內部費率標示",
+        "licensePrevious": "過往授權",
+        "licenseFamily": "不含地區的費率標示",
+        "isSelfHosted": "標記，指示 Bitrix24 是自建版還是雲端版",
         "isExpired": "標記，指示付費或試用期是否已過期",
         "days": "付費期或試用期剩餘天數"
       }
@@ -75,9 +100,9 @@
         "description": "特殊方法測試。"
       },
       "message": {
-        "line1": "此處展示透過 Frame 內嵌在應用程式中可用的方法運作。",
-        "selectUsers": "選擇用戶",
-        "selectUsersDescription": "使用 `$b24.dialog.selectUsers` 來選擇用戶",
+        "line1": "此處顯示透過 Frame 內嵌於應用程式中可用的方法運作。",
+        "selectUsers": "選擇使用者",
+        "selectUsersDescription": "使用 `$b24.dialog.selectUsers` 來選擇使用者",
         "makeImCallToVideo": "內部視訊通話",
         "makeImCallToVideoDescription": "使用 `$b24.parent.imCallTo(xxx, true)` 來發起通話",
         "makeImCallToVoice": "內部語音通話",
@@ -86,7 +111,7 @@
         "makeImOpenMessengerDescription": "使用 `$b24.parent.imOpenMessenger` 來開啟聊天視窗",
         "makeImOpenHistory": "聊天記錄",
         "makeImOpenHistoryDescription": "使用 `$b24.parent.imOpenHistory` 來開啟聊天記錄",
-        "makeImPhoneTo": "透過電話系統通話",
+        "makeImPhoneTo": "透過電話系統撥打電話",
         "makeImPhoneToDescription": "使用 `$b24.parent.imPhoneTo` 來撥打電話",
         "makeSendPullCommand": "Pull 訊息",
         "makeSendPullCommandDescription": "使用 `pull.application.event.add` 來發送訊息"
@@ -103,36 +128,36 @@
         "makeSendPullCommand": "發送"
       },
       "error": {
-        "notSelect": "未選擇用戶。",
+        "notSelect": "未選擇使用者。",
         "tryCallToSelf": "您無法撥打電話給自己。",
-        "emptyNumber": "未指定通話電話號碼。"
+        "emptyNumber": "未指定撥打電話的號碼。"
       }
     },
     "base_specific-parameters": {
       "nav": "特殊參數",
       "seo": {
         "title": "特殊參數",
-        "description": "自建版和雲端版專用參數列表。"
+        "description": "自建版和雲端版的特殊參數列表。"
       },
       "message": {
         "line1": "Bitrix24 的自建版和雲端版之間有一些區別。",
-        "isSelfHosted": "標記，指示 Bitrix24 是自建版或雲端版",
-        "primaryKeyIncrementValue": "ID 類型欄位的遞增步長",
+        "isSelfHosted": "標記，指示 Bitrix24 是自建版還是雲端版",
+        "primaryKeyIncrementValue": "ID 類型欄位的增量步長",
         "mainSettings": "設定連結",
         "ufList": "Uf 列表連結",
-        "ufPage": "Uf 頁面連結"
+        "ufPage": "Uf 連結"
       }
     },
     "base_lang": {
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "根據 Bitrix24 的地區設定展示語言訊息輸出。"
+        "description": "根據 Bitrix24 語言環境示範語言訊息的輸出。"
       },
       "message": {
+        "line1": "嘗試變更 Bitrix24 的語言。",
         "message1": "第一則訊息",
-        "message2": "第二則訊息",
-        "line1": "嘗試變更 Bitrix24 的語言。"
+        "message2": "第二則訊息"
       }
     },
     "base_feedback": {
@@ -141,19 +166,16 @@
         "title": "意見回饋表單",
         "description": "意見回饋表單欄位範例。"
       },
-      "actions": {
-        "open": "意見回饋"
-      },
       "message": {
-        "line1": "您可以將來自您 Bitrix24 的 CRM 表單嵌入到應用程式中，並傳遞特殊欄位給它。",
-        "line2": "當用戶填寫表單後，您的 Bitrix24 將可取得應用程式、費率方案等相關數據。",
+        "line1": "您可以將 Bitrix24 中的 CRM 表單嵌入應用程式，並向其傳遞特殊欄位。",
+        "line2": "當使用者填寫表單後，您的 Bitrix24 將可取得應用程式、授權方案等相關資料。",
         "app_code": "代碼",
         "app_status": "狀態",
         "payment_expired": "標記，指示付費或試用期是否已過期",
         "days": "付費期或試用期剩餘天數",
-        "b24_plan": "以地區作為前綴的費率標示",
-        "c_name": "用戶名稱",
-        "c_last_name": "用戶姓氏",
+        "b24_plan": "以地區為前綴的費率標示",
+        "c_name": "使用者名稱",
+        "c_last_name": "使用者姓氏",
         "hostname": "Bitrix24 位址"
       }
     },
@@ -167,7 +189,7 @@
         "create": "建立"
       },
       "message": {
-        "line1": "顯示格式化後的金額非常容易。"
+        "line1": "顯示格式化的金額非常容易。"
       },
       "list": {
         "code": "代碼",

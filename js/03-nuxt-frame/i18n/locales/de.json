@@ -3,28 +3,33 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "Anwendungseinstellungen",
+        "optionUser": "Benutzereinstellungen",
+        "feedback": "Feedback"
       }
     }
   },
   "page": {
     "index": {
       "seo": {
-        "title": "[playground] App-Test"
+        "title": "[playground] Anwendungstest"
       },
       "menu": {
         "main": "Öffnen"
       },
       "message": {
         "title": "Hallo!",
-        "line1": "Lassen Sie uns die Funktionsweise der App in Bitrix24 testen. Öffnen Sie die App im Slider."
+        "line1": "Lassen Sie uns die Funktionsweise der Anwendung in Bitrix24 testen. Öffnen Sie die Anwendung im Slider."
       }
     },
     "main": {
       "seo": {
-        "title": "[playground] App-Test"
+        "title": "[playground] Anwendungstest"
       },
       "message": {
-        "line1": "Öffnen Sie jede Seite im linken Menü und sehen Sie sich an, wie alles funktioniert.",
+        "line1": "Öffnen Sie jede Seite im linken Menü und erkunden Sie, wie alles funktioniert.",
         "line2": "Vergessen Sie nicht, mit dem Farbmodus zu spielen.",
         "scopes": "Erforderliche Berechtigungen (scopes):"
       }
@@ -32,17 +37,37 @@
     "feedback": {
       "seo": {
         "title": "Feedback-Formular",
-        "description": "Beispiele für ein Feedback-Formular."
+        "description": "Beispiel eines Feedback-Formulars."
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "Anwendungseinstellungen",
+        "description": "Beispiel für die Arbeit mit Anwendungseinstellungen."
+      },
+      "actions": {
+        "save": "Speichern",
+        "close": "Schließen"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "Benutzereinstellungen",
+        "description": "Beispiel für die Arbeit mit Benutzereinstellungen der Anwendung."
+      },
+      "actions": {
+        "save": "Speichern",
+        "close": "Schließen"
       }
     },
     "base_app-info": {
-      "nav": "Applikation",
+      "nav": "Anwendung",
       "seo": {
-        "title": "Applikation",
-        "description": "Informationen zur Applikation."
+        "title": "Anwendung",
+        "description": "Informationen zur Anwendung."
       },
       "message": {
-        "line1": "Dies sind die wichtigsten Metadaten zur Identifikation, Kontrolle und Diagnose der Applikation.",
+        "line1": "Dies sind die Schlüsselmetriken zur Identifizierung, Kontrolle und Diagnose der Anwendung.",
         "id": "Identifikator",
         "code": "Code",
         "version": "Version",
@@ -72,16 +97,16 @@
       "nav": "Spezielle Methoden",
       "seo": {
         "title": "Spezielle Methoden",
-        "description": "Test spezieller Methoden."
+        "description": "Testen spezieller Methoden."
       },
       "message": {
-        "line1": "Hier wird die Funktionsweise der Methoden gezeigt, die in der eingebetteten App über Frame verfügbar sind.",
-        "selectUsers": "Benutzerauswahl",
-        "selectUsersDescription": "verwenden Sie `$b24.dialog.selectUsers` für die Benutzerauswahl",
+        "line1": "Hier wird die Funktionsweise der Methoden gezeigt, die in der via Frame eingebetteten Anwendung verfügbar sind.",
+        "selectUsers": "Benutzer auswählen",
+        "selectUsersDescription": "verwenden Sie `$b24.dialog.selectUsers` zur Benutzerauswahl",
         "makeImCallToVideo": "Interner Videoanruf",
-        "makeImCallToVideoDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, true)` zum Initiieren eines Anrufs",
+        "makeImCallToVideoDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, true)` zur Initiierung eines Anrufs",
         "makeImCallToVoice": "Interner Sprachanruf",
-        "makeImCallToVoiceDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, false)` zum Initiieren eines Anrufs",
+        "makeImCallToVoiceDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, false)` zur Initiierung eines Anrufs",
         "makeImOpenMessenger": "Chat",
         "makeImOpenMessengerDescription": "verwenden Sie `$b24.parent.imOpenMessenger`, um ein Chat-Fenster zu öffnen",
         "makeImOpenHistory": "Chat-Verlauf",
@@ -115,7 +140,7 @@
         "description": "Liste spezieller Parameter für On-Premise- und Cloud-Versionen."
       },
       "message": {
-        "line1": "Es gibt einige Unterschiede zwischen On-Premise- und Cloud-Versionen von Bitrix24.",
+        "line1": "Es gibt einige Unterschiede zwischen der On-Premise- und der Cloud-Version von Bitrix24.",
         "isSelfHosted": "Flag, das angibt, ob es sich um eine On-Premise- oder Cloud-Version von Bitrix24 handelt",
         "primaryKeyIncrementValue": "Inkrementschritt für Felder vom Typ ID",
         "mainSettings": "Link zu den Einstellungen",
@@ -130,9 +155,9 @@
         "description": "Demonstriert die Ausgabe von Sprachmeldungen in Abhängigkeit von der Bitrix24-Lokalisierung."
       },
       "message": {
+        "line1": "Versuchen Sie, die Sprache von Bitrix24 zu ändern.",
         "message1": "erste Nachricht",
-        "message2": "zweite Nachricht",
-        "line1": "Versuchen Sie, die Sprache von Bitrix24 zu ändern."
+        "message2": "zweite Nachricht"
       }
     },
     "base_feedback": {
@@ -141,12 +166,9 @@
         "title": "Feedback-Formular",
         "description": "Beispiele für Felder eines Feedback-Formulars."
       },
-      "actions": {
-        "open": "Feedback"
-      },
       "message": {
-        "line1": "Sie können ein CRM-Formular aus Ihrem Bitrix24 in die App einbetten und spezielle Felder übergeben.",
-        "line2": "Wenn der Benutzer das Formular ausfüllt, sind in Ihrem Bitrix24 Daten zur App, zum Tarif usw. verfügbar.",
+        "line1": "Sie können ein CRM-Formular aus Ihrem Bitrix24 in die Anwendung einbetten und spezielle Felder übergeben.",
+        "line2": "Wenn der Benutzer das Formular ausfüllt, sind in Ihrem Bitrix24 Daten zur Anwendung, zum Tarif usw. verfügbar.",
         "app_code": "Code",
         "app_status": "Status",
         "payment_expired": "Flag, das angibt, ob die bezahlte oder Testperiode abgelaufen ist",

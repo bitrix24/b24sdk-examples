@@ -3,6 +3,11 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "Impostazioni applicazione",
+        "optionUser": "Impostazioni utente",
+        "feedback": "Feedback"
       }
     }
   },
@@ -16,7 +21,7 @@
       },
       "message": {
         "title": "Ciao!",
-        "line1": "Testiamo il funzionamento dell'applicazione in Bitrix24. Apri l'applicazione nel pannello laterale."
+        "line1": "Testiamo il funzionamento dell'applicazione in Bitrix24. Apri l'applicazione nel pannello scorrevole."
       }
     },
     "main": {
@@ -24,15 +29,35 @@
         "title": "[playground] Test dell'applicazione"
       },
       "message": {
-        "line1": "Apri ogni pagina nel menu di sinistra e scopri come funziona tutto.",
+        "line1": "Apri ogni pagina nel menu a sinistra ed esplora come funziona tutto.",
         "line2": "Non dimenticare di provare la modalità colore.",
-        "scopes": "Autorizzazioni richieste (scopes):"
+        "scopes": "Permessi richiesti (scopes):"
       }
     },
     "feedback": {
       "seo": {
         "title": "Modulo di feedback",
-        "description": "Esempi di modulo di feedback."
+        "description": "Esempio di modulo di feedback."
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "Impostazioni applicazione",
+        "description": "Esempio di gestione delle impostazioni dell'applicazione."
+      },
+      "actions": {
+        "save": "Salva",
+        "close": "Chiudi"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "Impostazioni utente",
+        "description": "Esempio di gestione delle impostazioni utente dell'applicazione."
+      },
+      "actions": {
+        "save": "Salva",
+        "close": "Chiudi"
       }
     },
     "base_app-info": {
@@ -54,18 +79,18 @@
       "nav": "Licenza e pagamento",
       "seo": {
         "title": "Licenza e pagamento",
-        "description": "Designazione del piano tariffario con l'indicazione della regione come prefisso."
+        "description": "Denominazione del piano tariffario con indicazione della regione come prefisso."
       },
       "message": {
         "line1": "È possibile avvisare in anticipo l'utente dell'avvicinarsi della scadenza del rinnovo.",
         "languageId": "codice lingua",
-        "license": "designazione tariffa con indicazione della regione come prefisso",
-        "licenseType": "designazione tariffaria interna senza indicazione della regione",
+        "license": "denominazione tariffa con indicazione della regione come prefisso",
+        "licenseType": "denominazione tariffa interna senza indicazione della regione",
         "licensePrevious": "licenza precedente",
-        "licenseFamily": "designazione tariffa senza indicazione della regione",
-        "isSelfHosted": "flag, indica se Bitrix24 è la versione on-premise o cloud",
-        "isExpired": "flag, indica se il periodo a pagamento o di prova è scaduto",
-        "days": "numero di giorni rimanenti alla fine del periodo a pagamento o di prova"
+        "licenseFamily": "denominazione tariffa senza indicazione della regione",
+        "isSelfHosted": "flag che indica se Bitrix24 è una versione on-premise o cloud",
+        "isExpired": "flag che indica se il periodo a pagamento o di prova è scaduto",
+        "days": "numero di giorni rimanenti fino alla fine del periodo a pagamento o di prova"
       }
     },
     "base_specific-methods": {
@@ -87,7 +112,7 @@
         "makeImOpenHistory": "Cronologia chat",
         "makeImOpenHistoryDescription": "usa `$b24.parent.imOpenHistory` per aprire la cronologia chat",
         "makeImPhoneTo": "Chiamata tramite telefonia",
-        "makeImPhoneToDescription": "usa `$b24.parent.imPhoneTo` per chiamare",
+        "makeImPhoneToDescription": "usa `$b24.parent.imPhoneTo` per effettuare una chiamata",
         "makeSendPullCommand": "Messaggio Pull",
         "makeSendPullCommandDescription": "usa `pull.application.event.add` per inviare un messaggio"
       },
@@ -95,7 +120,7 @@
         "clear": "Pulisci log",
         "reload": "Ricarica",
         "select": "Seleziona",
-        "videoCall": "Chiamata video",
+        "videoCall": "Videochiamata",
         "voiceCall": "Chiamata vocale",
         "imOpenMessenger": "Chat",
         "imOpenMessengerHistory": "Cronologia chat",
@@ -115,9 +140,9 @@
         "description": "Elenco dei parametri speciali per la versione on-premise e cloud."
       },
       "message": {
-        "line1": "Ci sono alcune differenze tra le versioni on-premise e cloud di Bitrix24.",
-        "isSelfHosted": "flag, indica se Bitrix24 è la versione on-premise o cloud",
-        "primaryKeyIncrementValue": "valore di incremento per i campi di tipo ID",
+        "line1": "Ci sono diverse differenze tra le versioni on-premise e cloud di Bitrix24.",
+        "isSelfHosted": "flag che indica se Bitrix24 è una versione on-premise o cloud",
+        "primaryKeyIncrementValue": "incremento per i campi di tipo ID",
         "mainSettings": "link alle impostazioni",
         "ufList": "link all'elenco Uf",
         "ufPage": "link a Uf"
@@ -127,31 +152,28 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Dimostra l'output dei messaggi linguistici a seconda della località di Bitrix24."
+        "description": "Dimostra l'output dei messaggi linguistici in base alla località di Bitrix24."
       },
       "message": {
+        "line1": "Prova a cambiare la lingua di Bitrix24.",
         "message1": "primo messaggio",
-        "message2": "secondo messaggio",
-        "line1": "Prova a cambiare la lingua di Bitrix24."
+        "message2": "secondo messaggio"
       }
     },
     "base_feedback": {
       "nav": "Modulo di feedback",
       "seo": {
         "title": "Modulo di feedback",
-        "description": "Esempi di campi per il modulo di feedback."
-      },
-      "actions": {
-        "open": "Feedback"
+        "description": "Esempi di campi per un modulo di feedback."
       },
       "message": {
-        "line1": "Puoi incorporare nel tuo applicativo un modulo CRM dal tuo Bitrix24 e passarvi campi speciali.",
-        "line2": "Quando l'utente compila il modulo, nel tuo Bitrix24 saranno disponibili dati sull'applicazione, sul piano tariffario, ecc.",
+        "line1": "Puoi incorporare nel tuo applicazione un modulo CRM dal tuo Bitrix24 e passarvi campi speciali.",
+        "line2": "Quando l'utente compila il modulo, nel tuo Bitrix24 saranno disponibili dati sull'applicazione, tariffa, ecc.",
         "app_code": "codice",
         "app_status": "stato",
-        "payment_expired": "flag, indica se il periodo a pagamento o di prova è scaduto",
-        "days": "numero di giorni rimanenti alla fine del periodo a pagamento o di prova",
-        "b24_plan": "designazione tariffa con indicazione della regione come prefisso",
+        "payment_expired": "flag che indica se il periodo a pagamento o di prova è scaduto",
+        "days": "numero di giorni rimanenti fino alla fine del periodo a pagamento o di prova",
+        "b24_plan": "denominazione tariffa con indicazione della regione come prefisso",
         "c_name": "nome utente",
         "c_last_name": "cognome utente",
         "hostname": "indirizzo Bitrix24"
@@ -167,7 +189,7 @@
         "create": "Crea"
       },
       "message": {
-        "line1": "Mostrare un importo formattato è molto semplice."
+        "line1": "Mostrare un importo formattato è molto facile."
       },
       "list": {
         "code": "Codice",
@@ -179,5 +201,5 @@
     }
   },
   "message1": "Chi dorme non piglia pesci",
-  "message2": "Un'immagine vale più di mille parole"
+  "message2": "Un immagine vale più di mille parole"
 }

@@ -3,6 +3,11 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "Cài đặt ứng dụng",
+        "optionUser": "Cài đặt người dùng",
+        "feedback": "Phản hồi"
       }
     }
   },
@@ -26,13 +31,33 @@
       "message": {
         "line1": "Mở từng trang trong menu bên trái và tìm hiểu cách mọi thứ hoạt động trên đó.",
         "line2": "Đừng quên thử nghiệm với chế độ màu sắc.",
-        "scopes": "Quyền được yêu cầu (scopes):"
+        "scopes": "Quyền yêu cầu (scopes):"
       }
     },
     "feedback": {
       "seo": {
         "title": "Biểu mẫu phản hồi",
         "description": "Ví dụ về biểu mẫu phản hồi."
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "Cài đặt ứng dụng",
+        "description": "Ví dụ làm việc với cài đặt ứng dụng."
+      },
+      "actions": {
+        "save": "Lưu",
+        "close": "Đóng"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "Cài đặt người dùng",
+        "description": "Ví dụ làm việc với cài đặt người dùng của ứng dụng."
+      },
+      "actions": {
+        "save": "Lưu",
+        "close": "Đóng"
       }
     },
     "base_app-info": {
@@ -42,7 +67,7 @@
         "description": "Thông tin về ứng dụng."
       },
       "message": {
-        "line1": "Đây là những điểm đánh dấu quan trọng để nhận dạng, kiểm soát và chẩn đoán ứng dụng.",
+        "line1": "Đây là các nhãn quan trọng để nhận dạng, kiểm soát và chẩn đoán ứng dụng.",
         "id": "định danh",
         "code": "mã",
         "version": "phiên bản",
@@ -57,15 +82,15 @@
         "description": "Ký hiệu gói dịch vụ với chỉ định khu vực làm tiền tố."
       },
       "message": {
-        "line1": "Có thể thông báo trước cho người dùng về thời hạn gia hạn.",
+        "line1": "Có thể cảnh báo trước cho người dùng về thời hạn gia hạn.",
         "languageId": "mã ngôn ngữ",
         "license": "ký hiệu gói dịch vụ với chỉ định khu vực làm tiền tố",
         "licenseType": "ký hiệu gói dịch vụ nội bộ không chỉ định khu vực",
         "licensePrevious": "giấy phép trước",
         "licenseFamily": "ký hiệu gói dịch vụ không chỉ định khu vực",
-        "isSelfHosted": "cờ chỉ định Bitrix24 là phiên bản hộp hay đám mây",
+        "isSelfHosted": "cờ chỉ định Bitrix24 là bản on-premise hay cloud",
         "isExpired": "cờ chỉ định thời hạn trả phí hoặc dùng thử đã hết hay chưa",
-        "days": "số ngày còn lại cho đến hết thời hạn trả phí hoặc dùng thử"
+        "days": "số ngày còn lại đến hết thời hạn trả phí hoặc dùng thử"
       }
     },
     "base_specific-methods": {
@@ -75,13 +100,13 @@
         "description": "Kiểm thử các phương thức đặc biệt."
       },
       "message": {
-        "line1": "Ở đây cho thấy hoạt động của các phương thức có sẵn trong ứng dụng được nhúng qua Frame.",
+        "line1": "Ở đây thể hiện hoạt động của các phương thức có sẵn trong ứng dụng nhúng thông qua Frame.",
         "selectUsers": "Chọn người dùng",
         "selectUsersDescription": "sử dụng `$b24.dialog.selectUsers` để chọn người dùng",
         "makeImCallToVideo": "Cuộc gọi video nội bộ",
-        "makeImCallToVideoDescription": "sử dụng `$b24.parent.imCallTo(xxx, true)` để khởi tạo cuộc gọi",
+        "makeImCallToVideoDescription": "sử dụng `$b24.parent.imCallTo(xxx, true)` để bắt đầu cuộc gọi",
         "makeImCallToVoice": "Cuộc gọi thoại nội bộ",
-        "makeImCallToVoiceDescription": "sử dụng `$b24.parent.imCallTo(xxx, false)` để khởi tạo cuộc gọi",
+        "makeImCallToVoiceDescription": "sử dụng `$b24.parent.imCallTo(xxx, false)` để bắt đầu cuộc gọi",
         "makeImOpenMessenger": "Trò chuyện",
         "makeImOpenMessengerDescription": "sử dụng `$b24.parent.imOpenMessenger` để mở cửa sổ trò chuyện",
         "makeImOpenHistory": "Lịch sử trò chuyện",
@@ -103,7 +128,7 @@
         "makeSendPullCommand": "Gửi"
       },
       "error": {
-        "notSelect": "Người dùng chưa được chọn.",
+        "notSelect": "Chưa chọn người dùng.",
         "tryCallToSelf": "Bạn không thể gọi cho chính mình.",
         "emptyNumber": "Chưa chỉ định số điện thoại để gọi."
       }
@@ -112,12 +137,12 @@
       "nav": "Tham số đặc biệt",
       "seo": {
         "title": "Tham số đặc biệt",
-        "description": "Danh sách các tham số đặc biệt cho phiên bản hộp và đám mây."
+        "description": "Danh sách tham số đặc biệt cho bản on-premise và cloud."
       },
       "message": {
-        "line1": "Có một số khác biệt giữa phiên bản hộp và đám mây của Bitrix24.",
-        "isSelfHosted": "cờ chỉ định Bitrix24 là phiên bản hộp hay đám mây",
-        "primaryKeyIncrementValue": "bước tăng cho các trường loại ID",
+        "line1": "Có một số khác biệt giữa bản on-premise và cloud của Bitrix24.",
+        "isSelfHosted": "cờ chỉ định Bitrix24 là bản on-premise hay cloud",
+        "primaryKeyIncrementValue": "bước tăng cho các trường kiểu ID",
         "mainSettings": "liên kết đến cài đặt",
         "ufList": "liên kết đến danh sách Uf",
         "ufPage": "liên kết đến Uf"
@@ -130,9 +155,9 @@
         "description": "Thể hiện việc xuất thông báo ngôn ngữ tùy theo ngôn ngữ của Bitrix24."
       },
       "message": {
+        "line1": "Hãy thử thay đổi ngôn ngữ trong Bitrix24.",
         "message1": "thông báo đầu tiên",
-        "message2": "thông báo thứ hai",
-        "line1": "Hãy thử thay đổi ngôn ngữ của Bitrix24."
+        "message2": "thông báo thứ hai"
       }
     },
     "base_feedback": {
@@ -141,16 +166,13 @@
         "title": "Biểu mẫu phản hồi",
         "description": "Ví dụ về các trường cho biểu mẫu phản hồi."
       },
-      "actions": {
-        "open": "Phản hồi"
-      },
       "message": {
-        "line1": "Bạn có thể nhúng biểu mẫu CRM từ Bitrix24 của bạn vào ứng dụng và truyền vào đó các trường đặc biệt.",
+        "line1": "Bạn có thể nhúng biểu mẫu CRM từ Bitrix24 của mình vào ứng dụng và truyền vào các trường đặc biệt.",
         "line2": "Khi người dùng điền vào biểu mẫu, dữ liệu về ứng dụng, gói dịch vụ, v.v. sẽ có sẵn trong Bitrix24 của bạn.",
         "app_code": "mã",
         "app_status": "trạng thái",
         "payment_expired": "cờ chỉ định thời hạn trả phí hoặc dùng thử đã hết hay chưa",
-        "days": "số ngày còn lại cho đến hết thời hạn trả phí hoặc dùng thử",
+        "days": "số ngày còn lại đến hết thời hạn trả phí hoặc dùng thử",
         "b24_plan": "ký hiệu gói dịch vụ với chỉ định khu vực làm tiền tố",
         "c_name": "tên người dùng",
         "c_last_name": "họ người dùng",
@@ -161,7 +183,7 @@
       "nav": "Tiền tệ",
       "seo": {
         "title": "Tiền tệ",
-        "description": "Danh sách các loại tiền tệ trong Bitrix24."
+        "description": "Danh sách tiền tệ trong Bitrix24."
       },
       "actions": {
         "create": "Tạo"
@@ -178,6 +200,6 @@
       }
     }
   },
-  "message1": "Ai dậy sớm thì Trời cho",
+  "message1": "Ai dậy sớm thì trời cho",
   "message2": "Trăm nghe không bằng một thấy"
 }

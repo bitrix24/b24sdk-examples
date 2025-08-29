@@ -3,29 +3,34 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "アプリケーション設定",
+        "optionUser": "ユーザー設定",
+        "feedback": "フィードバック"
       }
     }
   },
   "page": {
     "index": {
       "seo": {
-        "title": "[playground] アプリテスト"
+        "title": "[playground] アプリケーションテスト"
       },
       "menu": {
         "main": "開く"
       },
       "message": {
         "title": "こんにちは！",
-        "line1": "Bitrix24内でのアプリケーションの動作をテストしましょう。スライダーでアプリを開いてください。"
+        "line1": "Bitrix24でのアプリケーションの動作をテストしてみましょう。スライダーでアプリケーションを開いてください。"
       }
     },
     "main": {
       "seo": {
-        "title": "[playground] アプリテスト"
+        "title": "[playground] アプリケーションテスト"
       },
       "message": {
-        "line1": "左メニューの各ページを開き、その機能を確認してください。",
-        "line2": "カラーモードもお試しください。",
+        "line1": "左メニューの各ページを開き、その動作を確認してください。",
+        "line2": "カラーモードで遊ぶのも忘れずに。",
         "scopes": "必要な権限 (scopes):"
       }
     },
@@ -33,6 +38,26 @@
       "seo": {
         "title": "フィードバックフォーム",
         "description": "フィードバックフォームの例。"
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "アプリケーション設定",
+        "description": "アプリケーション設定の操作例。"
+      },
+      "actions": {
+        "save": "保存",
+        "close": "閉じる"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "ユーザー設定",
+        "description": "アプリケーションのユーザー設定操作例。"
+      },
+      "actions": {
+        "save": "保存",
+        "close": "閉じる"
       }
     },
     "base_app-info": {
@@ -51,21 +76,21 @@
       }
     },
     "base_license-info": {
-      "nav": "ライセンスとお支払い",
+      "nav": "ライセンスと支払い",
       "seo": {
-        "title": "ライセンスとお支払い",
-        "description": "地域をプレフィックスとして指定した tariff plan の指定。"
+        "title": "ライセンスと支払い",
+        "description": "地域をプレフィックスとして示した料金プランの表示。"
       },
       "message": {
-        "line1": "更新期限の到来を事前にユーザーに通知できます。",
+        "line1": "更新期限が近づいていることを事前にユーザーに通知できます。",
         "languageId": "言語コード",
-        "license": "地域をプレフィックスとして指定した tariff の指定",
-        "licenseType": "地域指定なしの内部 tariff 指定",
+        "license": "地域をプレフィックスとして示した料金プラン",
+        "licenseType": "地域指定なしの内部料金プラン表示",
         "licensePrevious": "以前のライセンス",
-        "licenseFamily": "地域指定なしの tariff 指定",
+        "licenseFamily": "地域指定なしの料金プラン表示",
         "isSelfHosted": "Bitrix24がオンプレミス版かクラウド版かを示すフラグ",
-        "isExpired": "有償期間または試用期間が終了したかどうかを示すフラグ",
-        "days": "有償期間または試用期間の終了までの残り日数"
+        "isExpired": "有料期間または試用期間が終了したかどうかを示すフラグ",
+        "days": "有料期間または試用期間の残り日数"
       }
     },
     "base_specific-methods": {
@@ -75,8 +100,8 @@
         "description": "特殊メソッドのテスト。"
       },
       "message": {
-        "line1": "ここでは、Frameを介してアプリケーション内で利用可能なメソッドの動作を示します。",
-        "selectUsers": "ユーザーの選択",
+        "line1": "ここでは、Frameを通じてアプリケーション内で利用可能なメソッドの動作を示します。",
+        "selectUsers": "ユーザー選択",
         "selectUsersDescription": "ユーザー選択には `$b24.dialog.selectUsers` を使用してください",
         "makeImCallToVideo": "内部ビデオ通話",
         "makeImCallToVideoDescription": "通話開始には `$b24.parent.imCallTo(xxx, true)` を使用してください",
@@ -87,7 +112,7 @@
         "makeImOpenHistory": "チャット履歴",
         "makeImOpenHistoryDescription": "チャット履歴を開くには `$b24.parent.imOpenHistory` を使用してください",
         "makeImPhoneTo": "テレフォニー通話",
-        "makeImPhoneToDescription": "通話するには `$b24.parent.imPhoneTo` を使用してください",
+        "makeImPhoneToDescription": "電話をかけるには `$b24.parent.imPhoneTo` を使用してください",
         "makeSendPullCommand": "Pullメッセージ",
         "makeSendPullCommandDescription": "メッセージ送信には `pull.application.event.add` を使用してください"
       },
@@ -99,7 +124,7 @@
         "voiceCall": "音声通話",
         "imOpenMessenger": "チャット",
         "imOpenMessengerHistory": "チャット履歴",
-        "makeImPhoneTo": "電話をかける",
+        "makeImPhoneTo": "発信",
         "makeSendPullCommand": "送信"
       },
       "error": {
@@ -112,7 +137,7 @@
       "nav": "特殊パラメータ",
       "seo": {
         "title": "特殊パラメータ",
-        "description": "オンプレミス版とクラウド版のための特殊パラメータのリスト。"
+        "description": "オンプレミス版およびクラウド版のための特殊パラメータリスト。"
       },
       "message": {
         "line1": "Bitrix24のオンプレミス版とクラウド版にはいくつかの違いがあります。",
@@ -127,33 +152,30 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Bitrix24のロケールに応じた言語メッセージの出力をデモンストレーションします。"
+        "description": "Bitrix24のロケールに応じた言語メッセージの出力デモ。"
       },
       "message": {
+        "line1": "Bitrix24の言語を変更してみてください。",
         "message1": "最初のメッセージ",
-        "message2": "二番目のメッセージ",
-        "line1": "Bitrix24の言語を変更してみてください。"
+        "message2": "二番目のメッセージ"
       }
     },
     "base_feedback": {
       "nav": "フィードバックフォーム",
       "seo": {
         "title": "フィードバックフォーム",
-        "description": "フィードバックフォーム用のフィールド例。"
-      },
-      "actions": {
-        "open": "フィードバック"
+        "description": "フィードバックフォームのフィールド例。"
       },
       "message": {
-        "line1": "あなたのBitrix24からCRMフォームをアプリケーションに組み込み、特別なフィールドを渡すことができます。",
-        "line2": "ユーザーがフォームを記入すると、あなたのBitrix24でアプリ、tariffなどのデータが利用可能になります。",
+        "line1": "あなたのBitrix24からCRMフォームをアプリケーションに埋め込み、特別なフィールドを渡すことができます。",
+        "line2": "ユーザーがフォームを記入すると、あなたのBitrix24でアプリケーション、料金プランなどのデータが利用可能になります。",
         "app_code": "コード",
         "app_status": "ステータス",
-        "payment_expired": "有償期間または試用期間が終了したかどうかを示すフラグ",
-        "days": "有償期間または試用期間の終了までの残り日数",
-        "b24_plan": "地域をプレフィックスとして指定した tariff の指定",
+        "payment_expired": "有料期間または試用期間が終了したかどうかを示すフラグ",
+        "days": "有料期間または試用期間の残り日数",
+        "b24_plan": "地域をプレフィックスとして示した料金プラン",
         "c_name": "ユーザー名",
-        "c_last_name": "ユーザーの姓",
+        "c_last_name": "ユーザー姓",
         "hostname": "Bitrix24アドレス"
       }
     },
@@ -178,6 +200,6 @@
       }
     }
   },
-  "message1": "早起きは三文の得",
+  "message1": "早起きは三文の徳",
   "message2": "百聞は一見に如かず"
 }

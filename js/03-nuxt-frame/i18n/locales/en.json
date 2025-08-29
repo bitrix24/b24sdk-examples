@@ -3,6 +3,11 @@
     "default": {
       "sidebarHeader": {
         "title": "Bitrix24::Frame"
+      },
+      "navbarHeader": {
+        "optionApp": "Application settings",
+        "optionUser": "User settings",
+        "feedback": "Feedback"
       }
     }
   },
@@ -16,7 +21,7 @@
       },
       "message": {
         "title": "Hello!",
-        "line1": "Let's test the application in Bitrix24. Open the application in the slider."
+        "line1": "Let's test the application's operation in Bitrix24. Open the application in the slider."
       }
     },
     "main": {
@@ -25,14 +30,34 @@
       },
       "message": {
         "line1": "Open each page in the left menu and explore how everything works on it.",
-        "line2": "Don't forget to play with the color mode.",
+        "line2": "Don't forget to play around with the color mode.",
         "scopes": "Required permissions (scopes):"
       }
     },
     "feedback": {
       "seo": {
         "title": "Feedback form",
-        "description": "Examples of the feedback form."
+        "description": "Example of a feedback form."
+      }
+    },
+    "app-options": {
+      "seo": {
+        "title": "Application settings",
+        "description": "Example of working with application settings."
+      },
+      "actions": {
+        "save": "Save",
+        "close": "Close"
+      }
+    },
+    "user-options": {
+      "seo": {
+        "title": "User settings",
+        "description": "Example of working with application user settings."
+      },
+      "actions": {
+        "save": "Save",
+        "close": "Close"
       }
     },
     "base_app-info": {
@@ -57,12 +82,12 @@
         "description": "Designation of the tariff plan with the region specified as a prefix."
       },
       "message": {
-        "line1": "You can notify the user in advance about the upcoming renewal date.",
+        "line1": "You can warn the user in advance about the upcoming renewal date.",
         "languageId": "language code",
         "license": "tariff designation with the region specified as a prefix",
-        "licenseType": "internal tariff designation without the region specified",
+        "licenseType": "internal tariff designation without specifying the region",
         "licensePrevious": "previous license",
-        "licenseFamily": "tariff designation without the region specified",
+        "licenseFamily": "tariff designation without specifying the region",
         "isSelfHosted": "flag indicating whether Bitrix24 is the on-premise or cloud version",
         "isExpired": "flag indicating whether the paid or trial period has expired",
         "days": "number of days remaining until the end of the paid period or trial period"
@@ -75,7 +100,7 @@
         "description": "Testing specific methods."
       },
       "message": {
-        "line1": "This shows the operation of methods available in the application embedded via Frame.",
+        "line1": "Here is the operation of methods available in the application embedded via Frame.",
         "selectUsers": "Select user",
         "selectUsersDescription": "use `$b24.dialog.selectUsers` to select a user",
         "makeImCallToVideo": "Internal video call",
@@ -83,9 +108,9 @@
         "makeImCallToVoice": "Internal voice call",
         "makeImCallToVoiceDescription": "use `$b24.parent.imCallTo(xxx, false)` to initiate a call",
         "makeImOpenMessenger": "Chat",
-        "makeImOpenMessengerDescription": "use `$b24.parent.imOpenMessenger` to open the chat window",
+        "makeImOpenMessengerDescription": "use `$b24.parent.imOpenMessenger` to open a chat window",
         "makeImOpenHistory": "Chat history",
-        "makeImOpenHistoryDescription": "use `$b24.parent.imOpenHistory` to open the chat history",
+        "makeImOpenHistoryDescription": "use `$b24.parent.imOpenHistory` to open chat history",
         "makeImPhoneTo": "Call via telephony",
         "makeImPhoneToDescription": "use `$b24.parent.imPhoneTo` to make a call",
         "makeSendPullCommand": "Pull message",
@@ -105,7 +130,7 @@
       "error": {
         "notSelect": "User not selected.",
         "tryCallToSelf": "You cannot call yourself.",
-        "emptyNumber": "Phone number for call is not specified."
+        "emptyNumber": "Phone number for call not specified."
       }
     },
     "base_specific-parameters": {
@@ -117,7 +142,7 @@
       "message": {
         "line1": "There are several differences between the on-premise and cloud versions of Bitrix24.",
         "isSelfHosted": "flag indicating whether Bitrix24 is the on-premise or cloud version",
-        "primaryKeyIncrementValue": "increment step for ID-type fields",
+        "primaryKeyIncrementValue": "increment step for ID type fields",
         "mainSettings": "link to settings",
         "ufList": "link to Uf list",
         "ufPage": "link to Uf"
@@ -127,22 +152,19 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Demonstrates the output of language messages depending on the Bitrix24 locale."
+        "description": "Demonstrates output of language messages depending on the Bitrix24 locale."
       },
       "message": {
+        "line1": "Try changing the Bitrix24 language.",
         "message1": "first message",
-        "message2": "second message",
-        "line1": "Try changing the Bitrix24 language."
+        "message2": "second message"
       }
     },
     "base_feedback": {
       "nav": "Feedback form",
       "seo": {
         "title": "Feedback form",
-        "description": "Examples of fields for the feedback form."
-      },
-      "actions": {
-        "open": "Feedback"
+        "description": "Examples of fields for a feedback form."
       },
       "message": {
         "line1": "You can embed a CRM form from your Bitrix24 into the application and pass special fields to it.",
@@ -171,7 +193,7 @@
       },
       "list": {
         "code": "Code",
-        "title": "Name",
+        "title": "Title",
         "literal": "Sign",
         "value": "Formatting",
         "baseCurrency": "Base currency code"
