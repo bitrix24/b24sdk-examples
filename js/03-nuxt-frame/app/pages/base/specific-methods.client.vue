@@ -379,7 +379,7 @@ onUnmounted(() => {
     </AdviceBanner>
     <div class="flex flex-col sm:flex-row items-start justify-between gap-[10px]">
       <ContainerWrapper class="px-[16px] w-[300px]">
-        <B24Accordion data-model="active" :items="infoItems">
+        <B24Accordion :items="infoItems">
           <template #selectUsers="{ item }">
             <div class="pb-[12px]">
               <ProseP small accent="less-more">{{ item.description }}</ProseP>

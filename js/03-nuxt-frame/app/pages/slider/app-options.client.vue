@@ -47,14 +47,54 @@ onUnmounted(() => {
 
 <template>
   <NuxtLayout name="slider">
-    <AdviceBanner>
-      <B24Advice
-        class="w-full max-w-[550px]"
-        :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
-      >
-        <ProseP>@todo</ProseP>
-      </B24Advice>
-    </AdviceBanner>
+    <div class="flex flex-col items-center justify-between gap-[16px]">
+      <ContainerWrapper class="px-[16px] w-full">
+        <B24Accordion
+          sise="md"
+          :items="[{
+                label: 'setting1',
+                slot: 'setting1'
+              }]"
+        >
+          <template #setting1="{ item }">
+            <div class="pb-[12px]">
+              <ProseP>{{ item.label }}</ProseP>
+              <ProseP>@todo</ProseP>
+            </div>
+          </template>
+        </B24Accordion>
+      </ContainerWrapper>
+      <ContainerWrapper class="px-[16px] w-full">
+        <B24Accordion
+          sise="md"
+          :items="[{
+                label: 'setting2',
+                slot: 'setting2'
+              }]"
+        >
+          <template #setting2="{ item }">
+            <div class="pb-[12px]">
+              <ProseP>{{ item.label }}</ProseP>
+              <ProseP>@todo</ProseP>
+            </div>
+          </template>
+        </B24Accordion>
+      </ContainerWrapper>
+    </div>
+
+    <template #footer>
+      <div class="light bg-(--popup-window-background-color) flex items-center justify-center gap-3 border-t-1 border-t-(--ui-color-divider-less) shadow-top-md py-[9px] px-2 pr-(--scrollbar-width)">
+        <div class="flex flex-row gap-[10px]">
+          <B24Button
+            :label="t('page.app-options.actions.save')"
+            color="air-primary-success"
+          />
+          <B24Button
+            :label="t('page.app-options.actions.close')"
+            color="air-tertiary"
+          />
+        </div>
+      </div>
+    </template>
   </NuxtLayout>
 </template>

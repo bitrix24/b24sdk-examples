@@ -15,21 +15,43 @@ const emit = defineEmits<{ close: [boolean] }>()
     :use-light-content="false"
     :b24ui="{
       content: 'sm:max-w-[970px] sm:top-[275px] sm:max-h-[calc(100%-275px)]',
-      ddsidebarLayoutRoot: [
-        'edge-dark',
-        'edge-dark:[--air-theme-bg-color:#7c235b]',
-        'edge-dark:[--air-theme-bg-size:cover]',
-        'edge-dark:[--air-theme-bg-repeat:no-repeat]',
-        'edge-dark:[--air-theme-bg-position:0_0]',
-        'edge-dark:[--air-theme-bg-attachment:local]',
-        'edge-dark:[--air-theme-bg-image:url(/bg/edge-dark-v2.jpg)]',
-        'edge-dark:[--air-theme-bg-image-blurred:url(/bg/edge-dark-v2-blurred.webp)]'
-      ].join(' '),
-      sidebarLayoutLoadingIcon: 'text-(--ui-color-gray-70)'
     }"
   >
     <template #body>
-      @todo
+      <div class="flex flex-col items-center justify-between gap-[16px]">
+        <ContainerWrapper class="px-[16px] w-full">
+          <B24Accordion
+            sise="md"
+            :items="[{
+              label: 'setting1',
+              slot: 'setting1'
+            }]"
+          >
+            <template #setting1="{ item }">
+              <div class="pb-[12px]">
+               <ProseP>{{ item.label }}</ProseP>
+               <ProseP>@todo</ProseP>
+              </div>
+            </template>
+          </B24Accordion>
+        </ContainerWrapper>
+        <ContainerWrapper class="px-[16px] w-full">
+          <B24Accordion
+            sise="md"
+            :items="[{
+              label: 'setting2',
+              slot: 'setting2'
+            }]"
+          >
+            <template #setting2="{ item }">
+              <div class="pb-[12px]">
+               <ProseP>{{ item.label }}</ProseP>
+               <ProseP>@todo</ProseP>
+              </div>
+            </template>
+          </B24Accordion>
+        </ContainerWrapper>
+      </div>
     </template>
 
     <template #footer>

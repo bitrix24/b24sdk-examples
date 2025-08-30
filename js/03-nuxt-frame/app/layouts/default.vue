@@ -97,32 +97,43 @@ const colorModeLabel = computed(() => {
 const pages = computed<NavigationMenuItem[]>(() => {
   return [
     {
-      label: t('page.base_app-info.nav'),
-      to: '/base/app-info'
+      label: t('layout.default.navbarHeader.home'),
+      to: '/main'
     },
     {
-      label: t('page.base_license-info.nav'),
-      to: '/base/license-info'
-    },
-    {
-      label: t('page.base_specific-methods.nav'),
-      to: '/base/specific-methods'
-    },
-    {
-      label: t('page.base_specific-parameters.nav'),
-      to: '/base/specific-parameters'
-    },
-    {
-      label: t('page.base_currency.nav'),
-      to: '/base/currency'
-    },
-    {
-      label: t('page.base_lang.nav'),
-      to: '/base/lang'
-    },
-    {
-      label: t('page.base_feedback.nav'),
-      to: '/base/feedback'
+      label: t('layout.default.navbarHeader.pages'),
+      type: 'trigger' as NavigationMenuItem['type'],
+      active: route.path.includes(`/base`),
+      children: [
+        {
+          label: t('page.base_app-info.nav'),
+          to: '/base/app-info'
+        },
+        {
+          label: t('page.base_license-info.nav'),
+          to: '/base/license-info'
+        },
+        {
+          label: t('page.base_specific-methods.nav'),
+          to: '/base/specific-methods'
+        },
+        {
+          label: t('page.base_specific-parameters.nav'),
+          to: '/base/specific-parameters'
+        },
+        {
+          label: t('page.base_currency.nav'),
+          to: '/base/currency'
+        },
+        {
+          label: t('page.base_lang.nav'),
+          to: '/base/lang'
+        },
+        {
+          label: t('page.base_feedback.nav'),
+          to: '/base/feedback'
+        }
+      ]
     }
   ]
 })
@@ -229,36 +240,24 @@ const makeOpenOptionUser = async() => {
   <B24SidebarLayout
     :use-light-content="false"
   >
-    <template #sidebar>
-      <B24SidebarHeader>
-        <div class="h-full flex items-center relative my-0 ps-[25px] pe-xs rtl:pe-[25px]">
-          <B24Link href="/main" class="mt-0 text-(--ui-color-design-selection-content)">
-            <ProseH4 class="font-medium mb-0">
-              {{ $t('layout.default.sidebarHeader.title') }}
-            </ProseH4>
-          </B24Link>
-        </div>
-      </B24SidebarHeader>
-      <B24SidebarBody>
+    <template #navbar>
+      <B24NavbarSection>
         <B24NavigationMenu
           :items="pages"
-          orientation="vertical"
+          orientation="horizontal"
         />
-        <B24SidebarSpacer />
+      </B24NavbarSection>
+      <B24NavbarSpacer />
+      <B24NavbarSection class="flex-row items-center justify-start gap-4">
         <ClientOnly>
           <B24NavigationMenu
             :items="helpItems"
-            orientation="vertical"
+            orientation="horizontal"
             :b24ui="{
               linkLeadingBadge: '-top-[10px] left-[34px]'
             }"
           />
         </ClientOnly>
-      </B24SidebarBody>
-    </template>
-    <template #navbar>
-      <B24NavbarSpacer />
-      <B24NavbarSection class="flex-row items-center justify-start gap-4">
         <B24ButtonGroup size="xs">
           <B24Tooltip :content="{ side: 'bottom' }" :text="$t('layout.default.navbarHeader.optionApp')">
             <B24Button

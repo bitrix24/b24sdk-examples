@@ -2,7 +2,7 @@
 useHead({
   bodyAttrs: {
     // 'dark' | 'light' | 'edge-dark' | 'edge-light'
-    class: `light`
+    class: `light light:[--air-theme-bg-color:#ffffff]`
   }
 })
 </script>
