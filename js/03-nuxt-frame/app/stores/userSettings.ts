@@ -10,6 +10,7 @@ export const useUserSettingsStore = defineStore(
 
     // region State ////
     const configSettings = reactive({
+      deviceHistoryCleanupDays: 30,
       someValue_1: 30,
       someValue_2: 'some text'
     })
