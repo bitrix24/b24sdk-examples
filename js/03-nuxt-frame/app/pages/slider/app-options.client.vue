@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import {ref, onMounted, onUnmounted, computed} from 'vue'
 import { usePageStore } from '~/stores/page'
 import { useUserStore } from '~/stores/user'
 import { useAppSettingsStore } from '~/stores/appSettings'
 import { AjaxError } from '@bitrix24/b24jssdk'
 import type { B24Frame } from '@bitrix24/b24jssdk'
+import type { AccordionItem } from '@bitrix24/b24ui-nuxt'
 import ListIcon from '@bitrix24/b24icons-vue/main/ListIcon'
 import CloudErrorIcon from '@bitrix24/b24icons-vue/main/CloudErrorIcon'
 import ClockWithArrowIcon from '@bitrix24/b24icons-vue/main/ClockWithArrowIcon'
@@ -34,6 +35,19 @@ const deviceHistoryCleanupDays = ref([
 ])
 
 const deviceHistoryCleanupDay = ref(appSettings.configSettings.deviceHistoryCleanupDays)
+
+const infoItems = computed(() => [
+  {
+    label: t('page.app-options.option.history.title'),
+    icon: ClockWithArrowIcon,
+    slot: 'history'
+  },
+  {
+    label: t('page.app-options.option.present.title'),
+    icon: ListIcon,
+    slot: 'present'
+  }
+] satisfies AccordionItem[])
 // endregion ////
 
 // region Actions ////
@@ -167,72 +181,29 @@ onUnmounted(() => {
 
 <template>
   <NuxtLayout name="slider">
-    <B24Collapsible
-      :default-open="true"
-      class="light mb-4 flex flex-col gap-0 w-full bg-(--ui-color-bg-content-primary) rounded"
-    >
-      <B24Button
-        class="group w-full"
-        :label="$t('component.settings.slider.history.title')"
-        :icon="ClockWithArrowIcon"
-        use-dropdown
-        block
-        size="lg"
-        :b24ui="{
-          trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
+    <B24Accordion
+      :items="infoItems"
+      :b24ui="{
+          root:'light',
+          item: 'mb-4 bg-(--ui-color-bg-content-primary) rounded-(--ui-border-radius-md)',
+          trigger: 'py-[20px] px-[20px]',
+          label: 'text-(length:--ui-font-size-2xl) text-(-ui-color-text-primary)',
+          leadingIcon: 'text-(--ui-color-base-60)',
+          trailingIcon: 'text-(-ui-color-text-primary)',
         }"
-      />
-      <template #content>
-        <div class="px-4 mb-3">
-          <B24Separator class="mb-3" />
-
-          <B24Alert
-            color="air-primary"
-            :description="$t('component.settings.slider.history.alert')"
-          />
-
-          <B24FormField
-            class="my-3"
-            :label="$t('component.settings.slider.history.property')"
-          >
-            <B24Select
-              v-model="deviceHistoryCleanupDay"
-              :items="deviceHistoryCleanupDays"
-              class="w-full"
-            />
-          </B24FormField>
-        </div>
-      </template>
-    </B24Collapsible>
-
-    <B24Collapsible
-      :default-open="false"
-      class="flex flex-col gap-0 w-full bg-(--ui-color-bg-content-primary) rounded"
     >
-      <B24Button
-        normal-case
-        class="group w-full"
-        :label="$t('component.settings.slider.log.title')"
-        :icon="ListIcon"
-        use-dropdown
-        block
-        size="lg"
-        :b24ui="{
-          trailingIcon: 'group-data-[state=open]:rotate-180 transition-transform duration-200'
-        }"
-      />
-      <template #content>
-        <div class="px-4 mb-3">
+      <template #history>
+        <div class="px-4 pb-[12px]">
           <B24Separator class="mb-3" />
           <B24Alert
             class="mb-3"
             color="air-primary"
-            :description="$t('component.settings.slider.log.alert')"
+            :description="$t('page.app-options.option.history.alert')"
           />
 
           <B24FormField
             class="my-3"
-            :label="$t('component.settings.slider.history.property')"
+            :label="$t('page.app-options.option.history.property')"
           >
             <B24Select
               v-model="deviceHistoryCleanupDay"
@@ -242,8 +213,28 @@ onUnmounted(() => {
           </B24FormField>
         </div>
       </template>
-    </B24Collapsible>
+      <template #present>
+        <div class="px-4 pb-[12px]">
+          <B24Separator class="mb-3" />
+          <B24Alert
+            class="mb-3"
+            color="air-primary"
+            :description="$t('page.app-options.option.present.alert')"
+          />
 
+          <B24FormField
+            class="my-3"
+            :label="$t('page.app-options.option.present.property')"
+          >
+            <B24Select
+              v-model="deviceHistoryCleanupDay"
+              :items="deviceHistoryCleanupDays"
+              class="w-full"
+            />
+          </B24FormField>
+        </div>
+      </template>
+    </B24Accordion>
     <template #footer>
       <div class="light bg-(--popup-window-background-color) flex items-center justify-center gap-3 border-t-1 border-t-(--ui-color-divider-less) shadow-top-md py-[9px] px-2 pr-(--scrollbar-width)">
         <div class="flex flex-row gap-[10px]">

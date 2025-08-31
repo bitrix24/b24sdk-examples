@@ -279,7 +279,6 @@ const makeOpenOptionUser = async() => {
         <B24Button
           :label="$t('layout.default.navbarHeader.feedback')"
           color="air-secondary-accent"
-          rounded
           size="xs"
           @click="makeOpenFeedBack"
         />

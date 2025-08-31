@@ -53,6 +53,18 @@
       },
       "error": {
         "notAdmin": "Только администратор может редактировать настройки приложения."
+      },
+      "option": {
+        "history": {
+          "title": "title",
+          "alert": "alert",
+          "property": "property"
+        },
+        "present": {
+          "title": "title",
+          "alert": "alert",
+          "property": "property"
+        }
       }
     },
     "user-options": {
@@ -63,6 +75,18 @@
       "actions": {
         "save": "Сохранить",
         "cancel": "Отменить"
+      },
+      "option": {
+        "history": {
+          "title": "title",
+          "alert": "alert",
+          "property": "property"
+        },
+        "present": {
+          "title": "title",
+          "alert": "alert",
+          "property": "property"
+        }
       }
     },
     "base_app-info": {
