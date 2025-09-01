@@ -1,4 +1,4 @@
-import type { B24Frame } from '@bitrix24/b24jssdk'
+import type { B24Frame, TypeEnumAppStatus } from '@bitrix24/b24jssdk'
 
 /**
  * Some info about App
@@ -9,19 +9,15 @@ export const useAppSettingsStore = defineStore(
     let $b24: null | B24Frame = null
 
     // region State ////
-    const version = ref('0.0.0')
+    type ConfigType = {
+      deviceHistoryCleanupDays: number
+    }
+    type CombinedConfigTyp = ConfigType & { [key: string]: any }
+
+    const version = ref(0)
+    const status = ref<TypeEnumAppStatus>('Free')
     const isTrial = ref(true)
-    const integrator = reactive({
-      logo: '',
-      company: '',
-      phone: '',
-      email: '',
-      whatsapp: '',
-      telegram: '',
-      site: '',
-      comments: ''
-    })
-    const configSettings = reactive({
+    const configSettings = reactive<CombinedConfigTyp>({
       deviceHistoryCleanupDays: 30
     })
     // endregion ////
@@ -35,23 +31,23 @@ export const useAppSettingsStore = defineStore(
      * Initialize store from batch response data
      * @param data - Raw data from Bitrix24 API
      * @param data.version
-     * @param data.isTrial
-     * @param data.integrator
+     * @param data.status
      * @param data.configSettings
      */
     function initFromBatch(data: {
-      version?: string
-      isTrial?: boolean
-      integrator?: typeof integrator
-      configSettings?: typeof configSettings
+      version?: number
+      status?: TypeEnumAppStatus
+      configSettings?: Record<string, any>
     }) {
-      isTrial.value = data.isTrial ?? true
+      if (data.status) {
+        status.value = data.status
+        isTrial.value = status.value === 'Trial'
+      }
+
       if (data.version) {
         version.value = data.version
       }
-      if (data.integrator) {
-        Object.assign(integrator, data.integrator)
-      }
+
       if (data.configSettings) {
         Object.assign(configSettings, data.configSettings)
       }
@@ -69,67 +65,10 @@ export const useAppSettingsStore = defineStore(
       return $b24.callMethod(
         'app.option.set',
         {
-          integrator: { ...integrator },
           configSettings: { ...configSettings }
         }
       )
     }
-
-    const updateIntegrator = (params: Partial<typeof integrator>) => {
-      Object.assign(integrator, params)
-      saveSettings()
-    }
-
-    /**
-     * @need fix lang
-     */
-    const integratorPreview = computed(() => {
-      const result = []
-      if (integrator.phone.length) {
-        result.push({
-          label: 'Phone',
-          code: 'phone',
-          description: integrator.phone
-        })
-      }
-      if (integrator.email.length) {
-        result.push({
-          label: 'E-mail',
-          code: 'email',
-          description: integrator.email
-        })
-      }
-      if (integrator.telegram.length) {
-        result.push({
-          label: 'Telegram',
-          code: 'telegram',
-          description: integrator.telegram
-        })
-      }
-      if (integrator.whatsapp.length) {
-        result.push({
-          label: 'WhatsApp',
-          code: 'whatsapp',
-          description: integrator.whatsapp
-        })
-      }
-      if (integrator.site.length) {
-        result.push({
-          label: 'Website',
-          code: 'site',
-          description: integrator.site
-        })
-      }
-      if (integrator.comments.length) {
-        result.push({
-          label: 'Comments',
-          code: 'comments',
-          description: integrator.comments
-        })
-      }
-
-      return result
-    })
     // endregion ////
 
     return {
@@ -138,10 +77,7 @@ export const useAppSettingsStore = defineStore(
       setB24,
       initFromBatch,
       saveSettings,
-      configSettings,
-      integrator,
-      updateIntegrator,
-      integratorPreview
+      configSettings
     }
   }
 )

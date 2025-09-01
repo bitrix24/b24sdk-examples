@@ -21,7 +21,7 @@ const { t, locales: localesI18n, setLocale } = useI18n()
 const page = usePageStore()
 
 // region Init ////
-const { $logger, processErrorGlobal, initApp, reloadData, b24Helper, destroyB24Helper, usePullClient, useSubscribePullClient, startPullClient } = useAppInit('SpecificMethodsPage')
+const { $logger, moduleId, processErrorGlobal, initApp, b24Helper, destroyB24Helper, usePullClient, useSubscribePullClient, startPullClient } = useAppInit('SpecificMethodsPage')
 const { $initializeB24Frame } = useNuxtApp()
 let $b24: null | B24Frame = null
 
@@ -87,7 +87,7 @@ const makeReloadWindow = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
@@ -117,7 +117,7 @@ const makeSelectUsers = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
@@ -149,7 +149,7 @@ const makeImCallTo = async(isVideo: boolean = true) => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
@@ -185,7 +185,7 @@ const makeImOpenMessenger = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
@@ -218,7 +218,7 @@ const makeImOpenHistory = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
@@ -250,7 +250,7 @@ const makeImPhoneTo = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
@@ -259,7 +259,7 @@ const makeSendPullCommand = async(command: string, params: Record<string, any> =
   try {
     result.value = {}
 
-    page.isLoading = true
+    // page.isLoading = true
 
     result.value.selectedUsers = await $b24?.dialog.selectUsers()
     result.value.list = result.value.selectedUsers.map((row: SelectedUser): string => {
@@ -295,26 +295,28 @@ const makeSendPullCommand = async(command: string, params: Record<string, any> =
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: true,
-      clearErrorHref: '/base/specific-methods'
+      clearErrorHref: '/base/specific-methods.html'
     })
   }
 }
 
-const makeSendPullCommandHandler = (message: TypePullMessage): void => {
+const makeSendPullCommandHandler = async (message: TypePullMessage) => {
   $logger.warn('<< pull.get <<<', message)
-
-  if (message.command === 'reload.options') {
-    $logger.info("Get pull command for update. Reinit the application")
-    reloadData()
-    return
-  }
 
   result.value.resultInfo = {
     command: message.command,
     params: message.params
   }
 
-  page.isLoading = false
+  if (message.command === 'reload.options') {
+    $logger.info("Get pull command for update. Reinit the application")
+    // page.isLoading = true
+    // await reloadData()
+    // page.isLoading = false
+    // return
+  }
+
+  // page.isLoading = false
 }
 // endregion ////
 
@@ -331,7 +333,7 @@ onMounted(async () => {
   usePullClient()
   useSubscribePullClient(
     makeSendPullCommandHandler.bind( this ),
-    'main'
+    moduleId
   )
   startPullClient()
 
@@ -372,9 +374,10 @@ onUnmounted(() => {
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
+        :avatar="{ src: '../avatar/assistant.png' }"
       >
         <ProseP>{{ $t('page.base_specific-methods.message.line1') }}</ProseP>
+        <ProseP>{{ $t('page.base_specific-methods.message.line2') }}</ProseP>
       </B24Advice>
     </AdviceBanner>
     <div class="flex flex-col sm:flex-row items-start justify-between gap-[10px]">

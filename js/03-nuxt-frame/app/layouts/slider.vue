@@ -39,10 +39,10 @@ useSeoMeta({
 
     <!-- Header -->
     <template v-if="!page.isLoading" #content-top>
-      <div class="w-full flex flex-col gap-[6px]">
+      <div class="w-full flex flex-col gap-[4px]">
         <div class="flex items-center gap-[12px]">
           <div class="w-full flex items-center gap-[20px]">
-            <ProseH2 class="font-semibold mb-0">
+            <ProseH2 class="font-(--ui-font-weight-semi-bold) mb-0 text-(length:--ui-font-size-4xl)/[calc(var(--ui-font-size-4xl)+2px)]">
               {{ page.title }}
             </ProseH2>
             <slot name="top-actions-start" />
@@ -54,7 +54,7 @@ useSeoMeta({
             <slot name="top-actions-end" />
           </div>
         </div>
-        <ProseP v-if="page.description.length > 0" accent="less" class="mb-0">
+        <ProseP v-if="page.description.length > 0" small accent="less" class="mb-0">
           {{ page.description }}
         </ProseP>
       </div>

@@ -53,7 +53,7 @@ onUnmounted(() => {
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
+        :avatar="{ src: '../avatar/assistant.png' }"
       >
         <ProseP>{{ $t('page.base_lang.message.line1') }}</ProseP>
       </B24Advice>

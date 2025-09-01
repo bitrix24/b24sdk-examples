@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { navigateTo } from '#imports'
 import { usePageStore } from '~/stores/page'
 import type { DescriptionListItem } from '@bitrix24/b24ui-nuxt'
 import type { B24Frame } from '@bitrix24/b24jssdk'
@@ -58,16 +59,15 @@ const infoItems = computed(() => [
 
 // region Actions ////
 const makeOpenPage = async(url: string) => {
-  try {
-    const newWindow = window.open(url, '_blank', 'noopener,noreferrer');
-    if (newWindow) newWindow.opener = null;
-  } catch (error) {
-    processErrorGlobal(error, {
-      homePageIsHide: true,
-      isShowClearError: false,
-      clearErrorHref: '/base/feedback'
-    })
-  }
+  navigateTo({
+    path: url,
+    query: {}
+  }, {
+    external: true,
+    open: {
+      target: '_blank'
+    }
+  })
 }
 // endregion ////
 
@@ -90,7 +90,6 @@ onUnmounted(() => {
   destroyB24Helper()
 })
 // endregion ////
-
 </script>
 
 <template>
@@ -99,7 +98,7 @@ onUnmounted(() => {
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
+        :avatar="{ src: '../avatar/assistant.png' }"
       >
         <ProseP>{{ $t('page.base_feedback.message.line1') }}</ProseP>
         <ProseP>{{ $t('page.base_feedback.message.line2') }}</ProseP>

@@ -59,13 +59,13 @@ export default defineNuxtRouteMiddleware(async (
       let goTo: null | string = null
 
       if (optionsPlace === 'app-options') {
-        goTo = `${baseDir}slider/app-options`
+        goTo = `${baseDir}slider/app-options.html`
       // } else if (optionsPlace === 'user-options') {
-      //   goTo = `${baseDir}slider/user-options`
+      //   goTo = `${baseDir}slider/user-options.html`
       } else if (optionsPlace === 'feedback') {
-        goTo = `${baseDir}slider/feedback`
-      } else if (optionsPlace === 'main' && ['/', '/main'].includes(to.path)) {
-        goTo = `${baseDir}main`
+        goTo = `${baseDir}slider/feedback.html`
+      } else if (optionsPlace === 'main' && ['/index.html', '/main.html'].includes(to.path)) {
+        goTo = `${baseDir}main.html`
       }
 
       if (

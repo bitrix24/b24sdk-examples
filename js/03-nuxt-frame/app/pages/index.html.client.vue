@@ -12,10 +12,10 @@ useHead({
 })
 
 // region Init ////
-const { $logger, initApp, destroyB24Helper, processErrorGlobal } = useAppInit('IndexPage')
+const { $logger, initLang, processErrorGlobal } = useAppInit('IndexPage')
 const { $initializeB24Frame } = useNuxtApp()
 const $b24: B24Frame = await $initializeB24Frame()
-await initApp($b24, localesI18n, setLocale)
+await initLang($b24, localesI18n, setLocale)
 
 const isAutoOpenActivityList = ref(true)
 const isHmrUpdate = import.meta.hot?.data?.isHmrUpdate || false
@@ -47,14 +47,13 @@ onMounted(async () => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: true,
-      clearErrorHref: '/'
+      clearErrorHref: '/index.html'
     })
   }
 })
 
 onUnmounted(() => {
   $b24?.destroy()
-  destroyB24Helper()
 })
 // endregion ////
 
@@ -88,7 +87,7 @@ function openActivityList() {
     <B24Advice
       class="w-full max-w-[550px]"
       :b24ui="{ descriptionWrapper: 'w-full' }"
-      :avatar="{ src: '/avatar/assistant.png' }"
+      :avatar="{ src: 'avatar/assistant.png' }"
     >
       <ProseH2>{{ $t('page.index.message.title') }}</ProseH2>
       <ProseP>{{ $t('page.index.message.line1') }}</ProseP>

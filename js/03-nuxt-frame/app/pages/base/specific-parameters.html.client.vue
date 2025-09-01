@@ -60,7 +60,7 @@ const makeOpenPage = async(url: string) => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-parameters'
+      clearErrorHref: '/base/specific-parameters.html'
     })
   }
 }
@@ -84,7 +84,7 @@ const makeOpenDealUfList = async(url: string) => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/specific-parameters'
+      clearErrorHref: '/base/specific-parameters.html'
     })
   }
 }
@@ -117,7 +117,7 @@ onUnmounted(() => {
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
+        :avatar="{ src: '../avatar/assistant.png' }"
       >
         <ProseP>{{ $t('page.base_specific-parameters.message.line1') }}</ProseP>
       </B24Advice>

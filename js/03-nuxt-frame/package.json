@@ -8,11 +8,14 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "generate": "nuxt generate",
+    "generate-archive-for-b24": "pnpm run generate && pnpm run tools:fix-paths && pnpm run tools:create-archive",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "translate-ui": "tsx tools/translate.ui.ts"
+    "translate-ui": "tsx tools/translate.ui.ts",
+    "tools:fix-paths": "node ./tools/fix-paths.mjs",
+    "tools:create-archive": "node ./tools/create-archive.mjs"
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^2.0.2",
@@ -21,7 +24,9 @@
     "@nuxtjs/i18n": "^10.0.6",
     "@pinia/nuxt": "^0.11.2",
     "luxon": "^3.7.1",
-    "nuxt": "^4.0.3"
+    "nuxt": "^4.0.3",
+    "@unovis/ts": "^1.6.0",
+    "@unovis/vue": "^1.6.0"
   },
   "devDependencies": {
     "@types/luxon": "^3.7.1",
@@ -29,6 +34,7 @@
     "eslint": "^9.34.0",
     "typescript": "^5.9.2",
     "openai": "^5.16.0",
-    "tsx": "^4.20.5"
+    "tsx": "^4.20.5",
+    "consola": "^3.4.2"
   }
 }

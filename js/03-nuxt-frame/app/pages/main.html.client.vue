@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { useI18n } from '#imports'
 import type { B24Frame } from '@bitrix24/b24jssdk'
+import { useUserSettingsStore } from '~/stores/userSettings'
+
+const userSettings = useUserSettingsStore()
 
 const { t, locales: localesI18n, setLocale } = useI18n()
 
@@ -23,10 +26,10 @@ $logger.info('Hi from main page')
     <B24Advice
       class="w-full max-w-[550px]"
       :b24ui="{ descriptionWrapper: 'w-full' }"
-      :avatar="{ src: '/avatar/assistant.png' }"
+      :avatar="{ src: 'avatar/assistant.png' }"
     >
       <ProseP>{{ $t('page.main.message.line1') }}</ProseP>
-      <ProseP>
+      <ProseP v-if="userSettings.configSettings.isShowChangeColorMode">
         {{ $t('page.main.message.line2') }}
         <div class="ms-[4px] inline-flex flex-row items-center gap-[4px]">
           <B24Kbd value="shift" size="sm" accent="accent" /><B24Kbd value="d" size="sm" accent="accent" />
@@ -37,6 +40,8 @@ $logger.info('Hi from main page')
         <ProseCode color="air-primary-copilot">user_brief</ProseCode>
         <ProseCode color="air-primary-copilot">crm</ProseCode>
         <ProseCode color="air-primary-copilot">pull</ProseCode>
+        <ProseCode color="air-primary-copilot">placement</ProseCode>
+        <ProseCode color="air-primary-copilot">userfieldconfig</ProseCode>
       </div>
     </B24Advice>
   </AdviceCenter>

@@ -27,7 +27,7 @@ function initFrame() {
   if (!iframe) {
     iframe = document.createElement('iframe') as HTMLIFrameElement
     iframe.id = 'iframe-b24-form'
-    iframe.classList.add('mt-0', 'w-full', 'rounded-(--ui-border-radius-md)', 'min-h-[580px]')
+    iframe.classList.add('mt-0', 'w-full', 'rounded-(--ui-border-radius-md)', 'min-h-[600px]')
   }
 
   /**
@@ -110,7 +110,7 @@ onMounted(async () => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/slider/feedback'
+      clearErrorHref: '/slider/feedback.html'
     })
   } finally {
     page.isLoading = false
@@ -129,5 +129,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="frameContainer"/>
+  <div ref="frameContainer" class="bg-white rounded-(--ui-border-radius-md)" />
 </template>

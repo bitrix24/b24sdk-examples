@@ -45,7 +45,7 @@ const makeOpenSliderAddCurrency = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/currency'
+      clearErrorHref: '/base/currency.html'
     })
   } finally {
     page.isLoading = false
@@ -75,7 +75,7 @@ const makeOpenSliderEditCurrency = async (currencyCode: string) => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/base/currency'
+      clearErrorHref: '/base/currency.html'
     })
   } finally {
     page.isLoading = false
@@ -118,7 +118,7 @@ onUnmounted(() => {
       <B24Advice
         class="w-full max-w-[550px]"
         :b24ui="{ descriptionWrapper: 'w-full' }"
-        :avatar="{ src: '/avatar/assistant.png' }"
+        :avatar="{ src: '../avatar/assistant.png' }"
       >
         <ProseP>{{ $t('page.base_currency.message.line1') }}</ProseP>
       </B24Advice>

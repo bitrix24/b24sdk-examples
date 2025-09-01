@@ -6,7 +6,7 @@ import BtnSpinnerIcon from '@bitrix24/b24icons-vue/button-specialized/BtnSpinner
 useHead({
   bodyAttrs: {
     // 'dark' | 'light' | 'edge-dark' | 'edge-light'
-    class: `light`
+    class: `light light:[--air-theme-bg-color:#f9fafb]`
   }
 })
 
@@ -25,17 +25,18 @@ useSeoMeta({
     :use-light-content="false"
     :b24ui="{
       root: 'overflow-y-hidden',
-      container: 'p-[20px] mt-0'
+      container: 'p-0 lg:p-0 mt-0'
     }"
   >
     <div v-if="page.isLoading">
-      <div class="cursor-wait isolate absolute z-1000 inset-0 w-full flex flex-row flex-nowrap items-center justify-center h-[400px] min-h-[400px]">
+      <div class="cursor-wait isolate absolute z-1000 inset-0 w-full flex flex-row flex-nowrap items-center justify-center h-[200px] min-h-[200px]">
         <BtnSpinnerIcon
           class="text-(--ui-color-design-plain-content-icon-secondary) size-[110px] animate-spin-slow"
           aria-hidden="true"
         />
       </div>
     </div>
+
     <!-- Content -->
     <div v-show="!page.isLoading">
       <slot />
@@ -48,7 +49,7 @@ useSeoMeta({
 </template>
 
 <style scoped>
-  .--app {
-    scrollbar-gutter: auto;
-  }
+.--app {
+  scrollbar-gutter: auto;
+}
 </style>

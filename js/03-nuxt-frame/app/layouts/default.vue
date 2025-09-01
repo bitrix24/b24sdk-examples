@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { usePageStore } from '~/stores/page'
+import { useAppSettingsStore } from '~/stores/appSettings'
+import { useUserSettingsStore } from '~/stores/userSettings'
 import type { NavigationMenuItem, BadgeProps } from '@bitrix24/b24ui-nuxt'
 import type { B24Frame } from '@bitrix24/b24jssdk'
 import { useAppInit } from '~/composables/useAppInit'
@@ -19,6 +21,8 @@ type colorMode = 'dark' | 'light' | 'edge-dark' | 'edge-light'
 const { t } = useI18n()
 const slots = defineSlots()
 const overlay = useOverlay()
+const appSettings = useAppSettingsStore()
+const userSettings = useUserSettingsStore()
 
 const userOptionsSlideover = overlay.create(UserOptionsSlideover)
 
@@ -36,7 +40,7 @@ useSeoMeta({
   description: page.description
 })
 
-const { $logger, processErrorGlobal, reloadData } = useAppInit('LayoutDefault')
+const { $logger, processErrorGlobal } = useAppInit('LayoutDefault')
 const { $initializeB24Frame } = useNuxtApp()
 const $b24: B24Frame = await $initializeB24Frame()
 $logger.info('Hi from layouts/default')
@@ -98,42 +102,78 @@ const pages = computed<NavigationMenuItem[]>(() => {
   return [
     {
       label: t('layout.default.navbarHeader.home'),
-      to: '/main'
+      to: '/main.html'
     },
     {
       label: t('layout.default.navbarHeader.pages'),
       type: 'trigger' as NavigationMenuItem['type'],
       active: route.path.includes(`/base`),
+      class: 'lg:hidden',
       children: [
         {
           label: t('page.base_app-info.nav'),
-          to: '/base/app-info'
+          to: '/base/app-info.html'
         },
         {
           label: t('page.base_license-info.nav'),
-          to: '/base/license-info'
+          to: '/base/license-info.html'
         },
         {
           label: t('page.base_specific-methods.nav'),
-          to: '/base/specific-methods'
+          to: '/base/specific-methods.html'
         },
         {
           label: t('page.base_specific-parameters.nav'),
-          to: '/base/specific-parameters'
+          to: '/base/specific-parameters.html'
         },
         {
           label: t('page.base_currency.nav'),
-          to: '/base/currency'
+          to: '/base/currency.html'
         },
         {
           label: t('page.base_lang.nav'),
-          to: '/base/lang'
+          to: '/base/lang.html'
         },
         {
           label: t('page.base_feedback.nav'),
-          to: '/base/feedback'
+          to: '/base/feedback.html'
         }
       ]
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_app-info.nav'),
+      to: '/base/app-info.html'
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_license-info.nav'),
+      to: '/base/license-info.html'
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_specific-methods.nav'),
+      to: '/base/specific-methods.html'
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_specific-parameters.nav'),
+      to: '/base/specific-parameters.html'
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_currency.nav'),
+      to: '/base/currency.html'
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_lang.nav'),
+      to: '/base/lang.html'
+    },
+    {
+      class: 'hidden lg:flex',
+      label: t('page.base_feedback.nav'),
+      to: '/base/feedback.html'
     }
   ]
 })
@@ -141,23 +181,29 @@ const pages = computed<NavigationMenuItem[]>(() => {
 const helpItems = computed(() => {
   const result: NavigationMenuItem[] = []
 
-  result.push({
-    label: colorModeLabel.value,
-    icon: colorModeIcon.value,
-    kbds: ['shift', 'd'],
-    badge: {
-      label: 'shift + d',
-      color: 'air-secondary' as BadgeProps['color']
-    },
-    onSelect(e: Event) {
-      e?.preventDefault()
-      toggleMode()
-    }
-  })
+  if (userSettings.configSettings.isShowChangeColorMode) {
+    result.push({
+      label: colorModeLabel.value,
+      icon: colorModeIcon.value,
+      badge: {
+        label: 'shift + d',
+        color: 'air-secondary' as BadgeProps['color']
+      },
+      onSelect(e: Event) {
+        e?.preventDefault()
+        toggleMode()
+      }
+    })
+  }
 
   return result
 })
-defineShortcuts(extractShortcuts(helpItems.value))
+
+defineShortcuts({
+  shift_d: () => {
+    toggleMode()
+  }
+})
 // endregion ////
 
 // region Template ////
@@ -192,7 +238,7 @@ const makeOpenFeedBack = async() => {
     await $b24?.slider.openSliderAppPage(
       {
         place: 'feedback',
-        bx24_width: 450,
+        bx24_width: 600,
         bx24_title: t('page.base_feedback.seo.title'),
       }
     )
@@ -200,7 +246,7 @@ const makeOpenFeedBack = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/main'
+      clearErrorHref: '/main.html'
     })
   }
 }
@@ -218,20 +264,14 @@ const makeOpenOptionApp = async() => {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: false,
-      clearErrorHref: '/main'
+      clearErrorHref: '/main.html'
     })
   }
 }
 
 const makeOpenOptionUser = async() => {
   const instance = userOptionsSlideover.open()
-
-  const shouldReload = await instance.result
-  if (shouldReload) {
-    page.isLoading = true
-    await reloadData()
-    page.isLoading = false
-  }
+  await instance.result
 }
 // endregion ////
 </script>
@@ -239,6 +279,9 @@ const makeOpenOptionUser = async() => {
 <template>
   <B24SidebarLayout
     :use-light-content="false"
+    :b24ui="{
+      container: 'px-[22px] lg:px-[22px] lg:pt-0 mt-[12px]'
+    }"
   >
     <template #navbar>
       <B24NavbarSection>
@@ -253,17 +296,18 @@ const makeOpenOptionUser = async() => {
           <B24NavigationMenu
             :items="helpItems"
             orientation="horizontal"
-            :b24ui="{
-              linkLeadingBadge: '-top-[10px] left-[34px]'
-            }"
           />
         </ClientOnly>
-        <B24ButtonGroup size="xs">
+        <B24ButtonGroup size="sm">
+          <B24Badge
+            size="xs"
+            :label="`${appSettings.isTrial ? 'trial ' : ''}v:${appSettings.version}`"
+            color="air-tertiary"
+          />
           <B24Tooltip :content="{ side: 'bottom' }" :text="$t('layout.default.navbarHeader.optionApp')">
             <B24Button
               :icon="SpannerIcon"
               color="air-secondary-accent"
-              rounded
               @click="makeOpenOptionApp"
             />
           </B24Tooltip>
@@ -271,7 +315,6 @@ const makeOpenOptionUser = async() => {
             <B24Button
               :icon="SettingsIcon"
               color="air-secondary-accent"
-              rounded
               @click="makeOpenOptionUser"
             />
           </B24Tooltip>
@@ -279,7 +322,7 @@ const makeOpenOptionUser = async() => {
         <B24Button
           :label="$t('layout.default.navbarHeader.feedback')"
           color="air-secondary-accent"
-          size="xs"
+          size="sm"
           @click="makeOpenFeedBack"
         />
       </B24NavbarSection>
@@ -296,10 +339,10 @@ const makeOpenOptionUser = async() => {
 
     <!-- Header -->
     <template v-if="isUseHeader && !page.isLoading" #content-top>
-      <div class="w-full flex flex-col gap-[6px]">
+      <div class="w-full flex flex-col gap-[4px]">
         <div class="flex items-center gap-[12px]">
           <div class="w-full flex items-center gap-[20px]">
-            <ProseH2 class="font-semibold mb-0">
+            <ProseH2 class="font-(--ui-font-weight-semi-bold) mb-0 text-(length:--ui-font-size-4xl)/[calc(var(--ui-font-size-4xl)+2px)]">
               {{ page.title }}
             </ProseH2>
             <slot name="top-actions-start" />

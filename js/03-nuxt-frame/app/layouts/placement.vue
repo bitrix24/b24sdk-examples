@@ -25,7 +25,7 @@ useSeoMeta({
     :use-light-content="false"
     :b24ui="{
       root: 'overflow-y-hidden',
-      container: 'p-[20px] mt-0'
+      container: 'mt-0 p-0 lg:p-0'
     }"
   >
     <div v-if="page.isLoading">
@@ -48,7 +48,7 @@ useSeoMeta({
 </template>
 
 <style scoped>
-  .--app {
-    scrollbar-gutter: auto;
-  }
+.--app {
+  scrollbar-gutter: auto;
+}
 </style>

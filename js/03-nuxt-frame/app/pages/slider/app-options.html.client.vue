@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {ref, onMounted, onUnmounted, computed} from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { navigateTo } from '#imports'
 import { usePageStore } from '~/stores/page'
 import { useUserStore } from '~/stores/user'
 import { useAppSettingsStore } from '~/stores/appSettings'
@@ -24,18 +25,18 @@ const page = usePageStore()
 const toast = useToast()
 
 // region Init ////
-const { $logger, initApp, b24Helper, destroyB24Helper, usePullClient, startPullClient, processErrorGlobal } = useAppInit('SliderAppOptionsPage')
+const { $logger, moduleId, initApp, destroyB24Helper, usePullClient, startPullClient, processErrorGlobal } = useAppInit('SliderAppOptionsPage')
 const appSettings = useAppSettingsStore()
 const user = useUserStore()
 const { $initializeB24Frame } = useNuxtApp()
 let $b24: null | B24Frame = null
 
 const deviceHistoryCleanupDays = ref([
-  30, 60, 90, 120, 15, 180
+  15, 30, 60, 90, 120, 180
 ])
 
 const deviceHistoryCleanupDay = ref(appSettings.configSettings.deviceHistoryCleanupDays)
-
+const activeInfoItem = ref(['0'])
 const infoItems = computed(() => [
   {
     label: t('page.app-options.option.history.title'),
@@ -51,46 +52,36 @@ const infoItems = computed(() => [
 // endregion ////
 
 // region Actions ////
+function initData() {
+  deviceHistoryCleanupDay.value = appSettings.configSettings.deviceHistoryCleanupDays
+}
+
+const makeOpenPage = async(url: string) => {
+  navigateTo({
+    path: $b24?.slider.getUrl(url).toString() || '',
+    query: {}
+  }, {
+    external: true,
+    open: {
+      target: '_blank'
+    }
+  })
+}
+
 async function makeSave() {
   try {
+    page.isLoading = true
+
     appSettings.configSettings.deviceHistoryCleanupDays = deviceHistoryCleanupDay.value
 
     await appSettings.saveSettings()
 
-    /**
-     * @todo fix this
-     */
-    /*/
-    await getB24Helper().appOptions.save(
-			{
-				keyFloat: optionsData.keyFloat,
-				keyInteger: optionsData.keyInteger,
-				keyBool: optionsData.keyBool ? 'Y' : 'N',
-				keyString: optionsData.keyString,
-				keyArray: getB24Helper().appOptions.encode(
-					optionsData.keyArray
-				),
-				keyObject: getB24Helper().appOptions.encode(
-					optionsData.keyObject
-				),
-				keyDate: optionsData.keyDate?.toISO(),
-				keyDateTime: optionsData.keyDateTime?.toISO(),
-			},
-			{
-				moduleId: 'main',
-				command: 'reload.options',
-				params: {
-					from: 'app.options'
-				},
-			}
-		)
-    //*/
     await makeSendPullCommand('reload.options', { from: 'app.options' })
     await makeClose()
   } catch (error) {
     $logger.error(error)
 
-    let title = 'Error'
+    let title = t('page.app-options.error.title')
     let description = ''
 
     if (error instanceof AjaxError) {
@@ -108,28 +99,32 @@ async function makeSave() {
       color: 'air-primary-alert',
       icon: CloudErrorIcon
     })
+  } finally {
+    page.isLoading = false
   }
 }
 
 async function makeSendPullCommand(command: string, params: Record<string, any> = {}) {
   try {
-    page.isLoading = true
+    $logger.warn('>> pull.send >>>', {
+      COMMAND: command,
+      PARAMS: params,
+      MODULE_ID: moduleId
+    })
 
     await $b24?.callMethod(
       'pull.application.event.add',
       {
         COMMAND: command,
         PARAMS: params,
-        MODULE_ID: b24Helper.value?.getModuleIdPullClient()
+        MODULE_ID: moduleId
       }
     )
-
-    $logger.warn('>> pull.send >>>', params)
   } catch (error) {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: true,
-      clearErrorHref: '/slider/app-options'
+      clearErrorHref: '/slider/app-options.html'
     })
   }
 }
@@ -162,11 +157,13 @@ onMounted(async () => {
 
     usePullClient()
     startPullClient()
+
+    initData()
   } catch (error) {
     processErrorGlobal(error, {
       homePageIsHide: true,
       isShowClearError: true,
-      clearErrorHref: '/slider/app-options'
+      clearErrorHref: '/slider/app-options.html'
     })
   } finally {
     page.isLoading = false
@@ -182,10 +179,12 @@ onUnmounted(() => {
 <template>
   <NuxtLayout name="slider">
     <B24Accordion
+      v-model="activeInfoItem"
+      type="multiple"
       :items="infoItems"
       :b24ui="{
-          root:'light',
-          item: 'mb-4 bg-(--ui-color-bg-content-primary) rounded-(--ui-border-radius-md)',
+          root: 'light',
+          item: 'mb-[16px] last:mb-0 bg-(--ui-color-bg-content-primary) rounded-(--ui-border-radius-md) border-b-0',
           trigger: 'py-[20px] px-[20px]',
           label: 'text-(length:--ui-font-size-2xl) text-(-ui-color-text-primary)',
           leadingIcon: 'text-(--ui-color-base-60)',
@@ -195,43 +194,46 @@ onUnmounted(() => {
       <template #history>
         <div class="px-4 pb-[12px]">
           <B24Separator class="mb-3" />
-          <B24Alert
-            class="mb-3"
-            color="air-primary"
-            :description="$t('page.app-options.option.history.alert')"
-          />
-
-          <B24FormField
-            class="my-3"
-            :label="$t('page.app-options.option.history.property')"
-          >
-            <B24Select
-              v-model="deviceHistoryCleanupDay"
-              :items="deviceHistoryCleanupDays"
-              class="w-full"
+          <div class="flex flex-col items-start justify-between gap-[18px]">
+            <B24Alert
+              color="air-secondary"
+              :description="$t('page.app-options.option.history.alert')"
+              :b24ui="{ description: 'text-(--ui-color-base-70)' }"
             />
-          </B24FormField>
+
+            <B24FormField
+              class="w-[190px]"
+              :description="$t('page.app-options.option.history.property')"
+            >
+              <B24Select
+                v-model="deviceHistoryCleanupDay"
+                :items="deviceHistoryCleanupDays"
+                size="lg"
+                class="w-full"
+              />
+            </B24FormField>
+          </div>
         </div>
       </template>
       <template #present>
         <div class="px-4 pb-[12px]">
           <B24Separator class="mb-3" />
-          <B24Alert
-            class="mb-3"
-            color="air-primary"
-            :description="$t('page.app-options.option.present.alert')"
-          />
-
-          <B24FormField
-            class="my-3"
-            :label="$t('page.app-options.option.present.property')"
-          >
-            <B24Select
-              v-model="deviceHistoryCleanupDay"
-              :items="deviceHistoryCleanupDays"
-              class="w-full"
+          <div class="flex flex-col items-start justify-between gap-[18px]">
+            <B24Alert
+              color="air-secondary"
+              :description="$t('page.app-options.option.present.alert')"
+              :b24ui="{ description: 'text-(--ui-color-base-70)' }"
             />
-          </B24FormField>
+            <div class="w-full text-right">
+              <B24Link
+                is-action
+                class="text-(length:--ui-font-size-sm)"
+                @click="makeOpenPage('/settings/configs/event_log.php')"
+              >
+                {{ $t('page.app-options.option.present.action') }}
+              </B24Link>
+            </div>
+          </div>
         </div>
       </template>
     </B24Accordion>

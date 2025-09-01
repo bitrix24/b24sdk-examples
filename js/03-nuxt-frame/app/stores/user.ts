@@ -14,17 +14,17 @@ export const useUserStore = defineStore(
     /**
      * Initialize store from batch response data
      * @param data - Raw data from Bitrix24 API
-     * @param data.NAME
-     * @param data.LAST_NAME
-     * @param data.ADMIN
+     * @param data.name
+     * @param data.lastName
+     * @param data.isAdmin
      */
     function initFromBatch(data: {
-      NAME?: string
-      LAST_NAME?: string
-      ADMIN?: boolean
+      name?: string
+      lastName?: string
+      isAdmin?: boolean
     }) {
-      login.value = [data?.NAME, data?.LAST_NAME].filter(Boolean).join(' ') || ' '
-      isAdmin.value = data.ADMIN || false
+      login.value = [data?.name, data?.lastName].filter(Boolean).join(' ') || ' '
+      isAdmin.value = data.isAdmin || false
     }
     // endregion ////
 

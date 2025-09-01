@@ -17,6 +17,8 @@ export interface ProcessErrorData {
 const { initB24Helper, getB24Helper, destroyB24Helper: destroyB24HelperOry, usePullClient, useSubscribePullClient, startPullClient } = useB24Helper()
 const isInitB24Helper = ref(false)
 
+const moduleId = 'main'
+
 /**
  * Composable handling application initialization
  * Coordinates data loading via batch request
@@ -51,42 +53,54 @@ export const useAppInit = (loggerTitle?: string) => {
       $b24,
       [
         LoadDataType.App,
+        LoadDataType.AppOptions,
+        LoadDataType.UserOptions,
         LoadDataType.Currency,
         LoadDataType.Profile
       ]
     )
     isInitB24Helper.value = true
 
-    const commands = {
-      appInfo: { method: 'app.info' },
-      appSettings: { method: 'app.option.get' },
-      userSettings: { method: 'user.option.get' },
-      profileData: { method: 'profile' }
+    const data = {
+      appInfo: getB24Helper().appInfo,
+      appSettings: getB24Helper().appOptions,
+      userSettings: getB24Helper().userOptions,
+      profileData: getB24Helper().profileInfo,
     }
-
-    const response = await $b24.callBatch(commands)
-
-    const data = response.getData()
     $logger.log('Init data >>', data)
+
+    /**
+     * @memo This can be used instead of `initB24Helper`
+     */
+    // const commands = {
+    //   appInfo: { method: 'app.info' },
+    //   appSettings: { method: 'app.option.get' },
+    //   userSettings: { method: 'user.option.get' },
+    //   profileData: { method: 'profile' }
+    // }
+    //
+    // const response = await $b24.callBatch(commands)
+    //
+    // const data = response.getData()
+    // $logger.log('Init data >>', data)
 
     // Update stores with received data
     user.initFromBatch({
-      NAME: data.profileData?.NAME,
-      LAST_NAME: data.profileData?.LAST_NAME,
-      ADMIN: data.profileData?.ADMIN === true
+      name: data.profileData?.data.name ?? undefined,
+      lastName: data.profileData?.data.lastName ?? undefined,
+      isAdmin: data.profileData?.data.isAdmin
     })
 
     appSettings.setB24($b24)
     appSettings.initFromBatch({
-      version: data.appInfo?.VERSION || '0.0.1',
-      isTrial: data.appInfo?.STATUS === 'T',
-      integrator: data.appSettings?.integrator || {},
-      configSettings: data.appSettings?.configSettings || {}
+      version: (data.appInfo?.data.version ?? 1),
+      status: data.appInfo?.data.status,
+      configSettings: (data.appSettings?.data ?? new Map()).get('configSettings')
     })
 
     userSettings.setB24($b24)
     userSettings.initFromBatch({
-      configSettings: data.userSettings?.configSettings || {}
+      configSettings: (data.userSettings?.data ?? new Map()).get('configSettings')
     })
 
     $logger.info('InitApp stop')
@@ -108,15 +122,31 @@ export const useAppInit = (loggerTitle?: string) => {
 
   /**
    * Reloads data
-   *
-   * @todo reinit all data at Store
    */
   async function reloadData() {
     await b24Helper.value?.loadData([
-      LoadDataType.App,
-      LoadDataType.Currency,
-      LoadDataType.Profile
+      LoadDataType.AppOptions,
+      LoadDataType.UserOptions,
+      LoadDataType.Currency
     ])
+
+    const data = {
+      appSettings: getB24Helper().appOptions,
+      userSettings: getB24Helper().userOptions
+    }
+
+    $logger.log('Reload data >>', data)
+
+    // Update stores with received data
+    appSettings.initFromBatch({
+      configSettings: (data.appSettings?.data ?? new Map()).get('configSettings')
+    })
+
+    userSettings.initFromBatch({
+      configSettings: (data.userSettings?.data ?? new Map()).get('configSettings')
+    })
+
+    $logger.info('reloadData stop')
   }
 
   const b24Helper = computed(() => {
@@ -166,7 +196,9 @@ export const useAppInit = (loggerTitle?: string) => {
 
   return {
     $logger,
+    moduleId,
     initApp,
+    initLang,
     reloadData,
     b24Helper,
     usePullClient,

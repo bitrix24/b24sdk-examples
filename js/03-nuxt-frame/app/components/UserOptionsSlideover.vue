@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 import { AjaxError } from '@bitrix24/b24jssdk'
 import type { AccordionItem } from '@bitrix24/b24ui-nuxt'
 import { useUserSettingsStore } from '~/stores/userSettings'
-import ListIcon from '@bitrix24/b24icons-vue/main/ListIcon'
 import CloudErrorIcon from '@bitrix24/b24icons-vue/main/CloudErrorIcon'
 import ClockWithArrowIcon from '@bitrix24/b24icons-vue/main/ClockWithArrowIcon'
 
@@ -14,6 +13,7 @@ import ClockWithArrowIcon from '@bitrix24/b24icons-vue/main/ClockWithArrowIcon'
 
 const { t } = useI18n()
 const toast = useToast()
+const page = usePageStore()
 
 const emit = defineEmits<{ close: [boolean] }>()
 
@@ -21,22 +21,16 @@ const emit = defineEmits<{ close: [boolean] }>()
 const { $logger } = useAppInit('UserOptionsSlideoverComponent')
 const userSettings = useUserSettingsStore()
 
-const deviceHistoryCleanupDays = ref([
-  30, 60, 90, 120, 15, 180
-])
+const someValue_1 = ref(userSettings.configSettings.someValue_1)
+const someValue_2 = ref(userSettings.configSettings.someValue_2)
+const isShowChangeColorMode = ref(userSettings.configSettings.isShowChangeColorMode)
 
-const deviceHistoryCleanupDay = ref(userSettings.configSettings.deviceHistoryCleanupDays)
-
+const activeInfoItem = ref(['0'])
 const infoItems = computed(() => [
   {
-    label: t('page.user-options.option.history.title'),
+    label: t('page.user-options.option.demo.title'),
     icon: ClockWithArrowIcon,
-    slot: 'history'
-  },
-  {
-    label: t('page.user-options.option.present.title'),
-    icon: ListIcon,
-    slot: 'present'
+    slot: 'demo'
   }
 ] satisfies AccordionItem[])
 
@@ -46,7 +40,11 @@ $logger.info('Hi from components/UserOptionsSlideover')
 // region Actions ////
 async function makeSave() {
   try {
-    userSettings.configSettings.deviceHistoryCleanupDays = deviceHistoryCleanupDay.value
+    // @todo need show loader from current B24Slideover
+    // page.isLoading = true
+    userSettings.configSettings.someValue_1 = someValue_1.value
+    userSettings.configSettings.someValue_2 = someValue_2.value
+    userSettings.configSettings.isShowChangeColorMode = isShowChangeColorMode.value
 
     await userSettings.saveSettings()
 
@@ -54,7 +52,7 @@ async function makeSave() {
   } catch (error) {
     $logger.error(error)
 
-    let title = 'Error'
+    let title = t('page.user-options.error.title')
     let description = ''
 
     if (error instanceof AjaxError) {
@@ -72,6 +70,8 @@ async function makeSave() {
       color: 'air-primary-alert',
       icon: CloudErrorIcon
     })
+  } finally {
+    // page.isLoading = false
   }
 }
 
@@ -97,56 +97,57 @@ async function makeCancel() {
   >
     <template #body>
       <B24Accordion
+        v-model="activeInfoItem"
+        type="multiple"
         :items="infoItems"
         :b24ui="{
-          root:'light',
-          item: 'mb-4 bg-(--ui-color-bg-content-primary) rounded-(--ui-border-radius-md)',
+          root: 'light',
+          item: 'mb-[16px] last:mb-0 bg-(--ui-color-bg-content-primary) rounded-(--ui-border-radius-md) border-b-0',
           trigger: 'py-[20px] px-[20px]',
           label: 'text-(length:--ui-font-size-2xl) text-(-ui-color-text-primary)',
           leadingIcon: 'text-(--ui-color-base-60)',
           trailingIcon: 'text-(-ui-color-text-primary)',
         }"
       >
-        <template #history>
+        <template #demo>
           <div class="px-4 pb-[12px]">
             <B24Separator class="mb-3" />
-            <B24Alert
-              class="mb-3"
-              color="air-primary"
-              :description="$t('page.user-options.option.history.alert')"
-            />
-
-            <B24FormField
-              class="my-3"
-              :label="$t('page.user-options.option.history.property')"
-            >
-              <B24Select
-                v-model="deviceHistoryCleanupDay"
-                :items="deviceHistoryCleanupDays"
-                class="w-full"
+            <div class="flex flex-col items-start justify-between gap-[18px]">
+              <B24Alert
+                color="air-secondary"
+                :description="$t('page.user-options.option.demo.alert')"
+                :b24ui="{ description: 'text-(--ui-color-base-70)' }"
               />
-            </B24FormField>
-          </div>
-        </template>
-        <template #present>
-          <div class="px-4 pb-[12px]">
-            <B24Separator class="mb-3" />
-            <B24Alert
-              class="mb-3"
-              color="air-primary"
-              :description="$t('page.user-options.option.present.alert')"
-            />
 
-            <B24FormField
-              class="my-3"
-              :label="$t('page.user-options.option.present.property')"
-            >
-              <B24Select
-                v-model="deviceHistoryCleanupDay"
-                :items="deviceHistoryCleanupDays"
+              <B24FormField
+                :description="$t('page.user-options.option.demo.property_someValue_1')"
+              >
+                <B24InputNumber
+                  v-model="someValue_1"
+                  class="w-[190px]"
+                  size="lg"
+                />
+              </B24FormField>
+
+              <B24FormField
                 class="w-full"
-              />
-            </B24FormField>
+                :description="$t('page.user-options.option.demo.property_someValue_2')"
+              >
+                <B24Input
+                  v-model="someValue_2"
+                  size="lg"
+                />
+              </B24FormField>
+
+              <B24FormField
+                :description="$t('page.user-options.option.demo.property_isShowChangeColorMode')"
+              >
+                <B24Switch
+                  v-model="isShowChangeColorMode"
+                  size="lg"
+                />
+              </B24FormField>
+            </div>
           </div>
         </template>
       </B24Accordion>

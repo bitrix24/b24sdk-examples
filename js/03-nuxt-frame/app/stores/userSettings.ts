@@ -9,10 +9,17 @@ export const useUserSettingsStore = defineStore(
     let $b24: null | B24Frame = null
 
     // region State ////
-    const configSettings = reactive({
-      deviceHistoryCleanupDays: 30,
+    type ConfigType = {
+      someValue_1: number
+      someValue_2: string
+      isShowChangeColorMode: boolean
+    }
+    type CombinedConfigTyp = ConfigType & { [key: string]: any }
+
+    const configSettings = reactive<CombinedConfigTyp>({
       someValue_1: 30,
-      someValue_2: 'some text'
+      someValue_2: 'some text',
+      isShowChangeColorMode: true
     })
     // endregion ////
 
@@ -27,7 +34,7 @@ export const useUserSettingsStore = defineStore(
      * @param data.configSettings
      */
     const initFromBatch = (data: {
-      configSettings?: typeof configSettings
+      configSettings?: Record<string, any>
     }) => {
       if (data.configSettings) {
         Object.assign(configSettings, data.configSettings)
