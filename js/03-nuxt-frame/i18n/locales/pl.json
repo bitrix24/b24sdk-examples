@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "Główna",
+        "pages": "Strony",
         "optionApp": "Ustawienia aplikacji",
         "optionUser": "Ustawienia użytkownika",
         "feedback": "Informacja zwrotna"
@@ -24,12 +26,43 @@
         "line1": "Przetestujmy działanie aplikacji w Bitrix24. Otwórz aplikację w suwaku."
       }
     },
+    "install": {
+      "seo": {
+        "title": "Instalacja aplikacji"
+      },
+      "ui": {
+        "title": "Instalacja aplikacji"
+      },
+      "step": {
+        "init": {
+          "caption": "Trzeba chwilę poczekać..."
+        },
+        "demo": {
+          "caption": "Przykłady..."
+        },
+        "events": {
+          "caption": "Zdarzenia..."
+        },
+        "placement": {
+          "caption": "Widżety..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Zakończenie"
+        }
+      }
+    },
     "main": {
       "seo": {
         "title": "[playground] Testowanie aplikacji"
       },
       "message": {
-        "line1": "Otwórz każdą stronę w lewym menu i zobacz, jak wszystko na niej działa.",
+        "line1": "Otwórz każdą stronę w górnym menu i zobacz, jak wszystko na niej działa.",
         "line2": "Nie zapomnij pobawić się trybem kolorów.",
         "scopes": "Wymagane uprawnienia (scopes):"
       }
@@ -47,7 +80,23 @@
       },
       "actions": {
         "save": "Zapisz",
-        "close": "Zamknij"
+        "cancel": "Anuluj"
+      },
+      "error": {
+        "title": "Błąd",
+        "notAdmin": "Tylko administrator może edytować ustawienia aplikacji."
+      },
+      "option": {
+        "history": {
+          "title": "Historia operacji",
+          "alert": "Demonstracja pracy z właściwością. Analogicznie można skonfigurować dowolne właściwości aplikacji.",
+          "property": "Przez ile dni przechowywać historię"
+        },
+        "present": {
+          "title": "Dziennik zdarzeń",
+          "alert": "Każde logowanie pracowników jest wyświetlane w Dzienniku zdarzeń. Zawsze możesz sprawdzić, kto, kiedy i z jakich adresów IP logował się do Bitrix24.",
+          "action": "Przejdź do dziennika zdarzeń"
+        }
       }
     },
     "user-options": {
@@ -57,7 +106,19 @@
       },
       "actions": {
         "save": "Zapisz",
-        "close": "Zamknij"
+        "cancel": "Anuluj"
+      },
+      "error": {
+        "title": "Błąd"
+      },
+      "option": {
+        "demo": {
+          "title": "Przykład",
+          "alert": "Demonstracja pracy z właściwością. Analogicznie można skonfigurować dowolne właściwości użytkownika.",
+          "property_someValue_1": "Dowolna liczba",
+          "property_someValue_2": "Dowolny ciąg znaków",
+          "property_isShowChangeColorMode": "Pokazywać przycisk zmiany koloru?"
+        }
       }
     },
     "base_app-info": {
@@ -82,36 +143,37 @@
         "description": "Oznaczenie planu taryfowego z podaniem regionu jako prefiksu."
       },
       "message": {
-        "line1": "Można uprzedzić użytkownika o zbliżającym się terminie odnowienia.",
+        "line1": "Można wcześniej uprzedzić użytkownika o nadchodzącym terminie przedłużenia.",
         "languageId": "kod języka",
         "license": "oznaczenie taryfy z podaniem regionu jako prefiksu",
         "licenseType": "wewnętrzne oznaczenie taryfy bez podania regionu",
         "licensePrevious": "poprzednia licencja",
         "licenseFamily": "oznaczenie taryfy bez podania regionu",
-        "isSelfHosted": "flaga wskazująca, czy Bitrix24 jest wersją pudełkową czy chmurową",
+        "isSelfHosted": "flaga wskazująca, czy Bitrix24 jest wersją pudełkową, czy chmurową",
         "isExpired": "flaga wskazująca, czy wygasł okres płatny lub próbny",
-        "days": "liczba dni pozostałych do końca okresu płatnego lub okresu próbnego"
+        "days": "liczba dni pozostałych do końca okresu płatnego lub próbnego"
       }
     },
     "base_specific-methods": {
-      "nav": "Metody specjalne",
+      "nav": "Metody spec.",
       "seo": {
         "title": "Metody specjalne",
         "description": "Testowanie metod specjalnych."
       },
       "message": {
-        "line1": "Tutaj pokazano działanie metod dostępnych w aplikacji wbudowanej przez Frame.",
+        "line1": "Tu pokazana jest praca metod dostępnych w aplikacji wbudowanej przez Frame.",
+        "line2": "Jeśli otworzysz ustawienia aplikacji i je zapiszesz, to na tej stronie zobaczysz push wiadomość z żądaniem odświeżenia strony.",
         "selectUsers": "Wybór użytkownika",
         "selectUsersDescription": "użyj `$b24.dialog.selectUsers` do wyboru użytkownika",
-        "makeImCallToVideo": "Wewnętrzna wideorozmowa",
+        "makeImCallToVideo": "Wewnętrzny wideorozmowa",
         "makeImCallToVideoDescription": "użyj `$b24.parent.imCallTo(xxx, true)` do inicjacji połączenia",
-        "makeImCallToVoice": "Wewnętrzna rozmowa głosowa",
+        "makeImCallToVoice": "Wewnętrzny rozmowa głosowa",
         "makeImCallToVoiceDescription": "użyj `$b24.parent.imCallTo(xxx, false)` do inicjacji połączenia",
         "makeImOpenMessenger": "Czat",
         "makeImOpenMessengerDescription": "użyj `$b24.parent.imOpenMessenger`, aby otworzyć okno czatu",
         "makeImOpenHistory": "Historia czatu",
         "makeImOpenHistoryDescription": "użyj `$b24.parent.imOpenHistory`, aby otworzyć historię czatu",
-        "makeImPhoneTo": "Połączenie przez telefon",
+        "makeImPhoneTo": "Połączenie przez telefonię",
         "makeImPhoneToDescription": "użyj `$b24.parent.imPhoneTo`, aby zadzwonić",
         "makeSendPullCommand": "Wiadomość Pull",
         "makeSendPullCommandDescription": "użyj `pull.application.event.add`, aby wysłać wiadomość"
@@ -128,20 +190,20 @@
         "makeSendPullCommand": "Wyślij"
       },
       "error": {
-        "notSelect": "Użytkownik nie został wybrany.",
+        "notSelect": "Użytkownik nie wybrany.",
         "tryCallToSelf": "Nie możesz zadzwonić do siebie.",
         "emptyNumber": "Nie podano numeru telefonu do połączenia."
       }
     },
     "base_specific-parameters": {
-      "nav": "Parametry specjalne",
+      "nav": "Parametry spec.",
       "seo": {
         "title": "Parametry specjalne",
         "description": "Lista parametrów specjalnych dla wersji pudełkowej i chmurowej."
       },
       "message": {
-        "line1": "Istnieje kilka różnic między wersją pudełkową a chmurową Bitrix24.",
-        "isSelfHosted": "flaga wskazująca, czy Bitrix24 jest wersją pudełkową czy chmurową",
+        "line1": "Jest kilka różnic między wersją pudełkową i chmurową Bitrix24.",
+        "isSelfHosted": "flaga wskazująca, czy Bitrix24 jest wersją pudełkową, czy chmurową",
         "primaryKeyIncrementValue": "krok przyrostu dla pól typu ID",
         "mainSettings": "link do ustawień",
         "ufList": "link do listy Uf",
@@ -152,7 +214,7 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Demonstruje wyświetlanie komunikatów językowych w zależności od lokalizacji Bitrix24."
+        "description": "Demonstruje wypisanie wiadomości językowych w zależności od lokalizacji Bitrix24."
       },
       "message": {
         "line1": "Spróbuj zmienić język Bitrix24.",
@@ -161,18 +223,18 @@
       }
     },
     "base_feedback": {
-      "nav": "Formularz informacji zwrotnej",
+      "nav": "Informacja zwrotna",
       "seo": {
         "title": "Formularz informacji zwrotnej",
         "description": "Przykłady pól dla formularza informacji zwrotnej."
       },
       "message": {
-        "line1": "Możesz osadzić w aplikacji formularz CRM z Twojego Bitrix24 i przekazać do niego specjalne pola.",
-        "line2": "Gdy użytkownik wypełni formularz, w Twoim Bitrix24 będą dostępne dane o aplikacji, taryfie itd.",
+        "line1": "Możesz wbudować w aplikację formularz CRM z twojego Bitrix24 i przekazać do niego specjalne pola.",
+        "line2": "Kiedy użytkownik wypełni formularz, w twoim Bitrix24 będą dostępne dane o aplikacji, taryfie itd.",
         "app_code": "kod",
         "app_status": "status",
         "payment_expired": "flaga wskazująca, czy wygasł okres płatny lub próbny",
-        "days": "liczba dni pozostałych do końca okresu płatnego lub okresu próbnego",
+        "days": "liczba dni pozostałych do końca okresu płatnego lub próbnego",
         "b24_plan": "oznaczenie taryfy z podaniem regionu jako prefiksu",
         "c_name": "imię użytkownika",
         "c_last_name": "nazwisko użytkownika",
@@ -189,7 +251,7 @@
         "create": "Utwórz"
       },
       "message": {
-        "line1": "Bardzo łatwo jest wyświetlić sformatowaną kwotę."
+        "line1": "Pokazanie sformatowanej sumy jest bardzo łatwe."
       },
       "list": {
         "code": "Kod",
@@ -197,6 +259,28 @@
         "literal": "Znak",
         "value": "Formatowanie",
         "baseCurrency": "Kod waluty bazowej"
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Przykładowe pole",
+        "description": "Zmiana wartości prowadzi do przebudowy wykresu",
+        "hint": "Trend"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Wstawienie w kartę deala",
+        "description": "Demonstracja."
+      },
+      "field": {
+        "label": "Przykładowe pole",
+        "description": "Zmiana wartości prowadzi do przebudowy wykresu",
+        "hint": "Trend"
       }
     }
   },

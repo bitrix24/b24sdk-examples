@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "Principale",
+        "pages": "Pagine",
         "optionApp": "Impostazioni applicazione",
         "optionUser": "Impostazioni utente",
         "feedback": "Feedback"
@@ -21,7 +23,38 @@
       },
       "message": {
         "title": "Ciao!",
-        "line1": "Testiamo il funzionamento dell'applicazione in Bitrix24. Apri l'applicazione nel pannello scorrevole."
+        "line1": "Testiamo il funzionamento dell'applicazione in Bitrix24. Apri l'applicazione nel pannello laterale."
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Installazione applicazione"
+      },
+      "ui": {
+        "title": "Installazione applicazione"
+      },
+      "step": {
+        "init": {
+          "caption": "Attendere prego..."
+        },
+        "demo": {
+          "caption": "Esempi..."
+        },
+        "events": {
+          "caption": "Eventi..."
+        },
+        "placement": {
+          "caption": "Widget..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Completamento"
+        }
       }
     },
     "main": {
@@ -29,9 +62,9 @@
         "title": "[playground] Test dell'applicazione"
       },
       "message": {
-        "line1": "Apri ogni pagina nel menu a sinistra ed esplora come funziona tutto.",
+        "line1": "Apri ogni pagina nel menu in alto e scopri come funziona tutto.",
         "line2": "Non dimenticare di provare la modalità colore.",
-        "scopes": "Permessi richiesti (scopes):"
+        "scopes": "Autorizzazioni richieste (scopes):"
       }
     },
     "feedback": {
@@ -47,7 +80,23 @@
       },
       "actions": {
         "save": "Salva",
-        "close": "Chiudi"
+        "cancel": "Annulla"
+      },
+      "error": {
+        "title": "Errore",
+        "notAdmin": "Solo l'amministratore può modificare le impostazioni dell'applicazione."
+      },
+      "option": {
+        "history": {
+          "title": "Cronologia operazioni",
+          "alert": "Dimostrazione del funzionamento della proprietà. Analogamente, è possibile configurare qualsiasi proprietà dell'applicazione.",
+          "property": "Per quanti giorni conservare la cronologia"
+        },
+        "present": {
+          "title": "Registro eventi",
+          "alert": "Ogni accesso dei dipendenti viene visualizzato nel Registro eventi. Puoi sempre verificare chi, quando e da quali indirizzi IP ha effettuato l'accesso a Bitrix24.",
+          "action": "Vai al registro eventi"
+        }
       }
     },
     "user-options": {
@@ -57,7 +106,19 @@
       },
       "actions": {
         "save": "Salva",
-        "close": "Chiudi"
+        "cancel": "Annulla"
+      },
+      "error": {
+        "title": "Errore"
+      },
+      "option": {
+        "demo": {
+          "title": "Esempio",
+          "alert": "Dimostrazione del funzionamento della proprietà. Analogamente, è possibile configurare qualsiasi proprietà utente.",
+          "property_someValue_1": "Numero arbitrario",
+          "property_someValue_2": "Stringa arbitraria",
+          "property_isShowChangeColorMode": "Mostra il pulsante per cambiare colore?"
+        }
       }
     },
     "base_app-info": {
@@ -67,7 +128,7 @@
         "description": "Informazioni sull'applicazione."
       },
       "message": {
-        "line1": "Questi sono i tag chiave per identificare, controllare e diagnosticare l'applicazione.",
+        "line1": "Questi sono i tag chiave per l'identificazione, il controllo e la diagnostica dell'applicazione.",
         "id": "identificatore",
         "code": "codice",
         "version": "versione",
@@ -79,28 +140,29 @@
       "nav": "Licenza e pagamento",
       "seo": {
         "title": "Licenza e pagamento",
-        "description": "Denominazione del piano tariffario con indicazione della regione come prefisso."
+        "description": "Designazione del piano tariffario con indicazione della regione come prefisso."
       },
       "message": {
         "line1": "È possibile avvisare in anticipo l'utente dell'avvicinarsi della scadenza del rinnovo.",
         "languageId": "codice lingua",
-        "license": "denominazione tariffa con indicazione della regione come prefisso",
-        "licenseType": "denominazione tariffa interna senza indicazione della regione",
+        "license": "designazione tariffa con indicazione della regione come prefisso",
+        "licenseType": "designazione tariffa interna senza indicazione della regione",
         "licensePrevious": "licenza precedente",
-        "licenseFamily": "denominazione tariffa senza indicazione della regione",
-        "isSelfHosted": "flag che indica se Bitrix24 è una versione on-premise o cloud",
+        "licenseFamily": "designazione tariffa senza indicazione della regione",
+        "isSelfHosted": "flag che indica se Bitrix24 è la versione on-premise o cloud",
         "isExpired": "flag che indica se il periodo a pagamento o di prova è scaduto",
         "days": "numero di giorni rimanenti fino alla fine del periodo a pagamento o di prova"
       }
     },
     "base_specific-methods": {
-      "nav": "Metodi speciali",
+      "nav": "Metodi spec.",
       "seo": {
         "title": "Metodi speciali",
         "description": "Test dei metodi speciali."
       },
       "message": {
-        "line1": "Qui viene mostrato il funzionamento dei metodi disponibili nell'applicazione integrata tramite Frame.",
+        "line1": "Qui viene mostrato il funzionamento dei metodi disponibili nell'applicazione incorporata tramite Frame.",
+        "line2": "Se apri le impostazioni dell'applicazione e le salvi, su questa pagina vedrai un messaggio push che richiede di aggiornare la pagina.",
         "selectUsers": "Selezione utente",
         "selectUsersDescription": "usa `$b24.dialog.selectUsers` per selezionare un utente",
         "makeImCallToVideo": "Chiamata video interna",
@@ -112,7 +174,7 @@
         "makeImOpenHistory": "Cronologia chat",
         "makeImOpenHistoryDescription": "usa `$b24.parent.imOpenHistory` per aprire la cronologia chat",
         "makeImPhoneTo": "Chiamata tramite telefonia",
-        "makeImPhoneToDescription": "usa `$b24.parent.imPhoneTo` per effettuare una chiamata",
+        "makeImPhoneToDescription": "usa `$b24.parent.imPhoneTo` per chiamare",
         "makeSendPullCommand": "Messaggio Pull",
         "makeSendPullCommandDescription": "usa `pull.application.event.add` per inviare un messaggio"
       },
@@ -134,15 +196,15 @@
       }
     },
     "base_specific-parameters": {
-      "nav": "Parametri speciali",
+      "nav": "Param. spec.",
       "seo": {
         "title": "Parametri speciali",
         "description": "Elenco dei parametri speciali per la versione on-premise e cloud."
       },
       "message": {
-        "line1": "Ci sono diverse differenze tra le versioni on-premise e cloud di Bitrix24.",
-        "isSelfHosted": "flag che indica se Bitrix24 è una versione on-premise o cloud",
-        "primaryKeyIncrementValue": "incremento per i campi di tipo ID",
+        "line1": "Ci sono alcune differenze tra le versioni on-premise e cloud di Bitrix24.",
+        "isSelfHosted": "flag che indica se Bitrix24 è la versione on-premise o cloud",
+        "primaryKeyIncrementValue": "valore di incremento per i campi di tipo ID",
         "mainSettings": "link alle impostazioni",
         "ufList": "link all'elenco Uf",
         "ufPage": "link a Uf"
@@ -152,7 +214,7 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Dimostra l'output dei messaggi linguistici in base alla località di Bitrix24."
+        "description": "Dimostra l'output dei messaggi linguistici in base alla lingua di Bitrix24."
       },
       "message": {
         "line1": "Prova a cambiare la lingua di Bitrix24.",
@@ -161,19 +223,19 @@
       }
     },
     "base_feedback": {
-      "nav": "Modulo di feedback",
+      "nav": "Feedback",
       "seo": {
         "title": "Modulo di feedback",
         "description": "Esempi di campi per un modulo di feedback."
       },
       "message": {
-        "line1": "Puoi incorporare nel tuo applicazione un modulo CRM dal tuo Bitrix24 e passarvi campi speciali.",
-        "line2": "Quando l'utente compila il modulo, nel tuo Bitrix24 saranno disponibili dati sull'applicazione, tariffa, ecc.",
+        "line1": "Puoi incorporare nel tuo applicativo un modulo CRM dal tuo Bitrix24 e trasferirvi campi speciali.",
+        "line2": "Quando l'utente compila il modulo, nel tuo Bitrix24 saranno disponibili dati sull'applicazione, sulla tariffa, ecc.",
         "app_code": "codice",
         "app_status": "stato",
         "payment_expired": "flag che indica se il periodo a pagamento o di prova è scaduto",
         "days": "numero di giorni rimanenti fino alla fine del periodo a pagamento o di prova",
-        "b24_plan": "denominazione tariffa con indicazione della regione come prefisso",
+        "b24_plan": "designazione tariffa con indicazione della regione come prefisso",
         "c_name": "nome utente",
         "c_last_name": "cognome utente",
         "hostname": "indirizzo Bitrix24"
@@ -189,7 +251,7 @@
         "create": "Crea"
       },
       "message": {
-        "line1": "Mostrare un importo formattato è molto facile."
+        "line1": "Mostrare un importo formattato è molto semplice."
       },
       "list": {
         "code": "Codice",
@@ -200,6 +262,28 @@
       }
     }
   },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Esempio campo",
+        "description": "La modifica del valore porta alla ricostruzione del grafico",
+        "hint": "Trend"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Incorpora nella scheda affare",
+        "description": "Dimostrazione."
+      },
+      "field": {
+        "label": "Esempio campo",
+        "description": "La modifica del valore porta alla ricostruzione del grafico",
+        "hint": "Trend"
+      }
+    }
+  },
   "message1": "Chi dorme non piglia pesci",
-  "message2": "Un immagine vale più di mille parole"
+  "message2": "Un'immagine vale più di mille parole"
 }

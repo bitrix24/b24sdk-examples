@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "Trang chủ",
+        "pages": "Trang",
         "optionApp": "Cài đặt ứng dụng",
         "optionUser": "Cài đặt người dùng",
         "feedback": "Phản hồi"
@@ -21,7 +23,38 @@
       },
       "message": {
         "title": "Xin chào!",
-        "line1": "Hãy kiểm tra hoạt động của ứng dụng trong Bitrix24. Mở ứng dụng trong slider."
+        "line1": "Hãy cùng kiểm tra hoạt động của ứng dụng trong Bitrix24. Mở ứng dụng trong slider."
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Cài đặt ứng dụng"
+      },
+      "ui": {
+        "title": "Cài đặt ứng dụng"
+      },
+      "step": {
+        "init": {
+          "caption": "Cần chờ một chút..."
+        },
+        "demo": {
+          "caption": "Ví dụ..."
+        },
+        "events": {
+          "caption": "Sự kiện..."
+        },
+        "placement": {
+          "caption": "Widget..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Hoàn tất"
+        }
       }
     },
     "main": {
@@ -29,7 +62,7 @@
         "title": "[playground] Kiểm thử ứng dụng"
       },
       "message": {
-        "line1": "Mở từng trang trong menu bên trái và tìm hiểu cách mọi thứ hoạt động trên đó.",
+        "line1": "Mở từng trang trong menu phía trên và tìm hiểu cách mọi thứ hoạt động trên đó.",
         "line2": "Đừng quên thử nghiệm với chế độ màu sắc.",
         "scopes": "Quyền yêu cầu (scopes):"
       }
@@ -47,7 +80,23 @@
       },
       "actions": {
         "save": "Lưu",
-        "close": "Đóng"
+        "cancel": "Hủy"
+      },
+      "error": {
+        "title": "Lỗi",
+        "notAdmin": "Chỉ quản trị viên mới có thể chỉnh sửa cài đặt ứng dụng."
+      },
+      "option": {
+        "history": {
+          "title": "Lịch sử thao tác",
+          "alert": "Minh họa hoạt động với thuộc tính. Tương tự, bạn có thể cấu hình bất kỳ thuộc tính ứng dụng nào.",
+          "property": "Lưu lịch sử bao nhiêu ngày"
+        },
+        "present": {
+          "title": "Nhật ký sự kiện",
+          "alert": "Mỗi lần đăng nhập của nhân viên được hiển thị trong Nhật ký sự kiện. Bạn luôn có thể kiểm tra ai, khi nào và từ địa chỉ IP nào đã đăng nhập vào Bitrix24.",
+          "action": "Đi đến nhật ký sự kiện"
+        }
       }
     },
     "user-options": {
@@ -57,7 +106,19 @@
       },
       "actions": {
         "save": "Lưu",
-        "close": "Đóng"
+        "cancel": "Hủy"
+      },
+      "error": {
+        "title": "Lỗi"
+      },
+      "option": {
+        "demo": {
+          "title": "Ví dụ",
+          "alert": "Minh họa hoạt động với thuộc tính. Tương tự, bạn có thể cấu hình bất kỳ thuộc tính người dùng nào.",
+          "property_someValue_1": "Số tùy ý",
+          "property_someValue_2": "Chuỗi tùy ý",
+          "property_isShowChangeColorMode": "Hiển thị nút đổi màu?"
+        }
       }
     },
     "base_app-info": {
@@ -82,15 +143,15 @@
         "description": "Ký hiệu gói dịch vụ với chỉ định khu vực làm tiền tố."
       },
       "message": {
-        "line1": "Có thể cảnh báo trước cho người dùng về thời hạn gia hạn.",
+        "line1": "Có thể thông báo trước cho người dùng về thời hạn gia hạn.",
         "languageId": "mã ngôn ngữ",
         "license": "ký hiệu gói dịch vụ với chỉ định khu vực làm tiền tố",
         "licenseType": "ký hiệu gói dịch vụ nội bộ không chỉ định khu vực",
         "licensePrevious": "giấy phép trước",
         "licenseFamily": "ký hiệu gói dịch vụ không chỉ định khu vực",
-        "isSelfHosted": "cờ chỉ định Bitrix24 là bản on-premise hay cloud",
-        "isExpired": "cờ chỉ định thời hạn trả phí hoặc dùng thử đã hết hay chưa",
-        "days": "số ngày còn lại đến hết thời hạn trả phí hoặc dùng thử"
+        "isSelfHosted": "cờ chỉ định Bitrix24 là phiên bản on-premise hay cloud",
+        "isExpired": "cờ chỉ định liệu kỳ thanh toán hoặc dùng thử đã hết hạn chưa",
+        "days": "số ngày còn lại đến cuối kỳ thanh toán hoặc kỳ dùng thử"
       }
     },
     "base_specific-methods": {
@@ -100,21 +161,22 @@
         "description": "Kiểm thử các phương thức đặc biệt."
       },
       "message": {
-        "line1": "Ở đây thể hiện hoạt động của các phương thức có sẵn trong ứng dụng nhúng thông qua Frame.",
+        "line1": "Ở đây thể hiện hoạt động của các phương thức có sẵn trong ứng dụng nhúng qua Frame.",
+        "line2": "Nếu bạn mở cài đặt ứng dụng và lưu chúng, trên trang này bạn sẽ thấy thông báo push yêu cầu làm mới trang.",
         "selectUsers": "Chọn người dùng",
         "selectUsersDescription": "sử dụng `$b24.dialog.selectUsers` để chọn người dùng",
         "makeImCallToVideo": "Cuộc gọi video nội bộ",
-        "makeImCallToVideoDescription": "sử dụng `$b24.parent.imCallTo(xxx, true)` để bắt đầu cuộc gọi",
+        "makeImCallToVideoDescription": "sử dụng `$b24.parent.imCallTo(xxx, true)` để khởi tạo cuộc gọi",
         "makeImCallToVoice": "Cuộc gọi thoại nội bộ",
-        "makeImCallToVoiceDescription": "sử dụng `$b24.parent.imCallTo(xxx, false)` để bắt đầu cuộc gọi",
-        "makeImOpenMessenger": "Trò chuyện",
-        "makeImOpenMessengerDescription": "sử dụng `$b24.parent.imOpenMessenger` để mở cửa sổ trò chuyện",
-        "makeImOpenHistory": "Lịch sử trò chuyện",
-        "makeImOpenHistoryDescription": "sử dụng `$b24.parent.imOpenHistory` để mở lịch sử trò chuyện",
-        "makeImPhoneTo": "Gọi điện qua điện thoại",
-        "makeImPhoneToDescription": "sử dụng `$b24.parent.imPhoneTo` để gọi điện",
-        "makeSendPullCommand": "Tin nhắn Pull",
-        "makeSendPullCommandDescription": "sử dụng `pull.application.event.add` để gửi tin nhắn"
+        "makeImCallToVoiceDescription": "sử dụng `$b24.parent.imCallTo(xxx, false)` để khởi tạo cuộc gọi",
+        "makeImOpenMessenger": "Chat",
+        "makeImOpenMessengerDescription": "sử dụng `$b24.parent.imOpenMessenger` để mở cửa sổ chat",
+        "makeImOpenHistory": "Lịch sử chat",
+        "makeImOpenHistoryDescription": "sử dụng `$b24.parent.imOpenHistory` để mở lịch sử chat",
+        "makeImPhoneTo": "Gọi qua điện thoại",
+        "makeImPhoneToDescription": "sử dụng `$b24.parent.imPhoneTo` để gọi",
+        "makeSendPullCommand": "Pull thông báo",
+        "makeSendPullCommandDescription": "sử dụng `pull.application.event.add` để gửi thông báo"
       },
       "actions": {
         "clear": "Xóa nhật ký",
@@ -122,13 +184,13 @@
         "select": "Chọn",
         "videoCall": "Gọi video",
         "voiceCall": "Gọi thoại",
-        "imOpenMessenger": "Trò chuyện",
-        "imOpenMessengerHistory": "Lịch sử trò chuyện",
+        "imOpenMessenger": "Chat",
+        "imOpenMessengerHistory": "Lịch sử chat",
         "makeImPhoneTo": "Gọi điện",
         "makeSendPullCommand": "Gửi"
       },
       "error": {
-        "notSelect": "Chưa chọn người dùng.",
+        "notSelect": "Người dùng chưa được chọn.",
         "tryCallToSelf": "Bạn không thể gọi cho chính mình.",
         "emptyNumber": "Chưa chỉ định số điện thoại để gọi."
       }
@@ -137,12 +199,12 @@
       "nav": "Tham số đặc biệt",
       "seo": {
         "title": "Tham số đặc biệt",
-        "description": "Danh sách tham số đặc biệt cho bản on-premise và cloud."
+        "description": "Danh sách tham số đặc biệt cho phiên bản on-premise và cloud."
       },
       "message": {
-        "line1": "Có một số khác biệt giữa bản on-premise và cloud của Bitrix24.",
-        "isSelfHosted": "cờ chỉ định Bitrix24 là bản on-premise hay cloud",
-        "primaryKeyIncrementValue": "bước tăng cho các trường kiểu ID",
+        "line1": "Có một vài điểm khác biệt giữa phiên bản on-premise và cloud của Bitrix24.",
+        "isSelfHosted": "cờ chỉ định Bitrix24 là phiên bản on-premise hay cloud",
+        "primaryKeyIncrementValue": "bước tăng cho các trường loại ID",
         "mainSettings": "liên kết đến cài đặt",
         "ufList": "liên kết đến danh sách Uf",
         "ufPage": "liên kết đến Uf"
@@ -155,24 +217,24 @@
         "description": "Thể hiện việc xuất thông báo ngôn ngữ tùy theo ngôn ngữ của Bitrix24."
       },
       "message": {
-        "line1": "Hãy thử thay đổi ngôn ngữ trong Bitrix24.",
+        "line1": "Hãy thử đổi ngôn ngữ Bitrix24.",
         "message1": "thông báo đầu tiên",
         "message2": "thông báo thứ hai"
       }
     },
     "base_feedback": {
-      "nav": "Biểu mẫu phản hồi",
+      "nav": "Phản hồi",
       "seo": {
         "title": "Biểu mẫu phản hồi",
         "description": "Ví dụ về các trường cho biểu mẫu phản hồi."
       },
       "message": {
         "line1": "Bạn có thể nhúng biểu mẫu CRM từ Bitrix24 của mình vào ứng dụng và truyền vào các trường đặc biệt.",
-        "line2": "Khi người dùng điền vào biểu mẫu, dữ liệu về ứng dụng, gói dịch vụ, v.v. sẽ có sẵn trong Bitrix24 của bạn.",
+        "line2": "Khi người dùng điền biểu mẫu, dữ liệu về ứng dụng, gói dịch vụ, v.v. sẽ có sẵn trong Bitrix24 của bạn.",
         "app_code": "mã",
         "app_status": "trạng thái",
-        "payment_expired": "cờ chỉ định thời hạn trả phí hoặc dùng thử đã hết hay chưa",
-        "days": "số ngày còn lại đến hết thời hạn trả phí hoặc dùng thử",
+        "payment_expired": "cờ chỉ định liệu kỳ thanh toán hoặc dùng thử đã hết hạn chưa",
+        "days": "số ngày còn lại đến cuối kỳ thanh toán hoặc kỳ dùng thử",
         "b24_plan": "ký hiệu gói dịch vụ với chỉ định khu vực làm tiền tố",
         "c_name": "tên người dùng",
         "c_last_name": "họ người dùng",
@@ -183,13 +245,13 @@
       "nav": "Tiền tệ",
       "seo": {
         "title": "Tiền tệ",
-        "description": "Danh sách tiền tệ trong Bitrix24."
+        "description": "Danh sách tiền tệ Bitrix24."
       },
       "actions": {
         "create": "Tạo"
       },
       "message": {
-        "line1": "Hiển thị số tiền đã định dạng rất dễ dàng."
+        "line1": "Hiển thị số tiền được định dạng rất dễ dàng."
       },
       "list": {
         "code": "Mã",
@@ -197,6 +259,28 @@
         "literal": "Ký hiệu",
         "value": "Định dạng",
         "baseCurrency": "Mã tiền tệ cơ sở"
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Ví dụ trường",
+        "description": "Thay đổi giá trị dẫn đến xây dựng lại biểu đồ",
+        "hint": "Xu hướng"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Nhúng vào thẻ giao dịch CRM",
+        "description": "Minh họa."
+      },
+      "field": {
+        "label": "Ví dụ trường",
+        "description": "Thay đổi giá trị dẫn đến xây dựng lại biểu đồ",
+        "hint": "Xu hướng"
       }
     }
   },

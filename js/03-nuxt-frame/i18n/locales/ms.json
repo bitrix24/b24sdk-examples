@@ -5,69 +5,130 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
-        "optionApp": "Tetapan aplikasi",
-        "optionUser": "Tetapan pengguna",
-        "feedback": "Maklum balas"
+        "home": "Laman Utama",
+        "pages": "Halaman",
+        "optionApp": "Tetapan Apl",
+        "optionUser": "Tetapan Pengguna",
+        "feedback": "Maklum Balas"
       }
     }
   },
   "page": {
     "index": {
       "seo": {
-        "title": "[playground] Pengujian aplikasi"
+        "title": "[playground] Ujian Apl"
       },
       "menu": {
         "main": "Buka"
       },
       "message": {
         "title": "Helo!",
-        "line1": "Mari kita uji cara aplikasi berfungsi dalam Bitrix24. Buka aplikasi dalam slider."
+        "line1": "Mari uji cara apl berfungsi dalam Bitrix24. Buka apl dalam peluncur."
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Pemasangan Apl"
+      },
+      "ui": {
+        "title": "Pemasangan Apl"
+      },
+      "step": {
+        "init": {
+          "caption": "Perlu tunggu sebentar..."
+        },
+        "demo": {
+          "caption": "Contoh..."
+        },
+        "events": {
+          "caption": "Peristiwa..."
+        },
+        "placement": {
+          "caption": "Widget..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Selesai"
+        }
       }
     },
     "main": {
       "seo": {
-        "title": "[playground] Pengujian aplikasi"
+        "title": "[playground] Ujian Apl"
       },
       "message": {
-        "line1": "Buka setiap halaman dalam menu di sebelah kiri dan pelajari bagaimana semuanya berfungsi di sana.",
-        "line2": "Jangan lupa untuk bermain-main dengan mod warna.",
-        "scopes": "Keizinan yang diperlukan (scopes):"
+        "line1": "Buka setiap halaman dalam menu atas dan kaji cara semuanya berfungsi di sana.",
+        "line2": "Jangan lupa bermain dengan mod warna.",
+        "scopes": "Keizinan diperlukan (scopes):"
       }
     },
     "feedback": {
       "seo": {
-        "title": "Borang maklum balas",
+        "title": "Borang Maklum Balas",
         "description": "Contoh borang maklum balas."
       }
     },
     "app-options": {
       "seo": {
-        "title": "Tetapan aplikasi",
-        "description": "Contoh bekerja dengan tetapan aplikasi."
+        "title": "Tetapan Apl",
+        "description": "Contoh bekerja dengan tetapan apl."
       },
       "actions": {
         "save": "Simpan",
-        "close": "Tutup"
+        "cancel": "Batal"
+      },
+      "error": {
+        "title": "Ralat",
+        "notAdmin": "Hanya pentadbir yang boleh mengedit tetapan apl."
+      },
+      "option": {
+        "history": {
+          "title": "Sejarah Operasi",
+          "alert": "Demonstrasi bekerja dengan sifat. Secara analogi, sebarang sifat apl boleh dikonfigurasi.",
+          "property": "Berapa hari untuk menyimpan sejarah"
+        },
+        "present": {
+          "title": "Log Peristiwa",
+          "alert": "Setiap kemasukan kakitangan dipaparkan dalam Log Peristiwa. Anda sentiasa boleh menyemak siapa, bila dan dari alamat IP mana yang mengakses Bitrix24.",
+          "action": "Pergi ke log peristiwa"
+        }
       }
     },
     "user-options": {
       "seo": {
-        "title": "Tetapan pengguna",
-        "description": "Contoh bekerja dengan tetapan pengguna aplikasi."
+        "title": "Tetapan Pengguna",
+        "description": "Contoh bekerja dengan tetapan pengguna apl."
       },
       "actions": {
         "save": "Simpan",
-        "close": "Tutup"
+        "cancel": "Batal"
+      },
+      "error": {
+        "title": "Ralat"
+      },
+      "option": {
+        "demo": {
+          "title": "Contoh",
+          "alert": "Demonstrasi bekerja dengan sifat. Secara analogi, sebarang sifat pengguna boleh dikonfigurasi.",
+          "property_someValue_1": "Nombor Rawak",
+          "property_someValue_2": "Rentetan Rawak",
+          "property_isShowChangeColorMode": "Tunjukkan butang tukar warna?"
+        }
       }
     },
     "base_app-info": {
-      "nav": "Aplikasi",
+      "nav": "Apl",
       "seo": {
-        "title": "Aplikasi",
-        "description": "Maklumat tentang aplikasi."
+        "title": "Apl",
+        "description": "Maklumat tentang apl."
       },
       "message": {
-        "line1": "Ini adalah tag utama untuk pengenalan, kawalan dan diagnosis aplikasi.",
+        "line1": "Ini adalah tag utama untuk pengenalan, kawalan dan diagnostik apl.",
         "id": "pengenal pasti",
         "code": "kod",
         "version": "versi",
@@ -76,32 +137,33 @@
       }
     },
     "base_license-info": {
-      "nav": "Lesen dan pembayaran",
+      "nav": "Lesen dan Pembayaran",
       "seo": {
-        "title": "Lesen dan pembayaran",
-        "description": "Penetapan pelan tarif dengan menunjukkan wilayah sebagai awalan."
+        "title": "Lesen dan Pembayaran",
+        "description": "Penetapan pelan tarif dengan penunjuk wilayah sebagai awalan."
       },
       "message": {
         "line1": "Anda boleh memberi amaran kepada pengguna terlebih dahulu tentang tarikh pembaharuan yang akan tiba.",
         "languageId": "kod bahasa",
-        "license": "penetapan tarif dengan menunjukkan wilayah sebagai awalan",
-        "licenseType": "penetapan tarif dalaman tanpa menunjukkan wilayah",
-        "licensePrevious": "lesen lepas",
-        "licenseFamily": "penetapan tarif tanpa menunjukkan wilayah",
-        "isSelfHosted": "bendera yang menunjukkan sama ada Bitrix24 adalah versi on-premise atau awan",
+        "license": "penetapan tarif dengan penunjuk wilayah sebagai awalan",
+        "licenseType": "penetapan tarif dalaman tanpa penunjuk wilayah",
+        "licensePrevious": "lesen sebelumnya",
+        "licenseFamily": "penetapan tarif tanpa penunjuk wilayah",
+        "isSelfHosted": "bendera yang menunjukkan sama ada Bitrix24 adalah versi kotak atau awan",
         "isExpired": "bendera yang menunjukkan sama ada tempoh berbayar atau percubaan telah tamat",
         "days": "bilangan hari yang tinggal sehingga akhir tempoh berbayar atau tempoh percubaan"
       }
     },
     "base_specific-methods": {
-      "nav": "Kaedah khas",
+      "nav": "Kaedah Khas",
       "seo": {
-        "title": "Kaedah khas",
-        "description": "Pengujian kaedah khas."
+        "title": "Kaedah Khas",
+        "description": "Ujian kaedah khas."
       },
       "message": {
-        "line1": "Di sini menunjukkan kerja kaedah yang tersedia dalam aplikasi terbina dalam melalui Frame.",
-        "selectUsers": "Pemilihan pengguna",
+        "line1": "Di sini menunjukkan kerja kaedah yang tersedia dalam apl terbina dalam melalui Frame.",
+        "line2": "Jika anda membuka tetapan apl dan menyimpannya, maka pada halaman ini anda akan melihat mesej push yang meminta untuk memuat semula halaman.",
+        "selectUsers": "Pilihan pengguna",
         "selectUsersDescription": "gunakan `$b24.dialog.selectUsers` untuk memilih pengguna",
         "makeImCallToVideo": "Panggilan video dalaman",
         "makeImCallToVideoDescription": "gunakan `$b24.parent.imCallTo(xxx, true)` untuk memulakan panggilan",
@@ -130,18 +192,18 @@
       "error": {
         "notSelect": "Pengguna tidak dipilih.",
         "tryCallToSelf": "Anda tidak boleh menghubungi diri sendiri.",
-        "emptyNumber": "Nombor telefon untuk panggilan tidak dinyatakan."
+        "emptyNumber": "Telefon untuk panggilan tidak dinyatakan."
       }
     },
     "base_specific-parameters": {
-      "nav": "Parameter khas",
+      "nav": "Parameter Khas",
       "seo": {
-        "title": "Parameter khas",
-        "description": "Senarai parameter khas untuk versi on-premise dan awan."
+        "title": "Parameter Khas",
+        "description": "Senarai parameter khas untuk versi kotak dan awan."
       },
       "message": {
-        "line1": "Terdapat beberapa perbezaan antara versi on-premise dan awan Bitrix24.",
-        "isSelfHosted": "bendera yang menunjukkan sama ada Bitrix24 adalah versi on-premise atau awan",
+        "line1": "Terdapat beberapa perbezaan antara versi kotak dan awan Bitrix24.",
+        "isSelfHosted": "bendera yang menunjukkan sama ada Bitrix24 adalah versi kotak atau awan",
         "primaryKeyIncrementValue": "langkah kenaikan untuk medan jenis ID",
         "mainSettings": "pautan ke tetapan",
         "ufList": "pautan ke senarai Uf",
@@ -152,7 +214,7 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Memaparkan output mesej bahasa bergantung pada lokal Bitrix24."
+        "description": "Memaparkan mesej bahasa bergantung pada lokal Bitrix24."
       },
       "message": {
         "line1": "Cuba ubah bahasa Bitrix24.",
@@ -161,35 +223,35 @@
       }
     },
     "base_feedback": {
-      "nav": "Borang maklum balas",
+      "nav": "Maklum Balas",
       "seo": {
-        "title": "Borang maklum balas",
+        "title": "Borang Maklum Balas",
         "description": "Contoh medan untuk borang maklum balas."
       },
       "message": {
-        "line1": "Anda boleh menyematkan borang CRM dari Bitrix24 anda ke dalam aplikasi dan menghantar medan khas ke dalamnya.",
-        "line2": "Apabila pengguna mengisi borang, data tentang aplikasi, tarif, dll. akan tersedia di Bitrix24 anda.",
+        "line1": "Anda boleh menyematkan borang CRM dari Bitrix24 anda ke dalam apl dan menghantar medan khas ke dalamnya.",
+        "line2": "Apabila pengguna mengisi borang, data tentang apl, tarif, dll. akan tersedia di Bitrix24 anda.",
         "app_code": "kod",
         "app_status": "status",
         "payment_expired": "bendera yang menunjukkan sama ada tempoh berbayar atau percubaan telah tamat",
         "days": "bilangan hari yang tinggal sehingga akhir tempoh berbayar atau tempoh percubaan",
-        "b24_plan": "penetapan tarif dengan menunjukkan wilayah sebagai awalan",
+        "b24_plan": "penetapan tarif dengan penunjuk wilayah sebagai awalan",
         "c_name": "nama pengguna",
         "c_last_name": "nama keluarga pengguna",
         "hostname": "alamat Bitrix24"
       }
     },
     "base_currency": {
-      "nav": "Mata wang",
+      "nav": "Mata Wang",
       "seo": {
-        "title": "Mata wang",
+        "title": "Mata Wang",
         "description": "Senarai mata wang Bitrix24."
       },
       "actions": {
         "create": "Buat"
       },
       "message": {
-        "line1": "Menunjukkan jumlah yang diformat adalah sangat mudah."
+        "line1": "Sangat mudah untuk menunjukkan jumlah yang diformat."
       },
       "list": {
         "code": "Kod",
@@ -200,6 +262,28 @@
       }
     }
   },
-  "message1": "Siapa cepat bangun, dia dapat untung",
-  "message2": "Lebih baik sekali melihat daripada seratus kali mendengar"
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Contoh medan",
+        "description": "Perubahan nilai membawa kepada pembinaan semula graf",
+        "hint": "Tren"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Penyepaduan dalam kad tawaran",
+        "description": "Demonstrasi."
+      },
+      "field": {
+        "label": "Contoh medan",
+        "description": "Perubahan nilai membawa kepada pembinaan semula graf",
+        "hint": "Tren"
+      }
+    }
+  },
+  "message1": "Siapa cepat dapat",
+  "message2": "Sebuah gambar bernilai seribu kata"
 }

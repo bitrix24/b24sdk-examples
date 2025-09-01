@@ -5,16 +5,18 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
-        "optionApp": "Pengaturan aplikasi",
-        "optionUser": "Pengaturan pengguna",
-        "feedback": "Umpan balik"
+        "home": "Beranda",
+        "pages": "Halaman",
+        "optionApp": "Pengaturan Aplikasi",
+        "optionUser": "Pengaturan Pengguna",
+        "feedback": "Umpan Balik"
       }
     }
   },
   "page": {
     "index": {
       "seo": {
-        "title": "[playground] Pengujian aplikasi"
+        "title": "[playground] Pengujian Aplikasi"
       },
       "menu": {
         "main": "Buka"
@@ -24,40 +26,99 @@
         "line1": "Mari kita uji cara kerja aplikasi di Bitrix24. Buka aplikasi di slider."
       }
     },
+    "install": {
+      "seo": {
+        "title": "Pemasangan Aplikasi"
+      },
+      "ui": {
+        "title": "Pemasangan Aplikasi"
+      },
+      "step": {
+        "init": {
+          "caption": "Harap tunggu sebentar..."
+        },
+        "demo": {
+          "caption": "Contoh..."
+        },
+        "events": {
+          "caption": "Peristiwa..."
+        },
+        "placement": {
+          "caption": "Widget..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Penyelesaian"
+        }
+      }
+    },
     "main": {
       "seo": {
-        "title": "[playground] Pengujian aplikasi"
+        "title": "[playground] Pengujian Aplikasi"
       },
       "message": {
-        "line1": "Buka setiap halaman di menu sebelah kiri dan pelajari cara kerjanya.",
+        "line1": "Buka setiap halaman di menu atas dan pelajari cara kerjanya.",
         "line2": "Jangan lupa untuk mencoba mode warna.",
-        "scopes": "Izin yang diperlukan (scopes):"
+        "scopes": "Izin yang dibutuhkan (scopes):"
       }
     },
     "feedback": {
       "seo": {
-        "title": "Formulir umpan balik",
+        "title": "Formulir Umpan Balik",
         "description": "Contoh formulir umpan balik."
       }
     },
     "app-options": {
       "seo": {
-        "title": "Pengaturan aplikasi",
-        "description": "Contoh cara kerja dengan pengaturan aplikasi."
+        "title": "Pengaturan Aplikasi",
+        "description": "Contoh bekerja dengan pengaturan aplikasi."
       },
       "actions": {
         "save": "Simpan",
-        "close": "Tutup"
+        "cancel": "Batalkan"
+      },
+      "error": {
+        "title": "Kesalahan",
+        "notAdmin": "Hanya administrator yang dapat mengedit pengaturan aplikasi."
+      },
+      "option": {
+        "history": {
+          "title": "Riwayat Operasi",
+          "alert": "Demonstrasi bekerja dengan properti. Dengan analogi, Anda dapat mengonfigurasi properti aplikasi apa pun.",
+          "property": "Berapa hari untuk menyimpan riwayat"
+        },
+        "present": {
+          "title": "Buku Peristiwa",
+          "alert": "Setiap masuk karyawan ditampilkan di Buku Peristiwa. Anda selalu dapat memeriksa siapa, kapan, dan dari alamat IP mana yang masuk ke Bitrix24.",
+          "action": "Pergi ke buku peristiwa"
+        }
       }
     },
     "user-options": {
       "seo": {
-        "title": "Pengaturan pengguna",
-        "description": "Contoh cara kerja dengan pengaturan pengguna aplikasi."
+        "title": "Pengaturan Pengguna",
+        "description": "Contoh bekerja dengan pengaturan pengguna aplikasi."
       },
       "actions": {
         "save": "Simpan",
-        "close": "Tutup"
+        "cancel": "Batalkan"
+      },
+      "error": {
+        "title": "Kesalahan"
+      },
+      "option": {
+        "demo": {
+          "title": "Contoh",
+          "alert": "Demonstrasi bekerja dengan properti. Dengan analogi, Anda dapat mengonfigurasi properti pengguna apa pun.",
+          "property_someValue_1": "Angka arbitrer",
+          "property_someValue_2": "String arbitrer",
+          "property_isShowChangeColorMode": "Tampilkan tombol ubah warna?"
+        }
       }
     },
     "base_app-info": {
@@ -67,8 +128,8 @@
         "description": "Informasi tentang aplikasi."
       },
       "message": {
-        "line1": "Ini adalah label kunci untuk identifikasi, kontrol, dan diagnostik aplikasi.",
-        "id": "identifikasi",
+        "line1": "Ini adalah tag kunci untuk identifikasi, kontrol, dan diagnostik aplikasi.",
+        "id": "pengidentifikasi",
         "code": "kode",
         "version": "versi",
         "status": "status",
@@ -76,31 +137,32 @@
       }
     },
     "base_license-info": {
-      "nav": "Lisensi dan pembayaran",
+      "nav": "Lisensi dan Pembayaran",
       "seo": {
-        "title": "Lisensi dan pembayaran",
-        "description": "Penetapan paket tarif dengan menunjukkan wilayah sebagai awalan."
+        "title": "Lisensi dan Pembayaran",
+        "description": "Penunjukan paket tarif dengan menunjukkan wilayah sebagai awalan."
       },
       "message": {
         "line1": "Anda dapat memperingatkan pengguna sebelumnya tentang tanggal perpanjangan.",
         "languageId": "kode bahasa",
-        "license": "penetapan tarif dengan menunjukkan wilayah sebagai awalan",
-        "licenseType": "penetapan tarif internal tanpa menunjukkan wilayah",
+        "license": "penunjukan paket dengan menunjukkan wilayah sebagai awalan",
+        "licenseType": "penunjukan paket internal tanpa menunjukkan wilayah",
         "licensePrevious": "lisensi sebelumnya",
-        "licenseFamily": "penetapan tarif tanpa menunjukkan wilayah",
-        "isSelfHosted": "bendera, menunjukkan apakah Bitrix24 adalah versi on-premise atau cloud",
-        "isExpired": "bendera, menunjukkan apakah periode berbayar atau percobaan telah berakhir",
-        "days": "jumlah hari yang tersisa hingga akhir periode berbayar atau periode percobaan"
+        "licenseFamily": "penunjukan paket tanpa menunjukkan wilayah",
+        "isSelfHosted": "bendera yang menunjukkan apakah Bitrix24 adalah versi on-premise atau cloud",
+        "isExpired": "bendera yang menunjukkan apakah periode berbayar atau percobaan telah kedaluwarsa",
+        "days": "jumlah hari tersisa hingga akhir periode berbayar atau percobaan"
       }
     },
     "base_specific-methods": {
-      "nav": "Metode khusus",
+      "nav": "Metode Khusus",
       "seo": {
-        "title": "Metode khusus",
+        "title": "Metode Khusus",
         "description": "Pengujian metode khusus."
       },
       "message": {
-        "line1": "Di sini ditunjukkan cara kerja metode yang tersedia di aplikasi yang disematkan melalui Frame.",
+        "line1": "Di sini ditunjukkan kerja metode yang tersedia di aplikasi yang disematkan melalui Frame.",
+        "line2": "Jika Anda membuka pengaturan aplikasi dan menyimpannya, maka di halaman ini Anda akan melihat pesan push dengan permintaan untuk memuat ulang halaman.",
         "selectUsers": "Pemilihan pengguna",
         "selectUsersDescription": "gunakan `$b24.dialog.selectUsers` untuk memilih pengguna",
         "makeImCallToVideo": "Panggilan video internal",
@@ -120,10 +182,10 @@
         "clear": "Bersihkan log",
         "reload": "Muat ulang",
         "select": "Pilih",
-        "videoCall": "Panggilan video",
-        "voiceCall": "Panggilan suara",
+        "videoCall": "Panggilan Video",
+        "voiceCall": "Panggilan Suara",
         "imOpenMessenger": "Obrolan",
-        "imOpenMessengerHistory": "Riwayat obrolan",
+        "imOpenMessengerHistory": "Riwayat Obrolan",
         "makeImPhoneTo": "Telepon",
         "makeSendPullCommand": "Kirim"
       },
@@ -134,14 +196,14 @@
       }
     },
     "base_specific-parameters": {
-      "nav": "Parameter khusus",
+      "nav": "Parameter Khusus",
       "seo": {
-        "title": "Parameter khusus",
+        "title": "Parameter Khusus",
         "description": "Daftar parameter khusus untuk versi on-premise dan cloud."
       },
       "message": {
         "line1": "Ada beberapa perbedaan antara versi on-premise dan cloud Bitrix24.",
-        "isSelfHosted": "bendera, menunjukkan apakah Bitrix24 adalah versi on-premise atau cloud",
+        "isSelfHosted": "bendera yang menunjukkan apakah Bitrix24 adalah versi on-premise atau cloud",
         "primaryKeyIncrementValue": "langkah kenaikan untuk bidang bertipe ID",
         "mainSettings": "tautan ke pengaturan",
         "ufList": "tautan ke daftar Uf",
@@ -161,28 +223,28 @@
       }
     },
     "base_feedback": {
-      "nav": "Formulir umpan balik",
+      "nav": "Umpan Balik",
       "seo": {
-        "title": "Formulir umpan balik",
-        "description": "Contoh field untuk formulir umpan balik."
+        "title": "Formulir Umpan Balik",
+        "description": "Contoh bidang untuk formulir umpan balik."
       },
       "message": {
-        "line1": "Anda dapat menyematkan formulir CRM dari Bitrix24 Anda ke dalam aplikasi dan meneruskan field khusus ke dalamnya.",
-        "line2": "Saat pengguna mengisi formulir, data tentang aplikasi, paket tarif, dll. akan tersedia di Bitrix24 Anda.",
+        "line1": "Anda dapat menyematkan formulir CRM dari Bitrix24 Anda ke dalam aplikasi dan meneruskan bidang khusus ke dalamnya.",
+        "line2": "Ketika pengguna mengisi formulir, data tentang aplikasi, paket, dll. akan tersedia di Bitrix24 Anda.",
         "app_code": "kode",
         "app_status": "status",
-        "payment_expired": "bendera, menunjukkan apakah periode berbayar atau percobaan telah berakhir",
-        "days": "jumlah hari yang tersisa hingga akhir periode berbayar atau periode percobaan",
-        "b24_plan": "penetapan tarif dengan menunjukkan wilayah sebagai awalan",
+        "payment_expired": "bendera yang menunjukkan apakah periode berbayar atau percobaan telah kedaluwarsa",
+        "days": "jumlah hari tersisa hingga akhir periode berbayar atau percobaan",
+        "b24_plan": "penunjukan paket dengan menunjukkan wilayah sebagai awalan",
         "c_name": "nama pengguna",
         "c_last_name": "nama belakang pengguna",
         "hostname": "alamat Bitrix24"
       }
     },
     "base_currency": {
-      "nav": "Mata uang",
+      "nav": "Mata Uang",
       "seo": {
-        "title": "Mata uang",
+        "title": "Mata Uang",
         "description": "Daftar mata uang Bitrix24."
       },
       "actions": {
@@ -200,6 +262,28 @@
       }
     }
   },
-  "message1": "Siapa cepat bangun, dia dapat rezeki",
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Contoh bidang",
+        "description": "Mengubah nilai menyebabkan grafik dibangun ulang",
+        "hint": "Tren"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Sematkan di kartu kesepakatan",
+        "description": "Demonstrasi."
+      },
+      "field": {
+        "label": "Contoh bidang",
+        "description": "Mengubah nilai menyebabkan grafik dibangun ulang",
+        "hint": "Tren"
+      }
+    }
+  },
+  "message1": "Siapa yang bangun pagi, Tuhan memberkati",
   "message2": "Lebih baik melihat sekali daripada mendengar seratus kali"
 }

@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "Ana Sayfa",
+        "pages": "Sayfalar",
         "optionApp": "Uygulama Ayarları",
         "optionUser": "Kullanıcı Ayarları",
         "feedback": "Geri Bildirim"
@@ -24,12 +26,43 @@
         "line1": "Bitrix24'te uygulamanın çalışmasını test edelim. Uygulamayı slaytçıda açın."
       }
     },
+    "install": {
+      "seo": {
+        "title": "Uygulama Kurulumu"
+      },
+      "ui": {
+        "title": "Uygulama Kurulumu"
+      },
+      "step": {
+        "init": {
+          "caption": "Biraz beklemek gerekiyor..."
+        },
+        "demo": {
+          "caption": "Örnekler..."
+        },
+        "events": {
+          "caption": "Olaylar..."
+        },
+        "placement": {
+          "caption": "Widget'lar..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Tamamlama"
+        }
+      }
+    },
     "main": {
       "seo": {
         "title": "[playground] Uygulama Testi"
       },
       "message": {
-        "line1": "Sol menüdeki her sayfayı açın ve üzerinde her şeyin nasıl çalıştığını inceleyin.",
+        "line1": "Üst menüdeki her sayfayı açın ve üzerinde her şeyin nasıl çalıştığını inceleyin.",
         "line2": "Renk modu ile oynamayı unutmayın.",
         "scopes": "Gerekli izinler (scopes):"
       }
@@ -43,21 +76,49 @@
     "app-options": {
       "seo": {
         "title": "Uygulama Ayarları",
-        "description": "Uygulama ayarlarıyla çalışma örneği."
+        "description": "Uygulama ayarları ile çalışma örneği."
       },
       "actions": {
         "save": "Kaydet",
-        "close": "Kapat"
+        "cancel": "İptal"
+      },
+      "error": {
+        "title": "Hata",
+        "notAdmin": "Yalnızca yönetici uygulama ayarlarını düzenleyebilir."
+      },
+      "option": {
+        "history": {
+          "title": "İşlem Geçmişi",
+          "alert": "Özellikle çalışma demonstrasyonu. Benzer şekilde, herhangi bir uygulama özelliği yapılandırılabilir.",
+          "property": "Geçmiş kaç gün saklansın"
+        },
+        "present": {
+          "title": "Olay Günlüğü",
+          "alert": "Çalışanların her girişi Olay Günlüğü'nde görüntülenir. Bitrix24'e kimin, ne zaman ve hangi IP adreslerinden girdiğini her zaman kontrol edebilirsiniz.",
+          "action": "Olay günlüğüne git"
+        }
       }
     },
     "user-options": {
       "seo": {
         "title": "Kullanıcı Ayarları",
-        "description": "Uygulamanın kullanıcı ayarlarıyla çalışma örneği."
+        "description": "Uygulama kullanıcı ayarları ile çalışma örneği."
       },
       "actions": {
         "save": "Kaydet",
-        "close": "Kapat"
+        "cancel": "İptal"
+      },
+      "error": {
+        "title": "Hata"
+      },
+      "option": {
+        "demo": {
+          "title": "Örnek",
+          "alert": "Özellikle çalışma demonstrasyonu. Benzer şekilde, herhangi bir kullanıcı özelliği yapılandırılabilir.",
+          "property_someValue_1": "Rastgele sayı",
+          "property_someValue_2": "Rastgele dize",
+          "property_isShowChangeColorMode": "Renk değiştirme düğmesi gösterilsin mi?"
+        }
       }
     },
     "base_app-info": {
@@ -67,8 +128,8 @@
         "description": "Uygulama hakkında bilgi."
       },
       "message": {
-        "line1": "Bunlar, uygulamayı tanımlamak, kontrol etmek ve teşhis etmek için temel işaretlerdir.",
-        "id": "kimlik",
+        "line1": "Bunlar, uygulamayı tanımlamak, kontrol etmek ve teşhis etmek için temel etiketlerdir.",
+        "id": "tanımlayıcı",
         "code": "kod",
         "version": "versiyon",
         "status": "durum",
@@ -79,18 +140,18 @@
       "nav": "Lisans ve Ödeme",
       "seo": {
         "title": "Lisans ve Ödeme",
-        "description": "Bölgeyi önek olarak belirten tarife planı tanımı."
+        "description": "Bölgeyi önek olarak belirten tarif planı tanımı."
       },
       "message": {
         "line1": "Kullanıcıyı yenileme süresinin gelmesi konusunda önceden uyarabilirsiniz.",
         "languageId": "dil kodu",
-        "license": "bölgeyi önek olarak belirten tarife tanımı",
+        "license": "bölge öneki ile tarife tanımı",
         "licenseType": "bölge belirtmeden iç tarife tanımı",
         "licensePrevious": "önceki lisans",
         "licenseFamily": "bölge belirtmeden tarife tanımı",
         "isSelfHosted": "Bitrix24'ün kutu veya bulut sürümü olup olmadığını belirten bayrak",
-        "isExpired": "ücretli veya deneme süresinin dolup dolmadığını belirten bayrak",
-        "days": "ücretli dönemin veya deneme döneminin sonuna kalan gün sayısı"
+        "isExpired": "ödenen veya deneme süresinin dolup dolmadığını belirten bayrak",
+        "days": "ödenen veya deneme süresinin bitmesine kalan gün sayısı"
       }
     },
     "base_specific-methods": {
@@ -101,12 +162,13 @@
       },
       "message": {
         "line1": "Burada, Frame üzerinden gömülü uygulamalarda bulunan metodların çalışması gösterilmektedir.",
+        "line2": "Uygulama ayarlarını açıp kaydederseniz, bu sayfada sayfayı yenileme isteği içeren bir push mesajı görürsünüz.",
         "selectUsers": "Kullanıcı seçimi",
         "selectUsersDescription": "kullanıcı seçmek için `$b24.dialog.selectUsers` kullanın",
-        "makeImCallToVideo": "Dahili video görüşme",
-        "makeImCallToVideoDescription": "çağrı başlatmak için `$b24.parent.imCallTo(xxx, true)` kullanın",
-        "makeImCallToVoice": "Dahili sesli görüşme",
-        "makeImCallToVoiceDescription": "çağrı başlatmak için `$b24.parent.imCallTo(xxx, false)` kullanın",
+        "makeImCallToVideo": "Dahili video araması",
+        "makeImCallToVideoDescription": "aramayı başlatmak için `$b24.parent.imCallTo(xxx, true)` kullanın",
+        "makeImCallToVoice": "Dahili sesli arama",
+        "makeImCallToVoiceDescription": "aramayı başlatmak için `$b24.parent.imCallTo(xxx, false)` kullanın",
         "makeImOpenMessenger": "Sohbet",
         "makeImOpenMessengerDescription": "sohbet penceresini açmak için `$b24.parent.imOpenMessenger` kullanın",
         "makeImOpenHistory": "Sohbet geçmişi",
@@ -117,27 +179,27 @@
         "makeSendPullCommandDescription": "mesaj göndermek için `pull.application.event.add` kullanın"
       },
       "actions": {
-        "clear": "Logu temizle",
+        "clear": "Günlüğü temizle",
         "reload": "Yeniden yükle",
         "select": "Seç",
-        "videoCall": "Video görüşme",
-        "voiceCall": "Sesli görüşme",
+        "videoCall": "Video Araması",
+        "voiceCall": "Sesli Arama",
         "imOpenMessenger": "Sohbet",
-        "imOpenMessengerHistory": "Sohbet geçmişi",
+        "imOpenMessengerHistory": "Sohbet Geçmişi",
         "makeImPhoneTo": "Ara",
         "makeSendPullCommand": "Gönder"
       },
       "error": {
         "notSelect": "Kullanıcı seçilmedi.",
         "tryCallToSelf": "Kendinizi arayamazsınız.",
-        "emptyNumber": "Arama için telefon belirtilmedi."
+        "emptyNumber": "Arama için telefon numarası belirtilmedi."
       }
     },
     "base_specific-parameters": {
       "nav": "Özel Parametreler",
       "seo": {
         "title": "Özel Parametreler",
-        "description": "Kutu ve bulut sürümü için özel parametreler listesi."
+        "description": "Kutu ve bulut sürümleri için özel parametreler listesi."
       },
       "message": {
         "line1": "Bitrix24'ün kutu ve bulut sürümleri arasında birkaç fark vardır.",
@@ -145,7 +207,7 @@
         "primaryKeyIncrementValue": "ID tipindeki alanlar için artış değeri",
         "mainSettings": "ayarlara bağlantı",
         "ufList": "Uf listesine bağlantı",
-        "ufPage": "Uf'a bağlantı"
+        "ufPage": "Uf sayfasına bağlantı"
       }
     },
     "base_lang": {
@@ -161,7 +223,7 @@
       }
     },
     "base_feedback": {
-      "nav": "Geri Bildirim Formu",
+      "nav": "Geri Bildirim",
       "seo": {
         "title": "Geri Bildirim Formu",
         "description": "Geri bildirim formu için alan örnekleri."
@@ -171,9 +233,9 @@
         "line2": "Kullanıcı formu doldurduğunda, Bitrix24'inizde uygulama, tarife vb. hakkında veriler erişilebilir olacaktır.",
         "app_code": "kod",
         "app_status": "durum",
-        "payment_expired": "ücretli veya deneme süresinin dolup dolmadığını belirten bayrak",
-        "days": "ücretli dönemin veya deneme döneminin sonuna kalan gün sayısı",
-        "b24_plan": "bölgeyi önek olarak belirten tarife tanımı",
+        "payment_expired": "ödenen veya deneme süresinin dolup dolmadığını belirten bayrak",
+        "days": "ödenen veya deneme süresinin bitmesine kalan gün sayısı",
+        "b24_plan": "bölge öneki ile tarife tanımı",
         "c_name": "kullanıcı adı",
         "c_last_name": "kullanıcı soyadı",
         "hostname": "Bitrix24 adresi"
@@ -197,6 +259,28 @@
         "literal": "Sembol",
         "value": "Biçimlendirme",
         "baseCurrency": "Temel para birimi kodu"
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Örnek alan",
+        "description": "Değerin değiştirilmesi grafiğin yeniden oluşturulmasına neden olur",
+        "hint": "Eğilim"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Kart işlemine gömme",
+        "description": "Demonstrasyon."
+      },
+      "field": {
+        "label": "Örnek alan",
+        "description": "Değerin değiştirilmesi grafiğin yeniden oluşturulmasına neden olur",
+        "hint": "Eğilim"
       }
     }
   },

@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "首頁",
+        "pages": "頁面",
         "optionApp": "應用程式設定",
         "optionUser": "使用者設定",
         "feedback": "意見回饋"
@@ -20,8 +22,39 @@
         "main": "開啟"
       },
       "message": {
-        "title": "你好！",
-        "line1": "讓我們在 Bitrix24 中測試應用程式的運作。請在滑出式面板中開啟應用程式。"
+        "title": "您好！",
+        "line1": "讓我們測試一下應用程式在 Bitrix24 中的運作。請在滑出式面板中開啟應用程式。"
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "應用程式安裝"
+      },
+      "ui": {
+        "title": "應用程式安裝"
+      },
+      "step": {
+        "init": {
+          "caption": "需要稍等一下..."
+        },
+        "demo": {
+          "caption": "範例..."
+        },
+        "events": {
+          "caption": "事件..."
+        },
+        "placement": {
+          "caption": "小工具..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "完成"
+        }
       }
     },
     "main": {
@@ -29,8 +62,8 @@
         "title": "[playground] 應用程式測試"
       },
       "message": {
-        "line1": "開啟左側選單中的每個頁面，並瞭解其運作方式。",
-        "line2": "別忘了試試色彩模式。",
+        "line1": "開啟上方選單中的每個頁面，研究其運作方式。",
+        "line2": "別忘了試用色彩模式。",
         "scopes": "所需權限 (scopes):"
       }
     },
@@ -43,21 +76,49 @@
     "app-options": {
       "seo": {
         "title": "應用程式設定",
-        "description": "應用程式設定運作範例。"
+        "description": "應用程式設定操作範例。"
       },
       "actions": {
         "save": "儲存",
-        "close": "關閉"
+        "cancel": "取消"
+      },
+      "error": {
+        "title": "錯誤",
+        "notAdmin": "只有管理員可以編輯應用程式設定。"
+      },
+      "option": {
+        "history": {
+          "title": "操作歷史",
+          "alert": "屬性操作示範。您可以按照類似方式設定任何應用程式屬性。",
+          "property": "儲存歷史記錄的天數"
+        },
+        "present": {
+          "title": "事件日誌",
+          "alert": "員工的每次登入都會顯示在事件日誌中。您隨時可以檢查誰、何時以及從哪些 IP 位址登入了 Bitrix24。",
+          "action": "前往事件日誌"
+        }
       }
     },
     "user-options": {
       "seo": {
         "title": "使用者設定",
-        "description": "應用程式使用者設定運作範例。"
+        "description": "應用程式使用者設定操作範例。"
       },
       "actions": {
         "save": "儲存",
-        "close": "關閉"
+        "cancel": "取消"
+      },
+      "error": {
+        "title": "錯誤"
+      },
+      "option": {
+        "demo": {
+          "title": "範例",
+          "alert": "屬性操作示範。您可以按照類似方式設定任何使用者屬性。",
+          "property_someValue_1": "任意數字",
+          "property_someValue_2": "任意字串",
+          "property_isShowChangeColorMode": "顯示顏色模式切換按鈕？"
+        }
       }
     },
     "base_app-info": {
@@ -79,28 +140,29 @@
       "nav": "授權與付款",
       "seo": {
         "title": "授權與付款",
-        "description": "以地區為前綴的費率方案標示。"
+        "description": "以地區作為前綴的費率方案標示。"
       },
       "message": {
-        "line1": "可以預先提醒使用者續約期限即將到來。",
+        "line1": "可以預先通知使用者續約到期日。",
         "languageId": "語言代碼",
-        "license": "以地區為前綴的費率標示",
-        "licenseType": "不含地區的內部費率標示",
-        "licensePrevious": "過往授權",
-        "licenseFamily": "不含地區的費率標示",
-        "isSelfHosted": "標記，指示 Bitrix24 是自建版還是雲端版",
+        "license": "以地區作為前綴的費率標示",
+        "licenseType": "不含地區標示的內部費率標示",
+        "licensePrevious": "過去的授權",
+        "licenseFamily": "不含地區標示的費率標示",
+        "isSelfHosted": "標記，指示 Bitrix24 是自架版還是雲端版",
         "isExpired": "標記，指示付費或試用期是否已過期",
-        "days": "付費期或試用期剩餘天數"
+        "days": "剩餘至付費期或試用期結束的天數"
       }
     },
     "base_specific-methods": {
       "nav": "特殊方法",
       "seo": {
         "title": "特殊方法",
-        "description": "特殊方法測試。"
+        "description": "測試特殊方法。"
       },
       "message": {
-        "line1": "此處顯示透過 Frame 內嵌於應用程式中可用的方法運作。",
+        "line1": "這裡展示了透過 Frame 內嵌的應用程式中可用方法的工作方式。",
+        "line2": "如果您開啟應用程式設定並儲存它們，您將在此頁面上看到要求重新整理頁面的 push 訊息。",
         "selectUsers": "選擇使用者",
         "selectUsersDescription": "使用 `$b24.dialog.selectUsers` 來選擇使用者",
         "makeImCallToVideo": "內部視訊通話",
@@ -114,10 +176,10 @@
         "makeImPhoneTo": "透過電話系統撥打電話",
         "makeImPhoneToDescription": "使用 `$b24.parent.imPhoneTo` 來撥打電話",
         "makeSendPullCommand": "Pull 訊息",
-        "makeSendPullCommandDescription": "使用 `pull.application.event.add` 來發送訊息"
+        "makeSendPullCommandDescription": "使用 `pull.application.event.add` 來傳送訊息"
       },
       "actions": {
-        "clear": "清除記錄",
+        "clear": "清除日誌",
         "reload": "重新載入",
         "select": "選擇",
         "videoCall": "視訊通話",
@@ -125,23 +187,23 @@
         "imOpenMessenger": "聊天",
         "imOpenMessengerHistory": "聊天記錄",
         "makeImPhoneTo": "撥打電話",
-        "makeSendPullCommand": "發送"
+        "makeSendPullCommand": "傳送"
       },
       "error": {
         "notSelect": "未選擇使用者。",
-        "tryCallToSelf": "您無法撥打電話給自己。",
-        "emptyNumber": "未指定撥打電話的號碼。"
+        "tryCallToSelf": "您不能打電話給自己。",
+        "emptyNumber": "未指定撥號電話號碼。"
       }
     },
     "base_specific-parameters": {
       "nav": "特殊參數",
       "seo": {
         "title": "特殊參數",
-        "description": "自建版和雲端版的特殊參數列表。"
+        "description": "自架版和雲端版的特殊參數列表。"
       },
       "message": {
-        "line1": "Bitrix24 的自建版和雲端版之間有一些區別。",
-        "isSelfHosted": "標記，指示 Bitrix24 是自建版還是雲端版",
+        "line1": "Bitrix24 的自架版和雲端版之間有一些區別。",
+        "isSelfHosted": "標記，指示 Bitrix24 是自架版還是雲端版",
         "primaryKeyIncrementValue": "ID 類型欄位的增量步長",
         "mainSettings": "設定連結",
         "ufList": "Uf 列表連結",
@@ -152,28 +214,28 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "根據 Bitrix24 語言環境示範語言訊息的輸出。"
+        "description": "根據 Bitrix24 的語言環境示範語言訊息的輸出。"
       },
       "message": {
-        "line1": "嘗試變更 Bitrix24 的語言。",
-        "message1": "第一則訊息",
-        "message2": "第二則訊息"
+        "line1": "嘗試更改 Bitrix24 的語言。",
+        "message1": "第一條訊息",
+        "message2": "第二條訊息"
       }
     },
     "base_feedback": {
-      "nav": "意見回饋表單",
+      "nav": "意見回饋",
       "seo": {
         "title": "意見回饋表單",
         "description": "意見回饋表單欄位範例。"
       },
       "message": {
-        "line1": "您可以將 Bitrix24 中的 CRM 表單嵌入應用程式，並向其傳遞特殊欄位。",
-        "line2": "當使用者填寫表單後，您的 Bitrix24 將可取得應用程式、授權方案等相關資料。",
+        "line1": "您可以將來自您 Bitrix24 的 CRM 表單嵌入到應用程式中，並向其傳遞特殊欄位。",
+        "line2": "當使用者填寫表單後，您的 Bitrix24 中將可取得有關應用程式、費率方案等的資料。",
         "app_code": "代碼",
         "app_status": "狀態",
         "payment_expired": "標記，指示付費或試用期是否已過期",
-        "days": "付費期或試用期剩餘天數",
-        "b24_plan": "以地區為前綴的費率標示",
+        "days": "剩餘至付費期或試用期結束的天數",
+        "b24_plan": "以地區作為前綴的費率標示",
         "c_name": "使用者名稱",
         "c_last_name": "使用者姓氏",
         "hostname": "Bitrix24 位址"
@@ -197,6 +259,28 @@
         "literal": "符號",
         "value": "格式化",
         "baseCurrency": "基礎貨幣代碼"
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "範例欄位",
+        "description": "變更值會導致圖表重建",
+        "hint": "趨勢"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "內嵌於交易卡",
+        "description": "示範。"
+      },
+      "field": {
+        "label": "範例欄位",
+        "description": "變更值會導致圖表重建",
+        "hint": "趨勢"
       }
     }
   },

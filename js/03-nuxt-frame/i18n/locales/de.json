@@ -5,7 +5,9 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
-        "optionApp": "Anwendungseinstellungen",
+        "home": "Startseite",
+        "pages": "Seiten",
+        "optionApp": "App-Einstellungen",
         "optionUser": "Benutzereinstellungen",
         "feedback": "Feedback"
       }
@@ -14,22 +16,53 @@
   "page": {
     "index": {
       "seo": {
-        "title": "[playground] Anwendungstest"
+        "title": "[playground] App-Test"
       },
       "menu": {
         "main": "Öffnen"
       },
       "message": {
         "title": "Hallo!",
-        "line1": "Lassen Sie uns die Funktionsweise der Anwendung in Bitrix24 testen. Öffnen Sie die Anwendung im Slider."
+        "line1": "Lassen Sie uns die Funktion der App in Bitrix24 testen. Öffnen Sie die App im Slider."
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "App-Installation"
+      },
+      "ui": {
+        "title": "App-Installation"
+      },
+      "step": {
+        "init": {
+          "caption": "Bitte haben Sie einen Moment Geduld..."
+        },
+        "demo": {
+          "caption": "Beispiele..."
+        },
+        "events": {
+          "caption": "Ereignisse..."
+        },
+        "placement": {
+          "caption": "Widgets..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Abschluss"
+        }
       }
     },
     "main": {
       "seo": {
-        "title": "[playground] Anwendungstest"
+        "title": "[playground] App-Test"
       },
       "message": {
-        "line1": "Öffnen Sie jede Seite im linken Menü und erkunden Sie, wie alles funktioniert.",
+        "line1": "Öffnen Sie jede Seite im oberen Menü und untersuchen Sie, wie alles darauf funktioniert.",
         "line2": "Vergessen Sie nicht, mit dem Farbmodus zu spielen.",
         "scopes": "Erforderliche Berechtigungen (scopes):"
       }
@@ -42,32 +75,60 @@
     },
     "app-options": {
       "seo": {
-        "title": "Anwendungseinstellungen",
-        "description": "Beispiel für die Arbeit mit Anwendungseinstellungen."
+        "title": "App-Einstellungen",
+        "description": "Beispiel für die Arbeit mit App-Einstellungen."
       },
       "actions": {
         "save": "Speichern",
-        "close": "Schließen"
+        "cancel": "Abbrechen"
+      },
+      "error": {
+        "title": "Fehler",
+        "notAdmin": "Nur ein Administrator kann die App-Einstellungen bearbeiten."
+      },
+      "option": {
+        "history": {
+          "title": "Betriebsverlauf",
+          "alert": "Demonstration der Arbeit mit der Eigenschaft. Analog können beliebige App-Eigenschaften konfiguriert werden.",
+          "property": "Wie viele Tage der Verlauf gespeichert werden soll"
+        },
+        "present": {
+          "title": "Ereignisprotokoll",
+          "alert": "Jeder Login von Mitarbeitern wird im Ereignisprotokoll angezeigt. Sie können jederzeit prüfen, wer, wann und von welcher IP-Adresse auf Bitrix24 zugegriffen hat.",
+          "action": "Zum Ereignisprotokoll"
+        }
       }
     },
     "user-options": {
       "seo": {
         "title": "Benutzereinstellungen",
-        "description": "Beispiel für die Arbeit mit Benutzereinstellungen der Anwendung."
+        "description": "Beispiel für die Arbeit mit benutzerdefinierten App-Einstellungen."
       },
       "actions": {
         "save": "Speichern",
-        "close": "Schließen"
+        "cancel": "Abbrechen"
+      },
+      "error": {
+        "title": "Fehler"
+      },
+      "option": {
+        "demo": {
+          "title": "Beispiel",
+          "alert": "Demonstration der Arbeit mit der Eigenschaft. Analog können beliebige benutzerdefinierte Eigenschaften konfiguriert werden.",
+          "property_someValue_1": "Beliebige Zahl",
+          "property_someValue_2": "Beliebige Zeichenkette",
+          "property_isShowChangeColorMode": "Schaltfläche zum Wechseln des Farbmodus anzeigen?"
+        }
       }
     },
     "base_app-info": {
-      "nav": "Anwendung",
+      "nav": "Applikation",
       "seo": {
-        "title": "Anwendung",
-        "description": "Informationen zur Anwendung."
+        "title": "Applikation",
+        "description": "Informationen zur Applikation."
       },
       "message": {
-        "line1": "Dies sind die Schlüsselmetriken zur Identifizierung, Kontrolle und Diagnose der Anwendung.",
+        "line1": "Dies sind die Schlüsselmetriken zur Identifizierung, Kontrolle und Diagnose der Applikation.",
         "id": "Identifikator",
         "code": "Code",
         "version": "Version",
@@ -79,36 +140,37 @@
       "nav": "Lizenz und Bezahlung",
       "seo": {
         "title": "Lizenz und Bezahlung",
-        "description": "Bezeichnung des Tarifplans mit Regionsangabe als Präfix."
+        "description": "Bezeichnung des Tarifplans mit Angabe der Region als Präfix."
       },
       "message": {
-        "line1": "Sie können den Benutzer im Voraus über den anstehenden Verlängerungstermin informieren.",
+        "line1": "Der Benutzer kann im Voraus über den anstehenden Verlängerungstermin informiert werden.",
         "languageId": "Sprachcode",
-        "license": "Tarifbezeichnung mit Regionsangabe als Präfix",
-        "licenseType": "interne Tarifbezeichnung ohne Regionsangabe",
-        "licensePrevious": "vorherige Lizenz",
+        "license": "Tarifbezeichnung mit Regionspräfix",
+        "licenseType": "Interne Tarifbezeichnung ohne Regionsangabe",
+        "licensePrevious": "Vorherige Lizenz",
         "licenseFamily": "Tarifbezeichnung ohne Regionsangabe",
         "isSelfHosted": "Flag, das angibt, ob es sich um eine On-Premise- oder Cloud-Version von Bitrix24 handelt",
-        "isExpired": "Flag, das angibt, ob die bezahlte oder Testperiode abgelaufen ist",
-        "days": "Anzahl der Tage bis zum Ende der bezahlten Periode oder Testperiode"
+        "isExpired": "Flag, das angibt, ob die bezahlte oder Testphase abgelaufen ist",
+        "days": "Anzahl der Tage bis zum Ende der bezahlten Periode oder Testphase"
       }
     },
     "base_specific-methods": {
-      "nav": "Spezielle Methoden",
+      "nav": "Spez. Methoden",
       "seo": {
         "title": "Spezielle Methoden",
         "description": "Testen spezieller Methoden."
       },
       "message": {
-        "line1": "Hier wird die Funktionsweise der Methoden gezeigt, die in der via Frame eingebetteten Anwendung verfügbar sind.",
+        "line1": "Hier wird die Funktionsweise der Methoden gezeigt, die in der via Frame eingebetteten App verfügbar sind.",
+        "line2": "Wenn Sie die App-Einstellungen öffnen und speichern, sehen Sie auf dieser Seite eine Push-Nachricht mit der Aufforderung, die Seite zu aktualisieren.",
         "selectUsers": "Benutzer auswählen",
-        "selectUsersDescription": "verwenden Sie `$b24.dialog.selectUsers` zur Benutzerauswahl",
+        "selectUsersDescription": "verwenden Sie `$b24.dialog.selectUsers` für die Benutzerauswahl",
         "makeImCallToVideo": "Interner Videoanruf",
-        "makeImCallToVideoDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, true)` zur Initiierung eines Anrufs",
+        "makeImCallToVideoDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, true)` zum Initiieren eines Anrufs",
         "makeImCallToVoice": "Interner Sprachanruf",
-        "makeImCallToVoiceDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, false)` zur Initiierung eines Anrufs",
+        "makeImCallToVoiceDescription": "verwenden Sie `$b24.parent.imCallTo(xxx, false)` zum Initiieren eines Anrufs",
         "makeImOpenMessenger": "Chat",
-        "makeImOpenMessengerDescription": "verwenden Sie `$b24.parent.imOpenMessenger`, um ein Chat-Fenster zu öffnen",
+        "makeImOpenMessengerDescription": "verwenden Sie `$b24.parent.imOpenMessenger`, um das Chat-Fenster zu öffnen",
         "makeImOpenHistory": "Chat-Verlauf",
         "makeImOpenHistoryDescription": "verwenden Sie `$b24.parent.imOpenHistory`, um den Chat-Verlauf zu öffnen",
         "makeImPhoneTo": "Anruf über Telefonie",
@@ -117,7 +179,7 @@
         "makeSendPullCommandDescription": "verwenden Sie `pull.application.event.add`, um eine Nachricht zu senden"
       },
       "actions": {
-        "clear": "Log leeren",
+        "clear": "Log löschen",
         "reload": "Neu laden",
         "select": "Auswählen",
         "videoCall": "Videoanruf",
@@ -134,7 +196,7 @@
       }
     },
     "base_specific-parameters": {
-      "nav": "Spezielle Parameter",
+      "nav": "Spez. Parameter",
       "seo": {
         "title": "Spezielle Parameter",
         "description": "Liste spezieller Parameter für On-Premise- und Cloud-Versionen."
@@ -145,7 +207,7 @@
         "primaryKeyIncrementValue": "Inkrementschritt für Felder vom Typ ID",
         "mainSettings": "Link zu den Einstellungen",
         "ufList": "Link zur Uf-Liste",
-        "ufPage": "Link zu Uf"
+        "ufPage": "Link zum Uf"
       }
     },
     "base_lang": {
@@ -161,19 +223,19 @@
       }
     },
     "base_feedback": {
-      "nav": "Feedback-Formular",
+      "nav": "Feedback",
       "seo": {
         "title": "Feedback-Formular",
         "description": "Beispiele für Felder eines Feedback-Formulars."
       },
       "message": {
-        "line1": "Sie können ein CRM-Formular aus Ihrem Bitrix24 in die Anwendung einbetten und spezielle Felder übergeben.",
-        "line2": "Wenn der Benutzer das Formular ausfüllt, sind in Ihrem Bitrix24 Daten zur Anwendung, zum Tarif usw. verfügbar.",
+        "line1": "Sie können ein CRM-Formular aus Ihrem Bitrix24 in die App einbetten und spezielle Felder übergeben.",
+        "line2": "Wenn der Benutzer das Formular ausfüllt, sind in Ihrem Bitrix24 Daten zur App, zum Tarif usw. verfügbar.",
         "app_code": "Code",
         "app_status": "Status",
-        "payment_expired": "Flag, das angibt, ob die bezahlte oder Testperiode abgelaufen ist",
-        "days": "Anzahl der Tage bis zum Ende der bezahlten Periode oder Testperiode",
-        "b24_plan": "Tarifbezeichnung mit Regionsangabe als Präfix",
+        "payment_expired": "Flag, das angibt, ob die bezahlte oder Testphase abgelaufen ist",
+        "days": "Anzahl der Tage bis zum Ende der bezahlten Periode oder Testphase",
+        "b24_plan": "Tarifbezeichnung mit Regionspräfix",
         "c_name": "Benutzername",
         "c_last_name": "Benutzernachname",
         "hostname": "Bitrix24-Adresse"
@@ -197,6 +259,28 @@
         "literal": "Symbol",
         "value": "Formatierung",
         "baseCurrency": "Code der Basiswährung"
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Beispielfeld",
+        "description": "Das Ändern des Werts führt zur Neuerstellung des Diagramms",
+        "hint": "Trend"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Einbettung in die Deal-Karte",
+        "description": "Demonstration."
+      },
+      "field": {
+        "label": "Beispielfeld",
+        "description": "Das Ändern des Werts führt zur Neuerstellung des Diagramms",
+        "hint": "Trend"
       }
     }
   },

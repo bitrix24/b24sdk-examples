@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "Accueil",
+        "pages": "Pages",
         "optionApp": "Paramètres de l'application",
         "optionUser": "Paramètres utilisateur",
         "feedback": "Retour d'information"
@@ -24,12 +26,43 @@
         "line1": "Testons le fonctionnement de l'application dans Bitrix24. Ouvrez l'application dans le slider."
       }
     },
+    "install": {
+      "seo": {
+        "title": "Installation de l'application"
+      },
+      "ui": {
+        "title": "Installation de l'application"
+      },
+      "step": {
+        "init": {
+          "caption": "Veuillez patienter un instant..."
+        },
+        "demo": {
+          "caption": "Exemples..."
+        },
+        "events": {
+          "caption": "Événements..."
+        },
+        "placement": {
+          "caption": "Widgets..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Finalisation"
+        }
+      }
+    },
     "main": {
       "seo": {
         "title": "[playground] Test de l'application"
       },
       "message": {
-        "line1": "Ouvrez chaque page dans le menu de gauche et découvrez comment tout y fonctionne.",
+        "line1": "Ouvrez chaque page dans le menu supérieur et explorez son fonctionnement.",
         "line2": "N'oubliez pas de jouer avec le mode couleur.",
         "scopes": "Autorisations requises (scopes) :"
       }
@@ -43,21 +76,49 @@
     "app-options": {
       "seo": {
         "title": "Paramètres de l'application",
-        "description": "Exemple de travail avec les paramètres de l'application."
+        "description": "Exemple de gestion des paramètres de l'application."
       },
       "actions": {
         "save": "Sauvegarder",
-        "close": "Fermer"
+        "cancel": "Annuler"
+      },
+      "error": {
+        "title": "Erreur",
+        "notAdmin": "Seul un administrateur peut modifier les paramètres de l'application."
+      },
+      "option": {
+        "history": {
+          "title": "Historique des opérations",
+          "alert": "Démonstration du fonctionnement de la propriété. De la même manière, vous pouvez configurer n'importe quelle propriété de l'application.",
+          "property": "Nombre de jours de conservation de l'historique"
+        },
+        "present": {
+          "title": "Journal des événements",
+          "alert": "Chaque connexion des employés s'affiche dans le Journal des événements. Vous pouvez toujours vérifier qui, quand et depuis quelles adresses IP s'est connecté à Bitrix24.",
+          "action": "Aller au journal des événements"
+        }
       }
     },
     "user-options": {
       "seo": {
         "title": "Paramètres utilisateur",
-        "description": "Exemple de travail avec les paramètres utilisateur de l'application."
+        "description": "Exemple de gestion des paramètres utilisateur de l'application."
       },
       "actions": {
         "save": "Sauvegarder",
-        "close": "Fermer"
+        "cancel": "Annuler"
+      },
+      "error": {
+        "title": "Erreur"
+      },
+      "option": {
+        "demo": {
+          "title": "Exemple",
+          "alert": "Démonstration du fonctionnement de la propriété. De la même manière, vous pouvez configurer n'importe quelle propriété utilisateur.",
+          "property_someValue_1": "Nombre arbitraire",
+          "property_someValue_2": "Chaîne arbitraire",
+          "property_isShowChangeColorMode": "Afficher le bouton de changement de couleur ?"
+        }
       }
     },
     "base_app-info": {
@@ -67,7 +128,7 @@
         "description": "Informations sur l'application."
       },
       "message": {
-        "line1": "Ce sont les marqueurs clés pour l'identification, le contrôle et le diagnostic de l'application.",
+        "line1": "Ce sont les métadonnées clés pour l'identification, le contrôle et le diagnostic de l'application.",
         "id": "identifiant",
         "code": "code",
         "version": "version",
@@ -79,28 +140,29 @@
       "nav": "Licence et paiement",
       "seo": {
         "title": "Licence et paiement",
-        "description": "Désignation du plan tarifaire avec indication de la région en préfixe."
+        "description": "Désignation du forfait avec indication de la région en tant que préfixe."
       },
       "message": {
-        "line1": "Vous pouvez prévenir l'utilisateur à l'avance de l'échéance du renouvellement.",
+        "line1": "Vous pouvez prévenir à l'avance l'utilisateur de l'approche de la date de renouvellement.",
         "languageId": "code de langue",
-        "license": "désignation du tarif avec indication de la région en préfixe",
-        "licenseType": "désignation tarifaire interne sans indication de région",
-        "licensePrevious": "ancienne licence",
-        "licenseFamily": "désignation du tarif sans indication de région",
-        "isSelfHosted": "drapeau indiquant si Bitrix24 est la version on-premise ou cloud",
-        "isExpired": "drapeau indiquant si la période payante ou d'essai a expiré",
+        "license": "désignation du forfait avec indication de la région en tant que préfixe",
+        "licenseType": "désignation interne du forfait sans indication de la région",
+        "licensePrevious": "licence précédente",
+        "licenseFamily": "désignation du forfait sans indication de la région",
+        "isSelfHosted": "indicateur précisant si Bitrix24 est la version on-premise ou cloud",
+        "isExpired": "indicateur précisant si la période payante ou d'essai a expiré",
         "days": "nombre de jours restants jusqu'à la fin de la période payante ou d'essai"
       }
     },
     "base_specific-methods": {
-      "nav": "Méthodes spéciales",
+      "nav": "Méth. spéc.",
       "seo": {
         "title": "Méthodes spéciales",
-        "description": "Test de méthodes spéciales."
+        "description": "Test des méthodes spéciales."
       },
       "message": {
-        "line1": "Ici est montré le fonctionnement des méthodes disponibles dans l'application intégrée via Frame.",
+        "line1": "Ici est démontré le fonctionnement des méthodes disponibles dans l'application intégrée via Frame.",
+        "line2": "Si vous ouvrez les paramètres de l'application et les sauvegardez, vous verrez sur cette page un message push demandant de rafraîchir la page.",
         "selectUsers": "Sélection d'utilisateur",
         "selectUsersDescription": "utilisez `$b24.dialog.selectUsers` pour sélectionner un utilisateur",
         "makeImCallToVideo": "Appel vidéo interne",
@@ -108,10 +170,10 @@
         "makeImCallToVoice": "Appel vocal interne",
         "makeImCallToVoiceDescription": "utilisez `$b24.parent.imCallTo(xxx, false)` pour initier un appel",
         "makeImOpenMessenger": "Chat",
-        "makeImOpenMessengerDescription": "utilisez `$b24.parent.imOpenMessenger` pour ouvrir une fenêtre de chat",
+        "makeImOpenMessengerDescription": "utilisez `$b24.parent.imOpenMessenger` pour ouvrir la fenêtre de chat",
         "makeImOpenHistory": "Historique du chat",
         "makeImOpenHistoryDescription": "utilisez `$b24.parent.imOpenHistory` pour ouvrir l'historique du chat",
-        "makeImPhoneTo": "Appel via la téléphonie",
+        "makeImPhoneTo": "Appel via téléphonie",
         "makeImPhoneToDescription": "utilisez `$b24.parent.imPhoneTo` pour appeler",
         "makeSendPullCommand": "Message Pull",
         "makeSendPullCommandDescription": "utilisez `pull.application.event.add` pour envoyer un message"
@@ -130,19 +192,19 @@
       "error": {
         "notSelect": "Aucun utilisateur sélectionné.",
         "tryCallToSelf": "Vous ne pouvez pas vous appeler vous-même.",
-        "emptyNumber": "Aucun téléphone indiqué pour l'appel."
+        "emptyNumber": "Aucun numéro de téléphone spécifié pour l'appel."
       }
     },
     "base_specific-parameters": {
-      "nav": "Paramètres spéciaux",
+      "nav": "Param. spéc.",
       "seo": {
         "title": "Paramètres spéciaux",
         "description": "Liste des paramètres spéciaux pour les versions on-premise et cloud."
       },
       "message": {
-        "line1": "Il y a plusieurs différences entre les versions on-premise et cloud de Bitrix24.",
-        "isSelfHosted": "drapeau indiquant si Bitrix24 est la version on-premise ou cloud",
-        "primaryKeyIncrementValue": "pas d'incrément pour les champs de type ID",
+        "line1": "Il existe quelques différences entre les versions on-premise et cloud de Bitrix24.",
+        "isSelfHosted": "indicateur précisant si Bitrix24 est la version on-premise ou cloud",
+        "primaryKeyIncrementValue": "incrément pour les champs de type ID",
         "mainSettings": "lien vers les paramètres",
         "ufList": "lien vers la liste Uf",
         "ufPage": "lien vers Uf"
@@ -152,7 +214,7 @@
       "nav": "I18n",
       "seo": {
         "title": "I18n",
-        "description": "Démontre la sortie des messages linguistiques en fonction de la locale Bitrix24."
+        "description": "Affiche les messages linguistiques en fonction de la locale de Bitrix24."
       },
       "message": {
         "line1": "Essayez de changer la langue de Bitrix24.",
@@ -161,21 +223,21 @@
       }
     },
     "base_feedback": {
-      "nav": "Formulaire de retour d'information",
+      "nav": "Retour d'information",
       "seo": {
         "title": "Formulaire de retour d'information",
         "description": "Exemples de champs pour un formulaire de retour d'information."
       },
       "message": {
-        "line1": "Vous pouvez intégrer un formulaire CRM de votre Bitrix24 dans l'application et y transmettre des champs spéciaux.",
-        "line2": "Lorsque l'utilisateur remplira le formulaire, les données sur l'application, le tarif, etc. seront disponibles dans votre Bitrix24.",
+        "line1": "Vous pouvez intégrer dans l'application un formulaire CRM de votre Bitrix24 et lui transmettre des champs spéciaux.",
+        "line2": "Lorsque l'utilisateur remplira le formulaire, les données sur l'application, le forfait, etc. seront disponibles dans votre Bitrix24.",
         "app_code": "code",
         "app_status": "statut",
-        "payment_expired": "drapeau indiquant si la période payante ou d'essai a expiré",
+        "payment_expired": "indicateur précisant si la période payante ou d'essai a expiré",
         "days": "nombre de jours restants jusqu'à la fin de la période payante ou d'essai",
-        "b24_plan": "désignation du tarif avec indication de la région en préfixe",
-        "c_name": "nom d'utilisateur",
-        "c_last_name": "nom de famille de l'utilisateur",
+        "b24_plan": "désignation du forfait avec indication de la région en tant que préfixe",
+        "c_name": "nom de l'utilisateur",
+        "c_last_name": "prénom de l'utilisateur",
         "hostname": "adresse Bitrix24"
       }
     },
@@ -197,6 +259,28 @@
         "literal": "Symbole",
         "value": "Formatage",
         "baseCurrency": "Code de la devise de base"
+      }
+    }
+  },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Exemple de champ",
+        "description": "Changer la valeur reconstruit le graphique",
+        "hint": "Tendance"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Intégration dans la fiche de transaction",
+        "description": "Démonstration."
+      },
+      "field": {
+        "label": "Exemple de champ",
+        "description": "Changer la valeur reconstruit le graphique",
+        "hint": "Tendance"
       }
     }
   },

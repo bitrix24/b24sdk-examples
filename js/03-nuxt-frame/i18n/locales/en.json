@@ -5,6 +5,8 @@
         "title": "Bitrix24::Frame"
       },
       "navbarHeader": {
+        "home": "Home",
+        "pages": "Pages",
         "optionApp": "Application settings",
         "optionUser": "User settings",
         "feedback": "Feedback"
@@ -21,7 +23,38 @@
       },
       "message": {
         "title": "Hello!",
-        "line1": "Let's test the application's operation in Bitrix24. Open the application in the slider."
+        "line1": "Let's test the application in Bitrix24. Open the application in the slider."
+      }
+    },
+    "install": {
+      "seo": {
+        "title": "Application installation"
+      },
+      "ui": {
+        "title": "Application installation"
+      },
+      "step": {
+        "init": {
+          "caption": "Please wait a bit..."
+        },
+        "demo": {
+          "caption": "Examples..."
+        },
+        "events": {
+          "caption": "Events..."
+        },
+        "placement": {
+          "caption": "Widgets..."
+        },
+        "userFields": {
+          "caption": "Uf..."
+        },
+        "crm": {
+          "caption": "CRM..."
+        },
+        "finish": {
+          "caption": "Completion"
+        }
       }
     },
     "main": {
@@ -29,7 +62,7 @@
         "title": "[playground] Application testing"
       },
       "message": {
-        "line1": "Open each page in the left menu and explore how everything works on it.",
+        "line1": "Open each page in the top menu and see how everything works on it.",
         "line2": "Don't forget to play around with the color mode.",
         "scopes": "Required permissions (scopes):"
       }
@@ -47,7 +80,23 @@
       },
       "actions": {
         "save": "Save",
-        "close": "Close"
+        "cancel": "Cancel"
+      },
+      "error": {
+        "title": "Error",
+        "notAdmin": "Only an administrator can edit application settings."
+      },
+      "option": {
+        "history": {
+          "title": "Operation history",
+          "alert": "Demonstration of working with a property. Similarly, you can configure any application properties.",
+          "property": "How many days to keep history"
+        },
+        "present": {
+          "title": "Event log",
+          "alert": "Every employee login is displayed in the Event Log. You can always check who, when, and from which IP addresses logged into Bitrix24.",
+          "action": "Go to event log"
+        }
       }
     },
     "user-options": {
@@ -57,7 +106,19 @@
       },
       "actions": {
         "save": "Save",
-        "close": "Close"
+        "cancel": "Cancel"
+      },
+      "error": {
+        "title": "Error"
+      },
+      "option": {
+        "demo": {
+          "title": "Example",
+          "alert": "Demonstration of working with a property. Similarly, you can configure any user properties.",
+          "property_someValue_1": "Arbitrary number",
+          "property_someValue_2": "Arbitrary string",
+          "property_isShowChangeColorMode": "Show color change button?"
+        }
       }
     },
     "base_app-info": {
@@ -67,7 +128,7 @@
         "description": "Application information."
       },
       "message": {
-        "line1": "These are key markers for identifying, controlling, and diagnosing the application.",
+        "line1": "These are key tags for identifying, controlling, and diagnosing the application.",
         "id": "identifier",
         "code": "code",
         "version": "version",
@@ -79,29 +140,30 @@
       "nav": "License and payment",
       "seo": {
         "title": "License and payment",
-        "description": "Designation of the tariff plan with the region specified as a prefix."
+        "description": "Designation of the tariff plan with the region as a prefix."
       },
       "message": {
-        "line1": "You can warn the user in advance about the upcoming renewal date.",
+        "line1": "You can warn the user in advance about the renewal date.",
         "languageId": "language code",
-        "license": "tariff designation with the region specified as a prefix",
-        "licenseType": "internal tariff designation without specifying the region",
+        "license": "tariff designation with the region as a prefix",
+        "licenseType": "internal tariff designation without region",
         "licensePrevious": "previous license",
-        "licenseFamily": "tariff designation without specifying the region",
-        "isSelfHosted": "flag indicating whether Bitrix24 is the on-premise or cloud version",
+        "licenseFamily": "tariff designation without region",
+        "isSelfHosted": "flag indicating whether Bitrix24 is an on-premise or cloud version",
         "isExpired": "flag indicating whether the paid or trial period has expired",
         "days": "number of days remaining until the end of the paid period or trial period"
       }
     },
     "base_specific-methods": {
-      "nav": "Specific methods",
+      "nav": "Special methods",
       "seo": {
-        "title": "Specific methods",
-        "description": "Testing specific methods."
+        "title": "Special methods",
+        "description": "Testing special methods."
       },
       "message": {
-        "line1": "Here is the operation of methods available in the application embedded via Frame.",
-        "selectUsers": "Select user",
+        "line1": "Here is the work of methods available in the application embedded via Frame.",
+        "line2": "If you open the application settings and save them, you will see a push message on this page requiring a page refresh.",
+        "selectUsers": "User selection",
         "selectUsersDescription": "use `$b24.dialog.selectUsers` to select a user",
         "makeImCallToVideo": "Internal video call",
         "makeImCallToVideoDescription": "use `$b24.parent.imCallTo(xxx, true)` to initiate a call",
@@ -130,18 +192,18 @@
       "error": {
         "notSelect": "User not selected.",
         "tryCallToSelf": "You cannot call yourself.",
-        "emptyNumber": "Phone number for call not specified."
+        "emptyNumber": "Phone number for call is not specified."
       }
     },
     "base_specific-parameters": {
-      "nav": "Specific parameters",
+      "nav": "Special parameters",
       "seo": {
-        "title": "Specific parameters",
-        "description": "List of specific parameters for the on-premise and cloud versions."
+        "title": "Special parameters",
+        "description": "List of special parameters for on-premise and cloud versions."
       },
       "message": {
         "line1": "There are several differences between the on-premise and cloud versions of Bitrix24.",
-        "isSelfHosted": "flag indicating whether Bitrix24 is the on-premise or cloud version",
+        "isSelfHosted": "flag indicating whether Bitrix24 is an on-premise or cloud version",
         "primaryKeyIncrementValue": "increment step for ID type fields",
         "mainSettings": "link to settings",
         "ufList": "link to Uf list",
@@ -161,7 +223,7 @@
       }
     },
     "base_feedback": {
-      "nav": "Feedback form",
+      "nav": "Feedback",
       "seo": {
         "title": "Feedback form",
         "description": "Examples of fields for a feedback form."
@@ -173,7 +235,7 @@
         "app_status": "status",
         "payment_expired": "flag indicating whether the paid or trial period has expired",
         "days": "number of days remaining until the end of the paid period or trial period",
-        "b24_plan": "tariff designation with the region specified as a prefix",
+        "b24_plan": "tariff designation with the region as a prefix",
         "c_name": "user name",
         "c_last_name": "user last name",
         "hostname": "Bitrix24 address"
@@ -189,17 +251,39 @@
         "create": "Create"
       },
       "message": {
-        "line1": "Displaying a formatted amount is very easy."
+        "line1": "Showing a formatted amount is very easy."
       },
       "list": {
         "code": "Code",
-        "title": "Title",
-        "literal": "Sign",
+        "title": "Name",
+        "literal": "Symbol",
         "value": "Formatting",
         "baseCurrency": "Base currency code"
       }
     }
   },
+  "uf": {
+    "demo": {
+      "field": {
+        "label": "Example field",
+        "description": "Changing the value leads to rebuilding the chart",
+        "hint": "Trend"
+      }
+    }
+  },
+  "placement": {
+    "crm_deal_detail_tab": {
+      "seo": {
+        "title": "Embedding in a deal card",
+        "description": "Demonstration."
+      },
+      "field": {
+        "label": "Example field",
+        "description": "Changing the value leads to rebuilding the chart",
+        "hint": "Trend"
+      }
+    }
+  },
   "message1": "The early bird catches the worm",
-  "message2": "Seeing once is better than hearing a hundred times"
+  "message2": "A picture is worth a thousand words"
 }
