@@ -2,7 +2,7 @@
   "name": "@bitrix24/b24jssdk-playground-frame",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@10.15.0",
+  "packageManager": "pnpm@10.15.1",
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@bitrix24/b24icons-vue": "^2.0.2",
-    "@bitrix24/b24jssdk-nuxt": "^0.4.5",
     "@bitrix24/b24ui-nuxt": "^1.0.3",
+    "@bitrix24/b24jssdk-nuxt": "^0.4.9",
     "@nuxtjs/i18n": "^10.0.6",
     "@pinia/nuxt": "^0.11.2",
     "luxon": "^3.7.1",

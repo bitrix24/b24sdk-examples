@@ -27,8 +27,7 @@ export default defineNuxtConfig({
     public: {
       b24FormId: '',
       b24FormSecret: '',
-      b24FormLoaderScript: '',
-      appUrl: ''
+      b24FormLoaderScript: ''
     }
   },
   devServer: {
@@ -45,8 +44,7 @@ export default defineNuxtConfig({
       // allow incoming requests from this host
       allowedHosts: [
         '******.ngrok-free.app',
-        'seasonally-punctual-agama.cloudpub.ru',
-        'lazily-volcanic-moose.cloudpub.ru'
+        'perversely-welcomed-peacock.cloudpub.ru'
       ],
       // and don't forget CORS, if needed:
       cors: true

@@ -20,15 +20,18 @@ const { $logger, moduleId, initApp, reloadData, b24Helper, destroyB24Helper, use
 const appSettings = useAppSettingsStore()
 const { $initializeB24Frame } = useNuxtApp()
 let $b24: null | B24Frame = null
+const isEditMode = ref(false)
 // endregion ////
 
-// region Init ////
+// region Init Data ////
 const data = ref<DataRecord[]>([])
 
 const x = (d: DataRecord) => d.x
 const y = (d: DataRecord) => d.y
 const dropdownItems = ref(['CRM settings', 'My company details', 'Access permissions', 'CRM Payment', 'CRM.Delivery', 'Scripts', 'Create script', 'Install from Bitrix24.Market'])
 const dropdownValue = ref('CRM Payment')
+
+const dataField = ref(0)
 // endregion ////
 
 // region Actions ////
@@ -43,6 +46,14 @@ async function refreshData() {
     { x: ++i, y: getRandomInt() },
     { x: ++i, y: getRandomInt() }
   ]
+}
+
+async function setData() {
+  if (!$b24) { return }
+
+  await $b24.placement.call('setValue', { value: dataField.value })
+
+  $logger.warn('send >> ', { value: dataField.value })
 }
 
 function openSliderDemo() {
@@ -71,7 +82,10 @@ function getRandomInt(max: number = 5) {
 }
 
 async function resizeWindow() {
-  await $b24?.parent.fitWindow()
+  await $b24?.parent.resizeWindowAuto(
+    null,
+    isEditMode.value ? 60 : 245
+  )
 }
 // endregion ////
 
@@ -83,6 +97,15 @@ onMounted(async () => {
     $b24 = await $initializeB24Frame()
     await initApp($b24, localesI18n, setLocale)
 
+    isEditMode.value = $b24.placement.options['MODE'] === 'edit'
+
+    if (isEditMode.value) {
+      useHead({
+        bodyAttrs: {
+          class: `light light:[--air-theme-bg-color:#ffffff]`
+        }
+      })
+    }
     usePullClient()
     useSubscribePullClient(
       makeSendPullCommandHandler.bind( this ),
@@ -92,7 +115,9 @@ onMounted(async () => {
     await refreshData()
     await resizeWindow()
 
-    $logger.info('Hi from uf-placement')
+    $logger.info('Hi from uf-placement', $b24.placement.options)
+
+    dataField.value = Number.parseInt($b24.placement.options?.VALUE || '0')
 
   } catch (error) {
     processErrorGlobal(error, {
@@ -114,60 +139,82 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative h-[245px] overflow-hidden">
-    <B24FormField
-      :label="$t('uf.demo.field.label')"
-      :description="$t('uf.demo.field.description')"
-      :hint="$t('uf.demo.field.hint')"
-    >
-      <template #hint>
-        <B24Badge
-          rounded
-          size="md"
-          color="air-primary-copilot"
-          inverted
-          :label="appSettings.configSettings.deviceHistoryCleanupDays"
-          :icon="TrendUpIcon"
+  <div>
+    <template v-if="isEditMode">
+      <B24FormField
+        :label="$t('uf.demo.field.label')"
+      >
+        <B24Input
+          v-model.number="dataField"
+          @keyup="setData"
         />
-      </template>
-      <B24Select
-        id="select"
-        v-model="dropdownValue"
-        color="air-primary"
-        class="w-full"
-        value-key="value"
-        :items="dropdownItems"
-        :content="{
-          sideOffset: 4,
-          collisionPadding: 1
-        }"
-        :b24ui="{
-          // base: 'hover:ring-1 hover:ring-inset hover:ring-ai-500 dark:hover:ring-ai-600 data-[state=open]:ring-1 data-[state=open]:ring-inset data-[state=open]:ring-ai-500',
-        }"
-        @change="refreshData"
-      />
-    </B24FormField>
-    <div class="mt-1 w-full relative rounded overflow-hidden bg-tertiary/10">
-      <div
-        style="background-position: 10px 10px"
-        class="absolute inset-0 bg-grid-example dark:bg-grid-example"
-        :class="[
-          [
-            '[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]'
-          ].join(' ')
-        ]"
-      />
-      <div class="isolate relative p-t-2 min-h-40 w-full h-full flex flex-col flex-nowrap justify-end items-center gap-4">
-        <VisXYContainer
-          v-if="!page.isLoading"
-          :data="data"
-          height="120"
-          @click.stop="openSliderDemo"
+      </B24FormField>
+    </template>
+    <template v-else>
+      <div class="relative h-[245px] overflow-hidden">
+        <B24FormField
+          :label="$t('uf.demo.field.label')"
+          :description="$t('uf.demo.field.description')"
+          :hint="$t('uf.demo.field.hint')"
         >
-          <VisArea curve-type="basis" :x="x" :y="y" color="#7437d3" />
-        </VisXYContainer>
+          <template #hint>
+            <B24Badge
+              rounded
+              size="md"
+              color="air-primary-success"
+              inverted
+              :label="dataField"
+              :icon="TrendUpIcon"
+            />
+            <B24Badge
+              rounded
+              size="md"
+              color="air-primary-copilot"
+              inverted
+              :label="appSettings.configSettings.deviceHistoryCleanupDays"
+              :icon="TrendUpIcon"
+            />
+          </template>
+          <B24Select
+            id="select"
+            v-model="dropdownValue"
+            color="air-primary"
+            class="w-full"
+            value-key="value"
+            :items="dropdownItems"
+            :content="{
+              sideOffset: 4,
+              collisionPadding: 1
+            }"
+            :b24ui="{
+              // base: 'hover:ring-1 hover:ring-inset hover:ring-ai-500 dark:hover:ring-ai-600 data-[state=open]:ring-1 data-[state=open]:ring-inset data-[state=open]:ring-ai-500',
+            }"
+            @change="refreshData"
+          />
+        </B24FormField>
+        <div class="mt-1 w-full relative rounded overflow-hidden bg-tertiary/10">
+        <div
+          style="background-position: 10px 10px"
+          class="absolute inset-0 bg-grid-example dark:bg-grid-example"
+          :class="[
+            [
+              '[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]'
+            ].join(' ')
+          ]"
+        />
+        <div class="isolate relative p-t-2 min-h-40 w-full h-full flex flex-col flex-nowrap justify-end items-center gap-4">
+          <VisXYContainer
+            v-if="!page.isLoading"
+            :data="data"
+            height="120"
+            @click.stop="openSliderDemo"
+          >
+            <VisArea curve-type="basis" :x="x" :y="y" color="#7437d3" />
+          </VisXYContainer>
+        </div>
+        <div class="pointer-events-none absolute rounded inset-0 border border-black/5" />
       </div>
-      <div class="pointer-events-none absolute rounded inset-0 border border-black/5" />
-    </div>
+      </div>
+    </template>
   </div>
 </template>

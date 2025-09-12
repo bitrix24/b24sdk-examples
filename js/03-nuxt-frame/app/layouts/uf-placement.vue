@@ -24,8 +24,10 @@ useSeoMeta({
   <B24SidebarLayout
     :use-light-content="false"
     :b24ui="{
-      root: 'overflow-y-hidden',
-      container: 'p-0 lg:p-0 mt-0'
+      root: 'overflow-y-hidden h-full min-h-full',
+      container: 'p-0 lg:p-0 mt-0 h-auto',
+      containerWrapper: 'size-auto h-auto',
+      containerWrapperInner: 'size-auto h-auto'
     }"
   >
     <div v-if="page.isLoading">
