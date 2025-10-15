@@ -16,7 +16,6 @@ namespace App\Scoring\Infrastructure\Bitrix24\RiskLevels;
 use App\Scoring\DTO\RiskLevel;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
 use Bitrix24\SDK\Core\Exceptions\TransportException;
-use Bitrix24\SDK\Services\CRM\Userfield\Exceptions\UserfieldNameIsTooLongException;
 use Bitrix24\SDK\Services\ServiceBuilder;
 use Psr\Log\LoggerInterface;
 
@@ -48,6 +47,16 @@ readonly class RiskLevelInstaller
                 null,
                 [
                     'code' => self::RISK_SP_CODE,
+                    'relations' => [
+                        'child' => [
+                            [
+                                // allow bind to contact
+                                'entityTypeId' => 3,
+                                'isChildrenListEnabled' => 'N',
+                                'isPredefined' => 'N'
+                            ]
+                        ]
+                    ]
                 ]
             );
             $this->logger->debug('RiskLevelInstaller.install.smartProcessCreated', [
@@ -61,7 +70,6 @@ readonly class RiskLevelInstaller
                 'entityTypeId' => $searchResult[0]->entityTypeId
             ]);
             $entityTypeId = $searchResult[0]->entityTypeId;
-
         }
         $this->logger->debug('RiskLevelInstaller.riskLevels.SmartProcess', ['id' => $entityTypeId]);
 
