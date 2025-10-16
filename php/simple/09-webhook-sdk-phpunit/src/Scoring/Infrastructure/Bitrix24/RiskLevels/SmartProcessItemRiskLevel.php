@@ -11,12 +11,16 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Scoring\Infrastructure\Bitrix24\RiskLevels;
 
-use App\Scoring\DTO\Score;
-use Bitrix24\SDK\Services\CRM\Contact\Result\ContactItemResult;
+use App\Scoring\RiskLevel;
 
-interface ScoringInterface
+final readonly class SmartProcessItemRiskLevel
 {
-    public function score(ContactItemResult $b24ContactItem): Score;
+    public function __construct(
+        public RiskLevel $risk,
+        public int $b24EntityId,
+        public int $b24EntityTypeId,
+    ) {
+    }
 }

@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace App\Commands;
 
-use App\Scoring\Infrastructure\Bitrix24\ScoreFieldsMapper;
+use App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelInstaller;
+use App\Scoring\Infrastructure\Bitrix24\ScoreInstaller;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
@@ -57,8 +58,9 @@ class InstallCommand extends Command
     }
 
     public function __construct(
+        private readonly RiskLevelInstaller $riskLevelInstaller,
+        private readonly ScoreInstaller $b24ScoreInstaller,
         private readonly LoggerInterface $logger,
-        private readonly ScoreFieldsMapper $b24ScoreFieldsMapper
     ) {
         // best practices recommend calling the parent constructor first and
         // then set your own properties. That wouldn't work in this case
@@ -69,7 +71,7 @@ class InstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.InstallCommand.start');
-        $symfonyStyle = new SymfonyStyle($input, $output);
+        $ss = new SymfonyStyle($input, $output);
 
         $b24ServiceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -78,11 +80,18 @@ class InstallCommand extends Command
         );
 
         // add contacts to bitrix24 via batch call
-        $symfonyStyle->writeln(['Start adding fields to contacts...', '']);
+        $ss->writeln([
+            'Start application installation...',
+            sprintf('portal: %s', $b24ServiceBuilder->core->getApiClient()->getCredentials()->getDomainUrl())
+        ]);
 
+        // install rersk levels as a smart process and fill it with default levels from enum RiskLevel
+        $this->riskLevelInstaller->install($b24ServiceBuilder);
+        $ss->writeln('Risk levels installed.......................OK');
 
-        $this->b24ScoreFieldsMapper->installFields($b24ServiceBuilder);
-
+        // add score field to contact
+        $this->b24ScoreInstaller->install($b24ServiceBuilder);
+        $ss->writeln('Field Score added to contact................OK');
 
         $this->logger->debug('Command.InstallCommand.finish');
 

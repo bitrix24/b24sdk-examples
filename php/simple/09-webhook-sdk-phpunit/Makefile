@@ -33,7 +33,7 @@ ROOT_DIR := $(shell pwd)
 help:
 	@echo "--------------------------------------------"
 	@echo "Bitrix24 PHP SDK examples                   "
-	@echo "05 — add linters for check source code      "
+	@echo "09 — phpunit                                "
 	@echo "--------------------------------------------"
 	@echo ""
 	@echo "🐳 Work with application containers"
@@ -139,14 +139,10 @@ lint-rector-fix:
 php-cli-bash:
 	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
 
-.PHONY: php-cli-generate-demo-data
-php-cli-generate-demo-data:
-	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:data-generator
+.PHONY: php-cli-app-install
+php-cli-app-install:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:install
 
-.PHONY: php-cli-import
-php-cli-import:
-	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:import-data
-
-.PHONY: php-cli-export
-php-cli-export:
-	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:export-data
+.PHONY: php-cli-app-process-contact
+php-cli-app-process-contact:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:process-contact

@@ -3,7 +3,7 @@ services:
     build:
       context: ./docker/php-cli
     environment:
-      PHP_IDE_CONFIG: "serverName=b24-php-sdk-examples-08.lan"
+      PHP_IDE_CONFIG: "serverName=b24-php-sdk-examples-09.lan"
       APP_DEBUG: 0
       BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL: ${BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL}
       BITRIX24_PHP_SDK_LOG_LEVEL: ${BITRIX24_PHP_SDK_LOG_LEVEL}

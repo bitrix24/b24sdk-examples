@@ -11,16 +11,15 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Scoring\Services;
 
-use App\Scoring\DTO\Risk;
-use App\Scoring\DTO\Score;
+use App\Scoring\RiskLevel;
+use App\Scoring\Score;
 use Psr\Log\LoggerInterface;
-use Bitrix24\SDK\Services\CRM\Contact\Result\ContactItemResult;
 use Random\RandomException;
 
 
-class DefaultScoringModel implements ScoringInterface
+readonly class DefaultScoringModel implements ScoringModelInterface
 {
     public function __construct(
         private LoggerInterface $logger
@@ -30,23 +29,24 @@ class DefaultScoringModel implements ScoringInterface
     /**
      * @throws RandomException
      */
-    public function score(ContactItemResult $b24ContactItem): Score
+    public function scorePerson(array $personMetadata): Score
     {
-        $this->logger->debug('ScoringModel.score.start', ['b24ContactId' => $b24ContactItem->ID]);
-        
+        $this->logger->debug('ScoringModel.score.start', ['meta' => $personMetadata]);
+
         // complex scoring logic start
-        if ($b24ContactItem->ID % 2 === 1) {
+        $fullName = $personMetadata['NAME'] . ' ' . $personMetadata['LAST_NAME'] . ' ' . $personMetadata['SECOND_NAME'];
+        if (strlen($fullName) % 2 === 1) {
             $scores = random_int(11, 20);
-        }else{
+        } else {
             $scores = random_int(1, 10);
         }
 
         if ($scores > 10) {
-            $risk = Risk::HIGH;
+            $risk = RiskLevel::HIGH;
         } elseif ($scores >= 5) {
-            $risk = Risk::MEDIUM;
+            $risk = RiskLevel::MEDIUM;
         } else {
-            $risk = Risk::LOW;
+            $risk = RiskLevel::LOW;
         }
         // complex scoring logic end
 

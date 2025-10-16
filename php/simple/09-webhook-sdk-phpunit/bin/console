@@ -14,6 +14,7 @@ use App\Commands\DataGeneratorCommand;
 use App\Commands\ExportDataCommand;
 use App\Commands\ImportDataCommand;
 use App\Commands\InstallCommand;
+use App\Commands\ScoreContactCommand;
 use App\DI\DI;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -53,4 +54,5 @@ if ($_SERVER['APP_DEBUG']) {
 
 $application = new Application();
 $application->add(DI::get(InstallCommand::class));
+$application->add(DI::get(ScoreContactCommand::class));
 $application->run($input);

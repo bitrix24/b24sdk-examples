@@ -11,13 +11,11 @@
 
 declare(strict_types=1);
 
-namespace App\Scoring\DTO;
+namespace App\Scoring\Services;
 
-final readonly class Score
+use App\Scoring\Score;
+
+interface ScoringModelInterface
 {
-    public function __construct(
-        public int $scores,
-        public Risk $risk
-    ) {
-    }
+    public function scorePerson(array $personMetadata): Score;
 }

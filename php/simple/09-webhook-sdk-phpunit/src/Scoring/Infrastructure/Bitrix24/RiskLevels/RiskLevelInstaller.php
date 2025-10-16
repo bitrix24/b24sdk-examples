@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Scoring\Infrastructure\Bitrix24\RiskLevels;
 
-use App\Scoring\DTO\RiskLevel;
+use App\Scoring\RiskLevel;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
 use Bitrix24\SDK\Core\Exceptions\TransportException;
 use Bitrix24\SDK\Services\ServiceBuilder;
@@ -24,7 +24,6 @@ readonly class RiskLevelInstaller
     private const string RISK_SP_CODE = 'RISK_LEVELS';
 
     public function __construct(
-        private RiskLevelCommands $riskLevelCommands,
         private LoggerInterface $logger
     ) {
     }
@@ -75,8 +74,47 @@ readonly class RiskLevelInstaller
 
         // fill risk levels
         foreach (RiskLevel::cases() as $level) {
-            // create risk level, if level exists - return current id
-            $this->riskLevelCommands->addLevel($b24ServiceBuilder, $entityTypeId, $level);
+            $this->addLevel($b24ServiceBuilder, $entityTypeId, $level);
+        }
+    }
+
+    /**
+     * Add risk level to CRM
+     *
+     * risk level stored in CRM in field "XML_ID"
+     *
+     * @throws TransportException
+     * @throws BaseException
+     */
+    private function addLevel(ServiceBuilder $b24ServiceBuilder, int $entityTypeId, RiskLevel $riskLevel): void
+    {
+        $this->logger->debug('RiskLevelInstaller.addLevel.start', [
+            'entityTypeId' => $entityTypeId,
+            'riskLevel' => $riskLevel,
+        ]);
+
+        $searchResult = $b24ServiceBuilder->getCRMScope()->item()->list(
+            $entityTypeId,
+            [],
+            [
+                'xmlId' => $riskLevel->value
+            ],
+            ['*']
+        );
+
+        if ($searchResult->getCoreResponse()->getResponseData()->getPagination()->getTotal() === 0) {
+            $addResult = $b24ServiceBuilder->getCRMScope()->item()->add($entityTypeId, [
+                'title' => $riskLevel->name,
+                'xmlId' => $riskLevel->value,
+            ])->item();
+            $this->logger->debug('RiskLevelInstaller.addLevel.created', [
+                'id' => $addResult->id,
+                'level' => $riskLevel->value,
+            ]);
+        } else {
+            $this->logger->debug('RiskLevelInstaller.addLevel.AlreadyExists', [
+                'id' => $searchResult->getItems()[0]->id,
+            ]);
         }
     }
 }

@@ -14,7 +14,7 @@ FROM mlocati/php-extension-installer:2.4 AS php-extension-installer
 FROM composer:2.8 AS composer
 
 # Using official PHP 8.3 CLI image based on Debian Bookworm for development purposes
-FROM php:8.3-cli-bookworm AS dev-php
+FROM php:8.4-cli-bookworm AS dev-php
 
 # Copy Composer binary from the official Composer image
 COPY --from=composer /usr/bin/composer /usr/bin/composer

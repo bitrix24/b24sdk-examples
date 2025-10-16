@@ -11,9 +11,9 @@
 
 declare(strict_types=1);
 
-namespace App\Scoring\DTO;
+namespace App\Scoring;
 
-enum Risk: string
+enum RiskLevel: string
 {
     case LOW = 'low';
     case MEDIUM = 'medium';
