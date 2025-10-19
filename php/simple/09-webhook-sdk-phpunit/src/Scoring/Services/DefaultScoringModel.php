@@ -40,17 +40,9 @@ readonly class DefaultScoringModel implements ScoringModelInterface
         } else {
             $scores = random_int(1, 10);
         }
-
-        if ($scores > 10) {
-            $risk = RiskLevel::HIGH;
-        } elseif ($scores >= 5) {
-            $risk = RiskLevel::MEDIUM;
-        } else {
-            $risk = RiskLevel::LOW;
-        }
         // complex scoring logic end
 
-        $this->logger->debug('ScoringModel.score.finish', ['risk' => $risk->value]);
-        return new Score($scores, $risk);
+        $this->logger->debug('ScoringModel.score.finish', ['scores' => $scores]);
+        return Score::fromScores($scores);
     }
 }
