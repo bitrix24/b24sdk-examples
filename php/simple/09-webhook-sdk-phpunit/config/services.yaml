@@ -12,9 +12,9 @@ services:
   App\Scoring\Services\ScoringModelInterface:
     class: App\Scoring\Services\DefaultScoringModel
     autowire: true
-  App\Commands\InstallCommand:
+  App\Scoring\Infrastructure\Console\InstallCommand:
     public: true
-  App\Commands\ScoreContactCommand:
+  App\Scoring\Infrastructure\Console\ScoreContactCommand:
     public: true
   App\Scoring\Infrastructure\Bitrix24\ScoreFieldMapper:
     public: true

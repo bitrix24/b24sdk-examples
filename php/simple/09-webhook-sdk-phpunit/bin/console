@@ -10,12 +10,9 @@
  * file that was distributed with this source code.
  */
 
-use App\Commands\DataGeneratorCommand;
-use App\Commands\ExportDataCommand;
-use App\Commands\ImportDataCommand;
-use App\Commands\InstallCommand;
-use App\Commands\ScoreContactCommand;
 use App\DI\DI;
+use App\Scoring\Infrastructure\Console\InstallCommand;
+use App\Scoring\Infrastructure\Console\ScoreContactCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Dotenv\Dotenv;

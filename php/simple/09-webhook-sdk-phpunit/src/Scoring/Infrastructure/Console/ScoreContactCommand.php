@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace App\Commands;
+namespace App\Scoring\Infrastructure\Console;
 
 use App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelMapper;
 use App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelQueries;
@@ -25,7 +25,6 @@ use Override;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
