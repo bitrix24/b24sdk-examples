@@ -37,7 +37,7 @@ readonly class ScoreInstaller
         )->getUserfields();
         $fieldsNames = array_column($contactFields, 'XML_ID');
         // add score field
-        if (!in_array($this->scoreFieldMapper->getXmlId(), $fieldsNames, true)) {
+        if (!in_array($this->scoreFieldMapper->getName(), $fieldsNames, true)) {
             $b24FieldId = $b24ServiceBuilder->getCRMScope()->contactUserfield()->add(
                 [
                     'USER_TYPE_ID' => 'integer',

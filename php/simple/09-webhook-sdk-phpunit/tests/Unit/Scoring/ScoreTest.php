@@ -13,6 +13,13 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Score::class)]
 class ScoreTest extends TestCase
 {
+    #[TestDox('Test Score constructor accepts valid scores levels')]
+    public function testConstructorWithWrongScores(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new Score(21, RiskLevel::HIGH);
+    }
+
     #[TestDox('Test Score constructor accepts valid scores and matching risk levels')]
     #[DataProvider('validScoresProvider')]
     public function testConstructorAcceptsValidData(int $scores, RiskLevel $risk): void

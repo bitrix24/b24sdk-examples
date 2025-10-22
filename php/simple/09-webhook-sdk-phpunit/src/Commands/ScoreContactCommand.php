@@ -122,7 +122,7 @@ class ScoreContactCommand extends Command
 
         $contacts = $this->scoreQueries->filterContactsWithRiskLevel(
             $b24ServiceBuilder,
-            RiskLevel::LOW,
+            RiskLevel::HIGH,
             [],
             [],
             ['*', 'UF_*'],

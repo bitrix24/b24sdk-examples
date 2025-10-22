@@ -137,7 +137,9 @@ lint-rector-fix:
 .PHONY: test-unit
 test-unit:
 	docker-compose run --rm php-cli vendor/bin/phpunit --testsuite unit_tests --display-warnings
-
+.PHONY: test-integration
+test-integration:
+	docker-compose run --rm php-cli vendor/bin/phpunit --testsuite integration_tests --display-warnings
 
 # application
 .PHONY: php-cli-bash
