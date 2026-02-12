@@ -11,4 +11,4 @@
 
 declare(strict_types=1);
 
-print('Hello world!' . PHP_EOL);
+print('Hello world inside docker container!' . PHP_EOL);

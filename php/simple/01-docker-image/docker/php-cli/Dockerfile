@@ -9,8 +9,8 @@
 # https://github.com/mlocati/docker-php-extension-installer#readme
 FROM mlocati/php-extension-installer:2.4 AS php-extension-installer
 
-# Using official PHP 8.3 CLI image based on Debian Bookworm for development purposes
-FROM php:8.3-cli-bookworm AS dev-php
+# Using official PHP 8.4 CLI image based on Debian Bookworm for development purposes
+FROM php:8.4-cli-bookworm AS dev-php
 
 # Copy PHP extension installer script from mlocati's image
 COPY --from=php-extension-installer /usr/bin/install-php-extensions /usr/bin/install-php-extensions
