@@ -15,18 +15,18 @@
     }
   },
   "require": {
-    "bitrix24/b24phpsdk": "dev-dev",
+    "bitrix24/b24phpsdk": "3.0.*",
     "monolog/monolog": "^3",
-    "symfony/console": "^7.3",
-    "symfony/config": "^7.3",
-    "symfony/filesystem": "^7.3",
-    "symfony/dependency-injection": "^7.3",
-    "symfony/yaml": "^7.3",
+    "symfony/console": "^7||^8",
+    "symfony/config": "^7||^8",
+    "symfony/filesystem": "^7||^8",
+    "symfony/dependency-injection": "^7||^8",
+    "symfony/yaml": "^7||^8",
     "league/csv": "9.*",
     "fakerphp/faker": "1.23.*"
   },
   "require-dev": {
-    "symfony/debug-bundle": "^7.3",
+    "symfony/debug-bundle": "^7||^8",
     "ergebnis/composer-normalize": "^2",
     "lendable/composer-license-checker": "^1",
     "roave/security-advisories": "dev-latest",
