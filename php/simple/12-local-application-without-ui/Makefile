@@ -33,7 +33,7 @@ ROOT_DIR := $(shell pwd)
 help:
 	@echo "----------------------------------------------"
 	@echo "Bitrix24 PHP SDK examples                     "
-	@echo "11 — local application without user interface "
+	@echo "12 — local application without user interface "
 	@echo "----------------------------------------------"
 	@echo ""
 	@echo "🐳 Work with application containers:"
