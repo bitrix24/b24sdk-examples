@@ -46,8 +46,8 @@ class DataGeneratorCommand extends Command
         $filename = '/var/tmp/demo-data.csv';
         $demoContactsCount = 7000;
 
-        $generator = Faker\Factory::create('en_EN');
-        $writer = Writer::createFromPath($filename, 'w+');
+        $generator = Faker\Factory::create('en_US');
+        $writer = Writer::from($filename, 'w+');
         $writer->insertOne(['name', 'second_name', 'phone', 'email']);
 
         $items = [];

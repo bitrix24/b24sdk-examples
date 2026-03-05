@@ -23,7 +23,7 @@
     "symfony/dependency-injection": "^7||^8",
     "symfony/yaml": "^7||^8",
     "league/csv": "9.*",
-    "fakerphp/faker": "1.23.*"
+    "fakerphp/faker": "1.24.*"
   },
   "require-dev": {
     "symfony/debug-bundle": "^7||^8",

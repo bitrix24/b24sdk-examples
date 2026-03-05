@@ -51,7 +51,7 @@ if ($_SERVER['APP_DEBUG']) {
 }
 
 $application = new Application();
-$application->add(DI::get(DataGeneratorCommand::class));
-$application->add(DI::get(ImportDataCommand::class));
-$application->add(DI::get(ExportDataCommand::class));
+$application->addCommand(DI::get(DataGeneratorCommand::class));
+$application->addCommand(DI::get(ImportDataCommand::class));
+$application->addCommand(DI::get(ExportDataCommand::class));
 $application->run($input);
