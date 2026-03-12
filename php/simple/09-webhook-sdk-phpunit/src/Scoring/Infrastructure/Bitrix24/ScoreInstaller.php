@@ -38,19 +38,19 @@ readonly class ScoreInstaller
         $fieldsNames = array_column($contactFields, 'XML_ID');
         // add score field
         if (!in_array($this->scoreFieldMapper->getName(), $fieldsNames, true)) {
+            /** @var array{USER_TYPE_ID: string, FIELD_NAME: string, LABEL: string, SHOW_FILTER: string, SHOW_IN_LIST: string, EDIT_IN_LIST: string, SETTINGS: string, XML_ID: string} $userfieldItemFields */
+            $userfieldItemFields = [
+                'USER_TYPE_ID' => 'integer',
+                'FIELD_NAME' => $this->scoreFieldMapper->getName(),
+                'LABEL' => 'App: User Score',
+                'SHOW_FILTER' => 'Y',
+                'SHOW_IN_LIST' => 'Y',
+                'EDIT_IN_LIST' => 'N',
+                'SETTINGS' => json_encode(['DEFAULT_VALUE' => 0]),
+                'XML_ID' => $this->scoreFieldMapper->getXmlId(),
+            ];
             $b24FieldId = $b24ServiceBuilder->getCRMScope()->contactUserfield()->add(
-                [
-                    'USER_TYPE_ID' => 'integer',
-                    'FIELD_NAME' => $this->scoreFieldMapper->getName(),
-                    'LABEL' => 'App: User Score',
-                    'SHOW_FILTER' => 'Y',
-                    'SHOW_IN_LIST' => 'Y',
-                    'EDIT_IN_LIST' => 'N',
-                    'SETTINGS' => [
-                        'DEFAULT_VALUE' => 0
-                    ],
-                    'XML_ID' => $this->scoreFieldMapper->getXmlId(),
-                ]
+                $userfieldItemFields
             )->getId();
             $this->logger->debug('ScoreFieldsMapper.installFields.fieldInstalled', [
                 'name' => $this->scoreFieldMapper->getName(),

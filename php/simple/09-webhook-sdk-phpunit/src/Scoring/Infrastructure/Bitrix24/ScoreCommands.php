@@ -25,18 +25,14 @@ use RuntimeException;
 class ScoreCommands
 {
     public function __construct(
-        private RiskLevelMapper $riskLevelMapper,
-        private ScoreFieldMapper $scoreFieldMapper,
-        private LoggerInterface $logger
+        private readonly RiskLevelMapper $riskLevelMapper,
+        private readonly ScoreFieldMapper $scoreFieldMapper,
+        private readonly LoggerInterface $logger
     ) {
     }
 
     /**
-     * @param ServiceBuilder $b24ServiceBuilder
      * @param SmartProcessItemRiskLevel[] $indexedRiskLevels
-     * @param int $b24ContactId
-     * @param Score $score
-     * @return void
      * @throws BaseException
      * @throws TransportException
      */
@@ -52,14 +48,16 @@ class ScoreCommands
             'scores' => $score->scores,
         ]);
 
+        /** @var array<string, mixed> $fields */
+        $fields = [
+            // set score
+            'UF_CRM_' . $this->scoreFieldMapper->getName() => $score->scores,
+            // bind smart process item (risk level) to contact
+            'PARENT_ID_' . $this->riskLevelMapper->getEntityTypeId($b24ServiceBuilder) => $indexedRiskLevels[$score->risk->value]->b24EntityId,
+        ];
         if (!$b24ServiceBuilder->getCRMScope()->contact()->update(
             $b24ContactId,
-            [
-                // set score
-                'UF_CRM_' . $this->scoreFieldMapper->getName() => $score->scores,
-                // bind smart process item (risk level) to contact
-                'PARENT_ID_' . $this->riskLevelMapper->getEntityTypeId($b24ServiceBuilder) => $indexedRiskLevels[$score->risk->value]->b24EntityId,
-            ],
+            $fields,
         )->isSuccess()) {
             throw new RuntimeException('Failed to set score');
         }

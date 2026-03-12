@@ -11,7 +11,6 @@
 
 declare(strict_types=1);
 
-
 namespace App\Scoring\Infrastructure\Bitrix24\RiskLevels;
 
 use App\Scoring\RiskLevel;
@@ -41,8 +40,8 @@ readonly class RiskLevelQueries
             $entityTypeId,
             [],
             [],
-// todo add issue
-//            ['id', 'entityTypeId', 'xmlId','title']
+            // todo add issue
+            //            ['id', 'entityTypeId', 'xmlId','title']
             ['*']
         )->getItems();
         $result = [];
@@ -53,11 +52,12 @@ readonly class RiskLevelQueries
                 $item->entityTypeId
             );
         }
+
         // index result by risk level
         return array_reduce(
             $result,
-            static function (array $acc, SmartProcessItemRiskLevel $item) {
-                $acc[$item->risk->value] = $item;
+            static function (array $acc, SmartProcessItemRiskLevel $smartProcessItemRiskLevel): array {
+                $acc[$smartProcessItemRiskLevel->risk->value] = $smartProcessItemRiskLevel;
                 return $acc;
             },
             []

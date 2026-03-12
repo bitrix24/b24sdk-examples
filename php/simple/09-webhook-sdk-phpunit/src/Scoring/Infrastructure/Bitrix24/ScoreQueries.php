@@ -31,6 +31,10 @@ readonly class ScoreQueries
 
     /**
      * Filter contacts without risk level
+     *
+     * @param array<string, mixed> $order
+     * @param array<string, mixed> $filter
+     * @param array<int, string> $select
      */
     public function filterContactsWithoutRiskLevel(
         ServiceBuilder $b24ServiceBuilder,
@@ -56,6 +60,11 @@ readonly class ScoreQueries
         );
     }
 
+    /**
+     * @param array<string, mixed> $filter
+     * @param array<string, mixed> $order
+     * @param array<int, string> $select
+     */
     public function filterContactsWithRiskLevel(
         ServiceBuilder $b24ServiceBuilder,
         RiskLevel $riskLevel,

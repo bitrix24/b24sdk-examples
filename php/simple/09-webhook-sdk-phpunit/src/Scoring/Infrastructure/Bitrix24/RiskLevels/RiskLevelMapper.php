@@ -30,6 +30,7 @@ readonly class RiskLevelMapper
     }
 
     /**
+     * @return positive-int
      * @throws TransportException
      * @throws BaseException
      * @throws Exception
@@ -48,7 +49,12 @@ readonly class RiskLevelMapper
                 'entityTypeId' => $searchResult[0]->entityTypeId
             ]);
 
-            return $searchResult[0]->entityTypeId;
+            $entityTypeId = $searchResult[0]->entityTypeId;
+            if ($entityTypeId <= 0) {
+                throw new RuntimeException('Invalid entity type ID');
+            }
+
+            return $entityTypeId;
         }
 
         throw new RuntimeException('Smart process not found');

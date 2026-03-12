@@ -36,8 +36,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ScoreContactCommand extends Command
 {
-    private bool $isShouldStopWork = false;
-
+    /**
+     * @return list<int>
+     */
     #[Override]
     public function getSubscribedSignals(): array
     {
@@ -50,8 +51,6 @@ class ScoreContactCommand extends Command
     #[Override]
     public function handleSignal(int $signal, int|false $previousExitCode = 0): false|int
     {
-        $this->isShouldStopWork = true;
-
         return parent::handleSignal($signal, $previousExitCode);
     }
 
@@ -73,7 +72,7 @@ class ScoreContactCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.ScoreContactCommand.start');
-        $ss = new SymfonyStyle($input, $output);
+        $symfonyStyle = new SymfonyStyle($input, $output);
 
         $b24ServiceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -115,7 +114,7 @@ class ScoreContactCommand extends Command
             // todo add batch support
             $this->scoreCommands->setScore($b24ServiceBuilder, $indexedRiskLevels, $contact->ID, $score);
 
-            $ss->writeln(sprintf('Contact processed: %s | %s | score %s ', $contact->ID, $score->risk->value, $score->scores));
+            $symfonyStyle->writeln(sprintf('Contact processed: %s | %s | score %s ', $contact->ID, $score->risk->value, $score->scores));
         }
 
 
@@ -129,7 +128,7 @@ class ScoreContactCommand extends Command
 
 
         foreach ($contacts as $contact) {
-            $ss->writeln(
+            $symfonyStyle->writeln(
                 sprintf(
                     '%s | %s | %s | %s',
                     $contact->ID,
@@ -140,7 +139,7 @@ class ScoreContactCommand extends Command
             );
         }
 
-//        var_dump($contacts->getContacts());
+        //        var_dump($contacts->getContacts());
 
 
         return self::SUCCESS;

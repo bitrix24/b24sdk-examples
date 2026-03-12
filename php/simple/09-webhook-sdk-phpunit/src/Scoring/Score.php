@@ -29,14 +29,14 @@ final readonly class Score
         }
 
         // Validate that risk level matches the score according to business rules
-        $expectedRisk = RiskLevel::fromScores($scores);
-        if ($risk !== $expectedRisk) {
+        $riskLevel = RiskLevel::fromScores($scores);
+        if ($risk !== $riskLevel) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Risk level %s does not match score %d (expected %s)',
                     $risk->value,
                     $scores,
-                    $expectedRisk->value
+                    $riskLevel->value
                 )
             );
         }
@@ -46,8 +46,7 @@ final readonly class Score
      * Factory method to create Score from numeric value.
      * Automatically determines the appropriate RiskLevel.
      *
-     * @param int $scores Score value (1-20)
-     * @return self
+     * @param positive-int $scores Score value (1-20)
      * @throws InvalidArgumentException
      */
     public static function fromScores(int $scores): self

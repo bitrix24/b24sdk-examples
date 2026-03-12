@@ -17,5 +17,8 @@ use App\Scoring\Score;
 
 interface ScoringModelInterface
 {
+    /**
+     * @param array<string, mixed> $personMetadata
+     */
     public function scorePerson(array $personMetadata): Score;
 }

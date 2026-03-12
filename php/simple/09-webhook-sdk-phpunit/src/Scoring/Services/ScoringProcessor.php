@@ -16,7 +16,6 @@ namespace App\Scoring\Services;
 use App\Scoring\Score;
 use Psr\Log\LoggerInterface;
 
-
 readonly class ScoringProcessor
 {
     public function __construct(
@@ -25,6 +24,9 @@ readonly class ScoringProcessor
     ) {
     }
 
+    /**
+     * @param array<string, mixed> $personMetadata
+     */
     public function scorePerson(array $personMetadata): Score
     {
         $this->logger->debug('ScoringProcessor.scorePerson.start', ['metadata' => $personMetadata]);

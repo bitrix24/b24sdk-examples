@@ -38,8 +38,9 @@ use Bitrix24\SDK\Services\CRM\Common\Result\SystemFields\Types\PhoneValueType;
 )]
 class InstallCommand extends Command
 {
-    private bool $isShouldStopWork = false;
-
+    /**
+     * @return list<int>
+     */
     #[Override]
     public function getSubscribedSignals(): array
     {
@@ -52,8 +53,6 @@ class InstallCommand extends Command
     #[Override]
     public function handleSignal(int $signal, int|false $previousExitCode = 0): false|int
     {
-        $this->isShouldStopWork = true;
-
         return parent::handleSignal($signal, $previousExitCode);
     }
 
@@ -71,7 +70,7 @@ class InstallCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->logger->debug('Command.InstallCommand.start');
-        $ss = new SymfonyStyle($input, $output);
+        $symfonyStyle = new SymfonyStyle($input, $output);
 
         $b24ServiceBuilder = ServiceBuilderFactory::createServiceBuilderFromWebhook(
             $_ENV['BITRIX24_PHP_SDK_INCOMING_WEBHOOK_URL'],
@@ -80,18 +79,18 @@ class InstallCommand extends Command
         );
 
         // add contacts to bitrix24 via batch call
-        $ss->writeln([
+        $symfonyStyle->writeln([
             'Start application installation...',
             sprintf('portal: %s', $b24ServiceBuilder->core->getApiClient()->getCredentials()->getDomainUrl())
         ]);
 
         // install rersk levels as a smart process and fill it with default levels from enum RiskLevel
         $this->riskLevelInstaller->install($b24ServiceBuilder);
-        $ss->writeln('Risk levels installed.......................OK');
+        $symfonyStyle->writeln('Risk levels installed.......................OK');
 
         // add score field to contact
         $this->b24ScoreInstaller->install($b24ServiceBuilder);
-        $ss->writeln('Field Score added to contact................OK');
+        $symfonyStyle->writeln('Field Score added to contact................OK');
 
         $this->logger->debug('Command.InstallCommand.finish');
 

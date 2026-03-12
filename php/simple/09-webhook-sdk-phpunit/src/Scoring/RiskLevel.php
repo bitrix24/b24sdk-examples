@@ -28,7 +28,6 @@ enum RiskLevel: string
      * - HIGH: 10-20
      *
      * @param positive-int $scores Score value (1-20)
-     * @return self
      */
     public static function fromScores(int $scores): self
     {

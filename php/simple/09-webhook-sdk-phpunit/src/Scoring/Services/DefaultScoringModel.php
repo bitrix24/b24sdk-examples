@@ -18,7 +18,6 @@ use App\Scoring\Score;
 use Psr\Log\LoggerInterface;
 use Random\RandomException;
 
-
 readonly class DefaultScoringModel implements ScoringModelInterface
 {
     public function __construct(
@@ -27,6 +26,7 @@ readonly class DefaultScoringModel implements ScoringModelInterface
     }
 
     /**
+     * @param array<string, mixed> $personMetadata
      * @throws RandomException
      */
     public function scorePerson(array $personMetadata): Score
@@ -35,11 +35,8 @@ readonly class DefaultScoringModel implements ScoringModelInterface
 
         // complex scoring logic start
         $fullName = $personMetadata['NAME'] . ' ' . $personMetadata['LAST_NAME'] . ' ' . $personMetadata['SECOND_NAME'];
-        if (strlen($fullName) % 2 === 1) {
-            $scores = random_int(11, 20);
-        } else {
-            $scores = random_int(1, 10);
-        }
+        $scores = strlen($fullName) % 2 === 1 ? random_int(11, 20) : random_int(1, 10);
+
         // complex scoring logic end
 
         $this->logger->debug('ScoringModel.score.finish', ['scores' => $scores]);

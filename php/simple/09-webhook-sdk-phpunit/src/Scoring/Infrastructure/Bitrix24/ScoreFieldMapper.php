@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Scoring\Infrastructure\Bitrix24;
 
-
 use Bitrix24\SDK\Core\Exceptions\BaseException;
 use Bitrix24\SDK\Core\Exceptions\TransportException;
 use Bitrix24\SDK\Services\CRM\Userfield\Exceptions\UserfieldNameIsTooLongException;

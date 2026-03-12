@@ -70,6 +70,7 @@ readonly class RiskLevelInstaller
             ]);
             $entityTypeId = $searchResult[0]->entityTypeId;
         }
+
         $this->logger->debug('RiskLevelInstaller.riskLevels.SmartProcess', ['id' => $entityTypeId]);
 
         // fill risk levels
@@ -93,7 +94,7 @@ readonly class RiskLevelInstaller
             'riskLevel' => $riskLevel,
         ]);
 
-        $searchResult = $b24ServiceBuilder->getCRMScope()->item()->list(
+        $itemsResult = $b24ServiceBuilder->getCRMScope()->item()->list(
             $entityTypeId,
             [],
             [
@@ -102,7 +103,7 @@ readonly class RiskLevelInstaller
             ['*']
         );
 
-        if ($searchResult->getCoreResponse()->getResponseData()->getPagination()->getTotal() === 0) {
+        if ($itemsResult->getCoreResponse()->getResponseData()->getPagination()->getTotal() === 0) {
             $addResult = $b24ServiceBuilder->getCRMScope()->item()->add($entityTypeId, [
                 'title' => $riskLevel->name,
                 'xmlId' => $riskLevel->value,
@@ -113,7 +114,7 @@ readonly class RiskLevelInstaller
             ]);
         } else {
             $this->logger->debug('RiskLevelInstaller.addLevel.AlreadyExists', [
-                'id' => $searchResult->getItems()[0]->id,
+                'id' => $itemsResult->getItems()[0]->id,
             ]);
         }
     }
