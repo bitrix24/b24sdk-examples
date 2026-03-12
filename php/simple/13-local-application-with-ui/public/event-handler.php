@@ -25,21 +25,21 @@ $logger->debug('event-handler.php', [
     'request' => $_REQUEST,
 ]);
 
-// start process request
-$incomingRequest = Request::createFromGlobals();
-$logger->debug(
-    'Bitrix24EventController.start',
-    [
-        'request' => $incomingRequest->request->all(),
-        'query' => $incomingRequest->query->all()
-    ]
-);
-
-$b24EventController = new Bitrix24EventController(AuthRepositoryFactory::create($logger), $logger);
-$response = $b24EventController->process($incomingRequest);
-$response->send();
-
-$logger->debug('Bitrix24EventController.finish', [
-        'response' => $response->getStatusCode(),
-    ]
-);
+//// start process request
+//$incomingRequest = Request::createFromGlobals();
+//$logger->debug(
+//    'Bitrix24EventController.start',
+//    [
+//        'request' => $incomingRequest->request->all(),
+//        'query' => $incomingRequest->query->all()
+//    ]
+//);
+//
+//$b24EventController = new Bitrix24EventController(AuthRepositoryFactory::create($logger), $logger);
+//$response = $b24EventController->process($incomingRequest);
+//$response->send();
+//
+//$logger->debug('Bitrix24EventController.finish', [
+//        'response' => $response->getStatusCode(),
+//    ]
+//);

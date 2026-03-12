@@ -38,6 +38,9 @@ $logger->debug(
 
 $installController = new InstallController(AuthRepositoryFactory::create($logger), $logger);
 $response = $installController->process($incomingRequest);
+//send response to stdout
+// $response->send();
+
 ?>
 <?php
 if ($response->getStatusCode() !== StatusCodeInterface::STATUS_OK): ?>
@@ -50,6 +53,9 @@ if ($response->getStatusCode() !== StatusCodeInterface::STATUS_OK): ?>
     </pre>
 <?php
 else: ?>
+    <?php
+
+    ?>
     <pre>
         Application installation finished, tokens from Bitrix24:
         <?= print_r($_REQUEST, true) ?>
@@ -64,9 +70,6 @@ else: ?>
             });
         });
     </script>
-    <?php
-    //send response to stdout
-    $response->send();
-    ?>
+
 <?php
 endif; ?>

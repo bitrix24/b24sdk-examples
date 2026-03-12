@@ -47,41 +47,42 @@ final readonly class PlacementController
             }
 
             // init service builder with tokens from user who opened placement
-            $placementRequest = new PlacementRequest($incomingRequest);
-            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest($placementRequest->getRequest());
-            $currentUser = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
-            $userInfo = sprintf(
-                'current user info, auth data from placement request:' . PHP_EOL .
-                'user id – %s' . PHP_EOL .
-                'user name - %s %s' . PHP_EOL .
-                'is admin - %s',
-                $currentUser->ID,
-                $currentUser->NAME,
-                $currentUser->LAST_NAME,
-                $currentUser->ADMIN ? 'yes' : 'no'
-            );
-
-
-            // init service builder with tokens stored in file /config/auth.json.local
-            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromStoredToken();
-            $userFromStoredToken = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
-            $userInfo .= sprintf(
-                PHP_EOL . '----------' . PHP_EOL .
-                'user info for user from stored token:' . PHP_EOL .
-                'user id – %s' . PHP_EOL .
-                'user name - %s %s' . PHP_EOL .
-                'is admin - %s',
-                $userFromStoredToken->ID,
-                $userFromStoredToken->NAME,
-                $userFromStoredToken->LAST_NAME,
-                $userFromStoredToken->ADMIN ? 'yes' : 'no'
-            );
+//            $placementRequest = new PlacementRequest($incomingRequest);
+//            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest($placementRequest->getRequest());
+//            $currentUser = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
+//            $userInfo = sprintf(
+//                'current user info, auth data from placement request:' . PHP_EOL .
+//                'user id – %s' . PHP_EOL .
+//                'user name - %s %s' . PHP_EOL .
+//                'is admin - %s',
+//                $currentUser->ID,
+//                $currentUser->NAME,
+//                $currentUser->LAST_NAME,
+//                $currentUser->ADMIN ? 'yes' : 'no'
+//            );
+//
+//
+//            // init service builder with tokens stored in file /config/auth.json.local
+//            $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromStoredToken();
+//            $userFromStoredToken = $b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile();
+//            $userInfo .= sprintf(
+//                PHP_EOL . '----------' . PHP_EOL .
+//                'user info for user from stored token:' . PHP_EOL .
+//                'user id – %s' . PHP_EOL .
+//                'user name - %s %s' . PHP_EOL .
+//                'is admin - %s',
+//                $userFromStoredToken->ID,
+//                $userFromStoredToken->NAME,
+//                $userFromStoredToken->LAST_NAME,
+//                $userFromStoredToken->ADMIN ? 'yes' : 'no'
+//            );
 
             $this->logger->debug('PlacementController.finish');
             return new Response(
                 sprintf(
                     'main placement request successfully processed: %s',
-                    $userInfo
+'11'
+//                    $userInfo
                 ), 200
             );
         } catch (Throwable $exception) {

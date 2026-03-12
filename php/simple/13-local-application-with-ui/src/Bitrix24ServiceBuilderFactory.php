@@ -44,6 +44,7 @@ readonly class Bitrix24ServiceBuilderFactory
             self::getApplicationProfile(),
             EventDispatcherFactory::create(),
             LoggerFactory::create(self::LOGGER_NAME),
+            DefaultOAuthServerUrl::east(),
         );
     }
 
@@ -57,7 +58,7 @@ readonly class Bitrix24ServiceBuilderFactory
             self::getApplicationProfile(),
             $b24Event->getAuth()->authToken,
             $b24Event->getAuth()->domain,
-            DefaultOAuthServerUrl::west(),
+            DefaultOAuthServerUrl::east(),
         );
     }
 

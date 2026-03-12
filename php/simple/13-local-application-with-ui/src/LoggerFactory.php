@@ -17,6 +17,7 @@ use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
+use Monolog\Processor\IntrospectionProcessor;
 use Monolog\Processor\MemoryUsageProcessor;
 use Monolog\Processor\UidProcessor;
 use Psr\Log\LoggerInterface;
@@ -55,6 +56,7 @@ readonly class LoggerFactory
 
             $logger = new Logger($loggerName ?? self::LOGGER_NAME);
             $logger->pushHandler($rotatingFileHandler);
+            $logger->pushProcessor(new IntrospectionProcessor());
             $logger->pushProcessor(new MemoryUsageProcessor(true, true));
             $logger->pushProcessor(new UidProcessor());
 

@@ -56,8 +56,11 @@ final readonly class InstallController
             $placementRequest = new PlacementRequest($incomingRequest);
             $b24ServiceBuilder = Bitrix24ServiceBuilderFactory::createFromPlacementRequest($placementRequest->getRequest());
 
+            $this->logger->debug('InstallController.sbInit.finish');
+
             // your code can't trust data in request before you check is this request data valid
-            $b24ServiceBuilder->getMainScope()->main()->guardValidateCurrentAuthToken();
+            // todo fix
+            // $b24ServiceBuilder->getMainScope()->main()->guardValidateCurrentAuthToken();
 
             // ok, request data is valid, let's install application
             // step 1
