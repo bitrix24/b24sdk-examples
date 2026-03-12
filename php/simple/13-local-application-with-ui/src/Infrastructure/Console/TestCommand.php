@@ -13,23 +13,16 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Console;
 
-use Bitrix24\SDK\Core\Contracts\CoreInterface;
-use Bitrix24\SDK\Core\CoreBuilder;
-use Bitrix24\SDK\Core\Credentials\Credentials;
-use Bitrix24\SDK\Core\Credentials\WebhookUrl;
 use Bitrix24\SDK\Core\Exceptions\BaseException;
-use Bitrix24\SDK\Core\Response\Response;
+use Bitrix24\SDK\Services\Main\Common\EventHandlerMetadata;
 use Bitrix24\SDK\Services\ServiceBuilder;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
@@ -73,6 +66,62 @@ class TestCommand extends Command
                     )
                 )
             );
+
+            while (true) {
+                /**
+                 * @var QuestionHelper $helper
+                 *
+                 * method «setCode» override «execute» method for object Command
+                 * we use SingleCommandApplication for reduce code in this example
+                 */
+                // @phpstan-ignore-next-line
+                $helper = $this->getHelper('question');
+                $question = new ChoiceQuestion(
+                    'Please select command',
+                    [
+                        1 => 'bind event handler',
+                        2 => 'add contact',
+                        0 => 'exit🚪'
+                    ],
+                    null
+                );
+                $question->setErrorMessage('Menu item «%s» is invalid.');
+                $menuItem = $helper->ask($input, $output, $question);
+                $output->writeln(sprintf('You have just selected: %s', $menuItem));
+
+                switch ($menuItem) {
+                    case 'bind event handler':
+                        $currentB24UserId = $this->b24ServiceBuilder->getMainScope()->main()->getCurrentUserProfile()->getUserProfile()->ID;
+
+
+                        $eventHandlerUrl = sprintf(
+                            'https://%s/event-handler.php',
+                            //todo load from env?
+                            'fc4e-94-143-197-67.ngrok-free.app'
+                        );
+                        $this->logger->debug('TestCommand.startBindEventHandlers', [
+                            'eventHandlerUrl' => $eventHandlerUrl
+                        ]);
+
+                        $this->b24ServiceBuilder->getMainScope()->eventManager()->bindEventHandlers(
+                            [
+                                // register event handlers for implemented in SDK events
+                                new EventHandlerMetadata(
+                                    'ONCRMCONTACTADD',
+                                    $eventHandlerUrl,
+                                    $currentB24UserId
+                                ),
+                            ]
+                        );
+
+                        break;
+                    case 'add contact':
+                        var_dump('add contact');
+                        break;
+                    case 'exit🚪':
+                        return Command::SUCCESS;
+                }
+            }
         } catch (BaseException $exception) {
             $symfonyStyle->caution('Bitrix24 error');
             $symfonyStyle->text(

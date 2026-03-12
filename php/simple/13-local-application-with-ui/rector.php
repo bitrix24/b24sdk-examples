@@ -19,20 +19,12 @@ return RectorConfig::configure()
         __DIR__ . '/src',
     ])
     ->withCache(cacheDirectory: __DIR__ . '/var/cache/rector')
-    ->withSets(
-        [
-            DowngradeLevelSetList::DOWN_TO_PHP_82,
-            PHPUnitSetList::PHPUNIT_100
-        ]
-    )
     ->withImportNames(
         importNames: false,
         importDocBlockNames: false,
         importShortClasses: false,
-        removeUnusedImports: false,
     )
     ->withPhpSets(
-        php82: true,
         php83: true
     )
     ->withPreparedSets(
