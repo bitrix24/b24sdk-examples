@@ -15,7 +15,7 @@
     }
   },
   "require": {
-    "bitrix24/b24phpsdk": "dev-dev",
+    "bitrix24/b24phpsdk": "dev-v3-dev",
     "monolog/monolog": "^3",
     "symfony/console": "^7.3",
     "symfony/filesystem": "^7.3",
