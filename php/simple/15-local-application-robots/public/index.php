@@ -34,13 +34,12 @@ $logger->debug('index.init', [
 ]);
 // process request with controller
 $result = $placementController->process($incomingRequest);
+$result->send();
 ?>
-
 <pre>
     Main placement, auth tokens from bitrix24:
     <?= print_r($_REQUEST, true) ?>
-    Results from placement controller:
 <?php
-$result->send();
+
 ?>
 </pre>
