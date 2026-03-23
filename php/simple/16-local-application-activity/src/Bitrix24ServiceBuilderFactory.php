@@ -17,6 +17,7 @@ use App\Events\EventDispatcherFactory;
 use App\Repository\AuthRepositoryFactory;
 use Bitrix24\SDK\Core\Contracts\Events\EventInterface;
 use Bitrix24\SDK\Core\Credentials\ApplicationProfile;
+use Bitrix24\SDK\Core\Credentials\DefaultOAuthServerUrl;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Core\Exceptions\UnknownScopeCodeException;
 use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
@@ -43,6 +44,7 @@ readonly class Bitrix24ServiceBuilderFactory
             self::getApplicationProfile(),
             EventDispatcherFactory::create(),
             LoggerFactory::create(self::LOGGER_NAME),
+            DefaultOAuthServerUrl::east()
         );
     }
 
@@ -55,7 +57,8 @@ readonly class Bitrix24ServiceBuilderFactory
         return (new ServiceBuilderFactory(EventDispatcherFactory::create(), LoggerFactory::create()))->init(
             self::getApplicationProfile(),
             $b24Event->getAuth()->authToken,
-            $b24Event->getAuth()->domain
+            $b24Event->getAuth()->domain,
+            DefaultOAuthServerUrl::east()
         );
     }
 
@@ -77,7 +80,8 @@ readonly class Bitrix24ServiceBuilderFactory
             self::getApplicationProfile(),
             // load oauth tokens and portal URL stored in /config/auth.json.local to LocalAppAuth object
             $localAppAuthRepository->getAuth()->getAuthToken(),
-            $localAppAuthRepository->getAuth()->getDomainUrl()
+            $localAppAuthRepository->getAuth()->getDomainUrl(),
+            DefaultOAuthServerUrl::east()
         );
     }
 
