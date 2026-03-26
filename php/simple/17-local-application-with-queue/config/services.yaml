@@ -16,6 +16,89 @@ services:
     App\LoggerFactory:
       public: true
 
+    Symfony\Component\Serializer\SerializerInterface:
+      class: Symfony\Component\Serializer\Serializer
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createSymfonySerializer' ]
+
+    Symfony\Component\Messenger\Transport\Serialization\SerializerInterface:
+      class: App\Infrastructure\Messenger\Serializer\ActivityMessageTransportSerializer
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createTransportSerializer' ]
+      arguments:
+        - '@Symfony\Component\Serializer\SerializerInterface'
+
+    app.messenger.transport.activity:
+      class: Symfony\Component\Messenger\Transport\TransportInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createActivityTransport' ]
+      arguments:
+        - '@Symfony\Component\Messenger\Transport\Serialization\SerializerInterface'
+
+    app.messenger.transport.activity_failed:
+      class: Symfony\Component\Messenger\Transport\TransportInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createFailureTransport' ]
+      arguments:
+        - '@Symfony\Component\Messenger\Transport\Serialization\SerializerInterface'
+
+    app.messenger.transport_locator:
+      class: Psr\Container\ContainerInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createTransportLocator' ]
+      arguments:
+        - '@app.messenger.transport.activity'
+        - '@app.messenger.transport.activity_failed'
+
+    app.messenger.senders_locator:
+      class: Symfony\Component\Messenger\Transport\Sender\SendersLocator
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createSendersLocator' ]
+      arguments:
+        - '@app.messenger.transport_locator'
+
+    app.messenger.failure_sender_locator:
+      class: Psr\Container\ContainerInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createFailureSenderLocator' ]
+      arguments:
+        - '@app.messenger.transport.activity_failed'
+
+    app.messenger.retry_strategy_locator:
+      class: Psr\Container\ContainerInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createRetryStrategyLocator' ]
+
+    app.messenger.handlers_locator:
+      class: Symfony\Component\Messenger\Handler\HandlersLocator
+      factory: [ 'App\Infrastructure\Messenger\Handler\MessageHandlerLocatorFactory', 'create' ]
+      arguments:
+        - !tagged_iterator 'app.message_handler'
+
+    app.messenger.event_dispatcher:
+      class: Psr\EventDispatcher\EventDispatcherInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createEventDispatcher' ]
+      arguments:
+        - '@app.messenger.transport_locator'
+        - '@app.messenger.retry_strategy_locator'
+        - '@app.messenger.failure_sender_locator'
+        - '@Psr\Log\LoggerInterface'
+
+    app.messenger.bus:
+      class: Symfony\Component\Messenger\MessageBusInterface
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createMessageBus' ]
+      arguments:
+        - '@app.messenger.senders_locator'
+        - '@app.messenger.handlers_locator'
+        - '@app.messenger.event_dispatcher'
+        - '@Psr\Log\LoggerInterface'
+
+    Symfony\Component\Messenger\MessageBusInterface:
+      alias: 'app.messenger.bus'
+      public: true
+
+    app.messenger.worker.runtime:
+      class: Symfony\Component\Messenger\Worker
+      factory: [ 'App\Infrastructure\Messenger\MessengerFactory', 'createWorker' ]
+      arguments:
+        - '@app.messenger.transport.activity'
+        - '@app.messenger.bus'
+        - '@app.messenger.event_dispatcher'
+        - '@Psr\Log\LoggerInterface'
+      public: true
+
 
     # activities
     App\Workflow\Activities\:
