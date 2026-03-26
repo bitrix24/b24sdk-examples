@@ -1,0 +1,11 @@
+parameters:
+  level: 8
+  paths:
+    - src/
+  bootstrapFiles:
+    - tests/bootstrap.php
+  parallel:
+    jobSize: 20
+    maximumNumberOfProcesses: 8
+    minimumNumberOfJobsPerProcess: 2
+  treatPhpDocTypesAsCertain: false

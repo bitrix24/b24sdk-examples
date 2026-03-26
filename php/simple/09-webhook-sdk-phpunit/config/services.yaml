@@ -1,0 +1,38 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: false
+    public: true
+
+  App\LoggerFactory:
+    public: true
+
+  App\Scoring\Services\ScoringProcessor:
+    public: true
+  App\Scoring\Services\ScoringModelInterface:
+    class: App\Scoring\Services\DefaultScoringModel
+    autowire: true
+  App\Scoring\Infrastructure\Console\InstallCommand:
+    public: true
+  App\Scoring\Infrastructure\Console\ScoreContactCommand:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\ScoreFieldMapper:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\ScoreInstaller:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\ScoreQueries:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\ScoreCommands:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelInstaller:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelQueries:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelMapper:
+    public: true
+  App\Scoring\Infrastructure\Bitrix24\RiskLevels\RiskLevelCommands:
+    public: true
+  Psr\Log\LoggerInterface:
+    class: App\LoggerFactory
+    autowire: true
+    factory: [ '@App\LoggerFactory', 'create' ]

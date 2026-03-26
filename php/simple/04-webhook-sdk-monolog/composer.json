@@ -1,0 +1,26 @@
+{
+  "name": "b24sdk-examples/04-webhook-sdk-monolog",
+  "description": "Example for work with bitrix24-php-sdk via webhook and monolog",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Maksim Mesilov",
+      "email": "mesilov.maxim@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.3",
+    "bitrix24/b24phpsdk": "1.3.*",
+    "monolog/monolog": "^3"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "ergebnis/composer-normalize": "^2"
+  },
+  "config": {
+    "allow-plugins": {
+      "ergebnis/composer-normalize": true
+    }
+  }
+}

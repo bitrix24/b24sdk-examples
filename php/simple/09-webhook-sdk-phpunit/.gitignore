@@ -1,0 +1,6 @@
+.idea
+/var/*
+/vendor/
+/volumes/*
+*.log
+.env.local

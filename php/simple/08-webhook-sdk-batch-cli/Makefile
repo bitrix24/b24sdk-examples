@@ -1,0 +1,152 @@
+# This file is part of the b24sdk-examples package.
+#
+# © Maksim Mesilov <mesilov.maxim@gmail.com>
+#
+# For the full copyright and license information, please view the LICENSE
+# file that was distributed with this source code.
+
+# Export current user's UID and GID to be used by Docker for correct file permissions
+export UID=$(shell id -u)
+export GID=$(shell id -g)
+
+# Load environment variables from .env and optional .env.local (no error if missing)
+# All variables will be exported to subprocesses (e.g., Docker, shell commands)
+include .env
+-include .env.local
+export
+
+# Default Docker commands, can be overridden if needed (different setups, old docker-compose, CI quirks, etc.)
+DOCKER?=docker
+DOCKER_COMPOSE?=docker compose
+
+# Makefile quality-of-life improvements:
+# - Default goal = help
+# - Cleaner output (no Entering/Leaving directory noise)
+.DEFAULT_GOAL := help
+MAKEFLAGS += --no-print-directory
+
+# - Export all vars for easier scripting
+# - Set project root path
+.EXPORT_ALL_VARIABLES:
+ROOT_DIR := $(shell pwd)
+
+help:
+	@echo "--------------------------------------------"
+	@echo "Bitrix24 PHP SDK examples                   "
+	@echo "05 — add linters for check source code      "
+	@echo "--------------------------------------------"
+	@echo ""
+	@echo "🐳 Work with application containers"
+	@echo "docker-build               - build containers"
+	@echo "docker-up                  - run docker"
+	@echo "docker-down                - stop docker"
+	@echo "docker-down-clear          - stop docker and remove orphaned containers"
+	@echo ""
+	@echo "📦 Work with composer"
+	@echo "composer-install           - install dependencies from composer"
+	@echo "composer-update            - update dependencies from composer"
+	@echo "composer-dumpautoload      - regenerate composer autoload file"
+	@echo "composer                   - run composer and pass arguments"
+	@echo ""
+	@echo "👮 Work with linters and checks"
+	@echo "lint-allowed-licenses      - check dependencies for white-list licenses"
+	@echo "lint-cs-fixer              - check source code with PHP CS Fixer"
+	@echo "lint-cs-fixer-fix          - 🪄 fix source code with PHP CS Fixer"
+	@echo "lint-phpstan               - check source code with PhpStan"
+	@echo "lint-rector                - check source code with Rector"
+	@echo "lint-rector-fix            - 🪄 fix source code with Rector"
+	@echo ""
+	@echo "🚀 Work with application"
+	@echo "php-cli-generate-demo-data - run container php-cli and generate demo data"
+	@echo "php-cli-import             - run container php-cli and import data to bitrix24"
+	@echo "php-cli-export             - run container php-cli and export data from bitrix24"
+	@echo "php-cli-bash               - run container php-cli and open shell with arguments"
+	@echo ""
+	@echo "🎓 Examples"
+	@echo "If you want build docker containers, put this command in shell:"
+	@echo "make docker-build"
+
+# init project
+.PHONY: docker-build
+docker-build:
+	$(DOCKER_COMPOSE) build
+
+.PHONY: docker-rebuild
+docker-rebuild:
+	$(DOCKER_COMPOSE) rm -vsf ;\
+	$(DOCKER_COMPOSE) down -v --remove-orphans ;\
+	make docker-build ;\
+	make docker-up
+
+.PHONY: docker-up
+docker-up:
+	$(DOCKER_COMPOSE) up -d
+
+.PHONY: docker-down
+docker-down:
+	$(DOCKER_COMPOSE) down --remove-orphans
+
+.PHONY: docker-down-clear
+docker-down-clear:
+	$(DOCKER_COMPOSE) down --volumes --remove-orphans
+
+.PHONY: composer-install
+composer-install:
+	$(DOCKER_COMPOSE) run --rm php-cli composer install
+
+.PHONY: composer-update
+composer-update:
+	$(DOCKER_COMPOSE) run --rm php-cli composer update
+
+.PHONY: composer-dumpautoload
+composer-dumpautoload:
+	$(DOCKER_COMPOSE) run --rm php-cli composer dumpautoload
+
+# call composer with any parameters
+# make composer install
+# make composer "install --no-dev"
+.PHONY: composer
+composer:
+	$(DOCKER_COMPOSE) run --rm php-cli composer $(filter-out $@,$(MAKECMDGOALS))
+
+# linters
+.PHONY: lint-allowed-licenses
+lint-allowed-licenses:
+	docker-compose run --rm php-cli vendor/bin/composer-license-checker
+
+.PHONY: lint-cs-fixer
+lint-cs-fixer:
+	docker-compose run --rm php-cli vendor/bin/php-cs-fixer check --verbose --diff
+
+.PHONY: lint-cs-fixer-fix
+lint-cs-fixer-fix:
+	docker-compose run --rm php-cli vendor/bin/php-cs-fixer fix --verbose --diff
+
+.PHONY: lint-phpstan
+lint-phpstan:
+	docker-compose run --rm php-cli vendor/bin/phpstan --memory-limit=2G analyse -vvv
+
+.PHONY: lint-rector
+lint-rector:
+	docker-compose run --rm php-cli vendor/bin/rector process --dry-run
+
+.PHONY: lint-rector-fix
+lint-rector-fix:
+	docker-compose run --rm php-cli vendor/bin/rector process
+
+# application
+.PHONY: php-cli-bash
+php-cli-bash:
+	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: php-cli-generate-demo-data
+php-cli-generate-demo-data:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:data-generator
+
+.PHONY: php-cli-import
+php-cli-import:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:import-data
+
+.PHONY: php-cli-export
+php-cli-export:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:export-data

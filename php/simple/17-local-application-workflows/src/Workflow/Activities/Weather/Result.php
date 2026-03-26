@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * This file is part of the b24sdk examples package.
+ *
+ * © Maksim Mesilov <mesilov.maxim@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE.txt
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
+
+namespace App\Workflow\Activities\Weather;
+
+final readonly class Result
+{
+    public function __construct(
+        public int $temperature,
+        public string $comment
+    ) {
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'temperature' => $this->temperature,
+            'comment' => $this->comment
+        ];
+    }
+
+    // todo add interface
+    public static function getMetadata(): array
+    {
+        return [
+            'temperature' => [
+                'name' => [
+                    'en' => 'Temperature'
+                ],
+                'type' => 'int',
+            ],
+            'comment' => [
+                'name' => [
+                    'en' => 'Comment'
+                ],
+                'type' => 'string',
+            ]
+        ];
+    }
+}

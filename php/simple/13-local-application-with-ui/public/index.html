@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+<body>
+<h1>Hello World</h1>
+
+
+<script src="//api.bitrix24.com/api/v1/"></script>
+<script>
+    console.log('Hello world from index.html');
+    document.addEventListener("DOMContentLoaded", function () {
+        BX24.init(function () {
+
+            const authInfo = BX24.getAuth();
+            console.log('B24: authInfo: ', authInfo);
+
+
+            BX24.callMethod('user.get', { ID: 1 }, (result) => {
+                if (result.error())
+                {
+                    console.error(result.error());
+                }
+                else if (result.data())
+                {
+                    const user = result.data()[0];
+                    if (user)
+                    {
+                        fetch('ajax.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(authInfo)
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Success:', data);
+                            })
+                            .catch((error) => {
+                                console.error('Error:', error);
+                            });
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
