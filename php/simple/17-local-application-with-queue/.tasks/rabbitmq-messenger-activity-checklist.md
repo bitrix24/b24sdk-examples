@@ -47,18 +47,18 @@
 - [ ] Добавить логирование `workflowId`, `code`, `eventToken` при приёме и публикации.
 
 ## Доменная обработка
-- [ ] Оставить `ActivityHandler` как синхронный сервис исполнения activity.
-- [ ] Убрать из него зависимость на HTTP endpoint flow.
-- [ ] Сделать так, чтобы `ActivityHandler` возвращал `ActivityResponse`.
-- [ ] Оставить маршрутизацию по `ActivityHandlerInterface` внутри `ActivityHandler`.
-- [ ] Сделать отсутствие handler ошибкой с исключением.
+- [x] Оставить `ActivityHandler` как синхронный сервис исполнения activity.
+- [x] Убрать из него зависимость на HTTP endpoint flow.
+- [x] Сделать так, чтобы `ActivityHandler` возвращал `ActivityResponse`.
+- [x] Оставить маршрутизацию по `ActivityHandlerInterface` внутри `ActivityHandler`.
+- [x] Сделать отсутствие handler ошибкой с исключением.
 
 ## Worker handler и команда
-- [ ] Создать `App\MessageHandler\ActivityMessageHandler`.
-- [ ] Восстанавливать request/context из `ActivityMessage`.
-- [ ] Вызывать `ActivityHandler` из message handler.
-- [ ] После успешного результата вызывать `bizproc event()->send(...)`.
-- [ ] При любой ошибке пробрасывать исключение для retry/failure transport.
+- [x] Создать `App\MessageHandler\ActivityMessageHandler`.
+- [x] Восстанавливать request/context из `ActivityMessage`.
+- [x] Вызывать `ActivityHandler` из message handler.
+- [x] После успешного результата вызывать `bizproc event()->send(...)`.
+- [x] При любой ошибке пробрасывать исключение для retry/failure transport.
 - [ ] Создать console-команду `app:activity-worker`.
 - [ ] Зарегистрировать `ActivityWorkerCommand` в `bin/console`.
 - [ ] Обработать graceful shutdown по SIGTERM/SIGINT.
@@ -76,8 +76,8 @@
 ## Тесты
 - [x] Написать unit test на mapping `ActivityRequest -> ActivityMessage`.
 - [x] Написать unit test на обратное восстановление context из `ActivityMessage`.
-- [ ] Написать unit test на выбор handler по `code`.
-- [ ] Написать unit test на ошибку при отсутствии handler.
+- [x] Написать unit test на выбор handler по `code`.
+- [x] Написать unit test на ошибку при отсутствии handler.
 - [ ] Написать unit test на `createFromWorkflowAuth()`.
 - [ ] Написать integration test: endpoint публикует сообщение и отвечает `200`.
 - [ ] Написать integration test: endpoint отвечает `500` при ошибке публикации.

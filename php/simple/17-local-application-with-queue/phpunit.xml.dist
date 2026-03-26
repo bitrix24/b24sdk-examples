@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="tests/bootstrap.php"
          colors="true"
-         cacheDirectory=".phpunit.cache">
+         cacheDirectory="var/cache/.phpunit.cache">
     <testsuites>
         <testsuite name="App Test Suite">
             <directory>tests</directory>

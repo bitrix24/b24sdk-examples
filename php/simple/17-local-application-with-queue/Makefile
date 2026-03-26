@@ -29,6 +29,8 @@ MAKEFLAGS += --no-print-directory
 # - Set project root path
 .EXPORT_ALL_VARIABLES:
 ROOT_DIR := $(shell pwd)
+SKILL_CREATOR_DIR ?= /Users/mesilov/.codex/skills/.system/skill-creator
+PROJECT_SKILLS_DIR ?= .codex/skills
 
 help:
 	@echo "----------------------------------------------"
@@ -48,6 +50,10 @@ help:
 	@echo "composer-update           - update dependencies from composer"
 	@echo "composer-dumpautoload     - regenerate composer autoload file"
 	@echo "composer                  - run composer and pass arguments"
+	@echo ""
+	@echo "🧠 Work with project skills:"
+	@echo "skill-init-task-planner   - create project-local task planner skill scaffold"
+	@echo "skill-validate            - validate a project-local skill, pass SKILL_PATH=..."
 	@echo ""
 	@echo "👮 Work with linters and checks:"
 	@echo "lint-allowed-licenses     - check dependencies for white-list licenses"
@@ -147,6 +153,15 @@ composer-dumpautoload:
 .PHONY: composer
 composer:
 	$(DOCKER_COMPOSE) run --rm php-cli composer $(filter-out $@,$(MAKECMDGOALS))
+
+.PHONY: skill-init-task-planner
+skill-init-task-planner:
+	python3 $(SKILL_CREATOR_DIR)/scripts/init_skill.py task-planner --path $(PROJECT_SKILLS_DIR) --resources references --interface display_name="Планировщик задач" --interface short_description="Планирует задачи и ищет лакуны" --interface default_prompt="Используй $$task-planner, чтобы уточнить задачу, сохранить план в .tasks/ и проверить его на неоднозначности, архитектурные конфликты и лакуны."
+
+.PHONY: skill-validate
+skill-validate:
+	@test -n "$(SKILL_PATH)" || (echo "Usage: make skill-validate SKILL_PATH=.codex/skills/task-planner" && exit 1)
+	python3 .codex/scripts/validate_skill.py "$(SKILL_PATH)"
 
 # linters
 .PHONY: lint-allowed-licenses
