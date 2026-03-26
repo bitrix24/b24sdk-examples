@@ -10,6 +10,9 @@ services:
       resource: '../src/Repository/*'
     App\Message\ActivityMessageMapper:
       public: true
+    App\MessageHandler\ActivityMessageHandler:
+      tags:
+        - { name: 'app.message_handler' }
 
     App\Infrastructure\Console\TestCommand:
       arguments:
