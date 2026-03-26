@@ -8,6 +8,8 @@ services:
       resource: '../src/Controller/*'
     App\Repository\:
       resource: '../src/Repository/*'
+    App\Message\ActivityMessageMapper:
+      public: true
 
     App\Infrastructure\Console\TestCommand:
       arguments:

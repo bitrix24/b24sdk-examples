@@ -21,6 +21,7 @@ use Bitrix24\SDK\Core\Credentials\DefaultOAuthServerUrl;
 use Bitrix24\SDK\Core\Exceptions\InvalidArgumentException;
 use Bitrix24\SDK\Core\Exceptions\UnknownScopeCodeException;
 use Bitrix24\SDK\Core\Exceptions\WrongConfigurationException;
+use Bitrix24\SDK\Services\Workflows\Common\Auth;
 use Bitrix24\SDK\Services\ServiceBuilder;
 use Bitrix24\SDK\Services\ServiceBuilderFactory;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,6 +60,23 @@ readonly class Bitrix24ServiceBuilderFactory
             $b24Event->getAuth()->authToken,
             $b24Event->getAuth()->domain,
             DefaultOAuthServerUrl::east()
+        );
+    }
+
+    /**
+     * @throws InvalidArgumentException
+     * @throws WrongConfigurationException
+     * @throws UnknownScopeCodeException
+     */
+    public static function createFromWorkflowAuth(array $authPayload): ServiceBuilder
+    {
+        $auth = Auth::initFromArray($authPayload);
+
+        return (new ServiceBuilderFactory(EventDispatcherFactory::create(), LoggerFactory::create(self::LOGGER_NAME)))->init(
+            self::getApplicationProfile(),
+            $auth->accessToken,
+            $auth->domain,
+            $auth->endpoints->getAuthServerUrl(),
         );
     }
 

@@ -56,6 +56,8 @@ help:
 	@echo "lint-phpstan              - check source code with PhpStan"
 	@echo "lint-rector               - check source code with Rector"
 	@echo "lint-rector-fix           - 🪄 fix source code with Rector"
+	@echo "test                      - run default test suite"
+	@echo "test-unit                 - run PHPUnit unit tests"
 	@echo ""
 	@echo "🐘 Work with PHP dev-server:"
 	@echo "php-dev-server-up         - run PHP dev-server on 10888 port and expose «public» folder"
@@ -170,6 +172,13 @@ lint-rector:
 .PHONY: lint-rector-fix
 lint-rector-fix:
 	docker-compose run --rm php-cli vendor/bin/rector process
+
+.PHONY: test-unit
+test-unit:
+	$(DOCKER_COMPOSE) run --rm php-cli vendor/bin/phpunit --configuration phpunit.xml.dist
+
+.PHONY: test
+test: test-unit
 
 # work dev environment
 .PHONY: php-dev-server-up

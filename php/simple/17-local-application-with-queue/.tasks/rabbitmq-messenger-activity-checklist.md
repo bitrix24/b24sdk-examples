@@ -15,26 +15,26 @@
 - [x] Добавить helper для открытия/показа RabbitMQ management URL.
 
 ## Messenger wiring
-- [ ] Добавить сервисы Messenger в текущий DI bootstrap без `FrameworkBundle`.
-- [ ] Создать transport `activity`.
-- [ ] Создать failure transport `activity_failed`.
-- [ ] Настроить routing `ActivityMessage -> activity`.
-- [ ] Настроить retry policy на 3 попытки с фиксированным backoff.
-- [ ] Настроить handler locator и message bus.
-- [ ] Настроить worker runtime для кастомной console-команды.
+- [x] Добавить сервисы Messenger в текущий DI bootstrap без `FrameworkBundle`.
+- [x] Создать transport `activity`.
+- [x] Создать failure transport `activity_failed`.
+- [x] Настроить routing `ActivityMessage -> activity`.
+- [x] Настроить retry policy на 3 попытки с фиксированным backoff.
+- [x] Настроить handler locator и message bus.
+- [x] Настроить worker runtime для кастомной console-команды.
 
 ## DTO и маппинг
-- [ ] Создать `App\Message\ActivityMessage`.
-- [ ] Зафиксировать плоскую структуру `auth`.
-- [ ] Зафиксировать плоскую структуру `workflowDocumentId`.
-- [ ] Зафиксировать плоскую структуру `workflowDocumentType`.
-- [ ] Создать mapper `ActivityRequest -> ActivityMessage`.
-- [ ] Создать mapper `ActivityMessage -> ActivityRequest` или execution context.
-- [ ] Проверить, что в message не попадают объекты SDK.
+- [x] Создать `App\Message\ActivityMessage`.
+- [x] Зафиксировать плоскую структуру `auth`.
+- [x] Зафиксировать плоскую структуру `workflowDocumentId`.
+- [x] Зафиксировать плоскую структуру `workflowDocumentType`.
+- [x] Создать mapper `ActivityRequest -> ActivityMessage`.
+- [x] Создать mapper `ActivityMessage -> ActivityRequest` или execution context.
+- [x] Проверить, что в message не попадают объекты SDK.
 
 ## Bitrix24 context
-- [ ] Добавить в `Bitrix24ServiceBuilderFactory` метод `createFromWorkflowAuth(array $authPayload): ServiceBuilder`.
-- [ ] Реализовать восстановление service builder только по auth из сообщения.
+- [x] Добавить в `Bitrix24ServiceBuilderFactory` метод `createFromWorkflowAuth(array $authPayload): ServiceBuilder`.
+- [x] Реализовать восстановление service builder только по auth из сообщения.
 - [ ] Проверить, что worker не использует `createFromStoredToken()`.
 
 ## HTTP endpoint
@@ -74,8 +74,8 @@
 - [ ] Логировать событие `moved to failure transport`.
 
 ## Тесты
-- [ ] Написать unit test на mapping `ActivityRequest -> ActivityMessage`.
-- [ ] Написать unit test на обратное восстановление context из `ActivityMessage`.
+- [x] Написать unit test на mapping `ActivityRequest -> ActivityMessage`.
+- [x] Написать unit test на обратное восстановление context из `ActivityMessage`.
 - [ ] Написать unit test на выбор handler по `code`.
 - [ ] Написать unit test на ошибку при отсутствии handler.
 - [ ] Написать unit test на `createFromWorkflowAuth()`.
