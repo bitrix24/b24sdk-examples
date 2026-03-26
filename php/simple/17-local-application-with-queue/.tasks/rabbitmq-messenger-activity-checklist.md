@@ -1,18 +1,18 @@
 # Checklist: RabbitMQ + Messenger для `ActivityHandler`
 
 ## Подготовка
-- [ ] Уточнить и зафиксировать `.env` переменные для RabbitMQ (`host`, `port`, `user`, `pass`, `vhost` если нужен).
-- [ ] Добавить в `composer.json` зависимости `symfony/messenger`, `symfony/amqp-messenger`, `symfony/dotenv`.
-- [ ] Обновить зависимости и проверить, что autoload/lock-файл консистентны.
+- [x] Уточнить и зафиксировать `.env` переменные для RabbitMQ (`host`, `port`, `user`, `pass`, `vhost` если нужен).
+- [x] Добавить в `composer.json` зависимости `symfony/messenger`, `symfony/amqp-messenger`, `symfony/dotenv`.
+- [x] Обновить зависимости и проверить, что autoload/lock-файл консистентны.
 
 ## RabbitMQ и окружение
-- [ ] Добавить сервис `rabbitmq` в `docker-compose.yaml`.
-- [ ] Прописать порты `5672` и `15672`.
-- [ ] Добавить volume для данных RabbitMQ.
-- [ ] Прокинуть переменные окружения RabbitMQ в `php-cli`.
-- [ ] Добавить команды в `Makefile` для запуска одного worker.
-- [ ] Добавить команду в `Makefile` для запуска двух worker-процессов.
-- [ ] Добавить helper для открытия/показа RabbitMQ management URL.
+- [x] Добавить сервис `rabbitmq` в `docker-compose.yaml`.
+- [x] Прописать порты `5672` и `15672`.
+- [x] Добавить volume для данных RabbitMQ.
+- [x] Прокинуть переменные окружения RabbitMQ в `php-cli`.
+- [x] Добавить команды в `Makefile` для запуска одного worker.
+- [x] Добавить команду в `Makefile` для запуска двух worker-процессов.
+- [x] Добавить helper для открытия/показа RabbitMQ management URL.
 
 ## Messenger wiring
 - [ ] Добавить сервисы Messenger в текущий DI bootstrap без `FrameworkBundle`.
