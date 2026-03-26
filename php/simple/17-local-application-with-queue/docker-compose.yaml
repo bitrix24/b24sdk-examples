@@ -2,15 +2,37 @@ services:
   php-cli:
     build:
       context: ./docker/php-cli
+    depends_on:
+      - rabbitmq
     environment:
-      PHP_IDE_CONFIG: "serverName=b24-php-sdk-examples-16.lan"
+      PHP_IDE_CONFIG: "serverName=b24-php-sdk-examples-17.lan"
       APP_DEBUG: 0
       BITRIX24_PHP_SDK_LOG_LEVEL: ${BITRIX24_PHP_SDK_LOG_LEVEL}
       BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT: ${BITRIX24_PHP_SDK_LOG_MAX_FILES_COUNT}
       BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID: ${BITRIX24_PHP_SDK_APPLICATION_CLIENT_ID}
       BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET: ${BITRIX24_PHP_SDK_APPLICATION_CLIENT_SECRET}
       BITRIX24_PHP_SDK_APPLICATION_SCOPE: ${BITRIX24_PHP_SDK_APPLICATION_SCOPE}
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
+      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_USER: ${RABBITMQ_USER}
+      RABBITMQ_PASS: ${RABBITMQ_PASS}
+      RABBITMQ_VHOST: ${RABBITMQ_VHOST}
     volumes:
       - .:/var/www/html
       - ./var/logs:/var/logs
     working_dir: /var/www/html
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS}
+      RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_VHOST}
+    ports:
+      - "${RABBITMQ_PORT}:5672"
+      - "${RABBITMQ_MANAGEMENT_PORT}:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq_data:

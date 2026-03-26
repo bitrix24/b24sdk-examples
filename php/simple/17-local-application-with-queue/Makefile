@@ -41,6 +41,7 @@ help:
 	@echo "docker-up                 - run docker"
 	@echo "docker-down               - stop docker"
 	@echo "docker-down-clear         - stop docker and remove orphaned containers"
+	@echo "rabbitmq-ui               - show RabbitMQ management UI URL"
 	@echo ""
 	@echo "📦 Work with composer:"
 	@echo "composer-install          - install dependencies from composer"
@@ -67,6 +68,9 @@ help:
 	@echo "🚀 Work with application:"
 	@echo "php-cli-app               - run container php-cli and run cli application «b24:test-command»"
 	@echo "php-cli-bash              - run container php-cli and open shell with arguments"
+	@echo "activity-worker           - run one async activity worker"
+	@echo "activity-workers-up       - run two async activity workers in background"
+	@echo "activity-workers-down     - stop background async activity workers"
 	@echo ""
 	@echo "🎓 Examples"
 	@echo "If you want build docker containers, put this command in shell:"
@@ -96,6 +100,12 @@ docker-down:
 docker-down-clear:
 	$(DOCKER_COMPOSE) down --volumes --remove-orphans
 
+.PHONY: rabbitmq-ui
+rabbitmq-ui:
+	@echo "RabbitMQ UI: http://localhost:$(RABBITMQ_MANAGEMENT_PORT)"
+	@echo "Username: $(RABBITMQ_USER)"
+	@echo "Password: $(RABBITMQ_PASS)"
+
 .PHONY: php-cli-bash
 php-cli-bash:
 	$(DOCKER_COMPOSE) run --rm php-cli sh $(filter-out $@,$(MAKECMDGOALS))
@@ -103,6 +113,19 @@ php-cli-bash:
 .PHONY: php-cli-app
 php-cli-app:
 	$(DOCKER_COMPOSE) run --rm php-cli php bin/console b24:test-command
+
+.PHONY: activity-worker
+activity-worker:
+	$(DOCKER_COMPOSE) run --rm php-cli php bin/console app:activity-worker
+
+.PHONY: activity-workers-up
+activity-workers-up:
+	$(DOCKER_COMPOSE) run -d --name activity-worker-1 php-cli php bin/console app:activity-worker
+	$(DOCKER_COMPOSE) run -d --name activity-worker-2 php-cli php bin/console app:activity-worker
+
+.PHONY: activity-workers-down
+activity-workers-down:
+	-$(DOCKER) stop activity-worker-1 activity-worker-2
 
 .PHONY: composer-install
 composer-install:
